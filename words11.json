@@ -1,0 +1,1197 @@
+{
+    "availability": {
+  "word": "availability",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "availability_1",
+      "definition": "[명사] 이용 가능성, 가용성",
+      "examples": [
+        "Please check the **availability** of rooms. (객실의 **이용 가능 여부**를 확인해 주세요.)"
+      ],
+      "keywords": ["accessibility", "usability"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "availability_2",
+      "definition": "[명사] (사람의) 시간 있음",
+      "examples": [
+        "Let me know your **availability** for a meeting. (회의 가능한 **시간**을 알려주세요.)"
+      ],
+      "keywords": ["schedule", "openness"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"awareness": {
+  "word": "awareness",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "awareness_1",
+      "definition": "[명사] 인식, 자각",
+      "examples": [
+        "Public **awareness** of climate change is increasing. (기후 변화에 대한 대중의 **인식**이 높아지고 있다.)"
+      ],
+      "keywords": ["consciousness", "recognition"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"away": {
+  "word": "away",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "away_1",
+      "definition": "[부사] 떨어져, 멀리",
+      "examples": [
+        "She lives far **away** from here. (그녀는 여기서 아주 **멀리** 산다.)"
+      ],
+      "keywords": ["distant", "afar"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "away_2",
+      "definition": "[부사] 부재중인",
+      "examples": [
+        "He is **away** on business. (그는 출장 중이다.)"
+      ],
+      "keywords": ["absent", "gone"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"baby": {
+  "word": "baby",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "baby_1",
+      "definition": "[명사] 아기, 어린아이",
+      "examples": [
+        "The **baby** is sleeping. (**아기**가 자고 있다.)"
+      ],
+      "keywords": ["infant", "child"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"back": {
+  "word": "back",
+  "pos": ["noun", "adverb", "verb"],
+  "meanings": [
+    {
+      "id": "back_1",
+      "definition": "[명사] 등, 뒤",
+      "examples": [
+        "He hurt his **back** while lifting a box. (그는 상자를 들다 **등을 다쳤다**.)"
+      ],
+      "keywords": ["rear", "behind"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "back_2",
+      "definition": "[부사] 뒤로, 돌아가서",
+      "examples": [
+        "I'll come **back** soon. (곧 **돌아올게요**.)"
+      ],
+      "keywords": ["return", "reverse"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"comfortable": {
+  "word": "comfortable",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "comfortable_1",
+      "definition": "[형용사] 편안한, 쾌적한",
+      "examples": [
+        "This chair is really **comfortable**. (이 의자는 정말 **편안하다**.)"
+      ],
+      "keywords": ["cozy", "pleasant"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "comfortable_2",
+      "definition": "[형용사] 마음이 편한, 안심하는",
+      "examples": [
+        "I feel **comfortable** around my friends. (친구들과 있을 때 마음이 **편하다**.)"
+      ],
+      "keywords": ["relaxed", "at ease"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"comic": {
+  "word": "comic",
+  "pos": ["adjective", "noun"],
+  "meanings": [
+    {
+      "id": "comic_1",
+      "definition": "[형용사] 웃긴, 희극의",
+      "examples": [
+        "The movie had many **comic** moments. (그 영화에는 많은 **웃긴 장면**이 있었다.)"
+      ],
+      "keywords": ["funny", "humorous"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "comic_2",
+      "definition": "[명사] 만화책, 코믹스",
+      "examples": [
+        "He likes reading Japanese **comics**. (그는 일본 **만화책** 읽는 것을 좋아한다.)"
+      ],
+      "keywords": ["manga", "cartoon"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"commander": {
+  "word": "commander",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "commander_1",
+      "definition": "[명사] 사령관, 지휘관",
+      "examples": [
+        "The **commander** led the troops bravely. (**지휘관**은 용감하게 부대를 이끌었다.)"
+      ],
+      "keywords": ["leader", "chief"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"commence": {
+  "word": "commence",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "commence_1",
+      "definition": "[동사] 시작하다, 개시하다",
+      "examples": [
+        "The ceremony will **commence** at noon. (식은 정오에 **시작된다**.)"
+      ],
+      "keywords": ["begin", "start"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"commentary": {
+  "word": "commentary",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "commentary_1",
+      "definition": "[명사] 해설, 논평",
+      "examples": [
+        "The live **commentary** made the game exciting. (실시간 **해설**이 경기를 더욱 흥미롭게 했다.)"
+      ],
+      "keywords": ["explanation", "analysis"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"competitor": {
+  "word": "competitor",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "competitor_1",
+      "definition": "[명사] 경쟁자, 경쟁 상대",
+      "examples": [
+        "Our main **competitor** is a global brand. (우리의 주요 **경쟁자**는 글로벌 브랜드다.)"
+      ],
+      "keywords": ["rival", "opponent"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"compile": {
+  "word": "compile",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "compile_1",
+      "definition": "[동사] (자료를) 엮다, 편집하다",
+      "examples": [
+        "She **compiled** a list of useful resources. (그녀는 유용한 자료 목록을 **엮었다**.)"
+      ],
+      "keywords": ["collect", "assemble"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "compile_2",
+      "definition": "[동사] (컴퓨터) 컴파일하다",
+      "examples": [
+        "The program failed to **compile** properly. (프로그램이 제대로 **컴파일되지 않았다**.)"
+      ],
+      "keywords": ["build", "process"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"complaint": {
+  "word": "complaint",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "complaint_1",
+      "definition": "[명사] 불평, 불만",
+      "examples": [
+        "We received several **complaints** about the noise. (우리는 소음에 대한 여러 **불만**을 접수했다.)"
+      ],
+      "keywords": ["grievance", "criticism"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"completely": {
+  "word": "completely",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "completely_1",
+      "definition": "[부사] 완전히, 전적으로",
+      "examples": [
+        "I **completely** forgot about the meeting. (회의를 **완전히** 잊어버렸다.)"
+      ],
+      "keywords": ["entirely", "totally"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"completion": {
+  "word": "completion",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "completion_1",
+      "definition": "[명사] 완성, 완료",
+      "examples": [
+        "The **completion** of the project took two years. (그 프로젝트의 **완료**에는 2년이 걸렸다.)"
+      ],
+      "keywords": ["finish", "fulfillment"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"complexity": {
+  "word": "complexity",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "complexity_1",
+      "definition": "[명사] 복잡성, 난이도",
+      "examples": [
+        "We underestimated the **complexity** of the task. (우리는 그 작업의 **복잡성**을 과소평가했다.)"
+      ],
+      "keywords": ["complication", "difficulty"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"compliance": {
+  "word": "compliance",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "compliance_1",
+      "definition": "[명사] 준수, 따름",
+      "examples": [
+        "All products must be in **compliance** with safety laws. (모든 제품은 안전 법규를 **준수해야 한다**.)"
+      ],
+      "keywords": ["obedience", "conformity"],
+      "embedding": {},
+      "difficulty": 4,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"complication": {
+  "word": "complication",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "complication_1",
+      "definition": "[명사] 복잡한 문제, 합병증",
+      "examples": [
+        "The patient developed a serious **complication**. (환자가 심각한 **합병증**을 보였다.)"
+      ],
+      "keywords": ["difficulty", "problem"],
+      "embedding": {},
+      "difficulty": 4,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"comply": {
+  "word": "comply",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "comply_1",
+      "definition": "[동사] 따르다, 준수하다",
+      "examples": [
+        "You must **comply** with the new regulations. (새 규정을 **준수해야 한다**.)"
+      ],
+      "keywords": ["obey", "follow"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"component": {
+  "word": "component",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "component_1",
+      "definition": "[명사] 구성 요소, 부품",
+      "examples": [
+        "Each **component** of the system is important. (시스템의 각 **구성 요소**는 중요하다.)"
+      ],
+      "keywords": ["part", "element"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:40:00Z"
+},
+"composer": {
+  "word": "composer",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "composer_1",
+      "definition": "[명사] 작곡가",
+      "examples": [
+        "Beethoven is a famous **composer**. (베토벤은 유명한 **작곡가**이다.)"
+      ],
+      "keywords": ["musician", "songwriter"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"composition": {
+  "word": "composition",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "composition_1",
+      "definition": "[명사] 구성, 조합",
+      "examples": [
+        "The chemical **composition** of water is H₂O. (물의 화학적 **구성**은 H₂O이다.)"
+      ],
+      "keywords": ["structure", "makeup"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "composition_2",
+      "definition": "[명사] 작문, 작곡",
+      "examples": [
+        "She wrote a short **composition** about her family. (그녀는 가족에 대한 짧은 **작문**을 썼다.)"
+      ],
+      "keywords": ["essay", "piece"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"compound": {
+  "word": "compound",
+  "pos": ["noun", "verb", "adjective"],
+  "meanings": [
+    {
+      "id": "compound_1",
+      "definition": "[명사] 화합물, 혼합물",
+      "examples": [
+        "Water is a **compound** of hydrogen and oxygen. (물은 수소와 산소의 **화합물**이다.)"
+      ],
+      "keywords": ["mixture", "blend"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "compound_2",
+      "definition": "[동사] 악화시키다, 혼합하다",
+      "examples": [
+        "His mistake **compounded** the problem. (그의 실수는 문제를 **악화시켰다**.)"
+      ],
+      "keywords": ["worsen", "combine"],
+      "embedding": {},
+      "difficulty": 4,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"comprise": {
+  "word": "comprise",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "comprise_1",
+      "definition": "[동사] 구성되다, 포함하다",
+      "examples": [
+        "The committee **comprises** ten members. (위원회는 10명의 구성원으로 **이뤄져 있다**.)"
+      ],
+      "keywords": ["include", "consist of"],
+      "embedding": {},
+      "difficulty": 4,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"compromise": {
+  "word": "compromise",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "compromise_1",
+      "definition": "[명사] 타협, 절충",
+      "examples": [
+        "They reached a **compromise** after long talks. (그들은 긴 대화 끝에 **타협**에 도달했다.)"
+      ],
+      "keywords": ["agreement", "settlement"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "compromise_2",
+      "definition": "[동사] 타협하다, 손상시키다",
+      "examples": [
+        "He refused to **compromise** his principles. (그는 자신의 원칙을 **타협하지 않았다**.)"
+      ],
+      "keywords": ["concede", "undermine"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"consequently": {
+  "word": "consequently",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "consequently_1",
+      "definition": "[부사] 그 결과, 따라서",
+      "examples": [
+        "It rained heavily; **consequently**, the match was canceled. (비가 많이 와서, **그 결과** 경기가 취소되었다.)"
+      ],
+      "keywords": ["therefore", "thus"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"conservation": {
+  "word": "conservation",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "conservation_1",
+      "definition": "[명사] 보존, 보호",
+      "examples": [
+        "Wildlife **conservation** is a global issue. (야생 동물 **보호**는 세계적인 문제이다.)"
+      ],
+      "keywords": ["protection", "preservation"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"conservative": {
+  "word": "conservative",
+  "pos": ["adjective", "noun"],
+  "meanings": [
+    {
+      "id": "conservative_1",
+      "definition": "[형용사] 보수적인, 전통적인",
+      "examples": [
+        "He has **conservative** political views. (그는 **보수적인** 정치적 견해를 가지고 있다.)"
+      ],
+      "keywords": ["traditional", "cautious"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "conservative_2",
+      "definition": "[명사] 보수주의자",
+      "examples": [
+        "The **Conservatives** won the election. (**보수당**이 선거에서 승리했다.)"
+      ],
+      "keywords": ["right-winger", "traditionalist"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"conserve": {
+  "word": "conserve",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "conserve_1",
+      "definition": "[동사] 보존하다, 절약하다",
+      "examples": [
+        "We should **conserve** water and energy. (우리는 물과 에너지를 **절약해야 한다**.)"
+      ],
+      "keywords": ["save", "preserve"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"whereas": {
+  "word": "whereas",
+  "pos": ["conjunction"],
+  "meanings": [
+    {
+      "id": "whereas_1",
+      "definition": "[접속사] 반면에, ~인 데 비해",
+      "examples": [
+        "He is tall, **whereas** his brother is short. (그는 키가 큰 **반면에** 그의 형제는 작다.)"
+      ],
+      "keywords": ["while", "although"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"whereby": {
+  "word": "whereby",
+  "pos": ["adverb", "conjunction"],
+  "meanings": [
+    {
+      "id": "whereby_1",
+      "definition": "[부사] 그것에 의하여, 그 방법으로",
+      "examples": [
+        "They introduced a system **whereby** people can book online. (사람들이 온라인으로 예약할 수 있는 시스템을 도입했다.)"
+      ],
+      "keywords": ["by which", "through which"],
+      "embedding": {},
+      "difficulty": 4,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"wherever": {
+  "word": "wherever",
+  "pos": ["adverb", "conjunction"],
+  "meanings": [
+    {
+      "id": "wherever_1",
+      "definition": "[부사] 어디든지, 어디에서나",
+      "examples": [
+        "I’ll follow you **wherever** you go. (네가 가는 **어디든지** 따라갈게.)"
+      ],
+      "keywords": ["anywhere", "everywhere"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"who": {
+  "word": "who",
+  "pos": ["pronoun"],
+  "meanings": [
+    {
+      "id": "who_1",
+      "definition": "[대명사] 누구, ~하는 사람",
+      "examples": [
+        "**Who** is calling? (**누가** 전화하고 있나요?)"
+      ],
+      "keywords": ["which person"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"whoever": {
+  "word": "whoever",
+  "pos": ["pronoun"],
+  "meanings": [
+    {
+      "id": "whoever_1",
+      "definition": "[대명사] 누구든지, 어떤 사람이든",
+      "examples": [
+        "**Whoever** wins will receive a prize. (**누구든지** 이기는 사람은 상을 받을 것이다.)"
+      ],
+      "keywords": ["anyone", "whosoever"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"wholly": {
+  "word": "wholly",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "wholly_1",
+      "definition": "[부사] 완전히, 전적으로",
+      "examples": [
+        "The plan was **wholly** successful. (그 계획은 **완전히** 성공했다.)"
+      ],
+      "keywords": ["entirely", "completely"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"why": {
+  "word": "why",
+  "pos": ["adverb", "noun"],
+  "meanings": [
+    {
+      "id": "why_1",
+      "definition": "[부사] 왜, 어째서",
+      "examples": [
+        "**Why** are you late? (**왜** 늦었어요?)"
+      ],
+      "keywords": ["for what reason"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "why_2",
+      "definition": "[명사] 이유, 원인",
+      "examples": [
+        "We don't know the **why** of his behavior. (그의 행동의 **이유**를 모른다.)"
+      ],
+      "keywords": ["reason", "cause"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"widely": {
+  "word": "widely",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "widely_1",
+      "definition": "[부사] 널리, 폭넓게",
+      "examples": [
+        "The book is **widely** read around the world. (그 책은 전 세계에서 **널리** 읽힌다.)"
+      ],
+      "keywords": ["extensively", "broadly"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:50:00Z"
+},
+"widen": {
+  "word": "widen",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "widen_1",
+      "definition": "[동사] 넓히다, 확대하다",
+      "examples": [
+        "They plan to **widen** the road. (그들은 도로를 **넓힐** 계획이다.)"
+      ],
+      "keywords": ["expand", "broaden"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "widen_2",
+      "definition": "[동사] (범위·차이 등을) 확대시키다",
+      "examples": [
+        "The gap between rich and poor is **widening**. (빈부격차가 **확대되고 있다**.)"
+      ],
+      "keywords": ["increase", "stretch"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"widespread": {
+  "word": "widespread",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "widespread_1",
+      "definition": "[형용사] 널리 퍼진, 광범위한",
+      "examples": [
+        "There is **widespread** support for the policy. (그 정책에 대한 **광범위한** 지지가 있다.)"
+      ],
+      "keywords": ["extensive", "common"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"widow": {
+  "word": "widow",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "widow_1",
+      "definition": "[명사] 미망인, 과부",
+      "examples": [
+        "She became a **widow** at a young age. (그녀는 젊은 나이에 **과부가 되었다**.)"
+      ],
+      "keywords": ["bereaved woman", "survivor"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"width": {
+  "word": "width",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "width_1",
+      "definition": "[명사] 폭, 너비",
+      "examples": [
+        "The **width** of the table is 80 cm. (그 탁자의 **폭**은 80cm이다.)"
+      ],
+      "keywords": ["breadth", "extent"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"wife": {
+  "word": "wife",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "wife_1",
+      "definition": "[명사] 아내, 배우자",
+      "examples": [
+        "He loves his **wife** very much. (그는 자신의 **아내**를 매우 사랑한다.)"
+      ],
+      "keywords": ["spouse", "partner"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"wildlife": {
+  "word": "wildlife",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "wildlife_1",
+      "definition": "[명사] 야생 동물",
+      "examples": [
+        "**Wildlife** protection is important for the ecosystem. (**야생 동물** 보호는 생태계에 중요하다.)"
+      ],
+      "keywords": ["fauna", "animals"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"will": {
+  "word": "will",
+  "pos": ["modal verb", "noun"],
+  "meanings": [
+    {
+      "id": "will_1",
+      "definition": "[조동사] ~할 것이다, ~하려고 하다",
+      "examples": [
+        "I **will** call you tomorrow. (내일 **전화할게요**.)"
+      ],
+      "keywords": ["intend", "shall"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "will_2",
+      "definition": "[명사] 의지, 유언",
+      "examples": [
+        "He left a **will** before his death. (그는 죽기 전에 **유언장**을 남겼다.)"
+      ],
+      "keywords": ["intention", "testament"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"willingness": {
+  "word": "willingness",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "willingness_1",
+      "definition": "[명사] 의지, 기꺼이 하려는 마음",
+      "examples": [
+        "Her **willingness** to help impressed everyone. (도우려는 그녀의 **의지**가 모두를 감동시켰다.)"
+      ],
+      "keywords": ["readiness", "enthusiasm"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"wind": {
+  "word": "wind",
+  "pos": ["noun", "verb"],
+      "meanings": [
+    {
+      "id": "wind_1",
+      "definition": "[명사] 바람",
+      "examples": [
+        "The **wind** is strong today. (오늘 **바람**이 세다.)"
+      ],
+      "keywords": ["breeze", "airflow"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "wind_2",
+      "definition": "[동사] 감다, 돌리다",
+      "examples": [
+        "Please **wind** the clock. (시계를 **감아주세요**.)"
+      ],
+      "keywords": ["coil", "turn"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"winner": {
+  "word": "winner",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "winner_1",
+      "definition": "[명사] 승자, 우승자",
+      "examples": [
+        "The **winner** received a gold medal. (**우승자**는 금메달을 받았다.)"
+      ],
+      "keywords": ["champion", "victor"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"winter": {
+  "word": "winter",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "winter_1",
+      "definition": "[명사] 겨울",
+      "examples": [
+        "**Winter** is cold and snowy. (**겨울**은 춥고 눈이 온다.)"
+      ],
+      "keywords": ["season", "cold"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"wipe": {
+  "word": "wipe",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "wipe_1",
+      "definition": "[동사] 닦다, 지우다",
+      "examples": [
+        "Please **wipe** the table clean. (테이블을 깨끗이 **닦아주세요**.)"
+      ],
+      "keywords": ["clean", "erase"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"wise": {
+  "word": "wise",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "wise_1",
+      "definition": "[형용사] 현명한, 지혜로운",
+      "examples": [
+        "It was a **wise** decision. (**현명한** 결정이었다.)"
+      ],
+      "keywords": ["sensible", "smart"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"wish": {
+  "word": "wish",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "wish_1",
+      "definition": "[동사] 바라다, 소망하다",
+      "examples": [
+        "I **wish** you happiness. (당신의 행복을 **바랍니다**.)"
+      ],
+      "keywords": ["hope", "desire"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "wish_2",
+      "definition": "[명사] 소원, 바람",
+      "examples": [
+        "She made a **wish** on her birthday. (그녀는 생일에 **소원을 빌었다**.)"
+      ],
+      "keywords": ["dream", "aspiration"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"wit": {
+  "word": "wit",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "wit_1",
+      "definition": "[명사] 재치, 기지",
+      "examples": [
+        "He is known for his quick **wit**. (그는 재빠른 **재치**로 유명하다.)"
+      ],
+      "keywords": ["humor", "cleverness"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"with": {
+  "word": "with",
+  "pos": ["preposition"],
+  "meanings": [
+    {
+      "id": "with_1",
+      "definition": "[전치사] ~와 함께, ~을 가지고",
+      "examples": [
+        "I went **with** my friend. (나는 친구와 **함께** 갔다.)"
+      ],
+      "keywords": ["alongside", "together"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"withdraw": {
+  "word": "withdraw",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "withdraw_1",
+      "definition": "[동사] (돈을) 인출하다",
+      "examples": [
+        "He **withdrew** cash from the ATM. (그는 ATM에서 현금을 **인출했다**.)"
+      ],
+      "keywords": ["take out", "remove"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "withdraw_2",
+      "definition": "[동사] 철수하다, 물러나다",
+      "examples": [
+        "The army **withdrew** from the city. (군대가 도시에서 **철수했다**.)"
+      ],
+      "keywords": ["retreat", "pull out"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"withdrawal": {
+  "word": "withdrawal",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "withdrawal_1",
+      "definition": "[명사] 인출, 철수",
+      "examples": [
+        "You can make one **withdrawal** per day. (하루에 한 번만 **인출**할 수 있다.)"
+      ],
+      "keywords": ["removal", "retraction"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "withdrawal_2",
+      "definition": "[명사] 금단 증상",
+      "examples": [
+        "He suffered from drug **withdrawal**. (그는 약물 **금단 증상**을 겪었다.)"
+      ],
+      "keywords": ["abstinence", "detox"],
+      "embedding": {},
+      "difficulty": 4,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+},
+"within": {
+  "word": "within",
+  "pos": ["preposition", "adverb"],
+  "meanings": [
+    {
+      "id": "within_1",
+      "definition": "[전치사] ~이내에, 내부에",
+      "examples": [
+        "The task must be finished **within** an hour. (그 일은 한 시간 **이내에** 끝나야 한다.)"
+      ],
+      "keywords": ["inside", "during"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T10:00:00Z"
+}
+}

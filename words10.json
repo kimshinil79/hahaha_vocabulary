@@ -1,0 +1,4722 @@
+{
+"compulsory": {
+  "word": "compulsory",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "compulsory_1",
+      "definition": "[형용사] 의무적인, 강제적인",
+      "examples": [
+        "Education is **compulsory** for children up to age 16. (교육은 16세까지 **의무적**이다.)"
+      ],
+      "keywords": ["mandatory", "obligatory"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T00:10:00Z"
+},
+"compute": {
+  "word": "compute",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "compute_1",
+      "definition": "[동사] 계산하다, 산출하다",
+      "examples": [
+        "The system **computes** your score automatically. (시스템이 자동으로 점수를 **계산한다**.)"
+      ],
+      "keywords": ["calculate", "estimate"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:10:00Z"
+},
+"computer": {
+  "word": "computer",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "computer_1",
+      "definition": "[명사] 컴퓨터",
+      "examples": [
+        "She bought a new **computer** for work. (그녀는 일을 위해 새 **컴퓨터**를 샀다.)"
+      ],
+      "keywords": ["PC", "machine"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:10:00Z"
+},
+"concede": {
+  "word": "concede",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "concede_1",
+      "definition": "[동사] 인정하다, 양보하다",
+      "examples": [
+        "He finally **conceded** that he was wrong. (그는 결국 자신이 틀렸음을 **인정했다**.)"
+      ],
+      "keywords": ["admit", "yield"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:10:00Z"
+},
+"conceive": {
+  "word": "conceive",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "conceive_1",
+      "definition": "[동사] 상상하다, 생각해내다",
+      "examples": [
+        "She **conceived** the idea while traveling. (그녀는 여행 중에 그 아이디어를 **생각해냈다**.)"
+      ],
+      "keywords": ["imagine", "form"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "conceive_2",
+      "definition": "[동사] (아이를) 가지다",
+      "examples": [
+        "They tried for years to **conceive** a child. (그들은 수년간 아이를 **갖기 위해 노력했다**.)"
+      ],
+      "keywords": ["become pregnant", "create"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T00:10:00Z"
+},
+"concentration": {
+  "word": "concentration",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "concentration_1",
+      "definition": "[명사] 집중, 전념",
+      "examples": [
+        "Good **concentration** is vital for studying. (**집중력**은 공부에 필수적이다.)"
+      ],
+      "keywords": ["focus", "attention"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:10:00Z"
+},
+"conception": {
+  "word": "conception",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "conception_1",
+      "definition": "[명사] 개념, 이해, 착상",
+      "examples": [
+        "People have different **conceptions** of beauty. (사람들은 미의 **개념**을 다르게 이해한다.)"
+      ],
+      "keywords": ["idea", "notion"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "conception_2",
+      "definition": "[명사] 임신, 수정",
+      "examples": [
+        "The baby was healthy from **conception** to birth. (그 아기는 **수정**에서 출산까지 건강했다.)"
+      ],
+      "keywords": ["pregnancy", "fertilization"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T00:10:00Z"
+},
+"concert": {
+  "word": "concert",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "concert_1",
+      "definition": "[명사] 콘서트, 연주회",
+      "examples": [
+        "We went to a BTS **concert** last night. (어젯밤 우리는 BTS **콘서트**에 갔다.)"
+      ],
+      "keywords": ["performance", "show"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:10:00Z"
+},
+"concession": {
+  "word": "concession",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "concession_1",
+      "definition": "[명사] 양보, 인정",
+      "examples": [
+        "He made several **concessions** to reach an agreement. (그는 합의를 위해 몇 가지 **양보**를 했다.)"
+      ],
+      "keywords": ["compromise", "allowance"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:10:00Z"
+},
+"conclusion": {
+  "word": "conclusion",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "conclusion_1",
+      "definition": "[명사] 결론, 결말",
+      "examples": [
+        "The report came to the **conclusion** that more data was needed. (그 보고서는 더 많은 데이터가 필요하다는 **결론**에 도달했다.)"
+      ],
+      "keywords": ["result", "ending"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"condemn": {
+  "word": "condemn",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "condemn_1",
+      "definition": "[동사] 비난하다, 규탄하다",
+      "examples": [
+        "Leaders around the world **condemned** the attack. (전 세계 지도자들이 그 공격을 **비난했다**.)"
+      ],
+      "keywords": ["criticize", "denounce"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "condemn_2",
+      "definition": "[동사] 선고하다, 처벌하다",
+      "examples": [
+        "He was **condemned** to life imprisonment. (그는 종신형을 **선고받았다**.)"
+      ],
+      "keywords": ["sentence", "doom"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"condition": {
+  "word": "condition",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "condition_1",
+      "definition": "[명사] 상태, 조건",
+      "examples": [
+        "The car is in good **condition**. (그 차는 상태가 좋다.)"
+      ],
+      "keywords": ["state", "situation"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "condition_2",
+      "definition": "[동사] 길들이다, 익숙하게 하다",
+      "examples": [
+        "Athletes are **conditioned** to strict routines. (운동선수들은 엄격한 규칙에 **익숙해져 있다**.)"
+      ],
+      "keywords": ["train", "accustom"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"confer": {
+  "word": "confer",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "confer_1",
+      "definition": "[동사] 수여하다, 부여하다",
+      "examples": [
+        "The university **conferred** an honorary degree on her. (그 대학은 그녀에게 명예학위를 **수여했다**.)"
+      ],
+      "keywords": ["grant", "bestow"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "confer_2",
+      "definition": "[동사] 상의하다, 협의하다",
+      "examples": [
+        "They **conferred** about the project. (그들은 프로젝트에 대해 **상의했다**.)"
+      ],
+      "keywords": ["consult", "discuss"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"conference": {
+  "word": "conference",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "conference_1",
+      "definition": "[명사] 회의, 학회",
+      "examples": [
+        "The annual **conference** will be held in Seoul. (연례 **회의**가 서울에서 열린다.)"
+      ],
+      "keywords": ["meeting", "convention"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"confession": {
+  "word": "confession",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "confession_1",
+      "definition": "[명사] 고백, 자백",
+      "examples": [
+        "He made a full **confession** to the police. (그는 경찰에 완전한 **자백**을 했다.)"
+      ],
+      "keywords": ["admission", "declaration"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"confidence": {
+  "word": "confidence",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "confidence_1",
+      "definition": "[명사] 자신감, 확신",
+      "examples": [
+        "She spoke with **confidence**. (그녀는 **자신감 있게** 말했다.)"
+      ],
+      "keywords": ["assurance", "belief"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"configuration": {
+  "word": "configuration",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "configuration_1",
+      "definition": "[명사] 배열, 배치, 구성",
+      "examples": [
+        "The network **configuration** has been updated. (네트워크 **구성이** 업데이트되었다.)"
+      ],
+      "keywords": ["layout", "arrangement"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"confirmation": {
+  "word": "confirmation",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "confirmation_1",
+      "definition": "[명사] 확인, 확증",
+      "examples": [
+        "I received a **confirmation** email. (나는 **확인 이메일**을 받았다.)"
+      ],
+      "keywords": ["verification", "approval"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"confrontation": {
+  "word": "confrontation",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "confrontation_1",
+      "definition": "[명사] 대립, 충돌",
+      "examples": [
+        "There was a violent **confrontation** between police and protesters. (경찰과 시위대 사이에 격렬한 **충돌**이 있었다.)"
+      ],
+      "keywords": ["conflict", "clash"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"confusion": {
+  "word": "confusion",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "confusion_1",
+      "definition": "[명사] 혼란, 혼동",
+      "examples": [
+        "The sudden change caused **confusion** among staff. (갑작스러운 변화가 직원들 사이에 **혼란**을 일으켰다.)"
+      ],
+      "keywords": ["disorder", "chaos"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"congratulate": {
+  "word": "congratulate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "congratulate_1",
+      "definition": "[동사] 축하하다",
+      "examples": [
+        "They **congratulated** her on her success. (그들은 그녀의 성공을 **축하했다**.)"
+      ],
+      "keywords": ["praise", "celebrate"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"congregation": {
+  "word": "congregation",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "congregation_1",
+      "definition": "[명사] (교회의) 신자 집단, 회중",
+      "examples": [
+        "The **congregation** sang together. (**회중**이 함께 노래를 불렀다.)"
+      ],
+      "keywords": ["assembly", "audience"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"congressional": {
+  "word": "congressional",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "congressional_1",
+      "definition": "[형용사] 국회의, 의회의",
+      "examples": [
+        "She gave a speech at a **congressional** meeting. (그녀는 **의회** 회의에서 연설했다.)"
+      ],
+      "keywords": ["legislative", "parliamentary"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"connection": {
+  "word": "connection",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "connection_1",
+      "definition": "[명사] 연결, 관계",
+      "examples": [
+        "There is a strong **connection** between diet and health. (식단과 건강 사이에는 강한 **연관성**이 있다.)"
+      ],
+      "keywords": ["link", "relationship"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"conquer": {
+  "word": "conquer",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "conquer_1",
+      "definition": "[동사] 정복하다, 극복하다",
+      "examples": [
+        "They **conquered** new territories. (그들은 새로운 지역을 **정복했다**.)"
+      ],
+      "keywords": ["defeat", "overcome"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"consciousness": {
+  "word": "consciousness",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "consciousness_1",
+      "definition": "[명사] 의식, 자각",
+      "examples": [
+        "He lost **consciousness** after the accident. (그는 사고 후 **의식을** 잃었다.)"
+      ],
+      "keywords": ["awareness", "perception"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"consecutive": {
+  "word": "consecutive",
+  "pos": ["adjective"],
+      "meanings": [
+        {
+          "id": "consecutive_1",
+          "definition": "[형용사] 연속적인, 잇따른",
+          "examples": [
+            "She won three **consecutive** championships. (그녀는 세 번 연속 **우승**했다.)"
+          ],
+          "keywords": ["successive", "continuous"],
+          "embedding": {},
+          "difficulty": 2,
+          "frequency": 0.9
+        }
+      ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"consensus": {
+  "word": "consensus",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "consensus_1",
+      "definition": "[명사] 합의, 일치된 의견",
+      "examples": [
+        "There was a **consensus** among experts. (전문가들 사이에 **합의**가 있었다.)"
+      ],
+      "keywords": ["agreement", "unity"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"consent": {
+  "word": "consent",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "consent_1",
+      "definition": "[명사] 동의, 허락",
+      "examples": [
+        "You need parental **consent** to travel abroad. (해외여행에는 부모의 **동의**가 필요하다.)"
+      ],
+      "keywords": ["approval", "agreement"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "consent_2",
+      "definition": "[동사] 동의하다, 허락하다",
+      "examples": [
+        "She **consented** to the plan. (그녀는 그 계획에 **동의했다**.)"
+      ],
+      "keywords": ["agree", "approve"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"consequence": {
+  "word": "consequence",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "consequence_1",
+      "definition": "[명사] 결과, 영향",
+      "examples": [
+        "Every action has a **consequence**. (모든 행동에는 **결과**가 따른다.)"
+      ],
+      "keywords": ["result", "outcome"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"consider": {
+  "word": "consider",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "consider_1",
+      "definition": "[동사] 고려하다, 숙고하다",
+      "examples": [
+        "We should **consider** all options. (모든 선택지를 **고려해야 한다**.)"
+      ],
+      "keywords": ["think about", "deliberate"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "consider_2",
+      "definition": "[동사] ~라고 여기다",
+      "examples": [
+        "She is **considered** a genius. (그녀는 **천재로 여겨진다**.)"
+      ],
+      "keywords": ["regard", "deem"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:20:00Z"
+},
+"considerable": {
+  "word": "considerable",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "considerable_1",
+      "definition": "[형용사] 상당한, 꽤 많은",
+      "examples": [
+        "The project required **considerable** effort. (그 프로젝트는 **상당한** 노력이 필요했다.)"
+      ],
+      "keywords": ["significant", "substantial"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"considerably": {
+  "word": "considerably",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "considerably_1",
+      "definition": "[부사] 상당히, 꽤",
+      "examples": [
+        "Prices have **considerably** increased. (가격이 **상당히** 올랐다.)"
+      ],
+      "keywords": ["significantly", "greatly"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"consideration": {
+  "word": "consideration",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "consideration_1",
+      "definition": "[명사] 고려, 숙고",
+      "examples": [
+        "After careful **consideration**, we decided to move forward. (신중한 **고려** 후에 우리는 진행하기로 했다.)"
+      ],
+      "keywords": ["thought", "deliberation"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"consist": {
+  "word": "consist",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "consist_1",
+      "definition": "[동사] ~으로 이루어지다",
+      "examples": [
+        "The team **consists** of five members. (그 팀은 다섯 명으로 **이루어져 있다**.)"
+      ],
+      "keywords": ["be made up of", "contain"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"consistency": {
+  "word": "consistency",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "consistency_1",
+      "definition": "[명사] 일관성, 농도",
+      "examples": [
+        "We need more **consistency** in our policies. (정책에 더 많은 **일관성**이 필요하다.)"
+      ],
+      "keywords": ["uniformity", "coherence"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"consistent": {
+  "word": "consistent",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "consistent_1",
+      "definition": "[형용사] 일관된, 일치하는",
+      "examples": [
+        "Her actions are always **consistent** with her words. (그녀의 행동은 항상 말과 **일치한다**.)"
+      ],
+      "keywords": ["steady", "reliable"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"consistently": {
+  "word": "consistently",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "consistently_1",
+      "definition": "[부사] 일관되게, 지속적으로",
+      "examples": [
+        "She **consistently** delivers great results. (그녀는 **일관되게** 좋은 성과를 낸다.)"
+      ],
+      "keywords": ["steadily", "regularly"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"consolidate": {
+  "word": "consolidate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "consolidate_1",
+      "definition": "[동사] 통합하다, 강화하다",
+      "examples": [
+        "The company **consolidated** its position in the market. (회사는 시장에서의 입지를 **강화했다**.)"
+      ],
+      "keywords": ["strengthen", "combine"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"conspiracy": {
+  "word": "conspiracy",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "conspiracy_1",
+      "definition": "[명사] 음모, 모의",
+      "examples": [
+        "They were arrested for **conspiracy** to commit fraud. (그들은 사기 **음모**로 체포되었다.)"
+      ],
+      "keywords": ["plot", "scheme"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"constant": {
+  "word": "constant",
+  "pos": ["adjective", "noun"],
+  "meanings": [
+    {
+      "id": "constant_1",
+      "definition": "[형용사] 끊임없는, 일정한",
+      "examples": [
+        "She lived in **constant** fear. (그녀는 **끊임없는** 두려움 속에서 살았다.)"
+      ],
+      "keywords": ["continuous", "steady"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "constant_2",
+      "definition": "[명사] 상수, 불변의 것",
+      "examples": [
+        "The speed of light is a universal **constant**. (빛의 속도는 보편적인 **상수**이다.)"
+      ],
+      "keywords": ["fixed value", "unchanging factor"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"constantly": {
+  "word": "constantly",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "constantly_1",
+      "definition": "[부사] 끊임없이, 지속적으로",
+      "examples": [
+        "He is **constantly** improving his skills. (그는 **지속적으로** 자신의 기술을 향상시키고 있다.)"
+      ],
+      "keywords": ["continuously", "repeatedly"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"constituency": {
+  "word": "constituency",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "constituency_1",
+      "definition": "[명사] 유권자, 선거구",
+      "examples": [
+        "He represents the largest **constituency** in the city. (그는 도시에서 가장 큰 **선거구**를 대표한다.)"
+      ],
+      "keywords": ["district", "voter group"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"constitute": {
+  "word": "constitute",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "constitute_1",
+      "definition": "[동사] 구성하다, ~이 되다",
+      "examples": [
+        "Women **constitute** more than half the population. (여성은 인구의 절반 이상을 **차지한다**.)"
+      ],
+      "keywords": ["form", "make up"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"constitution": {
+  "word": "constitution",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "constitution_1",
+      "definition": "[명사] 헌법, 구성, 체질",
+      "examples": [
+        "Freedom of speech is protected by the **Constitution**. (언론의 자유는 **헌법**에 의해 보장된다.)"
+      ],
+      "keywords": ["charter", "law"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:30:00Z"
+},
+"constitutional": {
+  "word": "constitutional",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "constitutional_1",
+      "definition": "[형용사] 헌법의, 합헌적인",
+      "examples": [
+        "The new law was declared **constitutional** by the court. (그 새 법은 법원에서 **합헌적**이라고 판결되었다.)"
+      ],
+      "keywords": ["legal", "chartered"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "constitutional_2",
+      "definition": "[형용사] 체질의, 체격의",
+      "examples": [
+        "He has a strong **constitutional** build. (그는 튼튼한 **체질**을 가지고 있다.)"
+      ],
+      "keywords": ["bodily", "physical"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"constraint": {
+  "word": "constraint",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "constraint_1",
+      "definition": "[명사] 제약, 제한",
+      "examples": [
+        "Budget **constraints** prevented us from hiring more staff. (예산 **제약**으로 인해 더 많은 직원을 고용할 수 없었다.)"
+      ],
+      "keywords": ["limitation", "restriction"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"construct": {
+  "word": "construct",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "construct_1",
+      "definition": "[동사] 건설하다, 구성하다",
+      "examples": [
+        "They **constructed** a new bridge. (그들은 새 다리를 **건설했다**.)"
+      ],
+      "keywords": ["build", "assemble"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "construct_2",
+      "definition": "[명사] 구조물, 개념",
+      "examples": [
+        "Freedom is a complex social **construct**. (자유는 복잡한 사회적 **개념**이다.)"
+      ],
+      "keywords": ["concept", "framework"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"construction": {
+  "word": "construction",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "construction_1",
+      "definition": "[명사] 건설, 구조",
+      "examples": [
+        "The **construction** of the new hospital will start soon. (새 병원 **건설**이 곧 시작될 것이다.)"
+      ],
+      "keywords": ["building", "creation"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"consult": {
+  "word": "consult",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "consult_1",
+      "definition": "[동사] 상담하다, 상의하다",
+      "examples": [
+        "You should **consult** your doctor before taking the medicine. (약을 복용하기 전에 의사와 **상의해야 한다**.)"
+      ],
+      "keywords": ["advise", "discuss"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"consultant": {
+  "word": "consultant",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "consultant_1",
+      "definition": "[명사] 상담가, 자문가, 컨설턴트",
+      "examples": [
+        "He works as a financial **consultant**. (그는 재정 **컨설턴트**로 일한다.)"
+      ],
+      "keywords": ["advisor", "specialist"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"consultation": {
+  "word": "consultation",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "consultation_1",
+      "definition": "[명사] 협의, 상담, 자문",
+      "examples": [
+        "A **consultation** with a lawyer is recommended. (변호사와의 **상담**이 권장된다.)"
+      ],
+      "keywords": ["discussion", "meeting"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"consume": {
+  "word": "consume",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "consume_1",
+      "definition": "[동사] 소비하다, 먹다",
+      "examples": [
+        "Koreans **consume** a lot of rice. (한국인들은 쌀을 많이 **소비한다**.)"
+      ],
+      "keywords": ["use up", "devour"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "consume_2",
+      "definition": "[동사] (감정 등이) 사로잡다",
+      "examples": [
+        "He was **consumed** by guilt. (그는 죄책감에 **사로잡혔다**.)"
+      ],
+      "keywords": ["engulf", "absorb"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"consumer": {
+  "word": "consumer",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "consumer_1",
+      "definition": "[명사] 소비자, 고객",
+      "examples": [
+        "The company focuses on **consumer** satisfaction. (그 회사는 **소비자** 만족에 집중한다.)"
+      ],
+      "keywords": ["customer", "buyer"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"consumption": {
+  "word": "consumption",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "consumption_1",
+      "definition": "[명사] 소비, 소모",
+      "examples": [
+        "Energy **consumption** has increased rapidly. (에너지 **소비**가 급격히 증가했다.)"
+      ],
+      "keywords": ["use", "expenditure"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"contact": {
+  "word": "contact",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "contact_1",
+      "definition": "[명사] 연락, 접촉",
+      "examples": [
+        "Please leave your **contact** information. (연락처를 남겨주세요.)"
+      ],
+      "keywords": ["communication", "connection"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "contact_2",
+      "definition": "[동사] 연락하다",
+      "examples": [
+        "I’ll **contact** you tomorrow. (내일 **연락드릴게요**.)"
+      ],
+      "keywords": ["call", "reach out"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"contain": {
+  "word": "contain",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "contain_1",
+      "definition": "[동사] 포함하다, 함유하다",
+      "examples": [
+        "This drink **contains** no sugar. (이 음료는 설탕을 **포함하지 않는다**.)"
+      ],
+      "keywords": ["include", "hold"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "contain_2",
+      "definition": "[동사] 억제하다, 억누르다",
+      "examples": [
+        "She could not **contain** her excitement. (그녀는 흥분을 **억누를 수 없었다**.)"
+      ],
+      "keywords": ["control", "restrain"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"container": {
+  "word": "container",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "container_1",
+      "definition": "[명사] 용기, 컨테이너",
+      "examples": [
+        "The food is kept in an airtight **container**. (음식은 밀폐 **용기**에 보관된다.)"
+      ],
+      "keywords": ["box", "vessel"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"contemplate": {
+  "word": "contemplate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "contemplate_1",
+      "definition": "[동사] 숙고하다, 심사숙고하다",
+      "examples": [
+        "She sat quietly, **contemplating** the future. (그녀는 조용히 앉아 미래를 **숙고했다**.)"
+      ],
+      "keywords": ["ponder", "consider"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "contemplate_2",
+      "definition": "[동사] 명상하다, 감상하다",
+      "examples": [
+        "He **contemplated** the beauty of the mountains. (그는 산의 아름다움을 **감상했다**.)"
+      ],
+      "keywords": ["observe", "meditate"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T00:40:00Z"
+},
+"contemporary": {
+  "word": "contemporary",
+  "pos": ["adjective", "noun"],
+  "meanings": [
+    {
+      "id": "contemporary_1",
+      "definition": "[형용사] 현대의, 동시대의",
+      "examples": [
+        "She prefers **contemporary** art. (그녀는 **현대미술**을 선호한다.)"
+      ],
+      "keywords": ["modern", "current"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "contemporary_2",
+      "definition": "[명사] 동시대인, 같은 시대 사람",
+      "examples": [
+        "Einstein was a **contemporary** of Freud. (아인슈타인은 프로이트와 **동시대인**이었다.)"
+      ],
+      "keywords": ["peer", "coeval"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:50:00Z"
+},
+"content": {
+  "word": "content",
+  "pos": ["noun", "adjective", "verb"],
+  "meanings": [
+    {
+      "id": "content_1",
+      "definition": "[명사] 내용, 함유물",
+      "examples": [
+        "The book’s **content** is suitable for children. (그 책의 **내용**은 어린이에게 적합하다.)"
+      ],
+      "keywords": ["subject matter", "substance"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "content_2",
+      "definition": "[형용사] 만족한",
+      "examples": [
+        "She felt **content** with her life. (그녀는 자신의 삶에 **만족했다**.)"
+      ],
+      "keywords": ["satisfied", "pleased"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "content_3",
+      "definition": "[동사] 만족시키다",
+      "examples": [
+        "He was easily **contented** with small things. (그는 작은 일에도 쉽게 **만족했다**.)"
+      ],
+      "keywords": ["satisfy", "please"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T00:50:00Z"
+},
+"context": {
+  "word": "context",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "context_1",
+      "definition": "[명사] 문맥, 상황",
+      "examples": [
+        "The word’s meaning depends on the **context**. (그 단어의 의미는 **문맥**에 따라 달라진다.)"
+      ],
+      "keywords": ["circumstance", "setting"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:50:00Z"
+},
+"continent": {
+  "word": "continent",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "continent_1",
+      "definition": "[명사] 대륙",
+      "examples": [
+        "Asia is the largest **continent** in the world. (아시아는 세계에서 가장 큰 **대륙**이다.)"
+      ],
+      "keywords": ["landmass", "region"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:50:00Z"
+},
+"continue": {
+  "word": "continue",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "continue_1",
+      "definition": "[동사] 계속하다, 지속하다",
+      "examples": [
+        "Please **continue** your work. (일을 **계속하세요**.)"
+      ],
+      "keywords": ["go on", "persist"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:50:00Z"
+},
+"contract": {
+  "word": "contract",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "contract_1",
+      "definition": "[명사] 계약, 계약서",
+      "examples": [
+        "She signed a **contract** with the company. (그녀는 회사와 **계약**을 맺었다.)"
+      ],
+      "keywords": ["agreement", "deal"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "contract_2",
+      "definition": "[동사] 계약하다; 수축하다; (병에) 걸리다",
+      "examples": [
+        "He **contracted** the flu last winter. (그는 지난 겨울 독감에 **걸렸다**.)"
+      ],
+      "keywords": ["shrink", "acquire"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:50:00Z"
+},
+"contrary": {
+  "word": "contrary",
+  "pos": ["adjective", "noun"],
+  "meanings": [
+    {
+      "id": "contrary_1",
+      "definition": "[형용사] 반대의, 상반되는",
+      "examples": [
+        "His views are **contrary** to mine. (그의 의견은 내 의견과 **반대**이다.)"
+      ],
+      "keywords": ["opposite", "conflicting"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "contrary_2",
+      "definition": "[명사] 반대되는 것",
+      "examples": [
+        "The **contrary** is true. (**정반대**가 사실이다.)"
+      ],
+      "keywords": ["reverse", "opposition"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:50:00Z"
+},
+"contrast": {
+  "word": "contrast",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "contrast_1",
+      "definition": "[명사] 대조, 차이",
+      "examples": [
+        "There is a sharp **contrast** between rich and poor. (부자와 가난한 사람들 사이에는 뚜렷한 **대조**가 있다.)"
+      ],
+      "keywords": ["difference", "comparison"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "contrast_2",
+      "definition": "[동사] 대조하다, 대비하다",
+      "examples": [
+        "The artist **contrasted** light and shadow. (그 화가는 빛과 그림자를 **대비시켰다**.)"
+      ],
+      "keywords": ["compare", "juxtapose"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T00:50:00Z"
+},
+"contribute": {
+  "word": "contribute",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "contribute_1",
+      "definition": "[동사] 기여하다, 공헌하다",
+      "examples": [
+        "She **contributed** to the success of the project. (그녀는 프로젝트의 성공에 **기여했다**.)"
+      ],
+      "keywords": ["donate", "help"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "contribute_2",
+      "definition": "[동사] 기부하다, 투고하다",
+      "examples": [
+        "He **contributes** articles to a newspaper. (그는 신문에 글을 **기고한다**.)"
+      ],
+      "keywords": ["submit", "offer"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:55:00Z"
+},
+"controversy": {
+  "word": "controversy",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "controversy_1",
+      "definition": "[명사] 논란, 논쟁",
+      "examples": [
+        "The new policy caused a lot of **controversy**. (그 새로운 정책은 많은 **논란**을 불러일으켰다.)"
+      ],
+      "keywords": ["dispute", "argument"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:55:00Z"
+},
+"convenient": {
+  "word": "convenient",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "convenient_1",
+      "definition": "[형용사] 편리한, 간편한",
+      "examples": [
+        "Online shopping is very **convenient**. (온라인 쇼핑은 매우 **편리하다**.)"
+      ],
+      "keywords": ["handy", "useful"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:55:00Z"
+},
+"conversation": {
+  "word": "conversation",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "conversation_1",
+      "definition": "[명사] 대화, 담화",
+      "examples": [
+        "They had a long **conversation** over coffee. (그들은 커피를 마시며 긴 **대화**를 나누었다.)"
+      ],
+      "keywords": ["dialogue", "talk"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:55:00Z"
+},
+"convey": {
+  "word": "convey",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "convey_1",
+      "definition": "[동사] 전달하다, 운반하다",
+      "examples": [
+        "Words cannot fully **convey** my gratitude. (말로는 내 감사함을 완전히 **전달할 수 없다**.)"
+      ],
+      "keywords": ["communicate", "express"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T00:55:00Z"
+},
+"convict": {
+  "word": "convict",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "convict_1",
+      "definition": "[동사] 유죄를 선고하다",
+      "examples": [
+        "He was **convicted** of theft. (그는 절도죄로 **유죄 판결**을 받았다.)"
+      ],
+      "keywords": ["sentence", "judge"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "convict_2",
+      "definition": "[명사] 죄수, 재소자",
+      "examples": [
+        "The **convict** served ten years in prison. (그 **죄수**는 10년의 형을 살았다.)"
+      ],
+      "keywords": ["prisoner", "offender"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T00:55:00Z"
+},
+"convince": {
+  "word": "convince",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "convince_1",
+      "definition": "[동사] 설득하다, 확신시키다",
+      "examples": [
+        "He **convinced** her to join the team. (그는 그녀를 설득해 팀에 합류하게 했다.)"
+      ],
+      "keywords": ["persuade", "assure"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:55:00Z"
+},
+"cooperate": {
+  "word": "cooperate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "cooperate_1",
+      "definition": "[동사] 협력하다, 협동하다",
+      "examples": [
+        "The two companies agreed to **cooperate**. (두 회사는 **협력하기로** 합의했다.)"
+      ],
+      "keywords": ["collaborate", "work together"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:55:00Z"
+},
+"cop": {
+  "word": "cop",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "cop_1",
+      "definition": "[명사] 경찰관 (비격식)",
+      "examples": [
+        "The **cop** arrested the thief. (**경찰관**이 도둑을 체포했다.)"
+      ],
+      "keywords": ["police officer", "constable"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "cop_2",
+      "definition": "[동사] 체포하다 (비격식)",
+      "examples": [
+        "He was **copped** for speeding. (그는 과속으로 **붙잡혔다**.)"
+      ],
+      "keywords": ["catch", "arrest"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T00:55:00Z"
+},
+"cope": {
+  "word": "cope",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "cope_1",
+      "definition": "[동사] 대처하다, 잘 처리하다",
+      "examples": [
+        "She couldn’t **cope** with the pressure. (그녀는 그 압박을 **감당하지 못했다**.)"
+      ],
+      "keywords": ["manage", "handle"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T00:55:00Z"
+},
+"copyright": {
+  "word": "copyright",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "copyright_1",
+      "definition": "[명사] 저작권, 판권",
+      "examples": [
+        "The author holds the **copyright** to the book. (그 저자는 책의 **저작권**을 소유하고 있다.)"
+      ],
+      "keywords": ["ownership", "intellectual property"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "copyright_2",
+      "definition": "[동사] 저작권을 등록하다",
+      "examples": [
+        "He **copyrighted** his new song. (그는 새 노래를 **저작권 등록**했다.)"
+      ],
+      "keywords": ["register", "protect"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T01:00:00Z"
+},
+"core": {
+  "word": "core",
+  "pos": ["noun", "adjective"],
+  "meanings": [
+    {
+      "id": "core_1",
+      "definition": "[명사] 핵심, 중심부",
+      "examples": [
+        "The **core** of the issue is communication. (문제의 **핵심**은 의사소통이다.)"
+      ],
+      "keywords": ["center", "essence"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "core_2",
+      "definition": "[형용사] 핵심적인",
+      "examples": [
+        "They teach **core** subjects like math and science. (그들은 수학과 과학 같은 **핵심 과목**을 가르친다.)"
+      ],
+      "keywords": ["essential", "fundamental"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:00:00Z"
+},
+"corporate": {
+  "word": "corporate",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "corporate_1",
+      "definition": "[형용사] 기업의, 법인의",
+      "examples": [
+        "He works in **corporate** finance. (그는 **기업 금융** 분야에서 일한다.)"
+      ],
+      "keywords": ["business", "commercial"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:00:00Z"
+},
+"correct": {
+  "word": "correct",
+  "pos": ["adjective", "verb"],
+  "meanings": [
+    {
+      "id": "correct_1",
+      "definition": "[형용사] 정확한, 올바른",
+      "examples": [
+        "Your answer is **correct**. (네 답은 **정확하다**.)"
+      ],
+      "keywords": ["accurate", "true"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "correct_2",
+      "definition": "[동사] 수정하다, 고치다",
+      "examples": [
+        "Please **correct** the spelling errors. (철자 오류를 **고쳐주세요**.)"
+      ],
+      "keywords": ["fix", "amend"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:00:00Z"
+},
+"correspond": {
+  "word": "correspond",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "correspond_1",
+      "definition": "[동사] 일치하다, 부합하다",
+      "examples": [
+        "Your results **correspond** with mine. (네 결과는 내 것과 **일치한다**.)"
+      ],
+      "keywords": ["match", "agree"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "correspond_2",
+      "definition": "[동사] 편지를 주고받다",
+      "examples": [
+        "They **corresponded** regularly for years. (그들은 수년간 정기적으로 편지를 **주고받았다**.)"
+      ],
+      "keywords": ["communicate", "exchange letters"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T01:00:00Z"
+},
+"corrupt": {
+  "word": "corrupt",
+  "pos": ["adjective", "verb"],
+  "meanings": [
+    {
+      "id": "corrupt_1",
+      "definition": "[형용사] 부패한, 타락한",
+      "examples": [
+        "The **corrupt** official was removed from office. (**부패한** 공무원이 해임되었다.)"
+      ],
+      "keywords": ["dishonest", "immoral"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "corrupt_2",
+      "definition": "[동사] 부패시키다, 타락하게 하다",
+      "examples": [
+        "Power can easily **corrupt** people. (권력은 사람을 쉽게 **타락시킬 수 있다**.)"
+      ],
+      "keywords": ["degrade", "pervert"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T01:00:00Z"
+},
+"costume": {
+  "word": "costume",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "costume_1",
+      "definition": "[명사] 의상, 복장",
+      "examples": [
+        "She wore a vampire **costume** for Halloween. (그녀는 할로윈에 뱀파이어 **복장**을 입었다.)"
+      ],
+      "keywords": ["outfit", "attire"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:00:00Z"
+},
+"cottage": {
+  "word": "cottage",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "cottage_1",
+      "definition": "[명사] 시골집, 오두막",
+      "examples": [
+        "They spent the weekend in a mountain **cottage**. (그들은 산속 **오두막**에서 주말을 보냈다.)"
+      ],
+      "keywords": ["cabin", "hut"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:00:00Z"
+},
+"cough": {
+  "word": "cough",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "cough_1",
+      "definition": "[동사] 기침하다",
+      "examples": [
+        "He **coughed** all night. (그는 밤새 **기침했다**.)"
+      ],
+      "keywords": ["hack", "clear throat"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "cough_2",
+      "definition": "[명사] 기침",
+      "examples": [
+        "She has a bad **cough**. (그녀는 심한 **기침**을 하고 있다.)"
+      ],
+      "keywords": ["throat clearing", "wheeze"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:00:00Z"
+},
+"council": {
+  "word": "council",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "council_1",
+      "definition": "[명사] 위원회, 의회, 협의회",
+      "examples": [
+        "The city **council** approved the new law. (시의회가 새 법안을 승인했다.)"
+      ],
+      "keywords": ["committee", "assembly"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:00:00Z"
+},
+"counsel": {
+  "word": "counsel",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "counsel_1",
+      "definition": "[명사] 조언, 변호인",
+      "examples": [
+        "She sought legal **counsel** before signing the contract. (그녀는 계약서에 서명하기 전에 법적 **조언**을 구했다.)"
+      ],
+      "keywords": ["advice", "guidance"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "counsel_2",
+      "definition": "[동사] 조언하다, 상담하다",
+      "examples": [
+        "He **counseled** the students about their future. (그는 학생들에게 진로에 대해 **조언했다**.)"
+      ],
+      "keywords": ["advise", "recommend"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T01:10:00Z"
+},
+"count": {
+  "word": "count",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "count_1",
+      "definition": "[동사] 세다, 계산하다",
+      "examples": [
+        "Can you **count** to ten? (10까지 **셀 수 있나요?**)"
+      ],
+      "keywords": ["enumerate", "calculate"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "count_2",
+      "definition": "[명사] 계산, 합계",
+      "examples": [
+        "The final **count** was 250 votes. (최종 **집계**는 250표였다.)"
+      ],
+      "keywords": ["total", "number"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:10:00Z"
+},
+"counter": {
+  "word": "counter",
+  "pos": ["noun", "verb", "adverb"],
+  "meanings": [
+    {
+      "id": "counter_1",
+      "definition": "[명사] 계산대, 조리대",
+      "examples": [
+        "She placed the groceries on the **counter**. (그녀는 식료품을 **계산대**에 올려놓았다.)"
+      ],
+      "keywords": ["desk", "table"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "counter_2",
+      "definition": "[동사] 반박하다, 대응하다",
+      "examples": [
+        "He **countered** the argument with solid evidence. (그는 확실한 증거로 그 주장을 **반박했다**.)"
+      ],
+      "keywords": ["oppose", "refute"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "counter_3",
+      "definition": "[부사] 반대로, 거꾸로",
+      "examples": [
+        "The proposal goes **counter** to our policy. (그 제안은 우리의 정책에 **반한다**.)"
+      ],
+      "keywords": ["against", "opposite"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T01:10:00Z"
+},
+"escalate": {
+  "word": "escalate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "escalate_1",
+      "definition": "[동사] (긴장, 문제 등이) 악화되다, 확대되다",
+      "examples": [
+        "The conflict quickly **escalated** into a war. (그 분쟁은 빠르게 전쟁으로 **확대되었다**.)"
+      ],
+      "keywords": ["intensify", "worsen"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "escalate_2",
+      "definition": "[동사] 단계적으로 증가시키다",
+      "examples": [
+        "The company plans to **escalate** production next year. (회사는 내년에 생산량을 **늘릴 계획이다**.)"
+      ],
+      "keywords": ["raise", "increase"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T01:15:00Z"
+},
+"essay": {
+  "word": "essay",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "essay_1",
+      "definition": "[명사] 수필, 에세이, 논술문",
+      "examples": [
+        "She wrote an **essay** about environmental issues. (그녀는 환경 문제에 관한 **수필**을 썼다.)"
+      ],
+      "keywords": ["composition", "paper"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:15:00Z"
+},
+"essence": {
+  "word": "essence",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "essence_1",
+      "definition": "[명사] 본질, 정수",
+      "examples": [
+        "The **essence** of democracy is freedom. (민주주의의 **본질**은 자유이다.)"
+      ],
+      "keywords": ["core", "nature"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "essence_2",
+      "definition": "[명사] 향수, 에센스",
+      "examples": [
+        "She used lavender **essence** for relaxation. (그녀는 휴식을 위해 라벤더 **에센스**를 사용했다.)"
+      ],
+      "keywords": ["extract", "fragrance"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T01:20:00Z"
+},
+"essentially": {
+  "word": "essentially",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "essentially_1",
+      "definition": "[부사] 본질적으로, 근본적으로",
+      "examples": [
+        "The two ideas are **essentially** the same. (그 두 아이디어는 **본질적으로** 같다.)"
+      ],
+      "keywords": ["basically", "fundamentally"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:20:00Z"
+},
+"establishment": {
+  "word": "establishment",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "establishment_1",
+      "definition": "[명사] 설립, 확립",
+      "examples": [
+        "The **establishment** of the hospital took five years. (그 병원의 **설립**에는 5년이 걸렸다.)"
+      ],
+      "keywords": ["foundation", "creation"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "establishment_2",
+      "definition": "[명사] 기관, 시설",
+      "examples": [
+        "They visited a famous dining **establishment**. (그들은 유명한 음식점을 방문했다.)"
+      ],
+      "keywords": ["organization", "institution"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T01:20:00Z"
+},
+"evaluation": {
+  "word": "evaluation",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "evaluation_1",
+      "definition": "[명사] 평가, 사정",
+      "examples": [
+        "The teacher gave an **evaluation** of each student. (선생님은 각 학생에 대한 **평가**를 했다.)"
+      ],
+      "keywords": ["assessment", "appraisal"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "evaluation_2",
+      "definition": "[명사] 가치 판단, 분석",
+      "examples": [
+        "A full **evaluation** of the data is required. (데이터에 대한 완전한 **분석**이 필요하다.)"
+      ],
+      "keywords": ["analysis", "judgment"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T01:20:00Z"
+},
+"evening": {
+  "word": "evening",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "evening_1",
+      "definition": "[명사] 저녁, 저녁시간",
+      "examples": [
+        "We went for a walk in the **evening**. (우리는 **저녁**에 산책을 했다.)"
+      ],
+      "keywords": ["nighttime", "dusk"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:30:00Z"
+},
+"event": {
+  "word": "event",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "event_1",
+      "definition": "[명사] 사건, 행사",
+      "examples": [
+        "The **event** attracted many visitors. (그 **행사**는 많은 방문객을 끌어모았다.)"
+      ],
+      "keywords": ["occasion", "incident"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:30:00Z"
+},
+"every": {
+  "word": "every",
+  "pos": ["determiner"],
+  "meanings": [
+    {
+      "id": "every_1",
+      "definition": "[한정사] 모든, 각각의",
+      "examples": [
+        "She goes to school **every** day. (그녀는 **매일** 학교에 간다.)"
+      ],
+      "keywords": ["each", "all"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:30:00Z"
+},
+"everybody": {
+  "word": "everybody",
+  "pos": ["pronoun"],
+  "meanings": [
+    {
+      "id": "everybody_1",
+      "definition": "[대명사] 모든 사람, 누구나",
+      "examples": [
+        "**Everybody** loves a good story. (**누구나** 좋은 이야기를 좋아한다.)"
+      ],
+      "keywords": ["everyone", "all people"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T01:30:00Z"
+},
+"fight": {
+  "word": "fight",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "fight_1",
+      "definition": "[동사] 싸우다, 투쟁하다",
+      "examples": [
+        "They **fought** bravely for freedom. (그들은 자유를 위해 용감히 **싸웠다**.)"
+      ],
+      "keywords": ["battle", "struggle"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "fight_2",
+      "definition": "[명사] 싸움, 전투",
+      "examples": [
+        "The **fight** lasted for hours. (**싸움**은 몇 시간 동안 계속되었다.)"
+      ],
+      "keywords": ["conflict", "combat"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"file": {
+  "word": "file",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "file_1",
+      "definition": "[명사] 파일, 서류철",
+      "examples": [
+        "She kept all her reports in a **file**. (그녀는 모든 보고서를 **파일**에 보관했다.)"
+      ],
+      "keywords": ["record", "folder"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "file_2",
+      "definition": "[동사] (문서를) 제출하다, 보관하다",
+      "examples": [
+        "He **filed** a complaint with the police. (그는 경찰에 불만을 **제출했다**.)"
+      ],
+      "keywords": ["submit", "register"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"fill": {
+  "word": "fill",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "fill_1",
+      "definition": "[동사] 채우다, 가득하게 하다",
+      "examples": [
+        "Please **fill** the glass with water. (컵에 **물을 채워** 주세요.)"
+      ],
+      "keywords": ["load", "stuff"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"film": {
+  "word": "film",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "film_1",
+      "definition": "[명사] 영화, 필름",
+      "examples": [
+        "We watched a great **film** last night. (어젯밤 우리는 훌륭한 **영화**를 봤다.)"
+      ],
+      "keywords": ["movie", "motion picture"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "film_2",
+      "definition": "[동사] 촬영하다",
+      "examples": [
+        "They **filmed** the scene in Paris. (그들은 파리에서 그 장면을 **촬영했다**.)"
+      ],
+      "keywords": ["record", "shoot"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"film-maker": {
+  "word": "film-maker",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "film-maker_1",
+      "definition": "[명사] 영화 제작자, 영화인",
+      "examples": [
+        "He is one of the most talented **film-makers** in Korea. (그는 한국에서 가장 재능 있는 **영화 제작자** 중 한 명이다.)"
+      ],
+      "keywords": ["director", "producer"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"finally": {
+  "word": "finally",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "finally_1",
+      "definition": "[부사] 마침내, 결국",
+      "examples": [
+        "We **finally** arrived at the hotel. (우리는 **마침내** 호텔에 도착했다.)"
+      ],
+      "keywords": ["eventually", "at last"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"financial": {
+  "word": "financial",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "financial_1",
+      "definition": "[형용사] 재정의, 금융의",
+      "examples": [
+        "He works for a **financial** company. (그는 **금융 회사**에서 일한다.)"
+      ],
+      "keywords": ["economic", "monetary"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"firearm": {
+  "word": "firearm",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "firearm_1",
+      "definition": "[명사] 화기, 총기류",
+      "examples": [
+        "Owning a **firearm** requires a special license. (**총기**를 소유하려면 특별 허가가 필요하다.)"
+      ],
+      "keywords": ["gun", "weapon"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"firefighter": {
+  "word": "firefighter",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "firefighter_1",
+      "definition": "[명사] 소방관",
+      "examples": [
+        "The **firefighters** saved many lives. (**소방관들**이 많은 생명을 구했다.)"
+      ],
+      "keywords": ["fireman", "rescuer"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"firework": {
+  "word": "firework",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "firework_1",
+      "definition": "[명사] 불꽃, 폭죽",
+      "examples": [
+        "We watched the **fireworks** on New Year’s Eve. (우리는 새해 전날 **불꽃놀이**를 봤다.)"
+      ],
+      "keywords": ["pyrotechnics", "explosives"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"firmly": {
+  "word": "firmly",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "firmly_1",
+      "definition": "[부사] 단단히, 확고히",
+      "examples": [
+        "She held his hand **firmly**. (그녀는 그의 손을 **단단히** 잡았다.)"
+      ],
+      "keywords": ["tightly", "securely"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "firmly_2",
+      "definition": "[부사] 확신을 가지고",
+      "examples": [
+        "He **firmly** believes in justice. (그는 정의를 **굳게 믿는다**.)"
+      ],
+      "keywords": ["strongly", "decisively"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:15:00Z"
+},
+"first": {
+  "word": "first",
+  "pos": ["adjective", "adverb", "noun"],
+  "meanings": [
+    {
+      "id": "first_1",
+      "definition": "[형용사] 첫 번째의, 최초의",
+      "examples": [
+        "This is my **first** visit to Paris. (이것은 내가 파리를 **처음 방문한** 것이다.)"
+      ],
+      "keywords": ["initial", "primary"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "first_2",
+      "definition": "[부사] 처음으로, 우선",
+      "examples": [
+        "Let’s eat **first** and talk later. (먼저 **식사하고** 나중에 이야기하자.)"
+      ],
+      "keywords": ["before anything", "initially"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "first_3",
+      "definition": "[명사] 첫 번째 사람(것)",
+      "examples": [
+        "He finished in **first** place. (그는 **1등**으로 결승선을 통과했다.)"
+      ],
+      "keywords": ["winner", "leader"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:20:00Z"
+},
+"firstly": {
+  "word": "firstly",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "firstly_1",
+      "definition": "[부사] 첫째로, 우선",
+      "examples": [
+        "**Firstly**, we need to review the data. (첫째로, 우리는 데이터를 검토해야 한다.)"
+      ],
+      "keywords": ["first", "to begin with"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:20:00Z"
+},
+"fish": {
+  "word": "fish",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "fish_1",
+      "definition": "[명사] 물고기, 생선",
+      "examples": [
+        "We had grilled **fish** for dinner. (우리는 저녁으로 구운 **생선**을 먹었다.)"
+      ],
+      "keywords": ["seafood", "creature"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "fish_2",
+      "definition": "[동사] 낚시하다, 물고기를 잡다",
+      "examples": [
+        "They love to **fish** in the lake. (그들은 호수에서 **낚시하는** 것을 좋아한다.)"
+      ],
+      "keywords": ["angle", "catch"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:20:00Z"
+},
+"fitness": {
+  "word": "fitness",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "fitness_1",
+      "definition": "[명사] 건강, 체력, 적합성",
+      "examples": [
+        "He goes to the gym to improve his **fitness**. (그는 **체력**을 향상시키기 위해 헬스장에 간다.)"
+      ],
+      "keywords": ["health", "strength"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "fitness_2",
+      "definition": "[명사] 적합성, 적응력",
+      "examples": [
+        "His **fitness** for the position was questioned. (그의 직위에 대한 **적합성**이 의심받았다.)"
+      ],
+      "keywords": ["suitability", "aptitude"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T02:20:00Z"
+},
+"five": {
+  "word": "five",
+  "pos": ["noun", "adjective"],
+  "meanings": [
+    {
+      "id": "five_1",
+      "definition": "[명사/형용사] 다섯, 5",
+      "examples": [
+        "There are **five** apples on the table. (테이블 위에 **사과 다섯 개**가 있다.)"
+      ],
+      "keywords": ["5", "quinary"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:25:00Z"
+},
+"fix": {
+  "word": "fix",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "fix_1",
+      "definition": "[동사] 고치다, 수리하다",
+      "examples": [
+        "He **fixed** the broken chair. (그는 부러진 의자를 **고쳤다**.)"
+      ],
+      "keywords": ["repair", "mend"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "fix_2",
+      "definition": "[명사] 해결책, 곤경",
+      "examples": [
+        "We’re in a difficult **fix**. (우리는 어려운 **상황**에 처해 있다.)"
+      ],
+      "keywords": ["problem", "solution"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T02:25:00Z"
+},
+"fixture": {
+  "word": "fixture",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "fixture_1",
+      "definition": "[명사] 고정된 기구, 설비, 경기 일정",
+      "examples": [
+        "The bathroom **fixtures** are new. (욕실의 **설비**가 새것이다.)"
+      ],
+      "keywords": ["equipment", "fitting"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T02:25:00Z"
+},
+"flag": {
+  "word": "flag",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "flag_1",
+      "definition": "[명사] 깃발, 신호",
+      "examples": [
+        "The national **flag** was raised. (국기가 게양되었다.)"
+      ],
+      "keywords": ["banner", "standard"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "flag_2",
+      "definition": "[동사] 표시하다, 약해지다",
+      "examples": [
+        "He **flagged** the important points in the report. (그는 보고서의 중요한 부분을 **표시했다**.)"
+      ],
+      "keywords": ["mark", "signal"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T02:25:00Z"
+},
+"flavour": {
+  "word": "flavour",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "flavour_1",
+      "definition": "[명사] 맛, 향, 특징",
+      "examples": [
+        "This soup has a rich **flavour**. (이 수프는 진한 **맛**이 난다.)"
+      ],
+      "keywords": ["taste", "scent"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "flavour_2",
+      "definition": "[동사] 맛을 내다",
+      "examples": [
+        "The sauce is **flavoured** with garlic. (그 소스는 마늘로 **맛을 냈다**.)"
+      ],
+      "keywords": ["season", "spice"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T02:30:00Z"
+},
+"flawed": {
+  "word": "flawed",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "flawed_1",
+      "definition": "[형용사] 결함이 있는, 불완전한",
+      "examples": [
+        "The theory is **flawed** but interesting. (그 이론은 **결함이 있지만** 흥미롭다.)"
+      ],
+      "keywords": ["imperfect", "defective"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:30:00Z"
+},
+"flee": {
+  "word": "flee",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "flee_1",
+      "definition": "[동사] 달아나다, 도망치다",
+      "examples": [
+        "The suspect **fled** the scene. (용의자가 현장에서 **달아났다**.)"
+      ],
+      "keywords": ["escape", "run away"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:30:00Z"
+},
+"fleet": {
+  "word": "fleet",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "fleet_1",
+      "definition": "[명사] 함대, 차량(선박)단",
+      "examples": [
+        "The navy sent its **fleet** to the coast. (해군이 **함대**를 해안으로 보냈다.)"
+      ],
+      "keywords": ["armada", "squadron"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T02:30:00Z"
+},
+"flexibility": {
+  "word": "flexibility",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "flexibility_1",
+      "definition": "[명사] 유연성, 융통성",
+      "examples": [
+        "Regular stretching improves **flexibility**. (규칙적인 스트레칭은 **유연성**을 향상시킨다.)"
+      ],
+      "keywords": ["elasticity", "adaptability"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:30:00Z"
+},
+"floor": {
+  "word": "floor",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "floor_1",
+      "definition": "[명사] 바닥, 층",
+      "examples": [
+        "Our office is on the third **floor**. (우리 사무실은 3층에 있다.)"
+      ],
+      "keywords": ["ground", "level"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:30:00Z"
+},
+"flour": {
+  "word": "flour",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "flour_1",
+      "definition": "[명사] 밀가루, 가루",
+      "examples": [
+        "Add two cups of **flour** to the mixture. (혼합물에 **밀가루** 두 컵을 넣으세요.)"
+      ],
+      "keywords": ["powder", "grain"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:30:00Z"
+},
+"flower": {
+  "word": "flower",
+  "pos": ["noun", "verb"],
+      "meanings": [
+        {
+          "id": "flower_1",
+          "definition": "[명사] 꽃, 개화식물",
+          "examples": [
+            "The **flowers** are blooming beautifully. (**꽃들이** 아름답게 피고 있다.)"
+          ],
+          "keywords": ["blossom", "bloom"],
+          "embedding": {},
+          "difficulty": 1,
+          "frequency": 1.0
+        },
+        {
+          "id": "flower_2",
+          "definition": "[동사] 꽃이 피다, 번영하다",
+          "examples": [
+            "The business **flowered** quickly. (그 사업은 빠르게 **번영했다**.)"
+          ],
+          "keywords": ["flourish", "prosper"],
+          "embedding": {},
+          "difficulty": 1,
+          "frequency": 0.95
+        }
+      ],
+  "updatedAt": "2025-11-09T02:30:00Z"
+},
+"flu": {
+  "word": "flu",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "flu_1",
+      "definition": "[명사] 독감, 인플루엔자",
+      "examples": [
+        "He caught the **flu** last week. (그는 지난주에 **독감**에 걸렸다.)"
+      ],
+      "keywords": ["influenza", "cold"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:30:00Z"
+},
+"fluid": {
+  "word": "fluid",
+  "pos": ["noun", "adjective"],
+  "meanings": [
+    {
+      "id": "fluid_1",
+      "definition": "[명사] 액체, 유체",
+      "examples": [
+        "Drink plenty of **fluids** to stay hydrated. (수분을 유지하려면 **액체**를 충분히 마셔라.)"
+      ],
+      "keywords": ["liquid", "solution"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "fluid_2",
+      "definition": "[형용사] 유동적인, 변하기 쉬운",
+      "examples": [
+        "The situation is still **fluid**. (상황은 아직 **유동적이다**.)"
+      ],
+      "keywords": ["changeable", "unstable"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T02:30:00Z"
+},
+"fly": {
+  "word": "fly",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "fly_1",
+      "definition": "[동사] 날다, 비행하다",
+      "examples": [
+        "Birds **fly** across the sky. (새들이 하늘을 **날아간다**.)"
+      ],
+      "keywords": ["soar", "glide"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "fly_2",
+      "definition": "[명사] 파리, 비행",
+      "examples": [
+        "There’s a **fly** in my soup. (내 수프에 **파리**가 있다.)"
+      ],
+      "keywords": ["insect", "flight"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:35:00Z"
+},
+"focus": {
+  "word": "focus",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "focus_1",
+      "definition": "[동사] 집중하다, 초점을 맞추다",
+      "examples": [
+        "You need to **focus** on your studies. (공부에 **집중해야** 한다.)"
+      ],
+      "keywords": ["concentrate", "pay attention"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "focus_2",
+      "definition": "[명사] 초점, 중심",
+      "examples": [
+        "The main **focus** of the discussion was education. (토론의 주요 **초점**은 교육이었다.)"
+      ],
+      "keywords": ["core", "subject"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:35:00Z"
+},
+"inflict": {
+  "word": "inflict",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "inflict_1",
+      "definition": "[동사] (고통, 피해 등을) 가하다, 입히다",
+      "examples": [
+        "The storm **inflicted** heavy damage on the town. (폭풍이 마을에 큰 피해를 **입혔다**.)"
+      ],
+      "keywords": ["impose", "cause"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T02:35:00Z"
+},
+"influential": {
+  "word": "influential",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "influential_1",
+      "definition": "[형용사] 영향력 있는",
+      "examples": [
+        "She is one of the most **influential** leaders in the company. (그녀는 회사에서 가장 **영향력 있는** 리더 중 한 명이다.)"
+      ],
+      "keywords": ["powerful", "persuasive"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:35:00Z"
+},
+"info": {
+  "word": "info",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "info_1",
+      "definition": "[명사] 정보 (informal)",
+      "examples": [
+        "Do you have any **info** about the event? (그 행사에 대한 **정보**가 있나요?)"
+      ],
+      "keywords": ["information", "data"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:35:00Z"
+},
+"information": {
+  "word": "information",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "information_1",
+      "definition": "[명사] 정보, 자료",
+      "examples": [
+        "We collected **information** from various sources. (우리는 여러 출처로부터 **정보를 수집했다**.)"
+      ],
+      "keywords": ["data", "details"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:35:00Z"
+},
+"infrastructure": {
+  "word": "infrastructure",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "infrastructure_1",
+      "definition": "[명사] 사회 기반 시설, 인프라",
+      "examples": [
+        "The government is investing in **infrastructure**. (정부는 **인프라**에 투자하고 있다.)"
+      ],
+      "keywords": ["facilities", "foundation"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T02:35:00Z"
+},
+"inhabitant": {
+  "word": "inhabitant",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "inhabitant_1",
+      "definition": "[명사] 거주자, 주민",
+      "examples": [
+        "The **inhabitants** of the island are very friendly. (그 섬의 **주민들**은 매우 친절하다.)"
+      ],
+      "keywords": ["resident", "dweller"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T02:35:00Z"
+},
+"inherent": {
+  "word": "inherent",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "inherent_1",
+      "definition": "[형용사] 내재된, 고유한",
+      "examples": [
+        "Risk is an **inherent** part of business. (위험은 사업의 **본질적인** 부분이다.)"
+      ],
+      "keywords": ["intrinsic", "innate"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T02:35:00Z"
+},
+"inherit": {
+  "word": "inherit",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "inherit_1",
+      "definition": "[동사] 상속받다, 물려받다",
+      "examples": [
+        "She **inherited** her father’s house. (그녀는 아버지의 집을 **상속받았다**.)"
+      ],
+      "keywords": ["receive", "acquire"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "inherit_2",
+      "definition": "[동사] 유전되다, 이어받다",
+      "examples": [
+        "He **inherited** his mother’s talent. (그는 어머니의 재능을 **물려받았다**.)"
+      ],
+      "keywords": ["derive", "obtain"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T02:35:00Z"
+},
+"inhibit": {
+  "word": "inhibit",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "inhibit_1",
+      "definition": "[동사] 억제하다, 방해하다",
+      "examples": [
+        "Fear can **inhibit** learning. (두려움은 학습을 **억제할 수 있다**.)"
+      ],
+      "keywords": ["restrain", "hinder"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T02:40:00Z"
+},
+"initially": {
+  "word": "initially",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "initially_1",
+      "definition": "[부사] 처음에, 초기에",
+      "examples": [
+        "**Initially**, I found the job difficult. (**처음에는** 그 일이 어렵다고 느꼈다.)"
+      ],
+      "keywords": ["at first", "originally"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:40:00Z"
+},
+"initiative": {
+  "word": "initiative",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "initiative_1",
+      "definition": "[명사] 주도권, 계획, 진취성",
+      "examples": [
+        "She took the **initiative** to start the project. (그녀는 프로젝트를 시작할 **주도권**을 잡았다.)"
+      ],
+      "keywords": ["drive", "enterprise"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:40:00Z"
+},
+"injection": {
+  "word": "injection",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "injection_1",
+      "definition": "[명사] 주사, 투입",
+      "examples": [
+        "He received a flu **injection**. (그는 독감 **주사**를 맞았다.)"
+      ],
+      "keywords": ["shot", "dose"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:40:00Z"
+},
+"injury": {
+  "word": "injury",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "injury_1",
+      "definition": "[명사] 부상, 손상",
+      "examples": [
+        "He suffered a knee **injury** during the match. (그는 경기 중 무릎 **부상**을 입었다.)"
+      ],
+      "keywords": ["wound", "damage"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:40:00Z"
+},
+"invention": {
+  "word": "invention",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "invention_1",
+      "definition": "[명사] 발명, 창의적인 고안",
+      "examples": [
+        "The telephone is one of the greatest **inventions** in history. (전화기는 역사상 가장 위대한 **발명품** 중 하나이다.)"
+      ],
+      "keywords": ["creation", "discovery"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:40:00Z"
+},
+"invest": {
+  "word": "invest",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "invest_1",
+      "definition": "[동사] 투자하다, 쏟다",
+      "examples": [
+        "She **invested** a lot of time in her career. (그녀는 자신의 경력에 많은 시간을 **쏟았다**.)"
+      ],
+      "keywords": ["spend", "commit"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "invest_2",
+      "definition": "[동사] (자금 등을) 투자하다",
+      "examples": [
+        "He **invested** in real estate. (그는 부동산에 **투자했다**.)"
+      ],
+      "keywords": ["finance", "fund"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:40:00Z"
+},
+"investigate": {
+  "word": "investigate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "investigate_1",
+      "definition": "[동사] 조사하다, 수사하다",
+      "examples": [
+        "The police are **investigating** the case. (경찰이 그 사건을 **조사 중이다**.)"
+      ],
+      "keywords": ["examine", "probe"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:40:00Z"
+},
+"investigation": {
+  "word": "investigation",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "investigation_1",
+      "definition": "[명사] 조사, 수사, 연구",
+      "examples": [
+        "An **investigation** was launched into the cause of the fire. (화재 원인에 대한 **조사**가 시작되었다.)"
+      ],
+      "keywords": ["inquiry", "examination"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:40:00Z"
+},
+"investigator": {
+  "word": "investigator",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "investigator_1",
+      "definition": "[명사] 조사관, 수사관",
+      "examples": [
+        "The **investigator** interviewed all the witnesses. (**조사관**이 모든 목격자를 인터뷰했다.)"
+      ],
+      "keywords": ["inspector", "detective"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:45:00Z"
+},
+"investment": {
+  "word": "investment",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "investment_1",
+      "definition": "[명사] 투자, 투자금",
+      "examples": [
+        "Real estate is a safe **investment**. (부동산은 안전한 **투자**이다.)"
+      ],
+      "keywords": ["funding", "capital"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:45:00Z"
+},
+"investor": {
+  "word": "investor",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "investor_1",
+      "definition": "[명사] 투자자",
+      "examples": [
+        "Foreign **investors** are showing interest in the project. (해외 **투자자들**이 그 프로젝트에 관심을 보이고 있다.)"
+      ],
+      "keywords": ["financier", "shareholder"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:45:00Z"
+},
+"overseas": {
+  "word": "overseas",
+  "pos": ["adjective", "adverb"],
+  "meanings": [
+    {
+      "id": "overseas_1",
+      "definition": "[형용사] 해외의, 국외의",
+      "examples": [
+        "She works for an **overseas** company. (그녀는 **해외** 기업에서 일한다.)"
+      ],
+      "keywords": ["foreign", "international"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "overseas_2",
+      "definition": "[부사] 해외로, 해외에서",
+      "examples": [
+        "He lived **overseas** for three years. (그는 3년 동안 **해외에서** 살았다.)"
+      ],
+      "keywords": ["abroad", "offshore"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:45:00Z"
+},
+"overturn": {
+  "word": "overturn",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "overturn_1",
+      "definition": "[동사] 뒤집다, 전복시키다, 번복하다",
+      "examples": [
+        "The car **overturned** on the highway. (그 차가 고속도로에서 **뒤집혔다**.)"
+      ],
+      "keywords": ["flip", "reverse"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:45:00Z"
+},
+"overwhelm": {
+  "word": "overwhelm",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "overwhelm_1",
+      "definition": "[동사] 압도하다, 휩싸이게 하다",
+      "examples": [
+        "She was **overwhelmed** with joy. (그녀는 기쁨에 **압도되었다**.)"
+      ],
+      "keywords": ["overpower", "submerge"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "overwhelm_2",
+      "definition": "[동사] (감정·일 등이) 감당하기 어렵게 하다",
+      "examples": [
+        "I was **overwhelmed** by the amount of work. (일의 양에 **감당할 수 없을 만큼 힘들었다**.)"
+      ],
+      "keywords": ["crush", "bury"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T02:45:00Z"
+},
+"overwhelming": {
+  "word": "overwhelming",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "overwhelming_1",
+      "definition": "[형용사] 압도적인, 감당하기 어려운",
+      "examples": [
+        "The support from fans was **overwhelming**. (팬들의 지원은 **압도적이었다**.)"
+      ],
+      "keywords": ["immense", "staggering"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "overwhelming_2",
+      "definition": "[형용사] (감정이) 벅찬, 강렬한",
+      "examples": [
+        "She felt an **overwhelming** sense of relief. (그녀는 **벅찬** 안도감을 느꼈다.)"
+      ],
+      "keywords": ["intense", "powerful"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T02:45:00Z"
+},
+"people": {
+  "word": "people",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "people_1",
+      "definition": "[명사] 사람들, 민중",
+      "examples": [
+        "**People** were waiting outside the theater. (**사람들**이 극장 밖에서 기다리고 있었다.)"
+      ],
+      "keywords": ["humans", "crowd"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "people_2",
+      "definition": "[명사] 국민, 민족",
+      "examples": [
+        "The Korean **people** value harmony. (한국 **국민**은 조화를 중요시한다.)"
+      ],
+      "keywords": ["nation", "citizens"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"poisonous": {
+  "word": "poisonous",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "poisonous_1",
+      "definition": "[형용사] 독이 있는, 유독한",
+      "examples": [
+        "Some mushrooms are **poisonous**. (일부 버섯은 **독이 있다**.)"
+      ],
+      "keywords": ["toxic", "venomous"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "poisonous_2",
+      "definition": "[형용사] 악의적인, 해로운",
+      "examples": [
+        "She gave him a **poisonous** look. (그녀는 그에게 **독기 어린** 시선을 보냈다.)"
+      ],
+      "keywords": ["malicious", "spiteful"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"policeman": {
+  "word": "policeman",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "policeman_1",
+      "definition": "[명사] 경찰관, 순경 (남성)",
+      "examples": [
+        "The **policeman** directed the traffic. (**경찰관**이 교통을 통제했다.)"
+      ],
+      "keywords": ["officer", "cop"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"popularity": {
+  "word": "popularity",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "popularity_1",
+      "definition": "[명사] 인기, 대중성",
+      "examples": [
+        "His **popularity** grew after the show. (그의 **인기**는 쇼 이후에 더 높아졌다.)"
+      ],
+      "keywords": ["fame", "recognition"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"premise": {
+  "word": "premise",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "premise_1",
+      "definition": "[명사] 전제, 가정",
+      "examples": [
+        "The argument is based on a false **premise**. (그 주장은 잘못된 **전제**에 기반한다.)"
+      ],
+      "keywords": ["assumption", "presupposition"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    },
+    {
+      "id": "premise_2",
+      "definition": "[명사] (복수형) 부지, 건물 구내",
+      "examples": [
+        "No smoking on the **premises**. (**건물 내** 금연.)"
+      ],
+      "keywords": ["property", "site"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"regulation": {
+  "word": "regulation",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "regulation_1",
+      "definition": "[명사] 규정, 규제",
+      "examples": [
+        "Safety **regulations** must be followed. (안전 **규정**은 반드시 지켜야 한다.)"
+      ],
+      "keywords": ["rule", "law"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "regulation_2",
+      "definition": "[명사] 조절, 통제",
+      "examples": [
+        "Temperature **regulation** is vital for health. (온도 **조절**은 건강에 중요하다.)"
+      ],
+      "keywords": ["control", "adjustment"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"sphere": {
+  "word": "sphere",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "sphere_1",
+      "definition": "[명사] 구, 구체",
+      "examples": [
+        "The Earth is a **sphere**. (지구는 하나의 **구체**이다.)"
+      ],
+      "keywords": ["ball", "orb"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "sphere_2",
+      "definition": "[명사] 영역, 분야",
+      "examples": [
+        "He works in the political **sphere**. (그는 정치 **분야**에서 일한다.)"
+      ],
+      "keywords": ["area", "domain"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"split": {
+  "word": "split",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "split_1",
+      "definition": "[동사] 나누다, 분열시키다",
+      "examples": [
+        "The group **split** into two teams. (그 그룹은 두 팀으로 **나뉘었다**.)"
+      ],
+      "keywords": ["divide", "separate"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "split_2",
+      "definition": "[명사] 분열, 틈",
+      "examples": [
+        "There was a **split** among the members. (회원들 간에 **분열**이 있었다.)"
+      ],
+      "keywords": ["division", "rift"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"spokesman": {
+  "word": "spokesman",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "spokesman_1",
+      "definition": "[명사] 대변인 (남성)",
+      "examples": [
+        "The **spokesman** announced the decision. (**대변인**이 결정을 발표했다.)"
+      ],
+      "keywords": ["representative", "agent"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"spokesperson": {
+  "word": "spokesperson",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "spokesperson_1",
+      "definition": "[명사] 대변인 (성별 구분 없음)",
+      "examples": [
+        "A company **spokesperson** denied the rumor. (회사 **대변인**이 그 소문을 부인했다.)"
+      ],
+      "keywords": ["speaker", "representative"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"spokeswoman": {
+  "word": "spokeswoman",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "spokeswoman_1",
+      "definition": "[명사] 여성 대변인",
+      "examples": [
+        "The **spokeswoman** gave a brief statement. (**여성 대변인**이 짧은 성명을 발표했다.)"
+      ],
+      "keywords": ["female representative", "speaker"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"sponsor": {
+  "word": "sponsor",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "sponsor_1",
+      "definition": "[명사] 후원자, 스폰서",
+      "examples": [
+        "The event had several **sponsors**. (그 행사에는 여러 **후원자**가 있었다.)"
+      ],
+      "keywords": ["supporter", "patron"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "sponsor_2",
+      "definition": "[동사] 후원하다",
+      "examples": [
+        "The company **sponsored** the concert. (그 회사가 콘서트를 **후원했다**.)"
+      ],
+      "keywords": ["fund", "support"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"sponsorship": {
+  "word": "sponsorship",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "sponsorship_1",
+      "definition": "[명사] 후원, 협찬",
+      "examples": [
+        "They received **sponsorship** from local businesses. (그들은 지역 업체들로부터 **후원**을 받았다.)"
+      ],
+      "keywords": ["support", "funding"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"spoon": {
+  "word": "spoon",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "spoon_1",
+      "definition": "[명사] 숟가락",
+      "examples": [
+        "She stirred the tea with a **spoon**. (그녀는 **숟가락**으로 차를 저었다.)"
+      ],
+      "keywords": ["utensil", "scoop"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"sport": {
+  "word": "sport",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "sport_1",
+      "definition": "[명사] 스포츠, 운동",
+      "examples": [
+        "Football is my favorite **sport**. (축구는 내가 가장 좋아하는 **스포츠**다.)"
+      ],
+      "keywords": ["game", "athletics"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "sport_2",
+      "definition": "[명사] 장난꾸러기, 유쾌한 사람",
+      "examples": [
+        "He's such a good **sport**. (그는 정말 유쾌한 **사람**이다.)"
+      ],
+      "keywords": ["fun person", "good-natured"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.75
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"spotlight": {
+  "word": "spotlight",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "spotlight_1",
+      "definition": "[명사] 스포트라이트, 주목",
+      "examples": [
+        "The actor was in the **spotlight**. (그 배우는 **주목을 받고 있었다**.)"
+      ],
+      "keywords": ["attention", "focus"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"spouse": {
+  "word": "spouse",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "spouse_1",
+      "definition": "[명사] 배우자",
+      "examples": [
+        "He came with his **spouse**. (그는 **배우자**와 함께 왔다.)"
+      ],
+      "keywords": ["partner", "husband", "wife"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:10:00Z"
+},
+"spring": {
+  "word": "spring",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "spring_1",
+      "definition": "[명사] 봄",
+      "examples": [
+        "**Spring** is my favorite season. (**봄**은 내가 가장 좋아하는 계절이다.)"
+      ],
+      "keywords": ["season", "blossom"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "spring_2",
+      "definition": "[명사] 용수철, 스프링",
+      "examples": [
+        "The bed has a broken **spring**. (그 침대는 **스프링**이 부러졌다.)"
+      ],
+      "keywords": ["coil", "metal"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "spring_3",
+      "definition": "[동사] 튀다, 뛰어오르다",
+      "examples": [
+        "The cat **sprang** onto the table. (고양이가 탁자 위로 **뛰어올랐다**.)"
+      ],
+      "keywords": ["leap", "jump"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"spy": {
+  "word": "spy",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "spy_1",
+      "definition": "[명사] 스파이, 간첩",
+      "examples": [
+        "The **spy** was caught stealing documents. (**스파이**가 문서를 훔치다 붙잡혔다.)"
+      ],
+      "keywords": ["agent", "informant"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "spy_2",
+      "definition": "[동사] 염탐하다, 감시하다",
+      "examples": [
+        "They **spied** on the enemy’s movements. (그들은 적의 움직임을 **감시했다**.)"
+      ],
+      "keywords": ["observe", "watch secretly"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"squad": {
+  "word": "squad",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "squad_1",
+      "definition": "[명사] (운동 경기 등의) 팀, 반, 소대",
+      "examples": [
+        "The police **squad** arrived quickly. (경찰 **소대**가 신속히 도착했다.)"
+      ],
+      "keywords": ["team", "unit"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"stab": {
+  "word": "stab",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "stab_1",
+      "definition": "[동사] (칼 등으로) 찌르다",
+      "examples": [
+        "He **stabbed** the meat with a fork. (그는 포크로 고기를 **찌렀다**.)"
+      ],
+      "keywords": ["pierce", "thrust"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "stab_2",
+      "definition": "[명사] 찌름, 자상(刺傷)",
+      "examples": [
+        "The victim had a **stab** wound. (피해자는 **자상**을 입었다.)"
+      ],
+      "keywords": ["cut", "wound"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"successful": {
+  "word": "successful",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "successful_1",
+      "definition": "[형용사] 성공한",
+      "examples": [
+        "The project was very **successful**. (그 프로젝트는 매우 **성공적이었다**.)"
+      ],
+      "keywords": ["effective", "prosperous"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"successfully": {
+  "word": "successfully",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "successfully_1",
+      "definition": "[부사] 성공적으로",
+      "examples": [
+        "She **successfully** completed the task. (그녀는 과제를 **성공적으로** 완료했다.)"
+      ],
+      "keywords": ["effectively", "smoothly"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"surge": {
+  "word": "surge",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "surge_1",
+      "definition": "[동사] 급증하다, 밀려오다",
+      "examples": [
+        "Prices **surged** after the announcement. (발표 후 가격이 **급등했다**.)"
+      ],
+      "keywords": ["rise", "increase"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "surge_2",
+      "definition": "[명사] 급증, 쇄도",
+      "examples": [
+        "A **surge** in demand surprised the company. (**수요 급증**이 회사를 놀라게 했다.)"
+      ],
+      "keywords": ["spike", "boom"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"surgeon": {
+  "word": "surgeon",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "surgeon_1",
+      "definition": "[명사] 외과의사",
+      "examples": [
+        "The **surgeon** performed the operation. (**외과의사**가 수술을 집도했다.)"
+      ],
+      "keywords": ["doctor", "physician"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"surgical": {
+  "word": "surgical",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "surgical_1",
+      "definition": "[형용사] 외과의, 수술의",
+      "examples": [
+        "She needs **surgical** treatment. (그녀는 **외과적** 치료가 필요하다.)"
+      ],
+      "keywords": ["medical", "operative"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"surplus": {
+  "word": "surplus",
+  "pos": ["noun", "adjective"],
+  "meanings": [
+    {
+      "id": "surplus_1",
+      "definition": "[명사] 잉여, 흑자",
+      "examples": [
+        "The company reported a trade **surplus**. (그 회사는 무역 **흑자**를 보고했다.)"
+      ],
+      "keywords": ["excess", "remainder"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"surprisingly": {
+  "word": "surprisingly",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "surprisingly_1",
+      "definition": "[부사] 놀랍게도, 의외로",
+      "examples": [
+        "**Surprisingly**, he passed the exam. (**놀랍게도**, 그는 시험에 합격했다.)"
+      ],
+      "keywords": ["unexpectedly", "amazingly"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"surrender": {
+  "word": "surrender",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "surrender_1",
+      "definition": "[동사] 항복하다, 포기하다",
+      "examples": [
+        "They **surrendered** to the enemy. (그들은 적에게 **항복했다**.)"
+      ],
+      "keywords": ["give up", "yield"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "surrender_2",
+      "definition": "[명사] 항복, 포기",
+      "examples": [
+        "The general signed the **surrender** document. (장군이 **항복문서**에 서명했다.)"
+      ],
+      "keywords": ["submission", "capitulation"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"surveillance": {
+  "word": "surveillance",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "surveillance_1",
+      "definition": "[명사] 감시, 감독",
+      "examples": [
+        "The area is under constant **surveillance**. (그 지역은 지속적인 **감시** 하에 있다.)"
+      ],
+      "keywords": ["observation", "monitoring"],
+      "embedding": {},
+      "difficulty": 4,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"survival": {
+  "word": "survival",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "survival_1",
+      "definition": "[명사] 생존, 살아남음",
+      "examples": [
+        "Their **survival** depended on teamwork. (그들의 **생존**은 팀워크에 달려 있었다.)"
+      ],
+      "keywords": ["existence", "continuation"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"survivor": {
+  "word": "survivor",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "survivor_1",
+      "definition": "[명사] 생존자, 살아남은 사람",
+      "examples": [
+        "The **survivors** were rescued by helicopter. (**생존자들**이 헬리콥터로 구조되었다.)"
+      ],
+      "keywords": ["remnant", "rescued person"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"suspend": {
+  "word": "suspend",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "suspend_1",
+      "definition": "[동사] 중단하다, 정지하다",
+      "examples": [
+        "The match was **suspended** due to rain. (비로 인해 경기가 **중단되었다**.)"
+      ],
+      "keywords": ["halt", "pause"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "suspend_2",
+      "definition": "[동사] (직무에서) 정직시키다",
+      "examples": [
+        "He was **suspended** from school. (그는 학교에서 **정학당했다**.)"
+      ],
+      "keywords": ["discipline", "ban temporarily"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"suspension": {
+  "word": "suspension",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "suspension_1",
+      "definition": "[명사] 정지, 정학, 보류",
+      "examples": [
+        "The player’s **suspension** lasted two games. (그 선수의 **출전 정지**는 두 경기 동안 지속됐다.)"
+      ],
+      "keywords": ["pause", "ban"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"suspicion": {
+  "word": "suspicion",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "suspicion_1",
+      "definition": "[명사] 의심, 혐의",
+      "examples": [
+        "He is under **suspicion** of theft. (그는 절도 **혐의**를 받고 있다.)"
+      ],
+      "keywords": ["doubt", "mistrust"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"suspicious": {
+  "word": "suspicious",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "suspicious_1",
+      "definition": "[형용사] 의심스러운, 수상한",
+      "examples": [
+        "The police found his behavior **suspicious**. (경찰은 그의 행동을 **수상하게** 여겼다.)"
+      ],
+      "keywords": ["doubtful", "questionable"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"sustain": {
+  "word": "sustain",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "sustain_1",
+      "definition": "[동사] 유지하다, 지속시키다",
+      "examples": [
+        "They tried to **sustain** their relationship. (그들은 관계를 **유지하려고** 노력했다.)"
+      ],
+      "keywords": ["maintain", "continue"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "sustain_2",
+      "definition": "[동사] (피해·상처를) 입다",
+      "examples": [
+        "He **sustained** a leg injury. (그는 다리에 **부상을 입었다**.)"
+      ],
+      "keywords": ["suffer", "incur"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:20:00Z"
+},
+"sustainable": {
+  "word": "sustainable",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "sustainable_1",
+      "definition": "[형용사] 지속 가능한, 환경 친화적인",
+      "examples": [
+        "We need more **sustainable** energy sources. (우리는 더 **지속 가능한** 에너지원을 필요로 한다.)"
+      ],
+      "keywords": ["eco-friendly", "renewable"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"wed": {
+  "word": "wed",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "wed_1",
+      "definition": "[동사] 결혼하다, 혼인하다",
+      "examples": [
+        "They plan to **wed** next spring. (그들은 내년 봄에 **결혼할** 계획이다.)"
+      ],
+      "keywords": ["marry", "unite"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"wednesday": {
+  "word": "wednesday",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "wednesday_1",
+      "definition": "[명사] 수요일",
+      "examples": [
+        "The meeting is on **Wednesday**. (회의는 **수요일**에 있다.)"
+      ],
+      "keywords": ["midweek", "day"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"week": {
+  "word": "week",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "week_1",
+      "definition": "[명사] 주, 일주일",
+      "examples": [
+        "I go to the gym three times a **week**. (나는 일주일에 세 번 헬스장에 간다.)"
+      ],
+      "keywords": ["seven days", "period"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"weekend": {
+  "word": "weekend",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "weekend_1",
+      "definition": "[명사] 주말",
+      "examples": [
+        "We traveled during the **weekend**. (우리는 **주말** 동안 여행을 했다.)"
+      ],
+      "keywords": ["Saturday", "Sunday"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"weekly": {
+  "word": "weekly",
+  "pos": ["adjective", "adverb"],
+  "meanings": [
+    {
+      "id": "weekly_1",
+      "definition": "[형용사] 매주의, 주간의",
+      "examples": [
+        "We have a **weekly** meeting every Monday. (우리는 매주 월요일에 **주간회의**를 한다.)"
+      ],
+      "keywords": ["every week", "periodic"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"weight": {
+  "word": "weight",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "weight_1",
+      "definition": "[명사] 무게, 체중",
+      "examples": [
+        "He lost **weight** through exercise. (그는 운동으로 **체중을 줄였다**.)"
+      ],
+      "keywords": ["mass", "heaviness"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"well": {
+  "word": "well",
+  "pos": ["adverb", "adjective", "noun"],
+  "meanings": [
+    {
+      "id": "well_1",
+      "definition": "[부사] 잘, 훌륭하게",
+      "examples": [
+        "She sings very **well**. (그녀는 노래를 아주 **잘한다**.)"
+      ],
+      "keywords": ["properly", "skillfully"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "well_2",
+      "definition": "[명사] 우물",
+      "examples": [
+        "They drew water from a **well**. (그들은 **우물**에서 물을 길었다.)"
+      ],
+      "keywords": ["spring", "hole"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"well-being": {
+  "word": "well-being",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "wellbeing_1",
+      "definition": "[명사] 행복, 복지, 건강",
+      "examples": [
+        "Exercise is important for your **well-being**. (운동은 **건강과 행복**에 중요하다.)"
+      ],
+      "keywords": ["health", "happiness"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"west": {
+  "word": "west",
+  "pos": ["noun", "adjective", "adverb"],
+  "meanings": [
+    {
+      "id": "west_1",
+      "definition": "[명사] 서쪽",
+      "examples": [
+        "The sun sets in the **west**. (태양은 **서쪽**으로 진다.)"
+      ],
+      "keywords": ["direction", "sunset"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"western": {
+  "word": "western",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "western_1",
+      "definition": "[형용사] 서쪽의, 서양의",
+      "examples": [
+        "**Western** culture influenced the world. (**서양 문화**는 전 세계에 영향을 주었다.)"
+      ],
+      "keywords": ["occidental", "westward"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"wet": {
+  "word": "wet",
+  "pos": ["adjective", "verb"],
+  "meanings": [
+    {
+      "id": "wet_1",
+      "definition": "[형용사] 젖은, 비 오는",
+      "examples": [
+        "My clothes are **wet** from the rain. (비에 젖어서 옷이 **축축하다**.)"
+      ],
+      "keywords": ["damp", "moist"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"what": {
+  "word": "what",
+  "pos": ["pronoun", "determiner", "adverb"],
+  "meanings": [
+    {
+      "id": "what_1",
+      "definition": "[대명사] 무엇, 어떤 것",
+      "examples": [
+        "**What** is your name? (**이름이** 뭐예요?)"
+      ],
+      "keywords": ["which", "that"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"whatever": {
+  "word": "whatever",
+  "pos": ["pronoun", "determiner"],
+  "meanings": [
+    {
+      "id": "whatever_1",
+      "definition": "[대명사] 무엇이든, 어떤 ~이든",
+      "examples": [
+        "Do **whatever** you like. (**원하는 대로** 하세요.)"
+      ],
+      "keywords": ["anything", "regardless"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"whatsoever": {
+  "word": "whatsoever",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "whatsoever_1",
+      "definition": "[부사] 전혀, 조금도 (부정문 강조)",
+      "examples": [
+        "I have no idea **whatsoever**. (나는 전혀 모르겠다.)"
+      ],
+      "keywords": ["at all", "in any way"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"wheat": {
+  "word": "wheat",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "wheat_1",
+      "definition": "[명사] 밀",
+      "examples": [
+        "**Wheat** is used to make bread. (**밀**은 빵을 만드는 데 사용된다.)"
+      ],
+      "keywords": ["grain", "cereal"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"when": {
+  "word": "when",
+  "pos": ["adverb", "conjunction"],
+  "meanings": [
+    {
+      "id": "when_1",
+      "definition": "[부사] 언제",
+      "examples": [
+        "**When** did you arrive? (**언제** 도착했어요?)"
+      ],
+      "keywords": ["at what time"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"whenever": {
+  "word": "whenever",
+  "pos": ["conjunction", "adverb"],
+  "meanings": [
+    {
+      "id": "whenever_1",
+      "definition": "[접속사] ~할 때마다, 언제든지",
+      "examples": [
+        "Call me **whenever** you need help. (**언제든지** 도움이 필요하면 전화해요.)"
+      ],
+      "keywords": ["anytime", "every time"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 0.95
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"where": {
+  "word": "where",
+  "pos": ["adverb", "conjunction"],
+  "meanings": [
+    {
+      "id": "where_1",
+      "definition": "[부사] 어디에, 어디서",
+      "examples": [
+        "**Where** are you going? (**어디로** 가세요?)"
+      ],
+      "keywords": ["location", "place"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"whether": {
+  "word": "whether",
+  "pos": ["conjunction"],
+  "meanings": [
+    {
+      "id": "whether_1",
+      "definition": "[접속사] ~인지 아닌지",
+      "examples": [
+        "I don’t know **whether** he’ll come. (그가 올지 **모르겠다**.)"
+      ],
+      "keywords": ["if", "or not"],
+      "embedding": {},
+      "difficulty": 2,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"which": {
+  "word": "which",
+  "pos": ["pronoun", "determiner"],
+  "meanings": [
+    {
+      "id": "which_1",
+      "definition": "[대명사] 어느, 어떤 것",
+      "examples": [
+        "**Which** do you prefer, tea or coffee? (**어느 쪽을** 좋아하나요, 차인가요 커피인가요?)"
+      ],
+      "keywords": ["what", "that"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"whilst": {
+  "word": "whilst",
+  "pos": ["conjunction"],
+  "meanings": [
+    {
+      "id": "whilst_1",
+      "definition": "[접속사] ~하는 동안 (while의 격식체)",
+      "examples": [
+        "He read a book **whilst** waiting. (**기다리는 동안** 책을 읽었다.)"
+      ],
+      "keywords": ["while", "during"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"whip": {
+  "word": "whip",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "whip_1",
+      "definition": "[동사] 휘두르다, 채찍질하다",
+      "examples": [
+        "He **whipped** the horse to go faster. (그는 말을 더 빨리 달리게 **채찍질했다**.)"
+      ],
+      "keywords": ["lash", "strike"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"white": {
+  "word": "white",
+  "pos": ["adjective", "noun"],
+  "meanings": [
+    {
+      "id": "white_1",
+      "definition": "[형용사] 흰, 하얀",
+      "examples": [
+        "She wore a **white** dress. (그녀는 **하얀** 드레스를 입었다.)"
+      ],
+      "keywords": ["pale", "colorless"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+},
+"without": {
+  "word": "without",
+  "pos": ["preposition"],
+  "meanings": [
+    {
+      "id": "without_1",
+      "definition": "[전치사] ~없이",
+      "examples": [
+        "I can’t live **without** you. (**너 없이**는 살 수 없어.)"
+      ],
+      "keywords": ["lacking", "excluding"],
+      "embedding": {},
+      "difficulty": 1,
+      "frequency": 1.0
+    }
+  ],
+  "updatedAt": "2025-11-09T09:30:00Z"
+}
+}

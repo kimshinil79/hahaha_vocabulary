@@ -1,0 +1,17 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /hahahaEnglish/
+
+# CRITICAL: Stop rewriting for llm-proxy.php immediately for all methods
+RewriteRule ^llm-proxy\.php$ - [L]
+
+# If the request is for an existing file or directory, serve it directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Otherwise, serve the SPA entry point, but only for GET requests
+RewriteCond %{REQUEST_METHOD} ^GET$
+RewriteRule . /hahahaEnglish/index.html [L]
+
+

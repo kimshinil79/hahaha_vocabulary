@@ -1,0 +1,6282 @@
+{
+    "danger": {
+  "word": "danger",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "danger_1",
+      "definition": "[명사] 위험, 해로움",
+      "examples": [
+        "Fire is a serious **danger** to forests. (불은 숲에 심각한 **위험**이다.)"
+      ],
+      "keywords": ["risk", "hazard"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "danger_2",
+      "definition": "[명사] 위태로운 상황, 위기",
+      "examples": [
+        "The climbers were in great **danger**. (등산가들은 큰 **위기**에 처했다.)"
+      ],
+      "keywords": ["peril", "threat"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "danger_3",
+      "definition": "[명사] 위험 요소, 위험물",
+      "examples": [
+        "That old bridge is a **danger** to drivers. (그 오래된 다리는 운전자에게 **위험하다**.)"
+      ],
+      "keywords": ["menace", "problem"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "danger_4",
+      "definition": "[명사] 해를 끼칠 가능성",
+      "examples": [
+        "There’s no **danger** of infection. (**감염의 위험**은 없다.)"
+      ],
+      "keywords": ["possibility", "risk"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "danger_5",
+      "definition": "[명사] 위험 지역",
+      "examples": [
+        "This area is a **danger** zone during floods. (이 지역은 홍수 때 **위험 지대**가 된다.)"
+      ],
+      "keywords": ["zone", "area"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T05:25:00Z"
+},
+
+"dangerous": {
+  "word": "dangerous",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "dangerous_1",
+      "definition": "[형용사] 위험한",
+      "examples": [
+        "It’s **dangerous** to drive in this storm. (이 폭풍 속에 운전하는 것은 **위험하다**.)"
+      ],
+      "keywords": ["risky", "unsafe"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "dangerous_2",
+      "definition": "[형용사] 해로울 수 있는, 치명적인",
+      "examples": [
+        "That snake is highly **dangerous**. (그 뱀은 매우 **위험하다**.)"
+      ],
+      "keywords": ["harmful", "lethal"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dangerous_3",
+      "definition": "[형용사] 불안정한, 위험 요소가 있는",
+      "examples": [
+        "He’s in a **dangerous** mood today. (그는 오늘 **위험한 기분**이다.)"
+      ],
+      "keywords": ["unstable", "risky"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dangerous_4",
+      "definition": "[형용사] (비유) 유혹적인, 위험스러운",
+      "examples": [
+        "She gave him a **dangerous** smile. (그녀는 그에게 **위험한 미소**를 지었다.)"
+      ],
+      "keywords": ["tempting", "seductive"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "dangerous_5",
+      "definition": "[형용사] 사회적으로 위험한",
+      "examples": [
+        "Spreading lies is a **dangerous** act. (거짓을 퍼뜨리는 것은 **위험한 행동**이다.)"
+      ],
+      "keywords": ["harmful", "destructive"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T05:25:00Z"
+},
+
+"dark": {
+  "word": "dark",
+  "pos": ["adjective", "noun"],
+  "meanings": [
+    {
+      "id": "dark_1",
+      "definition": "[형용사] 어두운, 캄캄한",
+      "examples": [
+        "The room was **dark** and quiet. (그 방은 **어둡고** 조용했다.)"
+      ],
+      "keywords": ["dim", "shadowy"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "dark_2",
+      "definition": "[형용사] 짙은 색의",
+      "examples": [
+        "He wore a **dark** blue jacket. (그는 **짙은 파란색** 재킷을 입었다.)"
+      ],
+      "keywords": ["deep", "blackish"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dark_3",
+      "definition": "[형용사] 우울한, 불길한",
+      "examples": [
+        "She has a **dark** past. (그녀는 **어두운 과거**를 가지고 있다.)"
+      ],
+      "keywords": ["sad", "gloomy"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "dark_4",
+      "definition": "[명사] 어둠, 암흑",
+      "examples": [
+        "He waited in the **dark**. (그는 **어둠 속**에서 기다렸다.)"
+      ],
+      "keywords": ["night", "shadow"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dark_5",
+      "definition": "[형용사] 악한, 사악한",
+      "examples": [
+        "The movie shows his **dark** side. (그 영화는 그의 **어두운 면**을 보여준다.)"
+      ],
+      "keywords": ["evil", "sinister"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:25:00Z"
+},
+
+"darkness": {
+  "word": "darkness",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "darkness_1",
+      "definition": "[명사] 어둠, 암흑",
+      "examples": [
+        "He was lost in **darkness**. (그는 **어둠 속**에서 길을 잃었다.)"
+      ],
+      "keywords": ["night", "shadow"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "darkness_2",
+      "definition": "[명사] 불명료함, 불확실함",
+      "examples": [
+        "The truth remains in **darkness**. (진실은 여전히 **어둠 속**에 있다.)"
+      ],
+      "keywords": ["mystery", "uncertainty"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "darkness_3",
+      "definition": "[명사] 절망, 우울함",
+      "examples": [
+        "He fell into **darkness** after losing his job. (그는 실직 후 **절망**에 빠졌다.)"
+      ],
+      "keywords": ["sadness", "depression"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "darkness_4",
+      "definition": "[명사] 사악함, 악",
+      "examples": [
+        "The hero fought against **darkness**. (영웅은 **악**과 싸웠다.)"
+      ],
+      "keywords": ["evil", "sin"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "darkness_5",
+      "definition": "[명사] 어두운 부분, 빛이 닿지 않는 곳",
+      "examples": [
+        "He hid in the **darkness** of the alley. (그는 골목의 **어둠 속**에 숨었다.)"
+      ],
+      "keywords": ["shade", "shadow"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:25:00Z"
+},
+"data": {
+  "word": "data",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "data_1",
+      "definition": "[명사] 데이터, 자료",
+      "examples": [
+        "The company collects user **data** to improve services. (그 회사는 서비스를 개선하기 위해 사용자 **데이터**를 수집한다.)"
+      ],
+      "keywords": ["information", "figures"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "data_2",
+      "definition": "[명사] 사실, 근거 자료",
+      "examples": [
+        "Scientific **data** support the theory. (과학적 **자료**가 그 이론을 뒷받침한다.)"
+      ],
+      "keywords": ["evidence", "proof"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "data_3",
+      "definition": "[명사] 컴퓨터에 저장된 정보",
+      "examples": [
+        "Make sure to back up your **data** regularly. (**데이터**를 정기적으로 백업해야 한다.)"
+      ],
+      "keywords": ["file", "record"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "data_4",
+      "definition": "[명사] (통계적) 수치 정보",
+      "examples": [
+        "The report contains **data** on climate change. (그 보고서에는 기후 변화에 관한 **수치 자료**가 포함되어 있다.)"
+      ],
+      "keywords": ["statistics", "numbers"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "data_5",
+      "definition": "[명사] (휴대폰) 데이터 사용량",
+      "examples": [
+        "I ran out of mobile **data** this month. (이번 달에 휴대폰 **데이터**를 다 썼다.)"
+      ],
+      "keywords": ["internet", "usage"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:33:00Z"
+},
+
+"date": {
+  "word": "date",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "date_1",
+      "definition": "[명사] 날짜, 일자",
+      "examples": [
+        "What’s today’s **date**? (오늘 **날짜**가 뭐야?)"
+      ],
+      "keywords": ["day", "time"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "date_2",
+      "definition": "[명사] 데이트, 약속",
+      "examples": [
+        "They went on a **date** last night. (그들은 어젯밤 **데이트**를 했다.)"
+      ],
+      "keywords": ["meeting", "appointment"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "date_3",
+      "definition": "[동사] ~와 교제하다, 데이트하다",
+      "examples": [
+        "She’s been **dating** him for six months. (그녀는 그와 6개월째 **교제 중이다**.)"
+      ],
+      "keywords": ["go out with", "see"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "date_4",
+      "definition": "[동사] (문서 등에) 날짜를 적다",
+      "examples": [
+        "Please **date** and sign the form. (양식에 **날짜를 쓰고** 서명하세요.)"
+      ],
+      "keywords": ["mark", "record"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "date_5",
+      "definition": "[명사] 대추야자 (과일)",
+      "examples": [
+        "She ate a sweet **date** for dessert. (그녀는 디저트로 달콤한 **대추야자**를 먹었다.)"
+      ],
+      "keywords": ["fruit", "food"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-07T05:33:00Z"
+},
+
+"daughter": {
+  "word": "daughter",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "daughter_1",
+      "definition": "[명사] 딸",
+      "examples": [
+        "They have one **daughter** and two sons. (그들은 **딸** 한 명과 아들 둘이 있다.)"
+      ],
+      "keywords": ["girl", "child"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "daughter_2",
+      "definition": "[명사] 여성 후손",
+      "examples": [
+        "She’s a **daughter** of a famous writer. (그녀는 유명한 작가의 **딸**이다.)"
+      ],
+      "keywords": ["offspring", "descendant"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "daughter_3",
+      "definition": "[명사] (비유) 자손, 산물",
+      "examples": [
+        "This city is the **daughter** of history. (이 도시는 역사의 **산물**이다.)"
+      ],
+      "keywords": ["result", "creation"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "daughter_4",
+      "definition": "[명사] 신학적·종교적 의미의 딸",
+      "examples": [
+        "We are all **daughters** of God. (우리는 모두 하나님의 **딸들**이다.)"
+      ],
+      "keywords": ["believer", "child"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "daughter_5",
+      "definition": "[명사] (과학) 자핵종, 생성물",
+      "examples": [
+        "A **daughter** isotope is formed after decay. (붕괴 후 **자핵종**이 형성된다.)"
+      ],
+      "keywords": ["isotope", "product"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.75
+    }
+  ],
+  "updatedAt": "2025-11-07T05:33:00Z"
+},
+
+"day": {
+  "word": "day",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "day_1",
+      "definition": "[명사] 하루, 날",
+      "examples": [
+        "It takes three **days** to finish. (그 일을 끝내려면 **3일** 걸린다.)"
+      ],
+      "keywords": ["time", "date"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "day_2",
+      "definition": "[명사] 낮 (밤의 반대)",
+      "examples": [
+        "Owls sleep during the **day**. (올빼미는 **낮**에 잔다.)"
+      ],
+      "keywords": ["daytime", "sunlight"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "day_3",
+      "definition": "[명사] 특정한 날, 기념일",
+      "examples": [
+        "Christmas **Day** is celebrated in December. (크리스마스 **날**은 12월에 기념된다.)"
+      ],
+      "keywords": ["occasion", "holiday"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "day_4",
+      "definition": "[명사] 시대, 시기",
+      "examples": [
+        "In my father’s **day**, things were simpler. (우리 아버지 **시절**엔 일이 더 단순했다.)"
+      ],
+      "keywords": ["era", "age"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "day_5",
+      "definition": "[명사] 근무일, 하루의 일과",
+      "examples": [
+        "It was a busy **day** at work. (오늘은 일터에서 **바쁜 하루**였다.)"
+      ],
+      "keywords": ["workday", "shift"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:33:00Z"
+},
+
+"dead": {
+  "word": "dead",
+  "pos": ["adjective", "noun"],
+  "meanings": [
+    {
+      "id": "dead_1",
+      "definition": "[형용사] 죽은, 생명이 없는",
+      "examples": [
+        "The fish was **dead** when we found it. (우리가 발견했을 때 그 물고기는 **죽어 있었다**.)"
+      ],
+      "keywords": ["lifeless", "deceased"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "dead_2",
+      "definition": "[명사] 죽은 사람들",
+      "examples": [
+        "We remember the **dead** every year. (우리는 매년 **죽은 이들**을 기린다.)"
+      ],
+      "keywords": ["deceased", "departed"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dead_3",
+      "definition": "[형용사] 기능이 멈춘, 작동하지 않는",
+      "examples": [
+        "My phone battery is **dead**. (내 폰 배터리가 **나갔다**.)"
+      ],
+      "keywords": ["off", "broken"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "dead_4",
+      "definition": "[형용사] 완전히, 전혀 (~한)",
+      "examples": [
+        "It was **dead** quiet in the room. (방 안은 **완전히** 조용했다.)"
+      ],
+      "keywords": ["completely", "totally"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dead_5",
+      "definition": "[형용사] 무감각한, 활기 없는",
+      "examples": [
+        "The city seemed **dead** at night. (그 도시는 밤에는 **활기가 없었다**.)"
+      ],
+      "keywords": ["inactive", "silent"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T05:33:00Z"
+},
+
+"deadline": {
+  "word": "deadline",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "deadline_1",
+      "definition": "[명사] 마감일, 기한",
+      "examples": [
+        "The **deadline** for submissions is Friday. (제출 **마감일**은 금요일이다.)"
+      ],
+      "keywords": ["due date", "limit"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "deadline_2",
+      "definition": "[명사] 급박한 시한",
+      "examples": [
+        "We’re working under a tight **deadline**. (우리는 **빠듯한 마감 기한** 안에서 일하고 있다.)"
+      ],
+      "keywords": ["pressure", "constraint"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deadline_3",
+      "definition": "[명사] 제한선, 경계선 (비유적)",
+      "examples": [
+        "Crossing the **deadline** means failure. (**마감선을 넘는 것**은 실패를 의미한다.)"
+      ],
+      "keywords": ["limit", "barrier"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "deadline_4",
+      "definition": "[명사] 방송·언론용 마감 시간",
+      "examples": [
+        "The reporter rushed to meet the **deadline**. (기자는 **마감 시간**을 맞추기 위해 서둘렀다.)"
+      ],
+      "keywords": ["cutoff", "submission"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deadline_5",
+      "definition": "[명사] 생명의 한계선 (비유)",
+      "examples": [
+        "They were fighting beyond the **deadline** of endurance. (그들은 인내의 **한계를 넘어** 싸우고 있었다.)"
+      ],
+      "keywords": ["limit", "threshold"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-07T05:33:00Z"
+},
+"deadly": {
+  "word": "deadly",
+  "pos": ["adjective", "adverb"],
+  "meanings": [
+    {
+      "id": "deadly_1",
+      "definition": "[형용사] 치명적인, 생명을 앗는",
+      "examples": [
+        "The snake’s bite can be **deadly**. (그 뱀의 물림은 **치명적이다**.)"
+      ],
+      "keywords": ["fatal", "lethal"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "deadly_2",
+      "definition": "[형용사] 매우 위험한, 파괴적인",
+      "examples": [
+        "They faced a **deadly** storm at sea. (그들은 바다에서 **위험한 폭풍**을 맞닥뜨렸다.)"
+      ],
+      "keywords": ["dangerous", "destructive"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deadly_3",
+      "definition": "[형용사] 극도의, 대단히 심한",
+      "examples": [
+        "She felt a **deadly** fear before the exam. (그녀는 시험 전 **극심한** 두려움을 느꼈다.)"
+      ],
+      "keywords": ["intense", "extreme"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "deadly_4",
+      "definition": "[형용사] 지루한, 생기 없는 (비유)",
+      "examples": [
+        "The lecture was **deadly** boring. (그 강의는 **지루하기 짝이 없었다**.)"
+      ],
+      "keywords": ["dull", "tedious"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "deadly_5",
+      "definition": "[부사] 극도로, 완전히",
+      "examples": [
+        "He was **deadly** serious about the project. (그는 그 프로젝트에 대해 **매우 진지했다**.)"
+      ],
+      "keywords": ["completely", "utterly"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:41:00Z"
+},
+
+"dealer": {
+  "word": "dealer",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "dealer_1",
+      "definition": "[명사] 상인, 판매업자",
+      "examples": [
+        "She’s a car **dealer** in Seoul. (그녀는 서울의 자동차 **판매상**이다.)"
+      ],
+      "keywords": ["merchant", "salesperson"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "dealer_2",
+      "definition": "[명사] 도박에서 카드를 나누는 사람",
+      "examples": [
+        "The **dealer** shuffled the cards. (**딜러**가 카드를 섞었다.)"
+      ],
+      "keywords": ["card distributor", "croupier"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dealer_3",
+      "definition": "[명사] (비격식) 마약상",
+      "examples": [
+        "The police arrested a drug **dealer**. (경찰이 마약 **판매상**을 체포했다.)"
+      ],
+      "keywords": ["trafficker", "seller"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dealer_4",
+      "definition": "[명사] 거래 중개인, 브로커",
+      "examples": [
+        "He works as a stock **dealer**. (그는 주식 **중개인**으로 일한다.)"
+      ],
+      "keywords": ["broker", "trader"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dealer_5",
+      "definition": "[명사] 공급자, 제공자",
+      "examples": [
+        "They are official **dealers** of that brand. (그들은 그 브랜드의 공식 **공급자**다.)"
+      ],
+      "keywords": ["provider", "distributor"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:41:00Z"
+},
+
+"dear": {
+  "word": "dear",
+  "pos": ["adjective", "noun", "interjection"],
+  "meanings": [
+    {
+      "id": "dear_1",
+      "definition": "[형용사] 소중한, 사랑하는",
+      "examples": [
+        "She is my **dear** friend. (그녀는 내 **소중한** 친구다.)"
+      ],
+      "keywords": ["beloved", "precious"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "dear_2",
+      "definition": "[형용사] 값비싼",
+      "examples": [
+        "These shoes were quite **dear**. (이 신발은 꽤 **비쌌다**.)"
+      ],
+      "keywords": ["expensive", "costly"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "dear_3",
+      "definition": "[명사] 사랑하는 사람, 여보/자기",
+      "examples": [
+        "Good morning, my **dear**. (좋은 아침이야, **자기야**.)"
+      ],
+      "keywords": ["sweetheart", "darling"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dear_4",
+      "definition": "[감탄사] 어머!, 이런! (놀람)",
+      "examples": [
+        "**Dear** me, what happened here? (**어머**, 여기 무슨 일이야?)"
+      ],
+      "keywords": ["oh no", "goodness"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "dear_5",
+      "definition": "[형용사] 귀중한, 마음에 드는",
+      "examples": [
+        "This book is very **dear** to me. (이 책은 나에게 아주 **소중하다**.)"
+      ],
+      "keywords": ["cherished", "valuable"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:41:00Z"
+},
+
+"death": {
+  "word": "death",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "death_1",
+      "definition": "[명사] 죽음, 사망",
+      "examples": [
+        "He was shocked by his friend’s **death**. (그는 친구의 **죽음**에 충격을 받았다.)"
+      ],
+      "keywords": ["passing", "end of life"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "death_2",
+      "definition": "[명사] 사망 원인",
+      "examples": [
+        "The cause of **death** was unknown. (**사망 원인**은 알려지지 않았다.)"
+      ],
+      "keywords": ["reason", "cause"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "death_3",
+      "definition": "[명사] 사형, 죽음의 형벌",
+      "examples": [
+        "He was sentenced to **death**. (그는 **사형**을 선고받았다.)"
+      ],
+      "keywords": ["execution", "capital punishment"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "death_4",
+      "definition": "[명사] 종말, 소멸 (비유)",
+      "examples": [
+        "The internet led to the **death** of many newspapers. (인터넷은 많은 신문들의 **종말**을 가져왔다.)"
+      ],
+      "keywords": ["end", "collapse"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "death_5",
+      "definition": "[명사] 죽음 상태, 무기력함",
+      "examples": [
+        "The town was silent like **death**. (그 도시는 **죽은 듯이** 조용했다.)"
+      ],
+      "keywords": ["stillness", "quiet"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:41:00Z"
+},
+
+"debris": {
+  "word": "debris",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "debris_1",
+      "definition": "[명사] 잔해, 파편",
+      "examples": [
+        "The explosion left **debris** everywhere. (폭발로 **잔해**가 사방에 흩어졌다.)"
+      ],
+      "keywords": ["rubble", "fragments"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "debris_2",
+      "definition": "[명사] 쓰레기, 부스러기",
+      "examples": [
+        "The beach was covered with **debris**. (해변이 **부스러기**로 덮여 있었다.)"
+      ],
+      "keywords": ["waste", "remains"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "debris_3",
+      "definition": "[명사] 우주 파편",
+      "examples": [
+        "Satellites can be damaged by space **debris**. (위성은 우주 **잔해**로 인해 손상될 수 있다.)"
+      ],
+      "keywords": ["space junk", "wreckage"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    },
+    {
+      "id": "debris_4",
+      "definition": "[명사] 붕괴 후 남은 잔해",
+      "examples": [
+        "They searched the **debris** for survivors. (그들은 **잔해** 속에서 생존자를 찾았다.)"
+      ],
+      "keywords": ["ruins", "wreckage"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "debris_5",
+      "definition": "[명사] 산사태나 폭풍으로 생긴 낙하물",
+      "examples": [
+        "Rocks and **debris** blocked the road. (바위와 **낙하물**이 도로를 막았다.)"
+      ],
+      "keywords": ["rubble", "obstruction"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T05:41:00Z"
+},
+"debut": {
+  "word": "debut",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "debut_1",
+      "definition": "[명사] 데뷔, 첫 출연",
+      "examples": [
+        "She made her film **debut** last year. (그녀는 작년에 영화에 **데뷔했다**.)"
+      ],
+      "keywords": ["first appearance", "introduction"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "debut_2",
+      "definition": "[명사] 처음 공개된 작품, 발표",
+      "examples": [
+        "The band’s **debut** album was a huge success. (그 밴드의 **데뷔 앨범**은 큰 성공을 거뒀다.)"
+      ],
+      "keywords": ["launch", "first release"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "debut_3",
+      "definition": "[동사] 처음 공개되다, 첫 등장하다",
+      "examples": [
+        "The new product **debuted** in Japan. (그 신제품은 일본에서 처음 **출시되었다**.)"
+      ],
+      "keywords": ["introduce", "premiere"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "debut_4",
+      "definition": "[명사] 사회 첫 등장, 첫 무대",
+      "examples": [
+        "She attended her **debut** ball at 18. (그녀는 18세 때 **데뷔 무도회**에 참석했다.)"
+      ],
+      "keywords": ["introduction", "first event"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    },
+    {
+      "id": "debut_5",
+      "definition": "[동사] 첫선을 보이다 (비유)",
+      "examples": [
+        "The artist **debuted** his new style in Paris. (그 예술가는 파리에서 새로운 스타일을 **선보였다**.)"
+      ],
+      "keywords": ["reveal", "present"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T05:48:00Z"
+},
+
+"december": {
+  "word": "december",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "december_1",
+      "definition": "[명사] 12월",
+      "examples": [
+        "Christmas is in **December**. (크리스마스는 **12월**에 있다.)"
+      ],
+      "keywords": ["month", "winter"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "december_2",
+      "definition": "[명사] 한 해의 마지막 달",
+      "examples": [
+        "**December** is often the busiest month of the year. (**12월**은 보통 1년 중 가장 바쁜 달이다.)"
+      ],
+      "keywords": ["year-end", "holiday season"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "december_3",
+      "definition": "[명사] 늦은 시기, 노년기 (비유)",
+      "examples": [
+        "He is in the **December** of his life. (그는 인생의 **황혼기**에 있다.)"
+      ],
+      "keywords": ["old age", "final stage"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "december_4",
+      "definition": "[명사] 겨울의 상징 (문학적)",
+      "examples": [
+        "The poem captures the cold spirit of **December**. (그 시는 **12월의 차가운 정서**를 담고 있다.)"
+      ],
+      "keywords": ["cold", "wintertime"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "december_5",
+      "definition": "[명사] 연말 행사 기간",
+      "examples": [
+        "We have many events scheduled for **December**. (우리는 **12월**에 예정된 행사가 많다.)"
+      ],
+      "keywords": ["festival", "celebration"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:48:00Z"
+},
+
+"decent": {
+  "word": "decent",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "decent_1",
+      "definition": "[형용사] 괜찮은, 품위 있는",
+      "examples": [
+        "He has a **decent** job. (그는 **괜찮은 직업**을 가지고 있다.)"
+      ],
+      "keywords": ["proper", "respectable"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "decent_2",
+      "definition": "[형용사] 예의 바른, 점잖은",
+      "examples": [
+        "She is a very **decent** person. (그녀는 매우 **점잖은 사람**이다.)"
+      ],
+      "keywords": ["polite", "honorable"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "decent_3",
+      "definition": "[형용사] 적절한, 만족스러운",
+      "examples": [
+        "The hotel offers **decent** service for the price. (그 호텔은 가격 대비 **괜찮은 서비스**를 제공한다.)"
+      ],
+      "keywords": ["reasonable", "good"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "decent_4",
+      "definition": "[형용사] 단정한, 단아한",
+      "examples": [
+        "Please wear something **decent** for the event. (행사에 맞는 **단정한 옷**을 입으세요.)"
+      ],
+      "keywords": ["neat", "tidy"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "decent_5",
+      "definition": "[형용사] 알맞은, 적당한 (수준·양)",
+      "examples": [
+        "We made a **decent** amount of money. (우리는 **꽤 많은 돈**을 벌었다.)"
+      ],
+      "keywords": ["fair", "satisfactory"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:48:00Z"
+},
+
+"decide": {
+  "word": "decide",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "decide_1",
+      "definition": "[동사] 결정하다, 결심하다",
+      "examples": [
+        "He finally **decided** to move abroad. (그는 마침내 해외로 이사하기로 **결정했다**.)"
+      ],
+      "keywords": ["determine", "choose"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "decide_2",
+      "definition": "[동사] 판단하다, 결론을 내리다",
+      "examples": [
+        "The judge will **decide** the case tomorrow. (판사가 내일 사건을 **판단할** 것이다.)"
+      ],
+      "keywords": ["rule", "settle"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "decide_3",
+      "definition": "[동사] 선택하다, 정하다",
+      "examples": [
+        "We can’t **decide** which restaurant to go to. (어느 식당에 갈지 **정하지** 못하겠다.)"
+      ],
+      "keywords": ["pick", "select"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "decide_4",
+      "definition": "[동사] 영향을 미치다, 결정적인 역할을 하다",
+      "examples": [
+        "The weather **decided** the outcome of the game. (날씨가 경기의 결과를 **좌우했다**.)"
+      ],
+      "keywords": ["influence", "affect"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "decide_5",
+      "definition": "[동사] (법적으로) 판결하다",
+      "examples": [
+        "The court **decided** in favor of the plaintiff. (법원은 원고에게 **유리하게 판결했다**.)"
+      ],
+      "keywords": ["determine legally", "rule"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T05:48:00Z"
+},
+
+"decision-making": {
+  "word": "decision-making",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "decision_making_1",
+      "definition": "[명사] 의사 결정, 판단 과정",
+      "examples": [
+        "Good **decision-making** is key to success. (좋은 **의사 결정**은 성공의 열쇠다.)"
+      ],
+      "keywords": ["judgment", "resolution"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "decision_making_2",
+      "definition": "[명사] 조직의 의사 결정 구조",
+      "examples": [
+        "The company improved its **decision-making** process. (회사는 **의사 결정 구조**를 개선했다.)"
+      ],
+      "keywords": ["management", "process"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "decision_making_3",
+      "definition": "[명사] 선택 과정, 전략 결정",
+      "examples": [
+        "AI assists in human **decision-making**. (AI는 인간의 **결정 과정**을 돕는다.)"
+      ],
+      "keywords": ["planning", "choice"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "decision_making_4",
+      "definition": "[명사] 신속한 판단력",
+      "examples": [
+        "Leaders need quick **decision-making** skills. (리더는 신속한 **판단력**이 필요하다.)"
+      ],
+      "keywords": ["decisiveness", "leadership"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "decision_making_5",
+      "definition": "[명사] 정치적·행정적 결정권",
+      "examples": [
+        "He has no **decision-making** authority. (그는 **결정권**이 없다.)"
+      ],
+      "keywords": ["authority", "power"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:48:00Z"
+},
+"decisive": {
+  "word": "decisive",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "decisive_1",
+      "definition": "[형용사] 결단력 있는, 단호한",
+      "examples": [
+        "She is a **decisive** leader who acts quickly. (그녀는 신속하게 행동하는 **결단력 있는** 리더다.)"
+      ],
+      "keywords": ["determined", "resolute"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "decisive_2",
+      "definition": "[형용사] 결정적인, 중요한",
+      "examples": [
+        "The final goal was **decisive** in winning the game. (마지막 골이 경기 승리의 **결정적인** 역할을 했다.)"
+      ],
+      "keywords": ["crucial", "vital"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "decisive_3",
+      "definition": "[형용사] 명확한, 의심할 여지가 없는",
+      "examples": [
+        "The results were **decisive**. (**결과**는 **명확했다**.)"
+      ],
+      "keywords": ["clear", "definite"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "decisive_4",
+      "definition": "[형용사] 판단이 빠른",
+      "examples": [
+        "He’s known for his **decisive** thinking. (그는 **빠른 판단력**으로 유명하다.)"
+      ],
+      "keywords": ["quick", "assertive"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "decisive_5",
+      "definition": "[형용사] 결론을 내리는 데 필요한",
+      "examples": [
+        "More **decisive** evidence is required. (더 **결정적인 증거**가 필요하다.)"
+      ],
+      "keywords": ["final", "determinative"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T05:56:00Z"
+},
+
+"declaration": {
+  "word": "declaration",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "declaration_1",
+      "definition": "[명사] 선언, 발표",
+      "examples": [
+        "The country made a **declaration** of independence. (그 나라는 독립 **선언**을 했다.)"
+      ],
+      "keywords": ["announcement", "proclamation"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "declaration_2",
+      "definition": "[명사] 진술, 표명",
+      "examples": [
+        "He made a **declaration** of love. (그는 사랑을 **고백했다**.)"
+      ],
+      "keywords": ["statement", "assertion"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "declaration_3",
+      "definition": "[명사] 세관 신고서",
+      "examples": [
+        "You must fill out a customs **declaration**. (세관 **신고서**를 작성해야 한다.)"
+      ],
+      "keywords": ["form", "report"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "declaration_4",
+      "definition": "[명사] 법적 진술서",
+      "examples": [
+        "The witness signed a sworn **declaration**. (증인은 선서 **진술서**에 서명했다.)"
+      ],
+      "keywords": ["affidavit", "testimony"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "declaration_5",
+      "definition": "[명사] 공식 발표문, 성명서",
+      "examples": [
+        "The **declaration** outlined their goals for peace. (그 **성명서**는 평화를 위한 목표를 명시했다.)"
+      ],
+      "keywords": ["manifesto", "resolution"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T05:56:00Z"
+},
+
+"decoration": {
+  "word": "decoration",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "decoration_1",
+      "definition": "[명사] 장식, 꾸밈",
+      "examples": [
+        "The room was full of Christmas **decorations**. (방 안은 크리스마스 **장식품**으로 가득했다.)"
+      ],
+      "keywords": ["ornament", "adornment"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "decoration_2",
+      "definition": "[명사] 장식 행위, 꾸미기",
+      "examples": [
+        "Cake **decoration** requires patience. (케이크 **장식**에는 인내가 필요하다.)"
+      ],
+      "keywords": ["design", "embellishment"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "decoration_3",
+      "definition": "[명사] 훈장, 표창",
+      "examples": [
+        "He received a military **decoration** for bravery. (그는 용맹함으로 군사 **훈장**을 받았다.)"
+      ],
+      "keywords": ["medal", "honor"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "decoration_4",
+      "definition": "[명사] 인테리어, 장식 양식",
+      "examples": [
+        "The house has modern **decoration**. (그 집은 현대적인 **인테리어**를 가지고 있다.)"
+      ],
+      "keywords": ["style", "interior"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "decoration_5",
+      "definition": "[명사] 축제용 꾸밈",
+      "examples": [
+        "The hall’s **decorations** matched the event’s theme. (홀의 **장식**은 행사 주제와 어울렸다.)"
+      ],
+      "keywords": ["display", "arrangement"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:56:00Z"
+},
+
+"dedicate": {
+  "word": "dedicate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "dedicate_1",
+      "definition": "[동사] 헌신하다, 전념하다",
+      "examples": [
+        "She **dedicated** her life to helping others. (그녀는 다른 사람들을 돕는 데 인생을 **헌신했다**.)"
+      ],
+      "keywords": ["devote", "commit"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "dedicate_2",
+      "definition": "[동사] (시간·노력 등을) 바치다",
+      "examples": [
+        "He **dedicated** years to his research. (그는 연구에 수년을 **바쳤다**.)"
+      ],
+      "keywords": ["offer", "spend"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "dedicate_3",
+      "definition": "[동사] (작품을) 헌정하다",
+      "examples": [
+        "The book is **dedicated** to his parents. (그 책은 그의 부모님께 **헌정되었다**.)"
+      ],
+      "keywords": ["address", "tribute"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dedicate_4",
+      "definition": "[동사] (건물 등을) 봉헌하다, 개관하다",
+      "examples": [
+        "The church was **dedicated** in 1920. (그 교회는 1920년에 **봉헌되었다**.)"
+      ],
+      "keywords": ["inaugurate", "open"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "dedicate_5",
+      "definition": "[동사] 목적을 위해 사용하도록 지정하다",
+      "examples": [
+        "This area is **dedicated** to research. (이 지역은 연구용으로 **지정되었다**.)"
+      ],
+      "keywords": ["assign", "designate"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T05:56:00Z"
+},
+
+"dedication": {
+  "word": "dedication",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "dedication_1",
+      "definition": "[명사] 헌신, 전념",
+      "examples": [
+        "Her **dedication** to her work is admirable. (그녀의 일에 대한 **헌신**은 존경스럽다.)"
+      ],
+      "keywords": ["commitment", "devotion"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "dedication_2",
+      "definition": "[명사] (건물 등의) 봉헌식",
+      "examples": [
+        "The new library’s **dedication** was held yesterday. (새 도서관의 **개관식**이 어제 열렸다.)"
+      ],
+      "keywords": ["inauguration", "opening"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "dedication_3",
+      "definition": "[명사] (책 등의) 헌정사",
+      "examples": [
+        "The **dedication** page mentions his teacher. (**헌정사** 페이지에는 그의 스승이 언급되어 있다.)"
+      ],
+      "keywords": ["tribute", "acknowledgment"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "dedication_4",
+      "definition": "[명사] 몰입, 열정",
+      "examples": [
+        "Success requires time and **dedication**. (성공은 시간과 **열정**을 필요로 한다.)"
+      ],
+      "keywords": ["effort", "passion"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "dedication_5",
+      "definition": "[명사] 특정 목적에의 헌납",
+      "examples": [
+        "The hall was built in **dedication** to the victims. (그 홀은 희생자들을 **기리기 위해** 세워졌다.)"
+      ],
+      "keywords": ["offering", "tribute"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T05:56:00Z"
+},
+"deed": {
+  "word": "deed",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "deed_1",
+      "definition": "[명사] 행위, 행동",
+      "examples": [
+        "A kind **deed** can change someone’s day. (친절한 **행동** 하나가 누군가의 하루를 바꿀 수 있다.)"
+      ],
+      "keywords": ["act", "action"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "deed_2",
+      "definition": "[명사] 선행, 공적",
+      "examples": [
+        "He was honored for his brave **deeds**. (그는 용감한 **행적**으로 존경받았다.)"
+      ],
+      "keywords": ["achievement", "exploit"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "deed_3",
+      "definition": "[명사] (법률) 증서, 문서",
+      "examples": [
+        "They signed the property **deed**. (그들은 부동산 **증서**에 서명했다.)"
+      ],
+      "keywords": ["document", "contract"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "deed_4",
+      "definition": "[명사] 실제 행위, 결과",
+      "examples": [
+        "His **deeds** spoke louder than words. (그의 **행동**이 말보다 더 강력했다.)"
+      ],
+      "keywords": ["behavior", "practice"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deed_5",
+      "definition": "[명사] 악행, 범죄 행위",
+      "examples": [
+        "He regretted his evil **deeds**. (그는 자신의 **악행**을 후회했다.)"
+      ],
+      "keywords": ["crime", "sin"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:03:00Z"
+},
+
+"deem": {
+  "word": "deem",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "deem_1",
+      "definition": "[동사] 간주하다, 생각하다",
+      "examples": [
+        "The proposal was **deemed** unnecessary. (그 제안은 **불필요하다고 여겨졌다**.)"
+      ],
+      "keywords": ["consider", "regard"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 1.0
+    },
+    {
+      "id": "deem_2",
+      "definition": "[동사] 평가하다, 판단하다",
+      "examples": [
+        "The event was **deemed** a success. (그 행사는 **성공으로 평가되었다**.)"
+      ],
+      "keywords": ["judge", "assess"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.95
+    },
+    {
+      "id": "deem_3",
+      "definition": "[동사] 법적·공식적으로 간주하다",
+      "examples": [
+        "The contract will be **deemed** valid. (그 계약은 **유효한 것으로 간주된다**.)"
+      ],
+      "keywords": ["treat as", "acknowledge"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "deem_4",
+      "definition": "[동사] (스스로) 여기다, 믿다",
+      "examples": [
+        "He **deemed** himself unworthy of praise. (그는 자신이 칭찬받을 자격이 없다고 **여겼다**.)"
+      ],
+      "keywords": ["believe", "suppose"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "deem_5",
+      "definition": "[동사] 사회적 기준에 따라 판단하다",
+      "examples": [
+        "The law **deems** this act illegal. (법은 이 행위를 **불법으로 규정한다**.)"
+      ],
+      "keywords": ["define", "rule"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:03:00Z"
+},
+
+"deep": {
+  "word": "deep",
+  "pos": ["adjective", "adverb", "noun"],
+  "meanings": [
+    {
+      "id": "deep_1",
+      "definition": "[형용사] 깊은, 깊이 있는",
+      "examples": [
+        "The lake is very **deep**. (그 호수는 매우 **깊다**.)"
+      ],
+      "keywords": ["profound", "bottomless"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "deep_2",
+      "definition": "[형용사] 심오한, 진지한",
+      "examples": [
+        "She gave a **deep** answer to the question. (그녀는 질문에 **심오한** 답변을 했다.)"
+      ],
+      "keywords": ["thoughtful", "meaningful"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "deep_3",
+      "definition": "[형용사] 깊은 색·소리의",
+      "examples": [
+        "He has a **deep** voice. (그는 **저음의** 목소리를 가지고 있다.)"
+      ],
+      "keywords": ["low", "rich"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "deep_4",
+      "definition": "[부사] 깊게, 심하게",
+      "examples": [
+        "He breathed **deep** before speaking. (그는 말하기 전에 **깊게** 숨을 들이마셨다.)"
+      ],
+      "keywords": ["profoundly", "heavily"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "deep_5",
+      "definition": "[명사] 심해, 깊은 곳",
+      "examples": [
+        "Creatures of the **deep** are rarely seen. (**심해**의 생물들은 거의 보이지 않는다.)"
+      ],
+      "keywords": ["depths", "abyss"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:03:00Z"
+},
+
+"deeply": {
+  "word": "deeply",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "deeply_1",
+      "definition": "[부사] 깊이, 매우",
+      "examples": [
+        "She was **deeply** moved by the speech. (그녀는 그 연설에 **깊이 감동받았다**.)"
+      ],
+      "keywords": ["profoundly", "greatly"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "deeply_2",
+      "definition": "[부사] 철저히, 심각하게",
+      "examples": [
+        "He is **deeply** involved in the project. (그는 그 프로젝트에 **깊이 관여되어 있다**.)"
+      ],
+      "keywords": ["completely", "thoroughly"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "deeply_3",
+      "definition": "[부사] 진심으로, 진지하게",
+      "examples": [
+        "I’m **deeply** sorry for your loss. (당신의 상실에 **진심으로** 유감입니다.)"
+      ],
+      "keywords": ["sincerely", "earnestly"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "deeply_4",
+      "definition": "[부사] 매우, 크게 (감정적으로)",
+      "examples": [
+        "She was **deeply** in love. (그녀는 **깊이 사랑에 빠져 있었다**.)"
+      ],
+      "keywords": ["strongly", "intensely"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "deeply_5",
+      "definition": "[부사] 심층적으로, 근본적으로",
+      "examples": [
+        "The two cultures are **deeply** different. (그 두 문화는 **근본적으로 다르다**.)"
+      ],
+      "keywords": ["fundamentally", "radically"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:03:00Z"
+},
+
+"default": {
+  "word": "default",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "default_1",
+      "definition": "[명사] 기본값, 초기 설정",
+      "examples": [
+        "The phone uses a **default** ringtone. (그 휴대폰은 **기본 벨소리**를 사용한다.)"
+      ],
+      "keywords": ["preset", "standard"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "default_2",
+      "definition": "[명사] 채무 불이행, 연체",
+      "examples": [
+        "The company went into **default** on its loans. (그 회사는 대출금 **상환을 불이행했다**.)"
+      ],
+      "keywords": ["failure", "nonpayment"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "default_3",
+      "definition": "[동사] (약속 등을) 이행하지 않다",
+      "examples": [
+        "He **defaulted** on his rent payment. (그는 집세를 **연체했다**.)"
+      ],
+      "keywords": ["neglect", "miss"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "default_4",
+      "definition": "[명사] (컴퓨터) 자동 설정",
+      "examples": [
+        "The system boots in **default** mode. (그 시스템은 **기본 모드**로 부팅된다.)"
+      ],
+      "keywords": ["automatic", "normal"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "default_5",
+      "definition": "[동사] 자동으로 적용되다",
+      "examples": [
+        "If you skip the choice, it will **default** to English. (선택을 건너뛰면 **자동으로 영어로 설정된다**.)"
+      ],
+      "keywords": ["revert", "auto-select"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:03:00Z"
+},
+"defect": {
+  "word": "defect",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "defect_1",
+      "definition": "[명사] 결함, 하자",
+      "examples": [
+        "The product was returned because of a **defect**. (그 제품은 **결함** 때문에 반품되었다.)"
+      ],
+      "keywords": ["flaw", "fault"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "defect_2",
+      "definition": "[명사] 약점, 단점",
+      "examples": [
+        "Every system has some **defects**. (모든 시스템에는 어느 정도의 **약점**이 있다.)"
+      ],
+      "keywords": ["weakness", "imperfection"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "defect_3",
+      "definition": "[동사] (조직·국가 등을) 탈퇴하다, 망명하다",
+      "examples": [
+        "The soldier **defected** to the enemy side. (그 군인은 적 진영으로 **망명했다**.)"
+      ],
+      "keywords": ["desert", "abandon"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "defect_4",
+      "definition": "[명사] 기능 불량, 오류",
+      "examples": [
+        "There’s a **defect** in the software. (그 소프트웨어에는 **버그**가 있다.)"
+      ],
+      "keywords": ["error", "bug"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "defect_5",
+      "definition": "[명사] 도덕적 결점, 성격상의 약점",
+      "examples": [
+        "Pride is his biggest **defect**. (자만심은 그의 가장 큰 **결점**이다.)"
+      ],
+      "keywords": ["fault", "flaw"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:12:00Z"
+},
+
+"defender": {
+  "word": "defender",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "defender_1",
+      "definition": "[명사] 수비수 (스포츠)",
+      "examples": [
+        "The **defender** blocked the shot. (**수비수**가 슛을 막았다.)"
+      ],
+      "keywords": ["back", "protector"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "defender_2",
+      "definition": "[명사] 옹호자, 변호자",
+      "examples": [
+        "He’s a strong **defender** of human rights. (그는 인권의 강력한 **옹호자**다.)"
+      ],
+      "keywords": ["advocate", "supporter"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "defender_3",
+      "definition": "[명사] 방어자, 수호자",
+      "examples": [
+        "The castle’s **defenders** fought bravely. (성의 **수호자들**은 용감히 싸웠다.)"
+      ],
+      "keywords": ["guardian", "protector"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "defender_4",
+      "definition": "[명사] 피고측 변호사",
+      "examples": [
+        "The **defender** argued that his client was innocent. (**변호인**은 그의 의뢰인이 무죄라고 주장했다.)"
+      ],
+      "keywords": ["lawyer", "attorney"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "defender_5",
+      "definition": "[명사] 보유 팀 (챔피언십)",
+      "examples": [
+        "They are the reigning **defenders** of the title. (그들은 현재 타이틀을 **보유한 팀**이다.)"
+      ],
+      "keywords": ["champion", "holder"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:12:00Z"
+},
+
+"defensive": {
+  "word": "defensive",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "defensive_1",
+      "definition": "[형용사] 방어적인, 수비의",
+      "examples": [
+        "The team took a **defensive** position. (그 팀은 **수비적인** 태세를 취했다.)"
+      ],
+      "keywords": ["protective", "guarding"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "defensive_2",
+      "definition": "[형용사] 변명하는, 방어적인 태도의",
+      "examples": [
+        "She became **defensive** when criticized. (그녀는 비판받자 **변명조로** 변했다.)"
+      ],
+      "keywords": ["self-protective", "argumentative"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "defensive_3",
+      "definition": "[형용사] 방어용의 (무기, 구조물 등)",
+      "examples": [
+        "The wall was built for **defensive** purposes. (그 성벽은 **방어 목적**으로 지어졌다.)"
+      ],
+      "keywords": ["fortified", "military"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "defensive_4",
+      "definition": "[형용사] 소극적인, 보수적인 (비유)",
+      "examples": [
+        "His **defensive** strategy slowed innovation. (그의 **보수적인 전략**은 혁신을 늦췄다.)"
+      ],
+      "keywords": ["cautious", "conservative"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "defensive_5",
+      "definition": "[형용사] (경제) 방어적 투자 성향의",
+      "examples": [
+        "Investors are shifting to **defensive** stocks. (투자자들이 **방어주**로 이동하고 있다.)"
+      ],
+      "keywords": ["stable", "safe"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-07T06:12:00Z"
+},
+
+"deficiency": {
+  "word": "deficiency",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "deficiency_1",
+      "definition": "[명사] 결핍, 부족",
+      "examples": [
+        "Vitamin D **deficiency** causes bone problems. (비타민 D **결핍**은 뼈 문제를 일으킨다.)"
+      ],
+      "keywords": ["lack", "shortage"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "deficiency_2",
+      "definition": "[명사] 결점, 불충분함",
+      "examples": [
+        "The report revealed **deficiencies** in management. (보고서는 경영의 **결점들**을 드러냈다.)"
+      ],
+      "keywords": ["flaw", "weakness"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "deficiency_3",
+      "definition": "[명사] 영양 부족",
+      "examples": [
+        "Iron **deficiency** is common in children. (철분 **결핍**은 아이들에게 흔하다.)"
+      ],
+      "keywords": ["anemia", "malnutrition"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deficiency_4",
+      "definition": "[명사] 불완전함, 기능 저하",
+      "examples": [
+        "He was born with a heart **deficiency**. (그는 선천적으로 심장 **기능 저하**를 가지고 태어났다.)"
+      ],
+      "keywords": ["impairment", "defect"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "deficiency_5",
+      "definition": "[명사] 부족 상태 (비유)",
+      "examples": [
+        "There’s a **deficiency** of trust in the team. (팀 내에 신뢰의 **부족**이 있다.)"
+      ],
+      "keywords": ["scarcity", "absence"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:12:00Z"
+},
+"deficit": {
+  "word": "deficit",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "deficit_1",
+      "definition": "[명사] 적자, 부족액",
+      "examples": [
+        "The country is facing a large trade **deficit**. (그 나라는 큰 무역 **적자**에 직면해 있다.)"
+      ],
+      "keywords": ["shortfall", "loss"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 1.0
+    },
+    {
+      "id": "deficit_2",
+      "definition": "[명사] 결핍, 부족",
+      "examples": [
+        "A sleep **deficit** can affect your health. (수면 **부족**은 건강에 영향을 미칠 수 있다.)"
+      ],
+      "keywords": ["lack", "deficiency"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "deficit_3",
+      "definition": "[명사] 정부 재정의 적자",
+      "examples": [
+        "The budget **deficit** continues to rise. (예산 **적자**가 계속 증가하고 있다.)"
+      ],
+      "keywords": ["debt", "gap"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "deficit_4",
+      "definition": "[명사] 심리적·인지적 결함",
+      "examples": [
+        "He was diagnosed with an attention **deficit**. (그는 **주의력 결핍** 진단을 받았다.)"
+      ],
+      "keywords": ["disorder", "impairment"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "deficit_5",
+      "definition": "[명사] 경쟁력 부족 (비유)",
+      "examples": [
+        "The company has a **deficit** in innovation. (그 회사는 혁신 면에서 **부족**하다.)"
+      ],
+      "keywords": ["weakness", "lag"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:21:00Z"
+},
+
+"definitely": {
+  "word": "definitely",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "definitely_1",
+      "definition": "[부사] 확실히, 분명히",
+      "examples": [
+        "I will **definitely** call you tomorrow. (내일은 꼭 **전화할게**.)"
+      ],
+      "keywords": ["certainly", "surely"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "definitely_2",
+      "definition": "[부사] 명백히, 틀림없이",
+      "examples": [
+        "This is **definitely** the best restaurant in town. (여기가 이 도시에서 **단연코 최고의 식당**이다.)"
+      ],
+      "keywords": ["clearly", "undoubtedly"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "definitely_3",
+      "definition": "[부사] (비격식) 완전히, 정말로",
+      "examples": [
+        "That movie was **definitely** worth watching. (그 영화는 **정말로** 볼 가치가 있었다.)"
+      ],
+      "keywords": ["absolutely", "truly"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "definitely_4",
+      "definition": "[부사] 확정적으로, 최종적으로",
+      "examples": [
+        "The date hasn’t been **definitely** decided yet. (날짜는 아직 **최종 결정되지 않았다**.)"
+      ],
+      "keywords": ["finally", "formally"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "definitely_5",
+      "definition": "[부사] 의심 없이, 분명히 (강조)",
+      "examples": [
+        "He’s **definitely** the one for the job. (그는 이 일에 **딱 맞는 사람**이다.)"
+      ],
+      "keywords": ["surely", "indeed"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:21:00Z"
+},
+
+"definition": {
+  "word": "definition",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "definition_1",
+      "definition": "[명사] 정의, 의미",
+      "examples": [
+        "Can you give me the **definition** of this word? (이 단어의 **정의**를 말해줄래?)"
+      ],
+      "keywords": ["meaning", "explanation"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "definition_2",
+      "definition": "[명사] 선명도, 해상도",
+      "examples": [
+        "The screen has high **definition**. (그 화면은 **고해상도**다.)"
+      ],
+      "keywords": ["clarity", "resolution"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "definition_3",
+      "definition": "[명사] 구체적 설명, 명시",
+      "examples": [
+        "The law lacks a clear **definition** of the term. (그 법은 그 용어의 명확한 **정의**가 부족하다.)"
+      ],
+      "keywords": ["description", "interpretation"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "definition_4",
+      "definition": "[명사] 특징, 구분되는 특성",
+      "examples": [
+        "Discipline is the **definition** of success. (규율은 성공의 **핵심 특성**이다.)"
+      ],
+      "keywords": ["essence", "nature"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "definition_5",
+      "definition": "[명사] 윤곽, 선명한 형태",
+      "examples": [
+        "The camera shows great muscle **definition**. (그 카메라는 근육의 **선명한 윤곽**을 잘 보여준다.)"
+      ],
+      "keywords": ["sharpness", "outline"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:21:00Z"
+},
+
+"defy": {
+  "word": "defy",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "defy_1",
+      "definition": "[동사] 반항하다, 저항하다",
+      "examples": [
+        "The protesters **defied** the government’s order. (시위자들은 정부의 명령에 **저항했다**.)"
+      ],
+      "keywords": ["resist", "oppose"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 1.0
+    },
+    {
+      "id": "defy_2",
+      "definition": "[동사] 무시하다, 거역하다",
+      "examples": [
+        "He **defied** the rules and continued his work. (그는 규칙을 **무시하고** 일을 계속했다.)"
+      ],
+      "keywords": ["disobey", "ignore"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.95
+    },
+    {
+      "id": "defy_3",
+      "definition": "[동사] 불가능하게 만들다, 설명이 안 되다",
+      "examples": [
+        "The mystery **defies** explanation. (그 미스터리는 **설명할 수 없다**.)"
+      ],
+      "keywords": ["evade", "escape"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "defy_4",
+      "definition": "[동사] 도전하다, 맞서다",
+      "examples": [
+        "She **defied** tradition and started her own company. (그녀는 전통에 **도전해** 자신의 회사를 세웠다.)"
+      ],
+      "keywords": ["challenge", "confront"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "defy_5",
+      "definition": "[동사] 대담하게 행동하다, 감히 ...하다",
+      "examples": [
+        "He **defied** danger to save the child. (그는 아이를 구하기 위해 **위험을 무릅썼다**.)"
+      ],
+      "keywords": ["brave", "dare"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:21:00Z"
+},
+
+"delegate": {
+  "word": "delegate",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "delegate_1",
+      "definition": "[명사] 대표, 사절",
+      "examples": [
+        "Each country sent a **delegate** to the conference. (각국이 회의에 **대표**를 보냈다.)"
+      ],
+      "keywords": ["representative", "envoy"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "delegate_2",
+      "definition": "[동사] 위임하다, 맡기다",
+      "examples": [
+        "The manager **delegated** tasks to his team. (관리자는 팀에게 일을 **위임했다**.)"
+      ],
+      "keywords": ["assign", "entrust"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "delegate_3",
+      "definition": "[명사] 회의 대표자",
+      "examples": [
+        "The **delegate** gave a speech on climate policy. (**대표자**가 기후 정책에 대한 연설을 했다.)"
+      ],
+      "keywords": ["spokesperson", "participant"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "delegate_4",
+      "definition": "[동사] 권한을 부여하다",
+      "examples": [
+        "He was **delegated** full authority. (그는 **전권을 위임받았다**.)"
+      ],
+      "keywords": ["authorize", "empower"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "delegate_5",
+      "definition": "[동사] 대표로 보내다",
+      "examples": [
+        "She was **delegated** to attend the summit. (그녀는 정상 회의에 **대표로 파견되었다**.)"
+      ],
+      "keywords": ["appoint", "assign"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:21:00Z"
+},
+
+"delegation": {
+  "word": "delegation",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "delegation_1",
+      "definition": "[명사] 대표단",
+      "examples": [
+        "A **delegation** from Korea visited Japan. (한국의 **대표단**이 일본을 방문했다.)"
+      ],
+      "keywords": ["mission", "group"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "delegation_2",
+      "definition": "[명사] 권한 위임, 위탁",
+      "examples": [
+        "The **delegation** of power was approved. (**권한 위임**이 승인되었다.)"
+      ],
+      "keywords": ["authorization", "assignment"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "delegation_3",
+      "definition": "[명사] 파견단, 사절단",
+      "examples": [
+        "The trade **delegation** met with foreign investors. (무역 **사절단**이 해외 투자자들과 만났다.)"
+      ],
+      "keywords": ["envoy group", "committee"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "delegation_4",
+      "definition": "[명사] 대표로 선임된 사람들",
+      "examples": [
+        "The student **delegation** attended the event. (학생 **대표단**이 행사에 참석했다.)"
+      ],
+      "keywords": ["representatives", "participants"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "delegation_5",
+      "definition": "[명사] 권한 분산, 조직 내 위임 체계",
+      "examples": [
+        "Effective **delegation** improves teamwork. (효과적인 **위임**은 팀워크를 향상시킨다.)"
+      ],
+      "keywords": ["distribution", "management"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:21:00Z"
+},
+"deliberate": {
+  "word": "deliberate",
+  "pos": ["adjective", "verb"],
+  "meanings": [
+    {
+      "id": "deliberate_1",
+      "definition": "[형용사] 신중한, 숙고한",
+      "examples": [
+        "She made a **deliberate** choice after thinking carefully. (그녀는 신중히 생각한 후 **숙고된 결정**을 내렸다.)"
+      ],
+      "keywords": ["careful", "considered"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "deliberate_2",
+      "definition": "[형용사] 고의적인, 의도적인",
+      "examples": [
+        "It was a **deliberate** attempt to mislead people. (그것은 사람들을 속이려는 **의도적인 시도**였다.)"
+      ],
+      "keywords": ["intentional", "planned"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "deliberate_3",
+      "definition": "[동사] 숙고하다, 심사숙고하다",
+      "examples": [
+        "The jury **deliberated** for two days. (배심원단은 이틀 동안 **숙의했다**.)"
+      ],
+      "keywords": ["consider", "discuss"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "deliberate_4",
+      "definition": "[형용사] 느릿한, 신중한 움직임의",
+      "examples": [
+        "He walked at a **deliberate** pace. (그는 **신중한 걸음**으로 걸었다.)"
+      ],
+      "keywords": ["slow", "measured"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deliberate_5",
+      "definition": "[동사] 심의하다, 논의하다",
+      "examples": [
+        "The board will **deliberate** the proposal tomorrow. (이사회가 내일 그 제안을 **심의할 것이다**.)"
+      ],
+      "keywords": ["debate", "examine"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:30:00Z"
+},
+
+"deliberately": {
+  "word": "deliberately",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "deliberately_1",
+      "definition": "[부사] 고의로, 일부러",
+      "examples": [
+        "He **deliberately** ignored my message. (그는 내 메시지를 **일부러 무시했다**.)"
+      ],
+      "keywords": ["intentionally", "purposely"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "deliberately_2",
+      "definition": "[부사] 신중하게, 숙고하여",
+      "examples": [
+        "She spoke **deliberately** to avoid mistakes. (그녀는 실수를 피하려고 **신중히** 말했다.)"
+      ],
+      "keywords": ["carefully", "thoughtfully"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "deliberately_3",
+      "definition": "[부사] 천천히, 침착하게",
+      "examples": [
+        "He moved **deliberately** toward the door. (그는 문 쪽으로 **천천히** 걸어갔다.)"
+      ],
+      "keywords": ["slowly", "steadily"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deliberately_4",
+      "definition": "[부사] 계획적으로, 의도적으로",
+      "examples": [
+        "They **deliberately** delayed the project. (그들은 프로젝트를 **의도적으로** 지연시켰다.)"
+      ],
+      "keywords": ["strategically", "calculatedly"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "deliberately_5",
+      "definition": "[부사] 침착하게, 조용히",
+      "examples": [
+        "He answered **deliberately**, not in a hurry. (그는 서두르지 않고 **침착하게** 대답했다.)"
+      ],
+      "keywords": ["composedly", "calmly"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:30:00Z"
+},
+
+"delicious": {
+  "word": "delicious",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "delicious_1",
+      "definition": "[형용사] 맛있는, 아주 맛좋은",
+      "examples": [
+        "This cake is **delicious**. (이 케이크는 정말 **맛있다**.)"
+      ],
+      "keywords": ["tasty", "flavorful"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "delicious_2",
+      "definition": "[형용사] 향기로운, 냄새가 좋은",
+      "examples": [
+        "The soup smells **delicious**. (그 수프는 **향기롭다**.)"
+      ],
+      "keywords": ["fragrant", "aromatic"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "delicious_3",
+      "definition": "[형용사] 기분 좋은, 유쾌한 (비유)",
+      "examples": [
+        "She felt a **delicious** sense of freedom. (그녀는 **기분 좋은 자유로움**을 느꼈다.)"
+      ],
+      "keywords": ["pleasant", "charming"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "delicious_4",
+      "definition": "[형용사] 감미로운 (소리·분위기)",
+      "examples": [
+        "The music was **deliciously** soft. (그 음악은 **감미롭게** 부드러웠다.)"
+      ],
+      "keywords": ["sweet", "gentle"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "delicious_5",
+      "definition": "[형용사] 재미있는, 매력적인 (비유)",
+      "examples": [
+        "It’s a **delicious** irony. (그건 **통쾌한 아이러니**다.)"
+      ],
+      "keywords": ["witty", "enjoyable"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:30:00Z"
+},
+
+"delivery": {
+  "word": "delivery",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "delivery_1",
+      "definition": "[명사] 배달, 배송",
+      "examples": [
+        "Your food **delivery** is on the way. (당신의 음식 **배달**이 오고 있습니다.)"
+      ],
+      "keywords": ["shipment", "dispatch"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "delivery_2",
+      "definition": "[명사] (연설 등의) 전달 방식",
+      "examples": [
+        "Her **delivery** during the speech was impressive. (그녀의 연설 **전달 방식**은 인상적이었다.)"
+      ],
+      "keywords": ["presentation", "expression"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "delivery_3",
+      "definition": "[명사] 출산, 분만",
+      "examples": [
+        "The baby was born by natural **delivery**. (그 아기는 자연 **분만**으로 태어났다.)"
+      ],
+      "keywords": ["childbirth", "labor"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "delivery_4",
+      "definition": "[명사] 상품 인도, 공급",
+      "examples": [
+        "Late **delivery** will result in a penalty. (늦은 **납품**은 벌금을 초래할 것이다.)"
+      ],
+      "keywords": ["supply", "handover"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "delivery_5",
+      "definition": "[명사] 구출, 해방 (비유)",
+      "examples": [
+        "They prayed for **delivery** from evil. (그들은 악으로부터의 **해방**을 기도했다.)"
+      ],
+      "keywords": ["rescue", "salvation"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-07T06:30:00Z"
+},
+
+"democratic": {
+  "word": "democratic",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "democratic_1",
+      "definition": "[형용사] 민주적인, 민주주의의",
+      "examples": [
+        "They live in a **democratic** country. (그들은 **민주주의 국가**에 산다.)"
+      ],
+      "keywords": ["republican", "egalitarian"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "democratic_2",
+      "definition": "[형용사] 평등한, 자유로운 분위기의",
+      "examples": [
+        "Our company has a **democratic** work culture. (우리 회사는 **수평적인 문화**를 가지고 있다.)"
+      ],
+      "keywords": ["inclusive", "open"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "democratic_3",
+      "definition": "[형용사] 국민의, 대중적인",
+      "examples": [
+        "He has a **democratic** manner that appeals to voters. (그는 유권자들에게 호감을 주는 **대중적인 태도**를 가지고 있다.)"
+      ],
+      "keywords": ["popular", "relatable"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "democratic_4",
+      "definition": "[형용사] 민주당의 (미국)",
+      "examples": [
+        "She’s a **Democratic** senator. (그녀는 **민주당 상원의원**이다.)"
+      ],
+      "keywords": ["party-related", "political"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "democratic_5",
+      "definition": "[형용사] 다수결의, 참여형의",
+      "examples": [
+        "We took a **democratic** vote to decide. (우리는 결정을 위해 **투표를 실시했다**.)"
+      ],
+      "keywords": ["participatory", "majority-based"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:30:00Z"
+},
+"demonstration": {
+  "word": "demonstration",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "demonstration_1",
+      "definition": "[명사] 시위, 데모",
+      "examples": [
+        "Thousands joined the peace **demonstration**. (수천 명이 평화 **시위**에 참여했다.)"
+      ],
+      "keywords": ["protest", "march"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "demonstration_2",
+      "definition": "[명사] 설명, 시범",
+      "examples": [
+        "The teacher gave a **demonstration** of the experiment. (선생님이 실험 **시범**을 보였다.)"
+      ],
+      "keywords": ["display", "presentation"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "demonstration_3",
+      "definition": "[명사] 증명, 입증",
+      "examples": [
+        "The study provided a clear **demonstration** of the theory. (그 연구는 이론의 명확한 **입증**을 제공했다.)"
+      ],
+      "keywords": ["proof", "evidence"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "demonstration_4",
+      "definition": "[명사] 표현, 발휘",
+      "examples": [
+        "He gave a **demonstration** of courage. (그는 **용기를 보여주었다**.)"
+      ],
+      "keywords": ["display", "manifestation"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "demonstration_5",
+      "definition": "[명사] 전시, 실연 행사",
+      "examples": [
+        "A software **demonstration** was held at the expo. (박람회에서 소프트웨어 **시연회**가 열렸다.)"
+      ],
+      "keywords": ["showcase", "exhibition"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:37:00Z"
+},
+
+"denial": {
+  "word": "denial",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "denial_1",
+      "definition": "[명사] 부인, 거절",
+      "examples": [
+        "He issued a **denial** of the accusations. (그는 혐의에 대한 **부인 성명**을 냈다.)"
+      ],
+      "keywords": ["rejection", "refusal"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "denial_2",
+      "definition": "[명사] 현실 부정 (심리적)",
+      "examples": [
+        "She is still in **denial** about her illness. (그녀는 아직 자신의 병을 **인정하지 않는다**.)"
+      ],
+      "keywords": ["refusal to accept", "avoidance"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "denial_3",
+      "definition": "[명사] (권리·요청의) 거부",
+      "examples": [
+        "The **denial** of access caused public outrage. (**접근 거부**가 대중의 분노를 불러일으켰다.)"
+      ],
+      "keywords": ["withholding", "rejection"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "denial_4",
+      "definition": "[명사] 금욕, 절제",
+      "examples": [
+        "Religious **denial** is part of his discipline. (종교적 **절제**는 그의 수행의 일부이다.)"
+      ],
+      "keywords": ["self-restraint", "abstinence"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "denial_5",
+      "definition": "[명사] 부정 발언, 부정 태도",
+      "examples": [
+        "His constant **denial** made trust impossible. (그의 끊임없는 **부정**은 신뢰를 불가능하게 했다.)"
+      ],
+      "keywords": ["disavowal", "negation"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:37:00Z"
+},
+
+"denounce": {
+  "word": "denounce",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "denounce_1",
+      "definition": "[동사] 비난하다, 규탄하다",
+      "examples": [
+        "They **denounced** the attack as inhumane. (그들은 그 공격을 **비인도적이라고 규탄했다**.)"
+      ],
+      "keywords": ["condemn", "criticize"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 1.0
+    },
+    {
+      "id": "denounce_2",
+      "definition": "[동사] 고발하다, 신고하다",
+      "examples": [
+        "He **denounced** his former allies to the police. (그는 경찰에 옛 동맹들을 **고발했다**.)"
+      ],
+      "keywords": ["inform on", "accuse"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "denounce_3",
+      "definition": "[동사] (공개적으로) 비판하다",
+      "examples": [
+        "The politician **denounced** corruption in the system. (그 정치인은 제도의 부패를 **공개 비판했다**.)"
+      ],
+      "keywords": ["attack", "rebuke"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "denounce_4",
+      "definition": "[동사] (조약 등을) 파기 선언하다",
+      "examples": [
+        "The country **denounced** the peace agreement. (그 나라는 평화 협정을 **파기했다**.)"
+      ],
+      "keywords": ["revoke", "withdraw"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "denounce_5",
+      "definition": "[동사] (도덕적) 비난을 표하다",
+      "examples": [
+        "Church leaders **denounced** violence. (교회 지도자들이 폭력을 **비난했다**.)"
+      ],
+      "keywords": ["blame", "decry"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:37:00Z"
+},
+
+"density": {
+  "word": "density",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "density_1",
+      "definition": "[명사] 밀도, 농도",
+      "examples": [
+        "The **density** of the liquid increases with cold. (액체의 **밀도**는 온도가 내려갈수록 증가한다.)"
+      ],
+      "keywords": ["thickness", "concentration"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "density_2",
+      "definition": "[명사] 인구 밀도",
+      "examples": [
+        "Tokyo has a high population **density**. (도쿄는 인구 **밀도가 높다**.)"
+      ],
+      "keywords": ["crowdedness", "compactness"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "density_3",
+      "definition": "[명사] 정보량, 복잡성",
+      "examples": [
+        "The **density** of information makes it hard to read. (정보의 **복잡성** 때문에 읽기 어렵다.)"
+      ],
+      "keywords": ["complexity", "richness"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "density_4",
+      "definition": "[명사] 어두움, 탁함 (시각적)",
+      "examples": [
+        "The photo’s color **density** is too high. (사진의 색상 **농도**가 너무 높다.)"
+      ],
+      "keywords": ["darkness", "opacity"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "density_5",
+      "definition": "[명사] 둔함, 이해력 부족 (비유)",
+      "examples": [
+        "His **density** in math surprised his teacher. (수학에 대한 그의 **둔함**이 선생님을 놀라게 했다.)"
+      ],
+      "keywords": ["dullness", "slowness"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-07T06:37:00Z"
+},
+
+"dentist": {
+  "word": "dentist",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "dentist_1",
+      "definition": "[명사] 치과의사",
+      "examples": [
+        "I have an appointment with my **dentist** tomorrow. (내일 **치과의사**와 예약이 있다.)"
+      ],
+      "keywords": ["dental doctor", "orthodontist"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "dentist_2",
+      "definition": "[명사] 치아 관리 전문가",
+      "examples": [
+        "The **dentist** cleaned my teeth. (**치과의사**가 내 이를 깨끗이 닦았다.)"
+      ],
+      "keywords": ["hygienist", "clinician"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dentist_3",
+      "definition": "[명사] 구강 질환 진단자",
+      "examples": [
+        "A **dentist** can detect early signs of decay. (**치과의사**는 충치의 초기 증상을 발견할 수 있다.)"
+      ],
+      "keywords": ["examiner", "specialist"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dentist_4",
+      "definition": "[명사] 교정·보철 전문의",
+      "examples": [
+        "My **dentist** recommended braces. (내 **치과의사**가 교정기를 추천했다.)"
+      ],
+      "keywords": ["orthodontist", "prosthodontist"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dentist_5",
+      "definition": "[명사] 비유적으로 세밀한 일을 하는 사람",
+      "examples": [
+        "He’s a financial **dentist**, fixing small issues precisely. (그는 작은 문제를 정밀하게 해결하는 **재정 전문가**다.)"
+      ],
+      "keywords": ["perfectionist", "fixer"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-07T06:37:00Z"
+},
+"depart": {
+  "word": "depart",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "depart_1",
+      "definition": "[동사] 출발하다, 떠나다",
+      "examples": [
+        "The train **departs** at 7 a.m. (그 기차는 오전 7시에 **출발한다**.)"
+      ],
+      "keywords": ["leave", "set off"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "depart_2",
+      "definition": "[동사] (규범·전통 등에서) 벗어나다",
+      "examples": [
+        "The movie **departs** from the original story. (그 영화는 원래 이야기에서 **벗어나 있다**.)"
+      ],
+      "keywords": ["deviate", "diverge"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "depart_3",
+      "definition": "[동사] 죽다 (격식)",
+      "examples": [
+        "He **departed** this life peacefully. (그는 평화롭게 **세상을 떠났다**.)"
+      ],
+      "keywords": ["pass away", "die"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    },
+    {
+      "id": "depart_4",
+      "definition": "[동사] 자리에서 떠나다, 사임하다",
+      "examples": [
+        "The CEO will **depart** next month. (CEO가 다음 달에 **사임한다**.)"
+      ],
+      "keywords": ["resign", "retire"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "depart_5",
+      "definition": "[동사] 이동하다, 나아가다 (비유)",
+      "examples": [
+        "Let’s **depart** from fear and move forward. (두려움에서 **벗어나 앞으로 나아가자**.)"
+      ],
+      "keywords": ["move on", "proceed"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:45:00Z"
+},
+
+"dependent": {
+  "word": "dependent",
+  "pos": ["adjective", "noun"],
+  "meanings": [
+    {
+      "id": "dependent_1",
+      "definition": "[형용사] 의존적인, 의지하는",
+      "examples": [
+        "Children are **dependent** on their parents. (아이들은 부모에게 **의존한다**.)"
+      ],
+      "keywords": ["reliant", "needy"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "dependent_2",
+      "definition": "[형용사] ~에 달려 있는, 좌우되는",
+      "examples": [
+        "Success is **dependent** on hard work. (성공은 노력에 **달려 있다**.)"
+      ],
+      "keywords": ["conditional", "determined by"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "dependent_3",
+      "definition": "[명사] 부양가족",
+      "examples": [
+        "He has two **dependents** to support. (그는 부양해야 할 **가족**이 두 명 있다.)"
+      ],
+      "keywords": ["family", "relative"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dependent_4",
+      "definition": "[형용사] 약물/알코올에 의존하는",
+      "examples": [
+        "He became **dependent** on alcohol. (그는 술에 **의존하게 되었다**.)"
+      ],
+      "keywords": ["addicted", "attached"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "dependent_5",
+      "definition": "[형용사] 종속된, 하위의",
+      "examples": [
+        "A colony is **dependent** on its empire. (식민지는 본국에 **종속되어 있다**.)"
+      ],
+      "keywords": ["subordinate", "controlled"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-07T06:45:00Z"
+},
+
+"depict": {
+  "word": "depict",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "depict_1",
+      "definition": "[동사] 묘사하다, 그리다",
+      "examples": [
+        "The painting **depicts** a peaceful village. (그 그림은 평화로운 마을을 **묘사한다**.)"
+      ],
+      "keywords": ["portray", "illustrate"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "depict_2",
+      "definition": "[동사] (글이나 영화에서) 표현하다",
+      "examples": [
+        "The movie **depicts** the struggles of immigrants. (그 영화는 이민자들의 고난을 **표현한다**.)"
+      ],
+      "keywords": ["represent", "describe"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "depict_3",
+      "definition": "[동사] (인물·감정을) 나타내다, 그리다",
+      "examples": [
+        "Her novel **depicts** deep human emotions. (그녀의 소설은 깊은 인간의 감정을 **그린다**.)"
+      ],
+      "keywords": ["express", "capture"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "depict_4",
+      "definition": "[동사] 사실적으로 보여주다",
+      "examples": [
+        "The film **depicts** war realistically. (그 영화는 전쟁을 사실적으로 **보여준다**.)"
+      ],
+      "keywords": ["show", "render"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "depict_5",
+      "definition": "[동사] 상징적으로 표현하다",
+      "examples": [
+        "The statue **depicts** freedom. (그 조각상은 **자유를 상징한다**.)"
+      ],
+      "keywords": ["symbolize", "embody"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:45:00Z"
+},
+
+"deploy": {
+  "word": "deploy",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "deploy_1",
+      "definition": "[동사] (군대·무기 등을) 배치하다",
+      "examples": [
+        "Troops were **deployed** along the border. (군대가 국경에 **배치되었다**.)"
+      ],
+      "keywords": ["position", "station"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 1.0
+    },
+    {
+      "id": "deploy_2",
+      "definition": "[동사] (자원·기술을) 활용하다, 투입하다",
+      "examples": [
+        "The company **deployed** AI to improve service. (그 회사는 서비스를 개선하기 위해 AI를 **투입했다**.)"
+      ],
+      "keywords": ["utilize", "use"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.95
+    },
+    {
+      "id": "deploy_3",
+      "definition": "[동사] 전략적으로 배치하다",
+      "examples": [
+        "We need to **deploy** our staff efficiently. (우리는 직원을 효율적으로 **배치할 필요가 있다**.)"
+      ],
+      "keywords": ["organize", "distribute"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "deploy_4",
+      "definition": "[동사] (비유적으로) 발휘하다, 동원하다",
+      "examples": [
+        "He **deployed** his charm to win support. (그는 지지를 얻기 위해 매력을 **발휘했다**.)"
+      ],
+      "keywords": ["exercise", "apply"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "deploy_5",
+      "definition": "[동사] 배열하다, 펼치다",
+      "examples": [
+        "Parachutes were **deployed** during the jump. (낙하 중 낙하산이 **펼쳐졌다**.)"
+      ],
+      "keywords": ["spread", "open"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:45:00Z"
+},
+
+"deployment": {
+  "word": "deployment",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "deployment_1",
+      "definition": "[명사] (군대·자원의) 배치, 전개",
+      "examples": [
+        "The **deployment** of troops took three days. (군대의 **배치**에 3일이 걸렸다.)"
+      ],
+      "keywords": ["positioning", "arrangement"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 1.0
+    },
+    {
+      "id": "deployment_2",
+      "definition": "[명사] (기술·전략의) 활용, 적용",
+      "examples": [
+        "The **deployment** of 5G is expanding rapidly. (5G의 **도입**이 빠르게 확산되고 있다.)"
+      ],
+      "keywords": ["implementation", "use"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.95
+    },
+    {
+      "id": "deployment_3",
+      "definition": "[명사] (인력·장비 등의) 효율적 운용",
+      "examples": [
+        "Effective **deployment** of resources saves time. (자원의 효율적인 **운용**은 시간을 절약한다.)"
+      ],
+      "keywords": ["distribution", "management"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "deployment_4",
+      "definition": "[명사] 전개, 확대 (비유)",
+      "examples": [
+        "The **deployment** of new policies began this year. (새 정책의 **전개**가 올해 시작되었다.)"
+      ],
+      "keywords": ["expansion", "execution"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deployment_5",
+      "definition": "[명사] 진열, 배열",
+      "examples": [
+        "The **deployment** of exhibits impressed visitors. (전시물의 **배열**이 방문객들을 감탄시켰다.)"
+      ],
+      "keywords": ["display", "layout"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:45:00Z"
+},
+"deposit": {
+  "word": "deposit",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "deposit_1",
+      "definition": "[명사] 예금, 예치금",
+      "examples": [
+        "I made a **deposit** of $500 in my bank account. (나는 은행 계좌에 500달러를 **예금했다**.)"
+      ],
+      "keywords": ["saving", "payment"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "deposit_2",
+      "definition": "[명사] 보증금, 계약금",
+      "examples": [
+        "We paid a **deposit** for the apartment. (우리는 아파트 **보증금**을 냈다.)"
+      ],
+      "keywords": ["down payment", "pledge"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "deposit_3",
+      "definition": "[동사] 두다, 놓다",
+      "examples": [
+        "She **deposited** her bag on the table. (그녀는 가방을 탁자 위에 **놓았다**.)"
+      ],
+      "keywords": ["place", "set down"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "deposit_4",
+      "definition": "[명사] 침전물, 퇴적물",
+      "examples": [
+        "The river left sand **deposits** along its banks. (강이 강둑에 모래 **퇴적물**을 남겼다.)"
+      ],
+      "keywords": ["sediment", "layer"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deposit_5",
+      "definition": "[동사] (돈을) 맡기다, 예치하다",
+      "examples": [
+        "You can **deposit** money through the ATM. (ATM을 통해 돈을 **예치할 수 있다**.)"
+      ],
+      "keywords": ["bank", "store"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:52:00Z"
+},
+
+"depression": {
+  "word": "depression",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "depression_1",
+      "definition": "[명사] 우울증",
+      "examples": [
+        "She was diagnosed with **depression**. (그녀는 **우울증** 진단을 받았다.)"
+      ],
+      "keywords": ["melancholy", "mental illness"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "depression_2",
+      "definition": "[명사] 불황, 경기 침체",
+      "examples": [
+        "The country suffered from a severe economic **depression**. (그 나라는 심각한 경제 **불황**을 겪었다.)"
+      ],
+      "keywords": ["recession", "downturn"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "depression_3",
+      "definition": "[명사] 저기압 (기상)",
+      "examples": [
+        "A tropical **depression** is moving toward the coast. (열대 **저기압**이 해안으로 이동 중이다.)"
+      ],
+      "keywords": ["low pressure", "storm system"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "depression_4",
+      "definition": "[명사] 움푹 들어간 곳, 함몰부",
+      "examples": [
+        "There was a small **depression** in the ground. (땅에 작은 **움푹한 곳**이 있었다.)"
+      ],
+      "keywords": ["dent", "hollow"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "depression_5",
+      "definition": "[명사] 침체, 의기소침 (비유)",
+      "examples": [
+        "After losing his job, he fell into a **depression**. (직장을 잃은 후 그는 **의기소침해졌다**.)"
+      ],
+      "keywords": ["sadness", "discouragement"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:52:00Z"
+},
+
+"deprive": {
+  "word": "deprive",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "deprive_1",
+      "definition": "[동사] (사람에게서) 빼앗다, 박탈하다",
+      "examples": [
+        "The new law **deprives** citizens of their rights. (새 법은 시민들의 권리를 **박탈한다**.)"
+      ],
+      "keywords": ["take away", "strip"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 1.0
+    },
+    {
+      "id": "deprive_2",
+      "definition": "[동사] (기회를) 주지 않다, 제한하다",
+      "examples": [
+        "He was **deprived** of the chance to explain. (그는 설명할 기회를 **빼앗겼다**.)"
+      ],
+      "keywords": ["deny", "prevent"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.95
+    },
+    {
+      "id": "deprive_3",
+      "definition": "[동사] (잠, 음식 등을) 못하게 하다",
+      "examples": [
+        "The noise **deprived** me of sleep. (소음 때문에 잠을 **못 잤다**.)"
+      ],
+      "keywords": ["rob", "remove"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deprive_4",
+      "definition": "[동사] (감정, 희망 등을) 빼앗다",
+      "examples": [
+        "War **deprives** people of hope. (전쟁은 사람들에게서 **희망을 빼앗는다**.)"
+      ],
+      "keywords": ["destroy", "take away"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "deprive_5",
+      "definition": "[동사] (직위나 자격을) 박탈하다",
+      "examples": [
+        "He was **deprived** of his title. (그는 **직함을 박탈당했다**.)"
+      ],
+      "keywords": ["dismiss", "remove"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:52:00Z"
+},
+
+"depth": {
+  "word": "depth",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "depth_1",
+      "definition": "[명사] 깊이, 심도",
+      "examples": [
+        "The river’s **depth** reaches 20 meters. (그 강의 **깊이**는 20미터에 이른다.)"
+      ],
+      "keywords": ["deepness", "distance downward"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "depth_2",
+      "definition": "[명사] (감정·사고의) 깊이",
+      "examples": [
+        "Her **depth** of understanding impressed everyone. (그녀의 **깊은 이해력**은 모두를 감동시켰다.)"
+      ],
+      "keywords": ["insight", "wisdom"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "depth_3",
+      "definition": "[명사] 심도, 농도 (색·소리 등)",
+      "examples": [
+        "The painting’s color **depth** is amazing. (그 그림의 색상 **심도**가 놀랍다.)"
+      ],
+      "keywords": ["intensity", "richness"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "depth_4",
+      "definition": "[명사] (지식의) 폭넓음, 세밀함",
+      "examples": [
+        "The book shows great **depth** of research. (그 책은 연구의 **깊이**를 보여준다.)"
+      ],
+      "keywords": ["thoroughness", "detail"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "depth_5",
+      "definition": "[명사] (비유) 최악의 상태, 극단",
+      "examples": [
+        "He was in the **depths** of despair. (그는 **절망의 나락**에 있었다.)"
+      ],
+      "keywords": ["bottom", "lowest point"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T06:52:00Z"
+},
+
+"deputy": {
+  "word": "deputy",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "deputy_1",
+      "definition": "[명사] 부관, 대리인",
+      "examples": [
+        "The **deputy** managed the office in the director’s absence. (이사는 부재 중이어서 **부관**이 사무실을 관리했다.)"
+      ],
+      "keywords": ["assistant", "representative"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "deputy_2",
+      "definition": "[명사] 부회장, 부사장 등 (직함)",
+      "examples": [
+        "She was appointed **Deputy** Minister of Education. (그녀는 **교육부 차관**으로 임명되었다.)"
+      ],
+      "keywords": ["vice", "associate"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "deputy_3",
+      "definition": "[명사] 보안관보 (미국)",
+      "examples": [
+        "The **deputy** arrested the suspect. (**보안관보**가 용의자를 체포했다.)"
+      ],
+      "keywords": ["sheriff", "officer"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "deputy_4",
+      "definition": "[명사] 국회의원, 대리 대표 (일부 국가)",
+      "examples": [
+        "A **deputy** in Parliament raised the issue. (의회 **의원**이 그 문제를 제기했다.)"
+      ],
+      "keywords": ["legislator", "member"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deputy_5",
+      "definition": "[명사] 임시 대행, 대신하는 사람",
+      "examples": [
+        "He acted as **deputy** while the boss was away. (상사가 없는 동안 그는 **대행 역할**을 했다.)"
+      ],
+      "keywords": ["stand-in", "substitute"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T06:52:00Z"
+},
+"descent": {
+  "word": "descent",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "descent_1",
+      "definition": "[명사] 하강, 내려감",
+      "examples": [
+        "The plane began its **descent** toward the airport. (비행기가 공항을 향해 **하강하기 시작했다**.)"
+      ],
+      "keywords": ["decline", "drop"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "descent_2",
+      "definition": "[명사] 혈통, 가문",
+      "examples": [
+        "She is of royal **descent**. (그녀는 **왕족 혈통**이다.)"
+      ],
+      "keywords": ["ancestry", "origin"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.95
+    },
+    {
+      "id": "descent_3",
+      "definition": "[명사] 하락, 쇠퇴 (비유)",
+      "examples": [
+        "The company’s **descent** into bankruptcy was sudden. (그 회사의 **파산으로의 추락**은 갑작스러웠다.)"
+      ],
+      "keywords": ["decline", "fall"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "descent_4",
+      "definition": "[명사] 내려가는 길, 경사",
+      "examples": [
+        "The hikers walked carefully down a steep **descent**. (등산객들이 가파른 **내리막길**을 조심히 내려갔다.)"
+      ],
+      "keywords": ["slope", "incline"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "descent_5",
+      "definition": "[명사] 급습, 습격",
+      "examples": [
+        "The police made a sudden **descent** on the house. (경찰이 그 집에 **급습을 감행했다**.)"
+      ],
+      "keywords": ["raid", "attack"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:00:00Z"
+},
+
+"design": {
+  "word": "design",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "design_1",
+      "definition": "[명사] 디자인, 설계",
+      "examples": [
+        "The **design** of this chair is modern and simple. (이 의자의 **디자인**은 현대적이고 단순하다.)"
+      ],
+      "keywords": ["style", "structure"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "design_2",
+      "definition": "[동사] 설계하다, 고안하다",
+      "examples": [
+        "She **designed** a new logo for the company. (그녀는 회사를 위한 새 로고를 **디자인했다**.)"
+      ],
+      "keywords": ["create", "develop"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "design_3",
+      "definition": "[명사] 계획, 의도",
+      "examples": [
+        "It was part of a secret **design**. (그것은 비밀 **계획**의 일부였다.)"
+      ],
+      "keywords": ["plan", "scheme"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "design_4",
+      "definition": "[명사] 무늬, 도안",
+      "examples": [
+        "The fabric has a floral **design**. (그 천에는 꽃무늬 **도안**이 있다.)"
+      ],
+      "keywords": ["pattern", "motif"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "design_5",
+      "definition": "[동사] (비유) 의도하다, 목적을 두다",
+      "examples": [
+        "The law was **designed** to protect consumers. (그 법은 소비자를 보호하도록 **고안되었다**.)"
+      ],
+      "keywords": ["intend", "aim"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:00:00Z"
+},
+
+"designate": {
+  "word": "designate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "designate_1",
+      "definition": "[동사] 지정하다, 지명하다",
+      "examples": [
+        "He was **designated** as the new team leader. (그는 새로운 팀장으로 **지명되었다**.)"
+      ],
+      "keywords": ["appoint", "assign"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 1.0
+    },
+    {
+      "id": "designate_2",
+      "definition": "[동사] 표시하다, 나타내다",
+      "examples": [
+        "The red line **designates** the danger zone. (빨간 선이 위험 구역을 **표시한다**.)"
+      ],
+      "keywords": ["mark", "indicate"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "designate_3",
+      "definition": "[동사] 명명하다, 부르다",
+      "examples": [
+        "This area was **designated** a national park. (이 지역은 국립공원으로 **지정되었다**.)"
+      ],
+      "keywords": ["name", "declare"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "designate_4",
+      "definition": "[형용사] 지명된, 임명된",
+      "examples": [
+        "She is the president-**designate**. (그녀는 **차기 대통령**이다.)"
+      ],
+      "keywords": ["appointed", "nominated"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "designate_5",
+      "definition": "[동사] 특정 목적을 위해 정하다",
+      "examples": [
+        "Funds were **designated** for research. (자금이 연구 용도로 **배정되었다**.)"
+      ],
+      "keywords": ["allocate", "dedicate"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:00:00Z"
+},
+
+"designer": {
+  "word": "designer",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "designer_1",
+      "definition": "[명사] 디자이너, 설계자",
+      "examples": [
+        "She’s a fashion **designer** in Paris. (그녀는 파리의 패션 **디자이너**다.)"
+      ],
+      "keywords": ["creator", "artist"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "designer_2",
+      "definition": "[명사] 설계 전문가, 고안자",
+      "examples": [
+        "The **designer** created a new car model. (**설계자**가 새로운 자동차 모델을 만들었다.)"
+      ],
+      "keywords": ["architect", "planner"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "designer_3",
+      "definition": "[형용사] 고급의, 명품의",
+      "examples": [
+        "He wore a **designer** suit to the event. (그는 행사에 **명품 정장**을 입었다.)"
+      ],
+      "keywords": ["luxury", "branded"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "designer_4",
+      "definition": "[명사] 창의적인 설계자 (비유)",
+      "examples": [
+        "Nature is the ultimate **designer**. (자연은 궁극적인 **설계자**다.)"
+      ],
+      "keywords": ["creator", "inventor"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "designer_5",
+      "definition": "[명사] 그래픽/인테리어 분야 전문가",
+      "examples": [
+        "The **designer** worked on the app’s interface. (**디자이너**가 앱 인터페이스를 작업했다.)"
+      ],
+      "keywords": ["visual artist", "developer"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:00:00Z"
+},
+
+"desirable": {
+  "word": "desirable",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "desirable_1",
+      "definition": "[형용사] 바람직한, 원하는",
+      "examples": [
+        "It’s **desirable** to exercise regularly. (정기적으로 운동하는 것이 **바람직하다**.)"
+      ],
+      "keywords": ["ideal", "recommended"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "desirable_2",
+      "definition": "[형용사] 매력적인, 호감 가는",
+      "examples": [
+        "He’s a very **desirable** partner. (그는 매우 **매력적인** 배우자감이다.)"
+      ],
+      "keywords": ["attractive", "appealing"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "desirable_3",
+      "definition": "[형용사] 이로운, 유익한",
+      "examples": [
+        "A calm attitude is **desirable** in this situation. (이 상황에서는 차분한 태도가 **이롭다**.)"
+      ],
+      "keywords": ["beneficial", "advantageous"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "desirable_4",
+      "definition": "[형용사] 가치 있는, 소유할 만한",
+      "examples": [
+        "This car is one of the most **desirable** models. (이 자동차는 가장 **인기 있는** 모델 중 하나다.)"
+      ],
+      "keywords": ["valuable", "coveted"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "desirable_5",
+      "definition": "[형용사] 사회적으로 바람직한",
+      "examples": [
+        "Fair treatment is a **desirable** social goal. (공정한 대우는 **사회적으로 바람직한** 목표다.)"
+      ],
+      "keywords": ["ethical", "positive"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:00:00Z"
+},
+"desk": {
+  "word": "desk",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "desk_1",
+      "definition": "[명사] 책상",
+      "examples": [
+        "She is studying at her **desk**. (그녀는 **책상**에서 공부하고 있다.)"
+      ],
+      "keywords": ["table", "workstation"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "desk_2",
+      "definition": "[명사] 사무실 부서, 데스크",
+      "examples": [
+        "Please contact the help **desk** for support. (지원이 필요하면 **고객센터 데스크**에 문의하세요.)"
+      ],
+      "keywords": ["counter", "office"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "desk_3",
+      "definition": "[명사] (신문·방송의) 편집부, 담당부서",
+      "examples": [
+        "She works at the foreign news **desk**. (그녀는 해외 뉴스 **부서**에서 일한다.)"
+      ],
+      "keywords": ["department", "section"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "desk_4",
+      "definition": "[명사] 안내대, 접수처",
+      "examples": [
+        "Ask for directions at the reception **desk**. (안내는 **접수대**에서 문의하세요.)"
+      ],
+      "keywords": ["front", "information"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "desk_5",
+      "definition": "[명사] 직위, 자리",
+      "examples": [
+        "He has been at that **desk** for ten years. (그는 그 **자리**에서 10년째 근무 중이다.)"
+      ],
+      "keywords": ["position", "post"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:07:00Z"
+},
+
+"desktop": {
+  "word": "desktop",
+  "pos": ["noun", "adjective"],
+  "meanings": [
+    {
+      "id": "desktop_1",
+      "definition": "[명사] 데스크탑 컴퓨터",
+      "examples": [
+        "I use a **desktop** for video editing. (나는 영상 편집에 **데스크탑**을 사용한다.)"
+      ],
+      "keywords": ["PC", "computer"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "desktop_2",
+      "definition": "[명사] (컴퓨터 화면의) 바탕화면",
+      "examples": [
+        "He saved the file on the **desktop**. (그는 파일을 **바탕화면**에 저장했다.)"
+      ],
+      "keywords": ["screen", "interface"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "desktop_3",
+      "definition": "[형용사] 책상 위에서 쓰는, 소형의",
+      "examples": [
+        "A **desktop** printer is more convenient for small offices. (**소형 프린터**는 작은 사무실에 더 편리하다.)"
+      ],
+      "keywords": ["tabletop", "compact"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "desktop_4",
+      "definition": "[형용사] 데스크탑용 소프트웨어의",
+      "examples": [
+        "This is a **desktop** version of the app. (이것은 앱의 **데스크탑 버전**이다.)"
+      ],
+      "keywords": ["PC-based", "offline"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "desktop_5",
+      "definition": "[명사] 책상 표면, 작업 공간",
+      "examples": [
+        "The **desktop** was cluttered with papers. (**책상 위**가 서류로 어질러져 있었다.)"
+      ],
+      "keywords": ["workspace", "surface"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:07:00Z"
+},
+
+"desperately": {
+  "word": "desperately",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "desperately_1",
+      "definition": "[부사] 절박하게, 필사적으로",
+      "examples": [
+        "He **desperately** tried to find a solution. (그는 해결책을 **필사적으로** 찾으려 했다.)"
+      ],
+      "keywords": ["urgently", "frantically"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "desperately_2",
+      "definition": "[부사] 몹시, 너무나",
+      "examples": [
+        "She **desperately** needs some rest. (그녀는 **몹시** 휴식이 필요하다.)"
+      ],
+      "keywords": ["badly", "greatly"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "desperately_3",
+      "definition": "[부사] 간절히, 절실히",
+      "examples": [
+        "He looked **desperately** for hope. (그는 희망을 **간절히** 찾았다.)"
+      ],
+      "keywords": ["earnestly", "intensely"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "desperately_4",
+      "definition": "[부사] 무모하게, 절망적으로",
+      "examples": [
+        "She **desperately** clung to the last chance. (그녀는 마지막 기회에 **절망적으로 매달렸다**.)"
+      ],
+      "keywords": ["hopelessly", "recklessly"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "desperately_5",
+      "definition": "[부사] (상황이) 매우 나쁘게, 위험하게",
+      "examples": [
+        "The team is **desperately** short of funds. (그 팀은 자금이 **심각하게 부족하다**.)"
+      ],
+      "keywords": ["critically", "severely"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:07:00Z"
+},
+
+"destructive": {
+  "word": "destructive",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "destructive_1",
+      "definition": "[형용사] 파괴적인, 해로운",
+      "examples": [
+        "The earthquake was highly **destructive**. (그 지진은 매우 **파괴적이었다**.)"
+      ],
+      "keywords": ["devastating", "ruinous"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "destructive_2",
+      "definition": "[형용사] 파괴력을 가진 (물리적)",
+      "examples": [
+        "The bomb has a **destructive** force. (그 폭탄은 강한 **파괴력**을 가지고 있다.)"
+      ],
+      "keywords": ["explosive", "damaging"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "destructive_3",
+      "definition": "[형용사] 비판적이고 해로운 (비유)",
+      "examples": [
+        "His **destructive** comments hurt the team. (그의 **비판적인 말**이 팀을 상처 입혔다.)"
+      ],
+      "keywords": ["harmful", "negative"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "destructive_4",
+      "definition": "[형용사] 자기파괴적인, 자멸적인",
+      "examples": [
+        "He has **destructive** habits like drinking too much. (그는 과음 같은 **자멸적 습관**을 가지고 있다.)"
+      ],
+      "keywords": ["self-harming", "ruinous"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "destructive_5",
+      "definition": "[형용사] 비생산적인, 발전을 막는",
+      "examples": [
+        "Conflict can be **destructive** to progress. (갈등은 발전에 **해로울 수 있다**.)"
+      ],
+      "keywords": ["counterproductive", "obstructive"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:07:00Z"
+},
+
+"detain": {
+  "word": "detain",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "detain_1",
+      "definition": "[동사] 구금하다, 억류하다",
+      "examples": [
+        "The police **detained** the suspect for questioning. (경찰이 용의자를 심문을 위해 **구금했다**.)"
+      ],
+      "keywords": ["arrest", "hold"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 1.0
+    },
+    {
+      "id": "detain_2",
+      "definition": "[동사] 지체하게 하다, 붙잡다",
+      "examples": [
+        "Sorry to **detain** you so long. (너무 오래 **붙잡아둬서** 미안해요.)"
+      ],
+      "keywords": ["delay", "keep"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "detain_3",
+      "definition": "[동사] 억류하다 (공항·항구 등에서)",
+      "examples": [
+        "He was **detained** at customs. (그는 세관에서 **억류되었다**.)"
+      ],
+      "keywords": ["confine", "stop"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "detain_4",
+      "definition": "[동사] 병원에 입원시키다 (법적 구속으로)",
+      "examples": [
+        "The patient was **detained** for psychiatric evaluation. (그 환자는 정신과 평가를 위해 **입원 조치되었다**.)"
+      ],
+      "keywords": ["commit", "admit"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "detain_5",
+      "definition": "[동사] (비유) 마음을 붙잡다, 사로잡다",
+      "examples": [
+        "The topic **detained** my attention for hours. (그 주제가 몇 시간 동안 내 **관심을 붙잡았다**.)"
+      ],
+      "keywords": ["engage", "absorb"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:07:00Z"
+},
+"detection": {
+  "word": "detection",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "detection_1",
+      "definition": "[명사] 발견, 탐지",
+      "examples": [
+        "Early **detection** of the disease can save lives. (질병의 조기 **발견**은 생명을 구할 수 있다.)"
+      ],
+      "keywords": ["discovery", "identification"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "detection_2",
+      "definition": "[명사] 감지, 탐지 기술",
+      "examples": [
+        "The system improves motion **detection** accuracy. (그 시스템은 움직임 **감지 정확도**를 향상시킨다.)"
+      ],
+      "keywords": ["sensing", "recognition"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "detection_3",
+      "definition": "[명사] 적발, 포착",
+      "examples": [
+        "The camera allows **detection** of hidden objects. (그 카메라는 숨겨진 물체의 **포착**을 가능하게 한다.)"
+      ],
+      "keywords": ["exposure", "catching"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "detection_4",
+      "definition": "[명사] 범죄의 수사, 탐정 활동",
+      "examples": [
+        "Modern **detection** methods rely on DNA testing. (현대의 **수사 기술**은 DNA 검사에 의존한다.)"
+      ],
+      "keywords": ["investigation", "analysis"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "detection_5",
+      "definition": "[명사] 감지 능력, 인식력",
+      "examples": [
+        "Her **detection** of lies was impressive. (그녀의 **거짓말 감지 능력**은 인상적이었다.)"
+      ],
+      "keywords": ["awareness", "perception"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:14:00Z"
+},
+
+"detective": {
+  "word": "detective",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "detective_1",
+      "definition": "[명사] 형사, 탐정",
+      "examples": [
+        "The **detective** solved the case in two days. (**형사**는 이틀 만에 사건을 해결했다.)"
+      ],
+      "keywords": ["investigator", "inspector"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "detective_2",
+      "definition": "[명사] 사립탐정",
+      "examples": [
+        "She hired a private **detective** to find her cat. (그녀는 고양이를 찾기 위해 **사립탐정**을 고용했다.)"
+      ],
+      "keywords": ["sleuth", "private eye"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "detective_3",
+      "definition": "[형용사] 탐정물의, 수사에 관한",
+      "examples": [
+        "He enjoys reading **detective** novels. (그는 **탐정 소설** 읽는 것을 즐긴다.)"
+      ],
+      "keywords": ["crime", "mystery"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "detective_4",
+      "definition": "[명사] 조사관, 감찰관 (비유)",
+      "examples": [
+        "The journalist acted like a **detective**. (그 기자는 **탐정처럼** 행동했다.)"
+      ],
+      "keywords": ["examiner", "analyzer"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "detective_5",
+      "definition": "[명사] 수사 전문가, 분석가 (비유)",
+      "examples": [
+        "Data **detectives** uncover digital fraud. (데이터 **분석가들**이 디지털 사기를 밝혀낸다.)"
+      ],
+      "keywords": ["analyst", "specialist"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:14:00Z"
+},
+
+"detention": {
+  "word": "detention",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "detention_1",
+      "definition": "[명사] 구금, 감금",
+      "examples": [
+        "He was held in **detention** for two nights. (그는 이틀 동안 **구금**되었다.)"
+      ],
+      "keywords": ["custody", "imprisonment"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "detention_2",
+      "definition": "[명사] 방과 후 남게 하기 (학교 벌칙)",
+      "examples": [
+        "The teacher gave him **detention** for being late. (선생님은 그에게 지각했다고 **방과 후 남기기** 벌을 줬다.)"
+      ],
+      "keywords": ["punishment", "discipline"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "detention_3",
+      "definition": "[명사] 억류, 구류",
+      "examples": [
+        "Several protesters are still in **detention**. (시위자 몇 명이 아직 **억류 중**이다.)"
+      ],
+      "keywords": ["arrest", "holding"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "detention_4",
+      "definition": "[명사] 지체, 체류",
+      "examples": [
+        "Bad weather caused the **detention** of the flight. (악천후로 인해 비행기가 **지연되었다**.)"
+      ],
+      "keywords": ["delay", "hold-up"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "detention_5",
+      "definition": "[명사] 정신적 억압, 구속 (비유)",
+      "examples": [
+        "He lived in a **detention** of fear and anxiety. (그는 두려움과 불안의 **구속 속에** 살았다.)"
+      ],
+      "keywords": ["restraint", "bondage"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-07T07:14:00Z"
+},
+
+"deteriorate": {
+  "word": "deteriorate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "deteriorate_1",
+      "definition": "[동사] 악화되다, 나빠지다",
+      "examples": [
+        "His health began to **deteriorate**. (그의 건강이 **악화되기 시작했다**.)"
+      ],
+      "keywords": ["worsen", "decline"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "deteriorate_2",
+      "definition": "[동사] 품질이 저하되다",
+      "examples": [
+        "Food **deteriorates** quickly in hot weather. (더운 날씨에 음식이 빨리 **상한다**.)"
+      ],
+      "keywords": ["spoil", "decay"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "deteriorate_3",
+      "definition": "[동사] 관계가 나빠지다",
+      "examples": [
+        "Relations between the two countries have **deteriorated**. (두 나라 관계가 **악화되었다**.)"
+      ],
+      "keywords": ["break down", "weaken"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "deteriorate_4",
+      "definition": "[동사] 정신적·감정적으로 약화되다",
+      "examples": [
+        "His mental state **deteriorated** under stress. (그의 정신 상태가 스트레스로 **나빠졌다**.)"
+      ],
+      "keywords": ["decline", "degenerate"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "deteriorate_5",
+      "definition": "[동사] 경제적·사회적으로 하락하다",
+      "examples": [
+        "The situation **deteriorated** into chaos. (상황이 **혼란으로 악화되었다**.)"
+      ],
+      "keywords": ["collapse", "degenerate"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:14:00Z"
+},
+
+"determination": {
+  "word": "determination",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "determination_1",
+      "definition": "[명사] 결심, 의지",
+      "examples": [
+        "Her **determination** helped her achieve success. (그녀의 **결심**이 성공을 이끌었다.)"
+      ],
+      "keywords": ["resolve", "willpower"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "determination_2",
+      "definition": "[명사] 결정, 판정",
+      "examples": [
+        "The court made a **determination** on the case. (법원이 사건에 대한 **결정을 내렸다**.)"
+      ],
+      "keywords": ["decision", "judgment"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "determination_3",
+      "definition": "[명사] 측정, 규정",
+      "examples": [
+        "Accurate **determination** of distance is crucial. (거리의 정확한 **측정**이 중요하다.)"
+      ],
+      "keywords": ["measurement", "estimation"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "determination_4",
+      "definition": "[명사] 단호함, 굳은 태도",
+      "examples": [
+        "There was **determination** in her eyes. (그녀의 눈에는 **단호함**이 있었다.)"
+      ],
+      "keywords": ["firmness", "persistence"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "determination_5",
+      "definition": "[명사] (화학·법률적) 판정, 확인",
+      "examples": [
+        "The **determination** of purity was done by testing. (**순도 판정**은 시험을 통해 이루어졌다.)"
+      ],
+      "keywords": ["verification", "analysis"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:14:00Z"
+},
+"devastate": {
+  "word": "devastate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "devastate_1",
+      "definition": "[동사] 완전히 파괴하다, 초토화시키다",
+      "examples": [
+        "The earthquake **devastated** the entire city. (지진이 도시 전체를 **초토화시켰다**.)"
+      ],
+      "keywords": ["destroy", "ruin"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "devastate_2",
+      "definition": "[동사] (사람에게) 큰 충격을 주다, 좌절시키다",
+      "examples": [
+        "The news of her death **devastated** him. (그녀의 죽음 소식은 그를 **큰 충격에 빠뜨렸다**.)"
+      ],
+      "keywords": ["shock", "upset"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "devastate_3",
+      "definition": "[동사] (감정적으로) 망연자실하게 만들다",
+      "examples": [
+        "He was **devastated** by the loss of his job. (그는 실직으로 **큰 상실감에 빠졌다**.)"
+      ],
+      "keywords": ["break down", "depress"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "devastate_4",
+      "definition": "[동사] 황폐하게 만들다",
+      "examples": [
+        "Floods **devastated** the farmlands. (홍수가 농지를 **황폐하게 만들었다**.)"
+      ],
+      "keywords": ["ravage", "damage"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "devastate_5",
+      "definition": "[동사] 완전히 무너뜨리다 (비유)",
+      "examples": [
+        "The scandal **devastated** the company’s reputation. (그 스캔들이 회사의 명성을 **완전히 무너뜨렸다**.)"
+      ],
+      "keywords": ["ruin", "cripple"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:21:00Z"
+},
+
+"development": {
+  "word": "development",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "development_1",
+      "definition": "[명사] 발전, 성장",
+      "examples": [
+        "Economic **development** is essential for national progress. (경제 **발전**은 국가 발전에 필수적이다.)"
+      ],
+      "keywords": ["progress", "growth"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "development_2",
+      "definition": "[명사] 개발, 건설",
+      "examples": [
+        "The city approved a new housing **development**. (도시는 새로운 주택 **개발**을 승인했다.)"
+      ],
+      "keywords": ["construction", "urban planning"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "development_3",
+      "definition": "[명사] 사건의 전개, 발전 과정",
+      "examples": [
+        "Recent **developments** suggest a breakthrough in peace talks. (최근의 **진전**은 평화 회담의 돌파구를 시사한다.)"
+      ],
+      "keywords": ["change", "advance"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "development_4",
+      "definition": "[명사] 신제품, 발명품",
+      "examples": [
+        "The latest **development** in AI is impressive. (AI의 최신 **개발 성과**는 인상적이다.)"
+      ],
+      "keywords": ["innovation", "creation"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "development_5",
+      "definition": "[명사] (사진의) 현상, 필름 인화",
+      "examples": [
+        "Film **development** takes about one hour. (필름 **현상**에는 약 한 시간이 걸린다.)"
+      ],
+      "keywords": ["processing", "printing"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-07T07:21:00Z"
+},
+
+"diagnose": {
+  "word": "diagnose",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "diagnose_1",
+      "definition": "[동사] 진단하다 (의학적으로)",
+      "examples": [
+        "The doctor **diagnosed** him with pneumonia. (의사는 그에게 폐렴이라고 **진단했다**.)"
+      ],
+      "keywords": ["identify", "analyze"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "diagnose_2",
+      "definition": "[동사] 문제의 원인을 규명하다",
+      "examples": [
+        "The technician **diagnosed** the computer failure. (기술자가 컴퓨터 고장의 원인을 **진단했다**.)"
+      ],
+      "keywords": ["analyze", "determine"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "diagnose_3",
+      "definition": "[동사] 병명을 판별하다",
+      "examples": [
+        "She was **diagnosed** as diabetic. (그녀는 당뇨병으로 **진단받았다**.)"
+      ],
+      "keywords": ["classify", "confirm"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "diagnose_4",
+      "definition": "[동사] (비유) 문제를 분석하다",
+      "examples": [
+        "Experts **diagnosed** the nation’s economic crisis. (전문가들이 국가의 경제 위기를 **분석했다**.)"
+      ],
+      "keywords": ["evaluate", "assess"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "diagnose_5",
+      "definition": "[동사] 원인을 밝혀내다, 알아내다",
+      "examples": [
+        "He **diagnosed** the source of the leak. (그는 누수의 원인을 **밝혀냈다**.)"
+      ],
+      "keywords": ["detect", "find"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:21:00Z"
+},
+
+"diagnosis": {
+  "word": "diagnosis",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "diagnosis_1",
+      "definition": "[명사] 진단 (의학)",
+      "examples": [
+        "The doctor made a quick **diagnosis**. (의사는 빠른 **진단**을 내렸다.)"
+      ],
+      "keywords": ["analysis", "determination"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "diagnosis_2",
+      "definition": "[명사] 병명, 질병 판정",
+      "examples": [
+        "His **diagnosis** was confirmed by another doctor. (그의 **병명**은 다른 의사에 의해 확인되었다.)"
+      ],
+      "keywords": ["identification", "verification"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "diagnosis_3",
+      "definition": "[명사] 문제 분석, 상황 평가 (비유)",
+      "examples": [
+        "The report offered a clear **diagnosis** of the issue. (그 보고서는 문제에 대한 명확한 **분석**을 제시했다.)"
+      ],
+      "keywords": ["evaluation", "review"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "diagnosis_4",
+      "definition": "[명사] 진단 결과, 소견서",
+      "examples": [
+        "She received the **diagnosis** yesterday. (그녀는 어제 **진단 결과**를 받았다.)"
+      ],
+      "keywords": ["finding", "result"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "diagnosis_5",
+      "definition": "[명사] (심리·사회적) 상태 평가",
+      "examples": [
+        "The psychiatrist provided a **diagnosis** of anxiety disorder. (정신과 의사가 불안 장애로 **진단했다**.)"
+      ],
+      "keywords": ["assessment", "judgment"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:21:00Z"
+},
+
+"diagram": {
+  "word": "diagram",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "diagram_1",
+      "definition": "[명사] 도표, 그림",
+      "examples": [
+        "The **diagram** shows how the machine works. (그 **도표**는 기계의 작동 원리를 보여준다.)"
+      ],
+      "keywords": ["chart", "illustration"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "diagram_2",
+      "definition": "[명사] 회로도, 설계도",
+      "examples": [
+        "Engineers studied the circuit **diagram**. (엔지니어들이 회로 **도면**을 검토했다.)"
+      ],
+      "keywords": ["blueprint", "layout"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "diagram_3",
+      "definition": "[동사] 도표로 나타내다",
+      "examples": [
+        "The process was **diagrammed** for clarity. (그 과정은 명확히 하기 위해 **도식화되었다**.)"
+      ],
+      "keywords": ["illustrate", "map out"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "diagram_4",
+      "definition": "[명사] 관계도, 개념도",
+      "examples": [
+        "This **diagram** explains the structure of the ecosystem. (이 **개념도**는 생태계의 구조를 설명한다.)"
+      ],
+      "keywords": ["schema", "model"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "diagram_5",
+      "definition": "[명사] 수학·과학용 도표",
+      "examples": [
+        "Students drew a **diagram** of the atom. (학생들은 원자의 **구조도**를 그렸다.)"
+      ],
+      "keywords": ["sketch", "representation"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:21:00Z"
+},
+"dialog": {
+  "word": "dialog",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "dialog_1",
+      "definition": "[명사] 대화, 대담",
+      "examples": [
+        "The two leaders started a peaceful **dialog**. (두 지도자가 평화로운 **대화**를 시작했다.)"
+      ],
+      "keywords": ["conversation", "discussion"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "dialog_2",
+      "definition": "[명사] 영화나 연극의 대사",
+      "examples": [
+        "The movie’s **dialog** was witty and natural. (그 영화의 **대사**는 재치 있고 자연스러웠다.)"
+      ],
+      "keywords": ["lines", "script"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dialog_3",
+      "definition": "[명사] 의견 교환, 협의",
+      "examples": [
+        "International **dialog** is essential for peace. (국제적 **대화**는 평화를 위해 필수적이다.)"
+      ],
+      "keywords": ["negotiation", "communication"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dialog_4",
+      "definition": "[명사] 컴퓨터 대화상자 (UI)",
+      "examples": [
+        "A **dialog** box appeared on the screen. (**대화상자**가 화면에 나타났다.)"
+      ],
+      "keywords": ["popup", "window"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "dialog_5",
+      "definition": "[명사] 철학적 대화, 문학적 대화",
+      "examples": [
+        "Plato’s works are written as **dialogs**. (플라톤의 저서는 **대화체**로 쓰여 있다.)"
+      ],
+      "keywords": ["philosophical talk", "exchange"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.8
+    }
+  ],
+  "updatedAt": "2025-11-07T07:27:00Z"
+},
+
+"diamond": {
+  "word": "diamond",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "diamond_1",
+      "definition": "[명사] 다이아몬드, 보석",
+      "examples": [
+        "She wore a beautiful **diamond** ring. (그녀는 아름다운 **다이아몬드 반지**를 끼고 있었다.)"
+      ],
+      "keywords": ["gem", "jewel"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "diamond_2",
+      "definition": "[명사] 다이아몬드 모양, 마름모",
+      "examples": [
+        "Cut the paper into a **diamond** shape. (종이를 **마름모** 모양으로 자르세요.)"
+      ],
+      "keywords": ["rhombus", "shape"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "diamond_3",
+      "definition": "[명사] 야구장 내야 구역",
+      "examples": [
+        "The players ran across the **diamond**. (선수들이 **내야**를 가로질러 달렸다.)"
+      ],
+      "keywords": ["field", "base path"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "diamond_4",
+      "definition": "[명사] 귀중한 것, 소중한 사람 (비유)",
+      "examples": [
+        "Her daughter is a real **diamond**. (그녀의 딸은 진짜 **보석 같은 존재**다.)"
+      ],
+      "keywords": ["treasure", "precious"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "diamond_5",
+      "definition": "[명사] 카드의 ♦(다이아몬드) 무늬",
+      "examples": [
+        "He played the **diamond** ace. (그는 **다이아몬드 에이스** 카드를 냈다.)"
+      ],
+      "keywords": ["suit", "card"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:27:00Z"
+},
+
+"diary": {
+  "word": "diary",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "diary_1",
+      "definition": "[명사] 일기, 일지",
+      "examples": [
+        "She writes in her **diary** every night. (그녀는 매일 밤 **일기를 쓴다**.)"
+      ],
+      "keywords": ["journal", "log"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "diary_2",
+      "definition": "[명사] 개인 기록장, 일정표",
+      "examples": [
+        "I noted the meeting in my **diary**. (나는 회의를 내 **일정표**에 적었다.)"
+      ],
+      "keywords": ["planner", "schedule book"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "diary_3",
+      "definition": "[명사] 일기 형식의 문학작품",
+      "examples": [
+        "The story is written as a **diary**. (그 이야기는 **일기 형식**으로 쓰였다.)"
+      ],
+      "keywords": ["memoir", "narrative"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "diary_4",
+      "definition": "[명사] 공식 기록, 업무 일지",
+      "examples": [
+        "The police kept a **diary** of the investigation. (경찰은 수사 **기록**을 남겼다.)"
+      ],
+      "keywords": ["logbook", "record"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "diary_5",
+      "definition": "[명사] 비밀스러운 개인 기록",
+      "examples": [
+        "He found his sister’s **diary** hidden under the bed. (그는 침대 밑에 숨겨진 여동생의 **일기장**을 발견했다.)"
+      ],
+      "keywords": ["private journal", "notebook"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:27:00Z"
+},
+
+"dictate": {
+  "word": "dictate",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "dictate_1",
+      "definition": "[동사] 받아쓰게 하다, 구술하다",
+      "examples": [
+        "The teacher **dictated** a paragraph to the students. (선생님이 학생들에게 한 단락을 **받아쓰게 했다**.)"
+      ],
+      "keywords": ["say aloud", "speak"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "dictate_2",
+      "definition": "[동사] 명령하다, 지시하다",
+      "examples": [
+        "Circumstances **dictated** his decision. (상황이 그의 결정을 **좌우했다**.)"
+      ],
+      "keywords": ["command", "determine"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "dictate_3",
+      "definition": "[명사] 지시, 명령",
+      "examples": [
+        "He acted according to the **dictates** of his conscience. (그는 양심의 **명령**에 따라 행동했다.)"
+      ],
+      "keywords": ["order", "rule"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "dictate_4",
+      "definition": "[동사] 영향을 미치다, 결정하다",
+      "examples": [
+        "Tradition often **dictates** social behavior. (전통은 종종 사회적 행동을 **결정한다**.)"
+      ],
+      "keywords": ["influence", "shape"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "dictate_5",
+      "definition": "[동사] 독재적으로 명령하다",
+      "examples": [
+        "He tried to **dictate** how others should live. (그는 다른 사람의 삶을 **지배하려 했다**.)"
+      ],
+      "keywords": ["impose", "order"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:27:00Z"
+},
+
+"dictator": {
+  "word": "dictator",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "dictator_1",
+      "definition": "[명사] 독재자",
+      "examples": [
+        "The **dictator** ruled the country with fear. (그 **독재자**는 공포로 나라를 통치했다.)"
+      ],
+      "keywords": ["tyrant", "autocrat"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "dictator_2",
+      "definition": "[명사] 권위적인 사람",
+      "examples": [
+        "He behaves like a **dictator** at work. (그는 직장에서 **독재자처럼** 행동한다.)"
+      ],
+      "keywords": ["bossy", "domineering"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dictator_3",
+      "definition": "[명사] 절대 권력을 가진 자 (비유)",
+      "examples": [
+        "Money became the new **dictator** of society. (돈이 사회의 새로운 **지배자**가 되었다.)"
+      ],
+      "keywords": ["ruler", "controller"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dictator_4",
+      "definition": "[명사] 명령을 내리는 사람",
+      "examples": [
+        "The coach was a **dictator** on the field. (그 코치는 경기장에서 **명령자**였다.)"
+      ],
+      "keywords": ["leader", "commander"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    },
+    {
+      "id": "dictator_5",
+      "definition": "[명사] 지배적인 존재 (비유)",
+      "examples": [
+        "Technology is the **dictator** of our time. (기술은 우리 시대의 **지배자**다.)"
+      ],
+      "keywords": ["force", "influence"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:27:00Z"
+},
+"die": {
+  "word": "die",
+  "pos": ["verb", "noun"],
+  "meanings": [
+    {
+      "id": "die_1",
+      "definition": "[동사] 죽다, 사망하다",
+      "examples": [
+        "Many people **died** in the war. (많은 사람들이 전쟁에서 **죽었다**.)"
+      ],
+      "keywords": ["pass away", "perish"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "die_2",
+      "definition": "[동사] (기계·불 등이) 꺼지다, 멈추다",
+      "examples": [
+        "The engine suddenly **died** on the road. (엔진이 도로 한가운데서 갑자기 **멈췄다**.)"
+      ],
+      "keywords": ["stop", "shut down"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "die_3",
+      "definition": "[동사] (감정·기억 등이) 사라지다, 희미해지다",
+      "examples": [
+        "Old traditions never completely **die**. (옛 전통은 완전히 **사라지지 않는다**.)"
+      ],
+      "keywords": ["fade", "disappear"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "die_4",
+      "definition": "[동사] (비유) 강렬히 원하다, ~하고 싶어 죽겠다",
+      "examples": [
+        "I’m **dying** to see that movie. (그 영화를 **너무 보고 싶다**.)"
+      ],
+      "keywords": ["long for", "crave"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "die_5",
+      "definition": "[명사] 주조틀, 금형 (기계 분야)",
+      "examples": [
+        "The metal was shaped using a **die**. (금속은 **주조틀**을 이용해 성형되었다.)"
+      ],
+      "keywords": ["mold", "press"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:33:00Z"
+},
+
+"diet": {
+  "word": "diet",
+  "pos": ["noun", "verb"],
+  "meanings": [
+    {
+      "id": "diet_1",
+      "definition": "[명사] 식단, 식이요법",
+      "examples": [
+        "She’s on a low-sugar **diet**. (그녀는 저당 **식단**을 따르고 있다.)"
+      ],
+      "keywords": ["meal plan", "nutrition"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "diet_2",
+      "definition": "[명사] 일상적인 식사, 음식 습관",
+      "examples": [
+        "A healthy **diet** is essential for good health. (건강한 **식습관**은 좋은 건강에 필수적이다.)"
+      ],
+      "keywords": ["eating habit", "food intake"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "diet_3",
+      "definition": "[동사] 다이어트를 하다",
+      "examples": [
+        "He’s **dieting** to lose weight. (그는 체중을 줄이기 위해 **다이어트 중이다**.)"
+      ],
+      "keywords": ["slim", "reduce weight"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "diet_4",
+      "definition": "[명사] (정기적으로 열리는) 의회, 회의",
+      "examples": [
+        "Japan’s parliament is called the National **Diet**. (일본의 국회는 ‘국회(**Diet**)’라 불린다.)"
+      ],
+      "keywords": ["assembly", "congress"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "diet_5",
+      "definition": "[명사] (비유) 지속적으로 섭취하는 것",
+      "examples": [
+        "He consumes a **diet** of news every morning. (그는 매일 아침 뉴스로 **하루를 시작한다**.)"
+      ],
+      "keywords": ["dose", "stream"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:33:00Z"
+},
+
+"differ": {
+  "word": "differ",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "differ_1",
+      "definition": "[동사] 다르다, 차이가 나다",
+      "examples": [
+        "Opinions **differ** from person to person. (사람마다 의견이 **다르다**.)"
+      ],
+      "keywords": ["vary", "diverge"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "differ_2",
+      "definition": "[동사] (의견이) 일치하지 않다",
+      "examples": [
+        "I **differ** with you on this issue. (이 문제에 대해서는 당신과 **의견이 다릅니다**.)"
+      ],
+      "keywords": ["disagree", "conflict"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "differ_3",
+      "definition": "[동사] 구별되다, 구분되다",
+      "examples": [
+        "Their methods **differ** slightly. (그들의 방법은 약간 **구분된다**.)"
+      ],
+      "keywords": ["contrast", "distinguish"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "differ_4",
+      "definition": "[동사] 다르게 행동하다, 다르게 보이다",
+      "examples": [
+        "He **differs** from his brother in personality. (그는 성격 면에서 형과 **다르다**.)"
+      ],
+      "keywords": ["deviate", "diverge"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "differ_5",
+      "definition": "[동사] (수치·양 등이) 차이가 나다",
+      "examples": [
+        "The prices **differ** depending on the size. (가격은 크기에 따라 **달라진다**.)"
+      ],
+      "keywords": ["vary", "fluctuate"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:33:00Z"
+},
+
+"difference": {
+  "word": "difference",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "difference_1",
+      "definition": "[명사] 차이, 구별",
+      "examples": [
+        "There’s a big **difference** between love and obsession. (사랑과 집착 사이에는 큰 **차이**가 있다.)"
+      ],
+      "keywords": ["distinction", "contrast"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "difference_2",
+      "definition": "[명사] 의견 차이, 불일치",
+      "examples": [
+        "They had a **difference** over how to proceed. (그들은 진행 방식에 대해 **의견 차이**가 있었다.)"
+      ],
+      "keywords": ["disagreement", "conflict"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "difference_3",
+      "definition": "[명사] 변화, 구분되는 점",
+      "examples": [
+        "This small **difference** affects the whole result. (이 작은 **차이**가 전체 결과에 영향을 준다.)"
+      ],
+      "keywords": ["variation", "shift"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "difference_4",
+      "definition": "[명사] (수학) 차, 뺄셈 결과",
+      "examples": [
+        "The **difference** between 8 and 5 is 3. (8과 5의 **차**는 3이다.)"
+      ],
+      "keywords": ["subtraction", "result"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "difference_5",
+      "definition": "[명사] 영향, 중요성 (비유)",
+      "examples": [
+        "Your help made a real **difference**. (당신의 도움이 정말 **중요한 변화**를 만들었다.)"
+      ],
+      "keywords": ["impact", "effect"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:33:00Z"
+},
+
+"different": {
+  "word": "different",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "different_1",
+      "definition": "[형용사] 다른, 서로 다른",
+      "examples": [
+        "We come from **different** countries. (우리는 서로 **다른 나라** 출신이다.)"
+      ],
+      "keywords": ["distinct", "varied"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "different_2",
+      "definition": "[형용사] 독특한, 색다른",
+      "examples": [
+        "She has a **different** way of thinking. (그녀는 **색다른** 사고방식을 가지고 있다.)"
+      ],
+      "keywords": ["unique", "special"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "different_3",
+      "definition": "[형용사] 차별된, 구분되는",
+      "examples": [
+        "These two materials feel **different** to the touch. (이 두 재료는 촉감이 **다르다**.)"
+      ],
+      "keywords": ["unlike", "contrasting"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "different_4",
+      "definition": "[형용사] 여러 가지의, 다양한",
+      "examples": [
+        "Students have **different** learning styles. (학생들은 **다양한** 학습 스타일을 가지고 있다.)"
+      ],
+      "keywords": ["diverse", "various"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "different_5",
+      "definition": "[형용사] 예전과 다른, 변한",
+      "examples": [
+        "He seems **different** today. (그는 오늘 **달라 보인다**.)"
+      ],
+      "keywords": ["changed", "altered"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:33:00Z"
+},
+"differentiate": {
+  "word": "differentiate",
+  "pos": ["verb"],
+  "meanings": [
+    {
+      "id": "differentiate_1",
+      "definition": "[동사] 구별하다, 식별하다",
+      "examples": [
+        "It’s hard to **differentiate** fact from opinion. (사실과 의견을 **구별하기** 어렵다.)"
+      ],
+      "keywords": ["distinguish", "tell apart"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "differentiate_2",
+      "definition": "[동사] 차별화하다",
+      "examples": [
+        "Companies try to **differentiate** their products. (기업들은 제품을 **차별화하려고** 노력한다.)"
+      ],
+      "keywords": ["set apart", "distinguish"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "differentiate_3",
+      "definition": "[동사] 차이를 두다, 다르게 하다",
+      "examples": [
+        "Teachers must **differentiate** instruction for students. (교사는 학생들에게 맞게 수업을 **조정해야 한다**.)"
+      ],
+      "keywords": ["adapt", "customize"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "differentiate_4",
+      "definition": "[동사] 구분되다 (자연스럽게)",
+      "examples": [
+        "Male and female birds **differentiate** in color. (수컷과 암컷 새는 색깔로 **구분된다**.)"
+      ],
+      "keywords": ["vary", "diverge"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "differentiate_5",
+      "definition": "[동사] (수학) 미분하다",
+      "examples": [
+        "In calculus, we learn how to **differentiate** functions. (미적분학에서는 함수의 **미분**을 배운다.)"
+      ],
+      "keywords": ["derive", "calculate"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:39:00Z"
+},
+
+"differently": {
+  "word": "differently",
+  "pos": ["adverb"],
+  "meanings": [
+    {
+      "id": "differently_1",
+      "definition": "[부사] 다르게, 다른 방식으로",
+      "examples": [
+        "She thinks **differently** from her parents. (그녀는 부모님과 **다르게** 생각한다.)"
+      ],
+      "keywords": ["otherwise", "uniquely"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "differently_2",
+      "definition": "[부사] (태도·반응이) 다르게",
+      "examples": [
+        "He reacted **differently** to the news. (그는 그 소식에 **다른 반응**을 보였다.)"
+      ],
+      "keywords": ["distinctly", "separately"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "differently_3",
+      "definition": "[부사] (조건·상황이) 다르게 변하여",
+      "examples": [
+        "Things might turn out **differently** this time. (이번에는 일이 **다르게** 전개될 수도 있다.)"
+      ],
+      "keywords": ["alternatively", "anew"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "differently_4",
+      "definition": "[부사] 독특하게, 개성 있게",
+      "examples": [
+        "He dresses **differently** from others. (그는 다른 사람들과 **다르게** 옷을 입는다.)"
+      ],
+      "keywords": ["distinctively", "originally"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "differently_5",
+      "definition": "[부사] 불균등하게, 다르게 적용되어",
+      "examples": [
+        "The rules are applied **differently** in each region. (그 규칙은 지역마다 **다르게** 적용된다.)"
+      ],
+      "keywords": ["unevenly", "variably"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:39:00Z"
+},
+
+"difficult": {
+  "word": "difficult",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "difficult_1",
+      "definition": "[형용사] 어려운, 힘든",
+      "examples": [
+        "This math problem is very **difficult**. (이 수학 문제는 매우 **어렵다**.)"
+      ],
+      "keywords": ["hard", "challenging"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "difficult_2",
+      "definition": "[형용사] 까다로운, 다루기 힘든",
+      "examples": [
+        "He is a **difficult** person to work with. (그는 함께 일하기 **까다로운** 사람이다.)"
+      ],
+      "keywords": ["demanding", "stubborn"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "difficult_3",
+      "definition": "[형용사] 곤란한, 난처한",
+      "examples": [
+        "It’s a **difficult** question to answer. (답하기 **곤란한** 질문이다.)"
+      ],
+      "keywords": ["tricky", "problematic"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "difficult_4",
+      "definition": "[형용사] 힘든 시기, 고통스러운",
+      "examples": [
+        "She went through a **difficult** time last year. (그녀는 작년에 **힘든 시기**를 겪었다.)"
+      ],
+      "keywords": ["painful", "tough"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "difficult_5",
+      "definition": "[형용사] 불가능에 가까운, 극도로 어려운",
+      "examples": [
+        "It’s **difficult** to imagine life without the internet. (인터넷 없는 삶은 **상상하기 어렵다**.)"
+      ],
+      "keywords": ["nearly impossible", "arduous"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:39:00Z"
+},
+
+"difficulty": {
+  "word": "difficulty",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "difficulty_1",
+      "definition": "[명사] 어려움, 곤란",
+      "examples": [
+        "She had **difficulty** understanding the lecture. (그녀는 강의를 이해하는 데 **어려움**을 겪었다.)"
+      ],
+      "keywords": ["trouble", "challenge"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "difficulty_2",
+      "definition": "[명사] 문제점, 장애물",
+      "examples": [
+        "They faced many **difficulties** during the project. (그들은 프로젝트 중 많은 **문제**에 직면했다.)"
+      ],
+      "keywords": ["obstacle", "hindrance"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "difficulty_3",
+      "definition": "[명사] 경제적 곤경, 곤란한 상황",
+      "examples": [
+        "The company is in financial **difficulty**. (그 회사는 재정적 **곤란**에 처해 있다.)"
+      ],
+      "keywords": ["hardship", "crisis"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "difficulty_4",
+      "definition": "[명사] (언어·기술 등의) 난이도",
+      "examples": [
+        "This exam has a high level of **difficulty**. (이 시험은 **난이도**가 높다.)"
+      ],
+      "keywords": ["complexity", "challenge"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "difficulty_5",
+      "definition": "[명사] 의견 충돌, 갈등",
+      "examples": [
+        "There was some **difficulty** between the two groups. (두 집단 간에 약간의 **갈등**이 있었다.)"
+      ],
+      "keywords": ["disagreement", "conflict"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:39:00Z"
+},
+
+"digital": {
+  "word": "digital",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "digital_1",
+      "definition": "[형용사] 디지털의, 전자적인",
+      "examples": [
+        "She bought a new **digital** camera. (그녀는 새 **디지털 카메라**를 샀다.)"
+      ],
+      "keywords": ["electronic", "computerized"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "digital_2",
+      "definition": "[형용사] 숫자 표시의",
+      "examples": [
+        "My watch has a **digital** display. (내 시계는 **숫자 표시** 화면이다.)"
+      ],
+      "keywords": ["numeric", "digit-based"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "digital_3",
+      "definition": "[형용사] 인터넷 기반의, 온라인의",
+      "examples": [
+        "Many businesses are moving to **digital** platforms. (많은 기업들이 **디지털 플랫폼**으로 옮겨가고 있다.)"
+      ],
+      "keywords": ["online", "virtual"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "digital_4",
+      "definition": "[형용사] 손가락의, 지문 관련 (의학)",
+      "examples": [
+        "The **digital** nerves control finger movement. (**지신경**은 손가락 움직임을 제어한다.)"
+      ],
+      "keywords": ["finger", "anatomical"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    },
+    {
+      "id": "digital_5",
+      "definition": "[형용사] 디지털 시대의, 첨단의",
+      "examples": [
+        "We live in a **digital** age. (우리는 **디지털 시대**에 살고 있다.)"
+      ],
+      "keywords": ["modern", "technological"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:39:00Z"
+},
+"dignity": {
+  "word": "dignity",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "dignity_1",
+      "definition": "[명사] 존엄, 품위",
+      "examples": [
+        "Every person deserves to live with **dignity**. (모든 사람은 **존엄**하게 살 권리가 있다.)"
+      ],
+      "keywords": ["honor", "respect"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "dignity_2",
+      "definition": "[명사] 위엄, 기품",
+      "examples": [
+        "The queen carried herself with **dignity**. (여왕은 **기품 있게** 행동했다.)"
+      ],
+      "keywords": ["grace", "majesty"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "dignity_3",
+      "definition": "[명사] 자존심, 자기 존중감",
+      "examples": [
+        "He refused help to protect his **dignity**. (그는 **자존심**을 지키기 위해 도움을 거절했다.)"
+      ],
+      "keywords": ["self-respect", "pride"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dignity_4",
+      "definition": "[명사] 존엄성 (사회적·인간적 가치로서)",
+      "examples": [
+        "The law protects human **dignity**. (법은 인간의 **존엄성**을 보호한다.)"
+      ],
+      "keywords": ["humanity", "moral worth"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "dignity_5",
+      "definition": "[명사] 품격 있는 태도",
+      "examples": [
+        "She accepted the criticism with **dignity**. (그녀는 비판을 **품격 있게** 받아들였다.)"
+      ],
+      "keywords": ["composure", "decency"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:45:00Z"
+},
+
+"dilemma": {
+  "word": "dilemma",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "dilemma_1",
+      "definition": "[명사] 딜레마, 난처한 상황",
+      "examples": [
+        "She faced a moral **dilemma** about telling the truth. (그녀는 진실을 말할지에 대한 **도덕적 딜레마**에 직면했다.)"
+      ],
+      "keywords": ["predicament", "difficulty"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "dilemma_2",
+      "definition": "[명사] 양자택일의 곤란",
+      "examples": [
+        "He was in a **dilemma** between duty and love. (그는 의무와 사랑 사이에서 **곤란한 선택**에 놓였다.)"
+      ],
+      "keywords": ["quandary", "conflict"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "dilemma_3",
+      "definition": "[명사] 어려운 결정의 순간",
+      "examples": [
+        "Leaders often face a **dilemma** in crisis situations. (지도자들은 위기 상황에서 종종 **어려운 결정**에 직면한다.)"
+      ],
+      "keywords": ["challenge", "decision"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dilemma_4",
+      "definition": "[명사] 모순적인 상황",
+      "examples": [
+        "The plan put them in a political **dilemma**. (그 계획은 그들을 **정치적 모순**에 빠뜨렸다.)"
+      ],
+      "keywords": ["contradiction", "trap"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.9
+    },
+    {
+      "id": "dilemma_5",
+      "definition": "[명사] 윤리적 또는 철학적 문제 상황",
+      "examples": [
+        "The trolley problem is a classic ethical **dilemma**. (트롤리 문제는 전형적인 윤리적 **딜레마**이다.)"
+      ],
+      "keywords": ["moral problem", "paradox"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:45:00Z"
+},
+
+"dimension": {
+  "word": "dimension",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "dimension_1",
+      "definition": "[명사] 차원, 규모",
+      "examples": [
+        "The problem has a new **dimension**. (그 문제에는 새로운 **차원**이 있다.)"
+      ],
+      "keywords": ["aspect", "extent"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "dimension_2",
+      "definition": "[명사] 크기, 부피, 치수",
+      "examples": [
+        "The box’s **dimensions** are 30×20×15 cm. (그 상자의 **크기**는 30×20×15cm다.)"
+      ],
+      "keywords": ["measurement", "size"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dimension_3",
+      "definition": "[명사] (문제·상황의) 범위, 측면",
+      "examples": [
+        "We must consider the social **dimension** of this issue. (이 문제의 사회적 **측면**을 고려해야 한다.)"
+      ],
+      "keywords": ["scope", "facet"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dimension_4",
+      "definition": "[명사] 3차원, 물리적 공간 개념",
+      "examples": [
+        "Length, width, and height are three **dimensions**. (길이, 너비, 높이는 세 **차원**이다.)"
+      ],
+      "keywords": ["spatial measure", "geometry"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "dimension_5",
+      "definition": "[명사] 비유적 의미의 새로운 영역",
+      "examples": [
+        "Her work adds a spiritual **dimension** to art. (그녀의 작품은 예술에 영적 **차원**을 더한다.)"
+      ],
+      "keywords": ["depth", "perspective"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    }
+  ],
+  "updatedAt": "2025-11-07T07:45:00Z"
+},
+
+"dinner": {
+  "word": "dinner",
+  "pos": ["noun"],
+  "meanings": [
+    {
+      "id": "dinner_1",
+      "definition": "[명사] 저녁 식사",
+      "examples": [
+        "We had **dinner** at a nice restaurant. (우리는 멋진 식당에서 **저녁을 먹었다**.)"
+      ],
+      "keywords": ["supper", "evening meal"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 1.0
+    },
+    {
+      "id": "dinner_2",
+      "definition": "[명사] 만찬, 공식 식사",
+      "examples": [
+        "They attended a charity **dinner**. (그들은 자선 **만찬**에 참석했다.)"
+      ],
+      "keywords": ["banquet", "feast"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.95
+    },
+    {
+      "id": "dinner_3",
+      "definition": "[명사] 주요 식사 (하루 중 가장 큰 식사)",
+      "examples": [
+        "In some countries, **dinner** is eaten at noon. (일부 나라에서는 **점심시간에 주요 식사**를 한다.)"
+      ],
+      "keywords": ["main meal", "midday meal"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "dinner_4",
+      "definition": "[명사] 저녁 모임, 식사 약속",
+      "examples": [
+        "We’re having a family **dinner** tonight. (오늘 밤 가족 **저녁 모임**이 있다.)"
+      ],
+      "keywords": ["gathering", "meal event"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.9
+    },
+    {
+      "id": "dinner_5",
+      "definition": "[명사] 정식 요리 (코스 요리 포함)",
+      "examples": [
+        "The restaurant offers a three-course **dinner**. (그 식당은 3코스 **정식 요리**를 제공한다.)"
+      ],
+      "keywords": ["course meal", "menu"],
+      "embedding": [],
+      "difficulty": 1,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:45:00Z"
+},
+
+"diplomatic": {
+  "word": "diplomatic",
+  "pos": ["adjective"],
+  "meanings": [
+    {
+      "id": "diplomatic_1",
+      "definition": "[형용사] 외교의, 외교적인",
+      "examples": [
+        "They resumed **diplomatic** relations after years of tension. (그들은 오랜 긴장 끝에 **외교 관계**를 재개했다.)"
+      ],
+      "keywords": ["international", "foreign affairs"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 1.0
+    },
+    {
+      "id": "diplomatic_2",
+      "definition": "[형용사] 사교적인, 신중한",
+      "examples": [
+        "He gave a very **diplomatic** answer. (그는 매우 **신중한 답변**을 했다.)"
+      ],
+      "keywords": ["tactful", "polite"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.95
+    },
+    {
+      "id": "diplomatic_3",
+      "definition": "[형용사] 외교관의, 외교 업무를 수행하는",
+      "examples": [
+        "She has a **diplomatic** post in Geneva. (그녀는 제네바에서 **외교직**을 맡고 있다.)"
+      ],
+      "keywords": ["official", "embassy"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "diplomatic_4",
+      "definition": "[형용사] 갈등을 피하는, 원만한",
+      "examples": [
+        "He tried to be **diplomatic** during the argument. (그는 논쟁 중에 **원만하게 행동하려고** 했다.)"
+      ],
+      "keywords": ["discreet", "graceful"],
+      "embedding": [],
+      "difficulty": 2,
+      "frequency": 0.9
+    },
+    {
+      "id": "diplomatic_5",
+      "definition": "[형용사] 외교문서에 관한, 공적 기록의",
+      "examples": [
+        "The archive holds many **diplomatic** documents. (그 기록보관소에는 많은 **외교 문서**가 보관되어 있다.)"
+      ],
+      "keywords": ["official", "state-related"],
+      "embedding": [],
+      "difficulty": 3,
+      "frequency": 0.85
+    }
+  ],
+  "updatedAt": "2025-11-07T07:45:00Z"
+}
+}
