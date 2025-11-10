@@ -1,5 +1,28 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Variables
+
+프로젝트를 실행하기 전에 다음 환경 변수를 `.env.local` 등 적절한 환경 파일에 설정해 주세요.
+
+```bash
+NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
+NEXT_PUBLIC_GEMINI_MODEL=gemini-2.5-flash
+NEXT_PUBLIC_GEMINI_API_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
+NEXT_PUBLIC_GOOGLE_TRANSLATE_API_KEY=your_google_translate_api_key
+NEXT_PUBLIC_GOOGLE_TRANSLATE_API_URL=https://translation.googleapis.com/language/translate/v2
+
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+# 필요 시
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_firebase_measurement_id
+```
+
+노출된 기존 API 키는 반드시 **재발급 및 폐기** 후 새로운 값을 사용하세요.
+
 ## Getting Started
 
 First, run the development server:
