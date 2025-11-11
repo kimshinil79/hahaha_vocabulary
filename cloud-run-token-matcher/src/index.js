@@ -362,6 +362,25 @@ const compareWithMeanings = (meanings, tokenEmbedding) => {
     .sort((a, b) => b.similarity - a.similarity);
 };
 
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || '').split(',').map((origin) => origin.trim()).filter(Boolean);
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && (!allowedOrigins.length || allowedOrigins.includes(origin))) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Vary', 'Origin');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(204).send('');
+  }
+
+  return next();
+});
+
 app.get('/healthz', (_req, res) => {
   res.json({ status: 'ok' });
 });
