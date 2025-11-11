@@ -1,0 +1,23 @@
+{
+  "name": "cloud-run-token-matcher",
+  "version": "0.1.0",
+  "description": "Token embedding comparison service for hahaha_vocabulary, deployable to Cloud Run.",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon --watch src src/index.js"
+  },
+  "dependencies": {
+    "@xenova/transformers": "^2.14.1",
+    "express": "^4.19.2",
+    "firebase-admin": "^12.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
+

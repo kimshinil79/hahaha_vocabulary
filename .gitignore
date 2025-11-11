@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# PHP 설정 파일 (API 키 포함)
+public/translate-config.php
+
 # vercel
 .vercel
 

@@ -3,8 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import nlp from 'compromise';
 import { db } from '@/lib/firebase';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, collection, addDoc } from 'firebase/firestore';
 import { useAuth } from '@/hooks/useAuth';
+import { API_CONFIG } from '@/lib/api-config';
+import MeaningEditModal from '@/components/MeaningEditModal';
 
 interface PasteImageModalProps {
   isOpen: boolean;
@@ -36,6 +38,24 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
   const [clickedWordForInput, setClickedWordForInput] = useState<string | null>(null); // 직접 입력할 단어
   const [lastDoubleClickedWord, setLastDoubleClickedWord] = useState<string | null>(null); // 마지막으로 더블 클릭한 단어
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const POS_MAP: Record<string, string> = {
+    noun: '[명사]',
+    verb: '[동사]',
+    adjective: '[형용사]',
+    adverb: '[부사]',
+    pronoun: '[대명사]',
+    preposition: '[전치사]',
+    conjunction: '[접속사]',
+    interjection: '[감탄사]',
+    determiner: '[한정사]',
+    article: '[관사]'
+  };
+
+  // 품사를 한글로 변환하는 함수
+  const getPosTag = (pos: string): string => {
+    return POS_MAP[pos.toLowerCase()] || '';
+  };
 
   // 단어 원형 변환 함수 (compromise 사용)
   const getLemma = (word: string): string => {
@@ -184,7 +204,7 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
     }
   };
 
-  // 문장에서 embedding 생성 및 가장 유사한 뜻 찾기 (Transformers.js + TensorFlow.js)
+  // 문장에서 embedding 생성 및 가장 유사한 뜻 찾기 (Transformers.js + TensorFlow.js + Token-level)
   const findMostSimilarMeaning = async (sentence: string, meanings: any[], fullText?: string, word?: string, wordPos?: string[]) => {
     try {
       // 1단계: 품사 기반 필터링
@@ -354,7 +374,7 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
         return null;
       }
       
-      // Transformers.js로 embedding 추출
+      // 1) 문장 임베딩 (fallback/혼합용)
       const transformersOutput = await extractor(extendedContext, { pooling: 'mean', normalize: true });
       
       if (!transformersOutput) {
@@ -387,6 +407,145 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
         return null;
       }
       
+      // 2) 토큰 레벨 임베딩: 문맥 내 target 단어 벡터 추출
+      let tokenEmbeddingForClickedWord: number[] | null = null;
+      if (word && typeof word === 'string' && word.trim().length > 0) {
+        try {
+          const tokenOutput = await extractor(extendedContext, { pooling: 'none', normalize: false });
+          // tokenOutput은 [tokens x hidden] 예상. 타입 보정
+          let tokenVectors: number[][] = [];
+          if (Array.isArray(tokenOutput) && Array.isArray(tokenOutput[0])) {
+            tokenVectors = tokenOutput as number[][];
+          } else if (tokenOutput && typeof tokenOutput === 'object' && 'dims' in tokenOutput && 'data' in tokenOutput) {
+            const dims = (tokenOutput as any).dims;
+            const data = (tokenOutput as any).data;
+            if (Array.isArray(dims) && (Array.isArray(data) || (data && typeof data.length === 'number'))) {
+              const flat: number[] = Array.isArray(data) ? data : Array.from(data as any);
+              let seq = 0;
+              let hidden = 0;
+              if (dims.length === 2) {
+                seq = dims[0];
+                hidden = dims[1];
+              } else if (dims.length === 3) {
+                seq = dims[1];
+                hidden = dims[2];
+              }
+              if (seq > 0 && hidden > 0 && flat.length === seq * hidden) {
+                tokenVectors = new Array(seq).fill(0).map((_, i) => flat.slice(i * hidden, (i + 1) * hidden));
+              }
+            }
+          } else if (typeof (tokenOutput as any)?.tolist === 'function') {
+            const list = (tokenOutput as any).tolist();
+            if (Array.isArray(list) && Array.isArray(list[0])) {
+              tokenVectors = list;
+            }
+          }
+
+          // 토크나이저로 토큰 목록 얻기
+          let tokens: string[] = [];
+          try {
+            const tokenizer = (extractor as any).tokenizer || (transformers as any).AutoTokenizer && await (transformers as any).AutoTokenizer.from_pretrained('Xenova/all-MiniLM-L6-v2');
+            if (tokenizer?.encode) {
+              try {
+                const textForTokenize = typeof extendedContext === 'string' ? extendedContext : String(extendedContext ?? '');
+                const enc = await tokenizer.encode(textForTokenize);
+                if (enc?.tokens && Array.isArray(enc.tokens)) {
+                  tokens = enc.tokens as string[];
+                }
+              } catch (encodeErr) {
+                // encode 실패 시 tokenize로 폴백
+              }
+            }
+            if (!tokens.length && tokenizer?.tokenize) {
+              try {
+                const textForTokenize2 = typeof extendedContext === 'string' ? extendedContext : String(extendedContext ?? '');
+                tokens = (await tokenizer.tokenize(textForTokenize2)) || [];
+              } catch (tokenizeErr) {
+                // tokenize도 실패
+              }
+            }
+          } catch (e) {
+            console.warn('토크나이저 토큰 추출 실패(계속 진행):', e);
+          }
+
+          if (tokenVectors.length && tokens.length) {
+            // special token 보정을 위한 offset 추정
+            let offset = 0;
+            if (tokenVectors.length - tokens.length === 2) {
+              offset = 1;
+            }
+            const clean = (t: string) => t.replace(/^##/, '').replace(/^▁/, '').toLowerCase();
+            const target = word.toLowerCase();
+
+            // 1차: 단순 포함/동등 매칭
+            let matchIdx: number[] = [];
+            for (let i = 0; i < tokens.length; i++) {
+              const tok = clean(tokens[i]);
+              if (!tok) continue;
+              if (tok === target || tok.includes(target) || target.includes(tok)) {
+                const tv = i + offset;
+                if (tv >= 0 && tv < tokenVectors.length) {
+                  matchIdx.push(tv);
+                }
+              }
+            }
+            // 2차: subword 연속 매칭
+            if (!matchIdx.length) {
+              try {
+                let targetTokens: string[] = [];
+                const tokenizer = (extractor as any).tokenizer || (transformers as any).AutoTokenizer && await (transformers as any).AutoTokenizer.from_pretrained('Xenova/all-MiniLM-L6-v2');
+                if (tokenizer?.encode) {
+                  try {
+                    const wordForTokenize = typeof word === 'string' ? word : String(word ?? '');
+                    const enc = await tokenizer.encode(wordForTokenize);
+                    if (enc?.tokens && Array.isArray(enc.tokens)) targetTokens = enc.tokens as string[];
+                  } catch {}
+                }
+                if (!targetTokens.length && tokenizer?.tokenize) {
+                  try {
+                    const wordForTokenize2 = typeof word === 'string' ? word : String(word ?? '');
+                    targetTokens = (await tokenizer.tokenize(wordForTokenize2)) || [];
+                  } catch {}
+                }
+                const cleanedTarget = targetTokens.map(clean);
+                for (let i = 0; i <= tokens.length - cleanedTarget.length; i++) {
+                  let ok = true;
+                  for (let j = 0; j < cleanedTarget.length; j++) {
+                    if (clean(tokens[i + j]) !== cleanedTarget[j]) {
+                      ok = false;
+                      break;
+                    }
+                  }
+                  if (ok) {
+                    for (let j = 0; j < cleanedTarget.length; j++) {
+                      const tv = i + j + offset;
+                      if (tv >= 0 && tv < tokenVectors.length) {
+                        matchIdx.push(tv);
+                      }
+                    }
+                    break;
+                  }
+                }
+              } catch {}
+            }
+
+            if (matchIdx.length) {
+              const hidden = tokenVectors[0].length;
+              const sum = new Array(hidden).fill(0);
+              for (const m of matchIdx) {
+                const v = tokenVectors[m];
+                for (let d = 0; d < hidden; d++) sum[d] += v[d];
+              }
+              const avg = sum.map((v) => v / matchIdx.length);
+              const norm = Math.sqrt(avg.reduce((s, v) => s + v * v, 0));
+              tokenEmbeddingForClickedWord = norm > 0 ? avg.map((v) => v / norm) : avg;
+            }
+          }
+        } catch (err) {
+          console.warn('토큰 임베딩 추출 실패(계속 진행):', err);
+        }
+      }
+
       // TensorFlow.js로 embedding 생성
       // 참고: Universal Sentence Encoder는 복잡하므로, 여기서는 간단한 해싱 기반 embedding 사용
       // 실제 프로덕션에서는 Universal Sentence Encoder를 사용하는 것이 좋습니다
@@ -438,14 +597,16 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
         }
       }
       
-      // 각 meaning의 embedding과 비교 (두 모델의 점수 결합)
+      // 각 meaning의 embedding과 비교 (토큰 + 두 모델의 점수 결합)
       let maxSimilarity = -1;
       let mostSimilarIndex = -1;
       let similarityResults: Array<{
         index: number;
         meaningId: string;
+        tokenSimilarity: number;
         transformersSimilarity: number;
         tfSimilarity: number;
+        normalizedToken: number;
         normalizedTransformers: number;
         normalizedTf: number;
         combinedSimilarity: number;
@@ -455,25 +616,33 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
         // 원본 meanings 배열에서의 인덱스 찾기
         const originalIndex = meanings.indexOf(meaning);
         
-        // 새로운 구조: { transformers: [...], tensorflow: [...] }
+        // 새로운 구조: { transformers: [...], tensorflow: [...], tokenEmbedding: [...] }
         // 기존 구조: [...] (배열)
         let meaningTransformersEmbedding: number[] | null = null;
         let meaningTensorflowEmbedding: number[] | null = null;
+        let meaningTokenEmbedding: number[] | null = null;
         
-        if (meaning.embedding) {
-          if (typeof meaning.embedding === 'object' && !Array.isArray(meaning.embedding)) {
-            // 새로운 구조
-            if (meaning.embedding.transformers && Array.isArray(meaning.embedding.transformers)) {
-              meaningTransformersEmbedding = meaning.embedding.transformers;
+        if (meaning && meaning.embedding) {
+          try {
+            if (typeof meaning.embedding === 'object' && !Array.isArray(meaning.embedding) && meaning.embedding !== null) {
+              // 새로운 구조
+              if (meaning.embedding.transformers && Array.isArray(meaning.embedding.transformers)) {
+                meaningTransformersEmbedding = meaning.embedding.transformers;
+              }
+              if (meaning.embedding.tensorflow && Array.isArray(meaning.embedding.tensorflow)) {
+                meaningTensorflowEmbedding = meaning.embedding.tensorflow;
+              }
+              if (meaning.embedding.tokenEmbedding && Array.isArray(meaning.embedding.tokenEmbedding)) {
+                meaningTokenEmbedding = meaning.embedding.tokenEmbedding;
+              }
+            } else if (Array.isArray(meaning.embedding) && meaning.embedding.length > 0) {
+              // 기존 구조 (배열) - 하위 호환성 유지
+              meaningTransformersEmbedding = meaning.embedding;
+              // TensorFlow.js embedding은 실시간 생성
+              meaningTensorflowEmbedding = null; // 나중에 생성
             }
-            if (meaning.embedding.tensorflow && Array.isArray(meaning.embedding.tensorflow)) {
-              meaningTensorflowEmbedding = meaning.embedding.tensorflow;
-            }
-          } else if (Array.isArray(meaning.embedding) && meaning.embedding.length > 0) {
-            // 기존 구조 (배열) - 하위 호환성 유지
-            meaningTransformersEmbedding = meaning.embedding;
-            // TensorFlow.js embedding은 실시간 생성
-            meaningTensorflowEmbedding = null; // 나중에 생성
+          } catch (embeddingErr) {
+            console.warn(`Embedding 구조 파싱 오류 (meaning ${index}):`, embeddingErr);
           }
         }
         
@@ -506,13 +675,21 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
             console.warn(`TensorFlow.js embedding 생성 실패 (meaning ${index}):`, error);
           }
         }
+
+        // Token embedding과 비교 (최우선)
+        let tokenSim = 0;
+        if (tokenEmbeddingForClickedWord && meaningTokenEmbedding && meaningTokenEmbedding.length === tokenEmbeddingForClickedWord.length) {
+          tokenSim = cosineSimilarity(tokenEmbeddingForClickedWord, meaningTokenEmbedding);
+        }
         
-        if (meaningTransformersEmbedding || meaningTensorflowEmbedding) {
+        if (meaningTransformersEmbedding || meaningTensorflowEmbedding || meaningTokenEmbedding) {
           similarityResults.push({
             index: originalIndex,
             meaningId: meaning.id || `meaning_${originalIndex}`,
+            tokenSimilarity: tokenSim,
             transformersSimilarity: transformersSim,
             tfSimilarity: tfSim,
+            normalizedToken: 0,
             normalizedTransformers: 0,
             normalizedTf: 0,
             combinedSimilarity: 0
@@ -525,16 +702,22 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
         return null;
       }
 
+      const tokenScores = similarityResults.map((r) => r.tokenSimilarity);
       const transformerScores = similarityResults.map((result) => result.transformersSimilarity);
       const tfScores = similarityResults.map((result) => result.tfSimilarity);
 
+      const normalizedTokenScores = normalizeScoresWithSoftmax(tokenScores, 0.35);
       const normalizedTransformersScores = normalizeScoresWithSoftmax(transformerScores, 0.35);
       const normalizedTfScores = normalizeScoresWithSoftmax(tfScores, 0.35);
 
       similarityResults = similarityResults.map((result, idx) => {
+        const normalizedToken = normalizedTokenScores[idx] ?? 0;
         const normalizedTransformers = normalizedTransformersScores[idx] ?? 0;
         const normalizedTf = normalizedTfScores[idx] ?? 0;
-        const combinedSimilarity = normalizedTransformers * 0.7 + normalizedTf * 0.3;
+        // 토큰 기반을 최우선. 토큰 가중치 0.7, 나머지 0.3은 문장 기반
+        const combinedSimilarity = (normalizedToken > 0 ? normalizedToken * 0.7 : 0) +
+                                   normalizedTransformers * 0.2 +
+                                   normalizedTf * 0.1;
 
         if (combinedSimilarity > maxSimilarity) {
           maxSimilarity = combinedSimilarity;
@@ -543,6 +726,7 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
 
         return {
           ...result,
+          normalizedToken,
           normalizedTransformers,
           normalizedTf,
           combinedSimilarity
@@ -557,6 +741,11 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
       console.log(`단어: "${word || 'unknown'}"`);
       console.log(`Transformers.js Embedding 차원: ${transformersEmbedding.length}`);
       console.log(`TensorFlow.js Embedding 차원: ${tfEmbedding.length}`);
+      if (tokenEmbeddingForClickedWord) {
+        console.log(`Token Embedding 차원: ${tokenEmbeddingForClickedWord.length}`);
+      } else {
+        console.log('Token Embedding 사용 불가(매칭 실패 또는 추출 불가)');
+      }
       console.log('-'.repeat(80));
       
       // 결합된 유사도 순으로 정렬
@@ -568,7 +757,7 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
         const marker = isMostSimilar ? '⭐' : '  ';
         console.log(`${marker} ${idx + 1}. [${result.meaningId}]`);
         console.log(
-          `     결합 유사도: ${result.combinedSimilarity.toFixed(4)} (정규화된 Transformers: ${result.normalizedTransformers.toFixed(4)}, 정규화된 TF.js: ${result.normalizedTf.toFixed(4)} | 원본 Transformers: ${result.transformersSimilarity.toFixed(4)}, 원본 TF.js: ${result.tfSimilarity.toFixed(4)})`
+          `     결합 유사도: ${result.combinedSimilarity.toFixed(4)} (정규화된 Token: ${result.normalizedToken.toFixed(4)}, 정규화된 Transformers: ${result.normalizedTransformers.toFixed(4)}, 정규화된 TF.js: ${result.normalizedTf.toFixed(4)} | 원본 Token: ${result.tokenSimilarity.toFixed(4)}, 원본 Transformers: ${result.transformersSimilarity.toFixed(4)}, 원본 TF.js: ${result.tfSimilarity.toFixed(4)})`
         );
         console.log(`     정의: ${meaning.definition}`);
         if (meaning.examples && meaning.examples.length > 0) {
@@ -597,7 +786,7 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
     }
   };
 
-  // Firebase에서 단어 정보 가져오기 (사용자 단어장 우선, 없으면 words 컬렉션에서)
+  // Firebase에서 단어 정보 가져오기 (words 컬렉션 전용)
   const fetchWordFromFirebase = async (word: string, sentence?: string, fullText?: string) => {
     setIsLoadingClickedWord(true);
     setClickedWordData(null);
@@ -610,43 +799,16 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
       let wordData: any = null;
       let meanings: any[] = [];
       let pos: string[] = [];
+      const targets = Array.from(
+        new Set(
+          [lemma, word]
+            .map((candidate) => candidate?.toLowerCase().trim())
+            .filter((candidate): candidate is string => Boolean(candidate))
+        )
+      );
       
-      // 1. 먼저 사용자 단어장에서 찾기
-      if (user) {
-        try {
-          const email = user.email;
-          const uid = user.uid;
-          
-          if (email) {
-            const username = email.split('@')[0];
-            const userDocId = `${username}${uid}`;
-            const userDocRef = doc(db, 'users', userDocId);
-            const userDocSnap = await getDoc(userDocRef);
-            
-            if (userDocSnap.exists()) {
-              const userData = userDocSnap.data();
-              const userMeanings = userData.meanings || {};
-              
-              if (userMeanings[word] || userMeanings[lemma]) {
-                const foundWord = userMeanings[word] || userMeanings[lemma];
-                meanings = foundWord.meanings || [];
-                wordData = {
-                  word: word,
-                  pos: [],
-                  meanings: meanings,
-                  updatedAt: foundWord.updatedAt || ''
-                };
-              }
-            }
-          }
-        } catch (error) {
-          console.error('사용자 단어장에서 가져오기 오류:', error);
-        }
-      }
-      
-      // 2. 사용자 단어장에 없으면 words 컬렉션에서 찾기
-      if (!wordData) {
-        const wordDocRef = doc(db, 'words', lemma.toLowerCase());
+      for (const candidate of targets) {
+        const wordDocRef = doc(db, 'words', candidate);
         const wordDocSnap = await getDoc(wordDocRef);
         
         if (wordDocSnap.exists()) {
@@ -655,11 +817,12 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
           pos = data.pos || [];
           
           wordData = {
-            word: data.word || lemma,
+            word: data.word || candidate,
             pos: pos,
             meanings: meanings,
             updatedAt: data.updatedAt || ''
           };
+          break;
         }
       }
       
@@ -756,8 +919,54 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
         updatedAt: new Date().toISOString()
       };
 
-      // Firestore에 저장
+      // Firestore에 저장 (사용자 단어장)
       await setDoc(userDocRef, { meanings }, { merge: true });
+
+      // words 컬렉션 업데이트
+      const trimmedWord = word.trim();
+      const lowerCaseWord = trimmedWord.toLowerCase();
+      const wordDocRef = doc(db, 'words', lowerCaseWord);
+      const wordDocSnap = await getDoc(wordDocRef);
+
+      if (wordDocSnap.exists()) {
+        const wordDocData = wordDocSnap.data();
+        const wordDocMeanings: any[] = Array.isArray(wordDocData.meanings) ? [...wordDocData.meanings] : [];
+        const nowIso = new Date().toISOString();
+
+        if (meaningIndex >= 0 && meaningIndex < wordDocMeanings.length) {
+          wordDocMeanings[meaningIndex] = {
+            ...wordDocMeanings[meaningIndex],
+            ...updatedMeaning,
+            updatedAt: nowIso
+          };
+        } else {
+          wordDocMeanings.push({
+            ...updatedMeaning,
+            updatedAt: nowIso
+          });
+        }
+
+        const extractedPosMatch = updatedMeaning.definition?.match(/^\s*\[([^\]]+)\]/);
+        const extractedPosValue = extractedPosMatch ? extractedPosMatch[1] : null;
+        let nextPos: string[] = [];
+
+        if (extractedPosValue) {
+          const extractedPosLabel = `[${extractedPosValue}]`;
+          const posEntry = Object.entries(POS_MAP).find(([, label]) => label === extractedPosLabel);
+          const canonicalPos = posEntry ? posEntry[0] : extractedPosValue.toLowerCase();
+          nextPos = [canonicalPos];
+        }
+
+        await setDoc(
+          wordDocRef,
+          {
+            meanings: wordDocMeanings,
+            pos: nextPos,
+            updatedAt: nowIso
+          },
+          { merge: true }
+        );
+      }
 
       // 로컬 state 업데이트
       if (source === 'clicked' && clickedWordData) {
@@ -864,21 +1073,103 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
     }
   };
 
-  // 품사를 한글로 변환하는 함수
-  const getPosTag = (pos: string): string => {
-    const posMap: { [key: string]: string } = {
-      'noun': '[명사]',
-      'verb': '[동사]',
-      'adjective': '[형용사]',
-      'adverb': '[부사]',
-      'pronoun': '[대명사]',
-      'preposition': '[전치사]',
-      'conjunction': '[접속사]',
-      'interjection': '[감탄사]',
-      'determiner': '[한정사]',
-      'article': '[관사]'
-    };
-    return posMap[pos.toLowerCase()] || '';
+const decodeHtmlEntities = (text: string): string => {
+  if (!text) return text;
+  const entities: Record<string, string> = {
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&#39;': "'",
+    '&#x27;': "'",
+    '&#x2F;': '/',
+    '&#96;': '`'
+  };
+  return text.replace(/&(?:amp|lt|gt|quot|#39|#x27|#x2F|#96);/g, (match) => entities[match] || match);
+};
+
+  const translateToKorean = async (text: string): Promise<string | null> => {
+    try {
+      // 정적 호스팅 환경 감지 및 엔드포인트 결정
+      const phpProxy = '/hahahaEnglish/translate-proxy.php';
+      const apiRoute = '/api/translate';
+      const endpoint = process.env.NEXT_PUBLIC_TRANSLATE_ENDPOINT || 
+        ((typeof window !== 'undefined' && window.location.pathname.startsWith('/hahahaEnglish'))
+          ? phpProxy 
+          : apiRoute);
+
+      // 절대 URL로 변환
+      const buildUrl = (path: string) => {
+        if (path.startsWith('http')) return path;
+        if (typeof window !== 'undefined') {
+          return window.location.origin + path;
+        }
+        return path;
+      };
+
+      const fullUrl = buildUrl(endpoint);
+      const response = await fetch(fullUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: text,
+          source: 'en',
+          target: 'ko',
+          // optional: allow insecure SSL on some shared hosts when enabled via env
+          insecure: (process.env.NEXT_PUBLIC_TRANSLATE_INSECURE === '1') ? true : undefined,
+        }),
+      });
+
+      if (!response.ok) {
+        // 응답 본문을 텍스트로 먼저 읽기
+        const errorText = await response.text();
+        let errorData = {};
+        try {
+          errorData = JSON.parse(errorText);
+        } catch {
+          // JSON 파싱 실패 시 텍스트 그대로 사용
+          errorData = { raw: errorText };
+        }
+        
+        console.error('번역 API 응답 오류:', {
+          status: response.status,
+          statusText: response.statusText,
+          url: fullUrl,
+          error: errorData,
+          rawText: errorText.substring(0, 500),
+        });
+        return null;
+      }
+
+      const data = await response.json();
+      if (!data?.translatedText) {
+        console.warn('번역 응답에 translatedText가 없습니다:', data);
+        return null;
+      }
+      return data.translatedText;
+    } catch (error) {
+      console.error('번역 호출 중 오류:', error);
+      return null;
+    }
+  };
+
+  const formatExampleText = async (input: string): Promise<string> => {
+    const sanitized = input.replace(/\s*\([^)]+\)\s*$/, '').trim();
+    if (!sanitized) return '';
+
+    let englishSentence = sanitized;
+    if (!/[.!?]"?$/.test(englishSentence)) {
+      englishSentence = `${englishSentence}.`;
+    }
+
+    const translation = await translateToKorean(sanitized);
+    if (!translation) {
+      return englishSentence;
+    }
+
+    return `${englishSentence} (${translation})`;
   };
 
   // 직접 입력 단어를 Firebase에 저장하는 함수
@@ -915,27 +1206,117 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
       const normalizedPos = pos.trim().toLowerCase();
       const posTag = getPosTag(pos);
       const definitionWithTag = posTag ? `${posTag} ${definition.trim()}` : definition.trim();
-      const exampleText = example.trim();
-      const now = new Date().toISOString();
+      const rawExample = example.trim();
+      const formattedExample = await formatExampleText(rawExample);
+      const exampleText = formattedExample || rawExample;
+      const now = new Date();
+      const nowIso = now.toISOString();
 
-      // 새로운 의미 생성
-      const newMeaning = {
-        definition: definitionWithTag,
-        examples: [exampleText],
-        frequency: 1,
-        updatedAt: now
+      const mergePosValues = (...values: Array<string | string[] | undefined>) => {
+        const set = new Set<string>();
+        values.forEach((value) => {
+          if (!value) return;
+          if (Array.isArray(value)) {
+            value.forEach((item) => {
+              if (typeof item === 'string' && item.trim()) {
+                set.add(item.trim().toLowerCase());
+              }
+            });
+          } else if (typeof value === 'string' && value.trim()) {
+            set.add(value.trim().toLowerCase());
+          }
+        });
+        return Array.from(set);
       };
 
-      // 기존 단어 데이터가 있으면 meanings 배열에 추가, 없으면 새로 생성
-      if (meanings[trimmedWord]) {
-        meanings[trimmedWord].meanings.push(newMeaning);
-        meanings[trimmedWord].updatedAt = now;
-      } else {
-        meanings[trimmedWord] = {
-          meanings: [newMeaning],
-          updatedAt: now
-        };
-      }
+      const extractMeaningIndex = (id?: unknown) => {
+        if (typeof id !== 'string') return null;
+        const match = id.match(new RegExp(`^${lowerCaseWord}_(\\d+)$`, 'i'));
+        if (!match) return null;
+        const parsed = Number(match[1]);
+        return Number.isFinite(parsed) ? parsed : null;
+      };
+
+      const getNextMeaningId = (list: any[]) => {
+        let maxIndex = 0;
+        list.forEach((item) => {
+          const idx = extractMeaningIndex(item?.id);
+          if (typeof idx === 'number' && idx > maxIndex) {
+            maxIndex = idx;
+          }
+        });
+        return `${lowerCaseWord}_${maxIndex + 1}`;
+      };
+
+      const createMeaningEntry = (id: string) => ({
+        id,
+        definition: definitionWithTag,
+        examples: [exampleText],
+        keywords: [],
+        embedding: {
+          transformers: [],
+          tensorflow: []
+        },
+        difficulty: 1,
+        frequency: 1,
+        source: 'manual',
+        updatedAt: nowIso
+      });
+
+      let queuedMeaning: any | null = null;
+
+      const mergeMeaningArray = (existing: any[] = [], captureNewMeaning = false) => {
+        const cloned = existing.map((item) => ({
+          ...item,
+          examples: Array.isArray(item.examples) ? [...item.examples] : []
+        }));
+
+        const index = cloned.findIndex((item) => item.definition === definitionWithTag);
+
+        if (index >= 0) {
+          const target = cloned[index];
+          const existingExamples = Array.isArray(target.examples) ? target.examples : [];
+          const mergedExamples = Array.from(new Set([...existingExamples, exampleText]));
+          const retainedId =
+            typeof target.id === 'string' && target.id.trim()
+              ? target.id
+              : getNextMeaningId(cloned);
+
+          cloned[index] = {
+            ...target,
+            id: retainedId,
+            definition: definitionWithTag,
+            examples: mergedExamples,
+            keywords: Array.isArray(target.keywords) ? target.keywords : [],
+            embedding:
+              typeof target.embedding === 'object' && target.embedding !== null
+                ? target.embedding
+                : { transformers: [], tensorflow: [] },
+            difficulty: target.difficulty || 1,
+            frequency: (target.frequency || 0) + 1,
+            source: target.source || 'manual',
+            updatedAt: nowIso
+          };
+        } else {
+          const newId = getNextMeaningId(cloned);
+          const newMeaning = createMeaningEntry(newId);
+          cloned.push(newMeaning);
+          if (captureNewMeaning) {
+            queuedMeaning = newMeaning;
+          }
+        }
+
+        return cloned;
+      };
+
+      const userWordEntry = meanings[trimmedWord] || { meanings: [], pos: [], updatedAt: nowIso };
+      const updatedUserMeanings = mergeMeaningArray(userWordEntry.meanings, false);
+      const updatedUserPos = mergePosValues(userWordEntry.pos, normalizedPos);
+      meanings[trimmedWord] = {
+        pos: updatedUserPos,
+        meanings: updatedUserMeanings,
+        updatedAt: nowIso
+      };
 
       // Firestore에 저장
       await setDoc(userDocRef, { meanings }, { merge: true });
@@ -945,39 +1326,13 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
       const wordDocSnap = await getDoc(wordDocRef);
       const wordDocData = wordDocSnap.exists() ? wordDocSnap.data() : {};
 
-      const existingWordMeanings: any[] = Array.isArray(wordDocData.meanings) ? [...wordDocData.meanings] : [];
-      const existingMeaningIndex = existingWordMeanings.findIndex((meaning) => meaning.definition === definitionWithTag);
-
-      let updatedWordMeanings: any[];
-      if (existingMeaningIndex >= 0) {
-        const existingMeaning = existingWordMeanings[existingMeaningIndex] ?? {};
-        const existingExamples: string[] = Array.isArray(existingMeaning.examples) ? existingMeaning.examples : [];
-        const mergedExamples = Array.from(new Set([...existingExamples, exampleText]));
-
-        updatedWordMeanings = [...existingWordMeanings];
-        updatedWordMeanings[existingMeaningIndex] = {
-          ...existingMeaning,
-          definition: definitionWithTag,
-          examples: mergedExamples,
-          frequency: (existingMeaning.frequency || 0) + 1,
-          updatedAt: now
-        };
-      } else {
-        updatedWordMeanings = [
-          ...existingWordMeanings,
-          {
-            definition: definitionWithTag,
-            examples: [exampleText],
-            frequency: 1,
-            updatedAt: now
-          }
-        ];
-      }
+      const isNewWordInWordsCollection = !wordDocSnap.exists();
+      const existingWordMeanings: any[] = Array.isArray(wordDocData.meanings) ? wordDocData.meanings : [];
+      queuedMeaning = null;
+      const updatedWordMeanings = mergeMeaningArray(existingWordMeanings, true);
 
       const existingPos: string[] = Array.isArray(wordDocData.pos) ? wordDocData.pos : [];
-      const updatedPos = normalizedPos
-        ? Array.from(new Set([...existingPos, normalizedPos]))
-        : existingPos;
+      const updatedPos = mergePosValues(existingPos, updatedUserPos, normalizedPos);
 
       await setDoc(
         wordDocRef,
@@ -985,10 +1340,24 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
           word: wordDocData.word || trimmedWord,
           pos: updatedPos,
           meanings: updatedWordMeanings,
-          updatedAt: now
+          updatedAt: nowIso
         },
         { merge: true }
       );
+
+      if (queuedMeaning) {
+        try {
+          await addDoc(collection(db, 'newWords'), {
+            word: trimmedWord,
+            eventType: isNewWordInWordsCollection ? 'new-word' : 'new-meaning',
+            meaning: queuedMeaning,
+            createdAt: nowIso,
+            source: 'manual'
+          });
+        } catch (queueError) {
+          console.error('새로운 단어 큐 저장 실패:', queueError);
+        }
+      }
 
       alert('단어가 저장되었습니다.');
       return true;
@@ -2116,7 +2485,12 @@ Please respond with only JSON, without any additional explanation.`;
           currentWordIndex={currentWordIndex}
           onClose={() => setEditingMeaning(null)}
           onSave={async (updatedMeaning) => {
-            await saveMeaningToFirebase(editingMeaning.word, editingMeaning.meaningIndex, updatedMeaning, editingMeaning.source);
+            await saveMeaningToFirebase(
+              editingMeaning.word,
+              editingMeaning.meaningIndex,
+              updatedMeaning,
+              editingMeaning.source
+            );
             setEditingMeaning(null);
           }}
           onDelete={async () => {
@@ -2148,193 +2522,6 @@ Please respond with only JSON, without any additional explanation.`;
           isSaving={isSavingMeaning}
         />
       )}
-    </div>
-  );
-}
-
-// 뜻 편집 모달 컴포넌트
-interface MeaningEditModalProps {
-  word: string;
-  meaningIndex: number;
-  source: 'clicked' | 'list';
-  clickedWordData: any | null;
-  wordDataList: any[];
-  currentWordIndex: number;
-  onClose: () => void;
-  onSave: (updatedMeaning: any) => Promise<void>;
-  onDelete: () => Promise<void>;
-  isSaving: boolean;
-}
-
-function MeaningEditModal({
-  word,
-  meaningIndex,
-  source,
-  clickedWordData,
-  wordDataList,
-  currentWordIndex,
-  onClose,
-  onSave,
-  onDelete,
-  isSaving
-}: MeaningEditModalProps) {
-  const currentMeanings = source === 'clicked' 
-    ? clickedWordData?.meanings || []
-    : wordDataList[currentWordIndex]?.meanings || [];
-  
-  const currentMeaning = currentMeanings[meaningIndex] || {};
-  
-  const [definition, setDefinition] = useState(currentMeaning.definition || '');
-  const [examples, setExamples] = useState<string[]>(currentMeaning.examples || []);
-  const [newExample, setNewExample] = useState('');
-
-  const handleAddExample = () => {
-    if (newExample.trim()) {
-      setExamples([...examples, newExample.trim()]);
-      setNewExample('');
-    }
-  };
-
-  const handleRemoveExample = (index: number) => {
-    setExamples(examples.filter((_, i) => i !== index));
-  };
-
-  const handleSave = async () => {
-    if (!definition.trim()) {
-      alert('뜻을 입력해주세요.');
-      return;
-    }
-
-    const updatedMeaning = {
-      ...currentMeaning,
-      definition: definition.trim(),
-      examples: examples,
-      frequency: currentMeaning.frequency || 0,
-      updatedAt: new Date().toISOString()
-    };
-
-    await onSave(updatedMeaning);
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[70] p-4">
-      <div className="bg-white rounded-2xl shadow-xl ring-1 ring-black/5 w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
-        {/* 헤더 */}
-        <div className="p-6 border-b border-gray-100 flex-shrink-0 bg-white">
-          <div className="flex justify-between items-center">
-            <h3 className="text-xl font-extrabold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-              뜻 편집: {word}
-            </h3>
-            <button
-              onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-3xl font-bold"
-            >
-              ×
-            </button>
-          </div>
-        </div>
-
-        {/* 메인 콘텐츠 */}
-        <div className="flex-1 overflow-y-auto p-6 bg-white">
-          {/* 뜻 정의 */}
-          <div className="mb-6">
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              뜻 정의
-            </label>
-            <textarea
-              value={definition}
-              onChange={(e) => setDefinition(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
-              rows={3}
-              placeholder="뜻을 입력하세요"
-            />
-          </div>
-
-          {/* 예문 */}
-          <div className="mb-6">
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              예문
-            </label>
-            <div className="space-y-2 mb-3">
-              {examples.map((example, index) => (
-                <div key={index} className="flex items-center gap-2 bg-gray-50 p-3 rounded-lg">
-                  <span className="flex-1 text-sm text-gray-700 italic">{example}</span>
-                  <button
-                    onClick={() => handleRemoveExample(index)}
-                    className="p-1.5 text-red-500 hover:bg-red-50 rounded-full transition-colors"
-                    title="예문 삭제"
-                  >
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      className="h-4 w-4" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke="currentColor"
-                    >
-                      <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth={2} 
-                        d="M6 18L18 6M6 6l12 12" 
-                      />
-                    </svg>
-                  </button>
-                </div>
-              ))}
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={newExample}
-                onChange={(e) => setNewExample(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleAddExample();
-                  }
-                }}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                placeholder="예문을 입력하고 Enter를 누르세요"
-              />
-              <button
-                onClick={handleAddExample}
-                className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors font-semibold"
-              >
-                추가
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* 푸터 */}
-        <div className="p-6 border-t border-gray-100 flex-shrink-0 bg-white">
-          <div className="flex justify-between gap-3">
-            <button
-              onClick={onDelete}
-              disabled={isSaving}
-              className="px-6 py-2 rounded-full bg-red-100 text-red-700 hover:bg-red-200 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              삭제
-            </button>
-            <div className="flex gap-3">
-              <button
-                onClick={onClose}
-                disabled={isSaving}
-                className="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                취소
-              </button>
-              <button
-                onClick={handleSave}
-                disabled={isSaving || !definition.trim()}
-                className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSaving ? '저장 중...' : '저장'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

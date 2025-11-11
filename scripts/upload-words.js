@@ -2,16 +2,24 @@ const { initializeApp } = require('firebase/app');
 const { getFirestore, doc, setDoc } = require('firebase/firestore');
 const { readFileSync } = require('fs');
 const { join } = require('path');
+require('dotenv').config({ path: join(__dirname, '..', '.env.local') });
+
+const requiredEnv = (value, name) => {
+  if (!value) {
+    throw new Error(`환경 변수 ${name}가 설정되지 않았습니다.`);
+  }
+  return value;
+};
 
 // Firebase 설정
 const firebaseConfig = {
-  apiKey: 'AIzaSyAQY-tXbLL-u1MLGDo_keO2HmSnmaAOlF0',
-  authDomain: 'memorizewholetext.firebaseapp.com',
-  projectId: 'memorizewholetext',
-  storageBucket: 'memorizewholetext.appspot.com',
-  messagingSenderId: '1017620600279',
-  appId: '1:1017620600279:web:1ef89648b5c2d17f56e792',
-  measurementId: 'G-HYV1GDPW35',
+  apiKey: requiredEnv(process.env.NEXT_PUBLIC_FIREBASE_API_KEY, 'NEXT_PUBLIC_FIREBASE_API_KEY'),
+  authDomain: requiredEnv(process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN, 'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN'),
+  projectId: requiredEnv(process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID, 'NEXT_PUBLIC_FIREBASE_PROJECT_ID'),
+  storageBucket: requiredEnv(process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET, 'NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET'),
+  messagingSenderId: requiredEnv(process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID, 'NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID'),
+  appId: requiredEnv(process.env.NEXT_PUBLIC_FIREBASE_APP_ID, 'NEXT_PUBLIC_FIREBASE_APP_ID'),
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Firebase 초기화

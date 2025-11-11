@@ -7,7 +7,7 @@ const {
   collection,
   getDocs,
 } = require('firebase/firestore');
-const { pipeline } = require('@xenova/transformers');
+const { pipeline, AutoTokenizer } = require('@xenova/transformers');
 
 // Firebase 설정
 const firebaseConfig = {
@@ -25,6 +25,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let transformersExtractorPromise = null;
+let tokenizerPromise = null;
 
 async function getTransformersExtractor() {
   if (!transformersExtractorPromise) {
@@ -34,6 +35,13 @@ async function getTransformersExtractor() {
     );
   }
   return transformersExtractorPromise;
+}
+
+async function getTokenizer() {
+  if (!tokenizerPromise) {
+    tokenizerPromise = AutoTokenizer.from_pretrained('Xenova/all-MiniLM-L6-v2');
+  }
+  return tokenizerPromise;
 }
 
 // Transformers.js로 embedding 생성
@@ -60,6 +68,190 @@ async function generateTransformersEmbedding(text) {
   } catch (error) {
     console.error('Transformers.js Embedding 생성 오류:', error);
     throw error;
+  }
+}
+
+// 특정 단어의 토큰 임베딩 생성 (문맥 기반)
+async function generateTokenEmbeddingForWord(text, targetWord) {
+  try {
+    // 입력을 문자열로 강제 변환
+    const inputText = (typeof text === 'string')
+      ? text
+      : (text && typeof text.toString === 'function')
+        ? text.toString()
+        : String(text ?? '');
+    const targetStr = (typeof targetWord === 'string')
+      ? targetWord
+      : (targetWord && typeof targetWord.toString === 'function')
+        ? targetWord.toString()
+        : String(targetWord ?? '');
+
+    const extractor = await getTransformersExtractor();
+    // 토큰별 히든 상태 추출
+    const output = await extractor(inputText, { pooling: 'none', normalize: false });
+
+    // tokenVectors를 [tokens, hidden] 형태의 2차원 배열로 정규화
+    let tokenVectors = null;
+    if (Array.isArray(output) && output.length > 0) {
+      // 이미 2차원 배열인 경우
+      if (Array.isArray(output[0])) {
+        tokenVectors = output;
+      } else if (typeof output[0] === 'number') {
+        // 드문 경우: 1차원만 온다면 변환 불가
+        console.warn('feature-extraction 결과가 1차원 배열입니다. 토큰 임베딩 생성을 건너뜁니다.');
+        return [];
+      }
+    } else if (output && typeof output === 'object') {
+      // Tensor 형태 처리 (dims, data 기반)
+      // 예상 dims: [seq, hidden] 또는 [1, seq, hidden]
+      const dims = Array.isArray(output.dims) ? output.dims : null;
+      const data = output.data;
+      if (dims && data && (Array.isArray(data) || (data.BYTES_PER_ELEMENT !== undefined))) {
+        const flat = Array.isArray(data) ? data : Array.from(data);
+        let seq = 0;
+        let hidden = 0;
+        if (dims.length === 2) {
+          seq = dims[0];
+          hidden = dims[1];
+        } else if (dims.length === 3) {
+          const batch = dims[0];
+          seq = dims[1];
+          hidden = dims[2];
+          if (batch !== 1) {
+            console.warn(`예상치 못한 batch 크기: ${batch}. batch=1 가정으로 진행합니다.`);
+          }
+        }
+        if (seq > 0 && hidden > 0 && flat.length === seq * hidden) {
+          tokenVectors = new Array(seq);
+          for (let i = 0; i < seq; i++) {
+            const start = i * hidden;
+            tokenVectors[i] = flat.slice(start, start + hidden);
+          }
+        }
+      } else if (typeof output.tolist === 'function') {
+        const list = output.tolist();
+        if (Array.isArray(list) && Array.isArray(list[0])) {
+          tokenVectors = list;
+        }
+      }
+    }
+    if (!tokenVectors || !Array.isArray(tokenVectors) || tokenVectors.length === 0 || !Array.isArray(tokenVectors[0])) {
+      console.warn('feature-extraction 결과가 토큰 차원 배열이 아닙니다. 토큰 임베딩 생성을 건너뜁니다.');
+      return [];
+    }
+
+    // 토큰 문자열 목록 (모델/토크나이저에 따라 special tokens 제외됨)
+    let tokens = [];
+    try {
+      const tokenizer = await getTokenizer();
+      // encode 선호: special tokens 제외하여 정렬 용이
+      if (tokenizer && typeof tokenizer.encode === 'function') {
+        const enc = await tokenizer.encode(inputText, { add_special_tokens: false });
+        if (enc && Array.isArray(enc.tokens) && enc.tokens.length > 0) {
+          tokens = enc.tokens;
+        }
+      }
+      if (tokens.length === 0 && tokenizer && typeof tokenizer.tokenize === 'function') {
+        tokens = tokenizer.tokenize(inputText) || [];
+      } else if (tokenizer && typeof tokenizer.encode === 'function') {
+        // 일부 구현에서는 encode 결과에 tokens가 있음
+        const enc = await tokenizer.encode(inputText, { add_special_tokens: false });
+        if (enc && Array.isArray(enc.tokens)) {
+          tokens = enc.tokens;
+        }
+      }
+    } catch (e) {
+      console.warn('토크나이저 토큰 추출 실패, 휴리스틱으로 진행합니다:', e?.message || e);
+      tokens = (inputText && typeof inputText === 'string') ? (inputText.match(/\S+/g) || []) : [];
+    }
+
+    // special token 보정치 추정
+    let offset = 0;
+    if (tokens.length > 0 && (tokenVectors.length - tokens.length === 2)) {
+      // [CLS], [SEP]가 추가된 전형적인 경우
+      offset = 1; // tokenVectors에서 실제 첫 토큰 위치
+    }
+
+    const clean = (t) => (t || '').replace(/^##/, '').replace(/^▁/, '').toLowerCase();
+    const target = String(targetStr || '').toLowerCase();
+
+    const matchIndices = [];
+
+    if (tokens.length > 0) {
+      // 1) 간단 포함/동등 매칭
+      for (let i = 0; i < tokens.length; i++) {
+        const tok = clean(tokens[i]);
+        if (!tok) continue;
+        if (tok === target || tok.includes(target) || target.includes(tok)) {
+          const tvIdx = i + offset;
+          if (tvIdx >= 0 && tvIdx < tokenVectors.length) {
+            matchIndices.push(tvIdx);
+          }
+        }
+      }
+
+      // 2) 연속 서브워드 매칭 (fallback)
+      if (matchIndices.length === 0) {
+        try {
+          const tokenizer = await getTokenizer();
+          let targetTokens = [];
+          if (tokenizer && typeof tokenizer.encode === 'function') {
+            const enc = await tokenizer.encode(targetStr, { add_special_tokens: false });
+            if (enc && Array.isArray(enc.tokens) && enc.tokens.length > 0) {
+              targetTokens = enc.tokens;
+            }
+          }
+          if (targetTokens.length === 0 && tokenizer && typeof tokenizer.tokenize === 'function') {
+            targetTokens = tokenizer.tokenize(targetStr) || [];
+          }
+          const cleanedTargetTokens = targetTokens.map(clean);
+          for (let i = 0; i <= tokens.length - cleanedTargetTokens.length; i++) {
+            let ok = true;
+            for (let j = 0; j < cleanedTargetTokens.length; j++) {
+              if (clean(tokens[i + j]) !== cleanedTargetTokens[j]) {
+                ok = false;
+                break;
+              }
+            }
+            if (ok) {
+              for (let j = 0; j < cleanedTargetTokens.length; j++) {
+                const tvIdx = i + j + offset;
+                if (tvIdx >= 0 && tvIdx < tokenVectors.length) {
+                  matchIndices.push(tvIdx);
+                }
+              }
+              break;
+            }
+          }
+        } catch (_) {
+          // ignore
+        }
+      }
+    } else {
+      // 토큰 문자열을 얻지 못한 경우, 전체 토큰을 스캔하며 간단 휴리스틱 적용 불가 → 건너뜀
+      console.warn('토큰 문자열을 얻지 못했습니다. 토큰 임베딩 생성을 건너뜁니다.');
+    }
+
+    if (matchIndices.length === 0) {
+      // 매칭 실패
+      return [];
+    }
+
+    const hiddenSize = tokenVectors[0].length;
+    const sum = new Array(hiddenSize).fill(0);
+    for (const idx of matchIndices) {
+      const vec = tokenVectors[idx];
+      for (let d = 0; d < hiddenSize; d++) {
+        sum[d] += vec[d];
+      }
+    }
+    // 평균 + L2 정규화
+    const avg = sum.map((v) => v / matchIndices.length);
+    const norm = Math.sqrt(avg.reduce((s, v) => s + v * v, 0));
+    return norm > 0 ? avg.map((v) => v / norm) : avg;
+  } catch (error) {
+    console.warn('토큰 임베딩 생성 중 오류:', error?.message || error);
+    return [];
   }
 }
 
@@ -179,11 +371,25 @@ async function updateWordEmbeddings(wordKey) {
           const tensorflowEmbedding = generateTensorFlowEmbedding(textToEmbed, transformersEmbedding.length);
           console.log(`   ✅ TensorFlow.js embedding 완료 (차원: ${tensorflowEmbedding.length})`);
 
+          // 토큰 임베딩 (문맥 내 target 단어 기준)
+          let tokenEmbedding = [];
+          if (textToEmbed) {
+            const targetWord = String(wordData.word || wordKey || '').toLowerCase();
+            console.log(`   🔎 Token embedding 생성 대상 단어: "${targetWord}"`);
+            tokenEmbedding = await generateTokenEmbeddingForWord(textToEmbed, targetWord);
+            if (Array.isArray(tokenEmbedding) && tokenEmbedding.length > 0) {
+              console.log(`   ✅ Token embedding 생성 완료 (차원: ${tokenEmbedding.length})`);
+            } else {
+              console.log(`   ⚠️  Token embedding을 생성하지 못했습니다.`);
+            }
+          }
+
           updatedMeanings.push({
             ...meaning,
             embedding: {
               transformers: transformersEmbedding,
               tensorflow: tensorflowEmbedding,
+              tokenEmbedding: Array.isArray(tokenEmbedding) ? tokenEmbedding : [],
             },
           });
           hasChanges = true;
@@ -197,6 +403,7 @@ async function updateWordEmbeddings(wordKey) {
       if (upgradeStructure) {
         let transformers = [];
         let tensorflow = [];
+        let tokenEmbedding = [];
 
         if (Array.isArray(existingEmbedding)) {
           transformers = existingEmbedding;
@@ -208,6 +415,20 @@ async function updateWordEmbeddings(wordKey) {
           tensorflow = Array.isArray(existingEmbedding.tensorflow)
             ? existingEmbedding.tensorflow
             : [];
+          tokenEmbedding = Array.isArray(existingEmbedding.tokenEmbedding)
+            ? existingEmbedding.tokenEmbedding
+            : [];
+        }
+
+        // tokenEmbedding이 비어있고, 예문이 있으면 생성 시도
+        if ((!Array.isArray(tokenEmbedding) || tokenEmbedding.length === 0) && textToEmbed) {
+          const targetWord = String(wordData.word || wordKey || '').toLowerCase();
+          console.log(`   🔎 Token embedding 생성 대상 단어: "${targetWord}"`);
+          const generated = await generateTokenEmbeddingForWord(textToEmbed, targetWord);
+          if (Array.isArray(generated) && generated.length > 0) {
+            tokenEmbedding = generated;
+            console.log(`   ✅ Token embedding 생성 완료 (차원: ${tokenEmbedding.length})`);
+          }
         }
 
         updatedMeanings.push({
@@ -215,11 +436,32 @@ async function updateWordEmbeddings(wordKey) {
           embedding: {
             transformers,
             tensorflow,
+            tokenEmbedding: Array.isArray(tokenEmbedding) ? tokenEmbedding : [],
           },
         });
         hasChanges = true;
       } else {
-        updatedMeanings.push(meaning);
+        // 기존 구조가 이미 새 구조인 경우에도 tokenEmbedding이 없으면 생성/추가
+        let nextMeaning = { ...meaning };
+        if (!nextMeaning.embedding || typeof nextMeaning.embedding !== 'object') {
+          nextMeaning.embedding = { transformers: [], tensorflow: [], tokenEmbedding: [] };
+        } else if (!('tokenEmbedding' in nextMeaning.embedding)) {
+          nextMeaning.embedding.tokenEmbedding = [];
+        }
+
+        const needToken = !Array.isArray(nextMeaning.embedding.tokenEmbedding) || nextMeaning.embedding.tokenEmbedding.length === 0;
+        if (needToken && textToEmbed) {
+          const targetWord = String(wordData.word || wordKey || '').toLowerCase();
+          console.log(`   🔎 Token embedding 생성 대상 단어: "${targetWord}"`);
+          const generated = await generateTokenEmbeddingForWord(textToEmbed, targetWord);
+          if (Array.isArray(generated) && generated.length > 0) {
+            nextMeaning.embedding.tokenEmbedding = generated;
+            hasChanges = true;
+            console.log(`   ✅ Token embedding 생성 완료 (차원: ${generated.length})`);
+          }
+        }
+
+        updatedMeanings.push(nextMeaning);
       }
 
       if (!canGenerate) {

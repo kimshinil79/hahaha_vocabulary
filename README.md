@@ -9,7 +9,12 @@ NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
 NEXT_PUBLIC_GEMINI_MODEL=gemini-2.5-flash
 NEXT_PUBLIC_GEMINI_API_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
 NEXT_PUBLIC_GOOGLE_TRANSLATE_API_KEY=your_google_translate_api_key
-NEXT_PUBLIC_GOOGLE_TRANSLATE_API_URL=https://translation.googleapis.com/language/translate/v2
+# 정적 배포(dothome 등)에서 Google Translate 호출 시 프록시 사용 권장
+# public/translate-proxy.php를 서버에 업로드하고, 프록시 URL을 지정하세요.
+# 예: NEXT_PUBLIC_TRANSLATE_ENDPOINT=/hahahaEnglish/translate-proxy.php
+NEXT_PUBLIC_TRANSLATE_ENDPOINT=
+# 일부 호스팅에서 TLS 검증 이슈가 있을 때 임시로 1 설정 (보안상 권장하지 않음)
+NEXT_PUBLIC_TRANSLATE_INSECURE=0
 
 NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
