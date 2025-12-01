@@ -27,7 +27,7 @@ export const organizeWords = async (
   setCurrentWordIndex(0);
 
   // catch 블록에서도 접근할 수 있도록 함수 스코프로 선언
-  let allWordData: any[] = [];
+  const allWordData: any[] = [];
 
   try {
     // 단어들을 원형으로 변환하고 중복 제거

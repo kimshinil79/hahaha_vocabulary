@@ -20,6 +20,7 @@ export const saveWordToWordsCollection = async (wordKey: string, wordData: any) 
 };
 
 // 특정 뜻을 words 컬렉션과 flashcards에 모두 저장
+// 반환값: { saved: boolean, message: string } - 저장 여부와 메시지
 export const addMeaningToWordsAndFlashcard = async (
   user: any,
   word: string,
@@ -27,7 +28,7 @@ export const addMeaningToWordsAndFlashcard = async (
   pronunciation?: string,
   groupId?: string,
   difficulty?: string
-): Promise<void> => {
+): Promise<{ saved: boolean; message: string }> => {
   if (!user) {
     throw new Error('로그인이 필요합니다.');
   }
@@ -158,6 +159,7 @@ export const addMeaningToWordsAndFlashcard = async (
     }
     
     await setDoc(userDocRef, { flashcards }, { merge: true });
+    return { saved: true, message: '단어장에 추가되었습니다.' };
   } else if (groupId) {
     // 중복이지만 그룹이 다른 경우 groups 배열에 추가
     const existingIndex = flashcards.findIndex((card: any) => {
@@ -167,7 +169,7 @@ export const addMeaningToWordsAndFlashcard = async (
     
     if (existingIndex >= 0) {
       const existingCard = flashcards[existingIndex];
-      let groups: string[] = existingCard.groups ? [...existingCard.groups] : [];
+      const groups: string[] = existingCard.groups ? [...existingCard.groups] : [];
       if (!groups.includes(groupId)) {
         groups.push(groupId);
         flashcards[existingIndex] = {
@@ -176,8 +178,14 @@ export const addMeaningToWordsAndFlashcard = async (
           updatedAt: new Date().toISOString()
         };
         await setDoc(userDocRef, { flashcards }, { merge: true });
+        return { saved: true, message: '단어가 다른 그룹에도 추가되었습니다.' };
+      } else {
+        return { saved: false, message: '이미 해당 그룹에 있는 단어입니다.' };
       }
     }
+    return { saved: false, message: '이미 단어장에 있는 단어입니다.' };
+  } else {
+    return { saved: false, message: '이미 단어장에 있는 단어입니다.' };
   }
 };
 

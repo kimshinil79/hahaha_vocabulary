@@ -208,7 +208,7 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
     
     try {
       setIsSavingMeaning(true);
-      await addMeaningToWordsAndFlashcard(
+      const result = await addMeaningToWordsAndFlashcard(
         user,
         addingToFlashcard.word,
         addingToFlashcard.meaning,
@@ -226,8 +226,14 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
         setUserFlashcards(flashcards);
       }
       
-      // 모달 자동 닫기
-      setAddingToFlashcard(null);
+      // 저장 여부에 따라 메시지 표시
+      if (result.saved) {
+        // 모달 자동 닫기
+        setAddingToFlashcard(null);
+      } else {
+        // 이미 있는 경우 알림만 표시하고 모달은 유지
+        alert(result.message);
+      }
     } catch (error) {
       console.error('저장 오류:', error);
       alert('저장 중 오류가 발생했습니다.');

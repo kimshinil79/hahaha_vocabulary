@@ -19,7 +19,7 @@ export default function WordEditModal({
 }: WordEditModalProps) {
   const [word, setWord] = useState(wordData?.word || '');
   const [pronunciation, setPronunciation] = useState(wordData?.pronunciation || '');
-  const [meanings, setMeanings] = useState<any[]>([]);
+  const [meanings, setMeanings] = useState<any[]>(wordData?.meanings ? [...wordData.meanings] : []);
 
   useEffect(() => {
     if (wordData) {
