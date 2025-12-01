@@ -329,6 +329,41 @@ const fetchWordDoc = async (lemma) => {
   return snap.data();
 };
 
+const generateHashedEmbedding = (text, size = 384) => {
+  const embedding = new Array(size).fill(0);
+  if (!text) return embedding;
+  const words = String(text).toLowerCase().split(/\s+/);
+  words.forEach((word, wordIdx) => {
+    for (let i = 0; i < word.length; i += 1) {
+      const charCode = word.charCodeAt(i);
+      const pos = (charCode + wordIdx * 97) % size;
+      embedding[pos] += Math.sin(charCode * 0.01) * (1 / (wordIdx + 1));
+    }
+  });
+  const norm = Math.sqrt(embedding.reduce((acc, val) => acc + val * val, 0));
+  return norm > 0 ? embedding.map((val) => val / norm) : embedding;
+};
+
+const computeSentenceEmbeddings = async (sentence) => {
+  const extractor = await getExtractor();
+  try {
+    const meanOutput = await extractor(sentence, { pooling: 'mean', normalize: true });
+    let transformerEmbedding = toJsArray(meanOutput);
+    if (!Array.isArray(transformerEmbedding) || !transformerEmbedding.length) {
+      transformerEmbedding = tensorToArray(meanOutput);
+    }
+    if (!Array.isArray(transformerEmbedding) || !transformerEmbedding.length) {
+      transformerEmbedding = [];
+    }
+    const embeddingSize = transformerEmbedding.length || 384;
+    const tfEmbedding = generateHashedEmbedding(sentence, embeddingSize);
+    return { transformerEmbedding, tfEmbedding };
+  } catch (error) {
+    console.warn('[token-match] sentence embedding failed:', error?.message || error);
+    return { transformerEmbedding: [], tfEmbedding: generateHashedEmbedding(sentence, 384) };
+  }
+};
+
 const cosineSimilarity = (a, b) => {
   if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return 0;
   let dot = 0;
@@ -343,20 +378,46 @@ const cosineSimilarity = (a, b) => {
   return dot / (Math.sqrt(normA) * Math.sqrt(normB));
 };
 
-const compareWithMeanings = (meanings, tokenEmbedding) => {
+const compareWithMeanings = (meanings, tokenEmbedding, transformerEmbedding, tfEmbedding) => {
   if (!Array.isArray(meanings)) return [];
   return meanings
     .map((meaning, idx) => {
-      const embedding = meaning?.embedding?.tokenEmbedding;
-      if (Array.isArray(embedding) && embedding.length === tokenEmbedding.length) {
-        const similarity = cosineSimilarity(tokenEmbedding, embedding);
-        return {
-          meaning,
-          similarity,
-          index: idx,
-        };
+      const meaningEmbedding = meaning?.embedding || {};
+      const tokenVector = Array.isArray(meaningEmbedding?.tokenEmbedding) ? meaningEmbedding.tokenEmbedding : [];
+      const transformerVector = Array.isArray(meaningEmbedding?.transformers) ? meaningEmbedding.transformers : [];
+      const tfVector = Array.isArray(meaningEmbedding?.tensorflow) ? meaningEmbedding.tensorflow : [];
+
+      const tokenSim = tokenVector.length === tokenEmbedding.length ? cosineSimilarity(tokenEmbedding, tokenVector) : 0;
+      const transformerSim = transformerVector.length === transformerEmbedding.length
+        ? cosineSimilarity(transformerEmbedding, transformerVector)
+        : 0;
+      const tfSim = tfVector.length === tfEmbedding.length ? cosineSimilarity(tfEmbedding, tfVector) : 0;
+
+      const weights = [];
+      if (tokenSim) weights.push({ score: tokenSim, weight: 0.7 });
+      if (transformerSim) weights.push({ score: transformerSim, weight: 0.2 });
+      if (tfSim) weights.push({ score: tfSim, weight: 0.1 });
+
+      let combined = 0;
+      if (weights.length) {
+        const totalWeight = weights.reduce((acc, item) => acc + item.weight, 0);
+        combined = weights.reduce((acc, item) => acc + item.score * item.weight, 0) / (totalWeight || 1);
       }
-      return null;
+
+      if (combined === 0 && weights.length === 0) {
+        return null;
+      }
+
+      return {
+        meaning,
+        similarity: combined,
+        index: idx,
+        components: {
+          token: tokenSim,
+          transformer: transformerSim,
+          tensorflow: tfSim,
+        },
+      };
     })
     .filter(Boolean)
     .sort((a, b) => b.similarity - a.similarity);
@@ -412,9 +473,13 @@ app.post('/token-match', async (req, res) => {
     const lemma = word.trim().toLowerCase();
     const wordDoc = await fetchWordDoc(lemma);
 
+    const { transformerEmbedding, tfEmbedding } = await computeSentenceEmbeddings(sentence.trim());
+
     if (!wordDoc?.meanings) {
       return res.status(200).json({
         tokenEmbedding: result.embedding,
+        transformerEmbedding,
+        tfEmbedding,
         tokenIndices: result.indices,
         tokens: result.tokens,
         matches: [],
@@ -423,16 +488,23 @@ app.post('/token-match', async (req, res) => {
       });
     }
 
-    const ranked = compareWithMeanings(wordDoc.meanings, result.embedding)
-      .map((item) => ({
-        similarity: item.similarity,
-        meaning: item.meaning,
-        meaningIndex: item.index,
-      }));
+    const ranked = compareWithMeanings(
+      wordDoc.meanings,
+      result.embedding,
+      transformerEmbedding,
+      tfEmbedding,
+    ).map((item) => ({
+      similarity: item.similarity,
+      meaning: item.meaning,
+      meaningIndex: item.index,
+      components: item.components,
+    }));
 
     res.json({
       lemma,
       tokenEmbedding: result.embedding,
+      transformerEmbedding,
+      tfEmbedding,
       tokenIndices: result.indices,
       tokens: result.tokens,
       matches: ranked,

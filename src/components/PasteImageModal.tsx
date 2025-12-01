@@ -15,16 +15,17 @@ interface PasteImageModalProps {
   onClose: () => void;
   onImagePasted: (imageDataUrl: string) => void;
   initialImage?: string | null; // 초기 이미지 (임시 저장된 이미지)
+  embedded?: boolean; // 페이지에 embedded 모드로 표시할지 여부
 }
 
-export default function PasteImageModal({ isOpen, onClose, onImagePasted, initialImage }: PasteImageModalProps) {
+export default function PasteImageModal({ isOpen, onClose, onImagePasted, initialImage, embedded = false }: PasteImageModalProps) {
   const { user } = useAuth();
   const [pastedImage, setPastedImage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showText, setShowText] = useState(false);
   const [ocrText, setOcrText] = useState('');
   const [isProcessingOCR, setIsProcessingOCR] = useState(false);
-  const [selectedWords, setSelectedWords] = useState<string[]>([]);
+  const [selectedWords, setSelectedWords] = useState<Array<{word: string; meaning: any; wordData: any}>>([]);
   const [wordDataList, setWordDataList] = useState<any[]>([]); // AI로부터 받은 단어 데이터 리스트
   const [currentWordIndex, setCurrentWordIndex] = useState(0); // 현재 표시할 단어 인덱스
   const [isLoadingWordData, setIsLoadingWordData] = useState(false);
@@ -40,6 +41,10 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
   const [clickedWordForInput, setClickedWordForInput] = useState<string | null>(null); // 직접 입력할 단어
   const [lastDoubleClickedWord, setLastDoubleClickedWord] = useState<string | null>(null); // 마지막으로 더블 클릭한 단어
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  // ChatGPT에서 받아온 새 단어 정보 (저장 전)
+  const [newWordFromChatGPT, setNewWordFromChatGPT] = useState<any>(null);
+  const [showNewWordSaveDialog, setShowNewWordSaveDialog] = useState(false);
 
   const POS_MAP: Record<string, string> = {
     noun: '[명사]',
@@ -139,6 +144,8 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
   const callTokenMatcher = async (contextSentence: string, targetWord: string) => {
     const endpoint = `${TOKEN_MATCHER_BASE_URL}/token-match`;
     try {
+      console.log('[Token Matcher] 호출 시작:', { endpoint, sentence: contextSentence, word: targetWord });
+      
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -153,14 +160,27 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('Token matcher 응답 오류:', response.status, errorText);
+        console.error('[Token Matcher] 응답 오류:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorText,
+          endpoint
+        });
         return null;
       }
 
       const data = await response.json();
+      console.log('[Token Matcher] 응답 성공:', { matchesCount: data?.matches?.length || 0 });
       return data;
     } catch (error) {
-      console.error('Token matcher 호출 실패:', error);
+      console.error('[Token Matcher] 호출 실패:', {
+        error: error instanceof Error ? error.message : String(error),
+        errorType: error instanceof TypeError ? 'Network/CORS' : 'Unknown',
+        endpoint,
+        details: error instanceof Error ? error.stack : undefined
+      });
+      
+      // 네트워크 오류인 경우 사용자에게 알림하지 않고 조용히 실패 (기능은 계속 작동)
       return null;
     }
   };
@@ -452,6 +472,178 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
     }
   };
 
+  // ChatGPT API를 호출하여 단어 정보 가져오기
+  const fetchWordFromChatGPT = async (word: string, baseForm?: string): Promise<any | null> => {
+    const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
+    
+    if (!apiKey || apiKey === 'YOUR_OPENAI_API_KEY_HERE') {
+      throw new Error('OpenAI API 키가 설정되지 않았습니다.');
+    }
+
+    const now = new Date().toISOString();
+    
+    const prompt = baseForm && baseForm.trim() !== '' && baseForm !== word.toLowerCase()
+      ? `다음 영어 단어에 대한 정보를 아래 형식의 JSON으로 제공해주세요.
+
+단어: "${word}"
+원형(lemma): "${baseForm.trim()}"
+
+응답 형식 (정확히 이 형식을 따르세요):
+{
+  "word": "${baseForm.trim()}",
+  "pos": ["noun", "verb"],
+  "pronunciation": "/əˈʃʊrəns/",
+  "meanings": [
+    {
+      "id": "${baseForm.trim().toLowerCase()}_1",
+      "definition": "[명사] 한국어 정의",
+      "examples": [
+        "English example sentence. (한국어 번역)"
+      ],
+      "keywords": ["keyword1", "keyword2"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.65
+    }
+  ],
+  "updatedAt": "${now}"
+}
+
+주의사항:
+1. JSON 형식만 반환하세요. 다른 설명이나 마크다운 코드 블록 없이 순수 JSON만 반환하세요.
+2. word는 원형 "${baseForm.trim()}"로 반환하세요.
+3. 만약 "${word}"가 영어 사전에 존재하지 않는 단어이거나 유효하지 않은 단어라면, meanings 배열을 빈 배열 []로 반환하고, definition에는 "[${word} 단어는 존재하지 않는 단어입니다.]" 형식으로 반환하세요.
+4. pos는 영어 품사 배열입니다 (예: ["noun"], ["verb", "noun"]).
+5. pronunciation은 IPA(International Phonetic Alphabet) 형식의 발음기호입니다. 슬래시(/)로 감싼 형식으로 반환하세요 (예: /əˈʃʊrəns/). 미국식 발음을 제공해주세요. 단어가 존재하지 않는 경우 빈 문자열 ""을 반환하세요.
+6. meanings 배열에는 단어의 주요 의미를 2개에서 5개 사이로 포함하세요. 가장 자주 사용되고 중요한 의미를 우선적으로 포함해주세요. 의미가 많더라도 5개를 초과하지 마세요. 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
+7. 각 meaning의 id는 "${baseForm.trim().toLowerCase()}_1", "${baseForm.trim().toLowerCase()}_2" 형식입니다.
+8. definition은 "[품사] 한국어 정의" 형식입니다 (예: "[명사] 확신, 자신감"). 단어가 존재하지 않는 경우 "[${word} 단어는 존재하지 않는 단어입니다.]" 형식으로 반환하세요.
+9. examples는 영문 예문과 한국어 번역을 포함한 문자열 배열입니다 (예: "She spoke with assurance. (그녀는 자신 있게 말했다.)"). 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
+10. keywords는 관련 단어 배열입니다 (영어로). 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
+11. embedding은 항상 빈 객체 {}입니다.
+12. difficulty는 1-5 사이의 정수입니다.
+13. frequency는 0-1 사이의 실수입니다.
+14. updatedAt은 "${now}" 형식의 ISO 8601 문자열입니다.`
+      : `다음 영어 단어에 대한 정보를 아래 형식의 JSON으로 제공해주세요.
+
+단어: "${word}"
+
+응답 형식 (정확히 이 형식을 따르세요):
+{
+  "word": "${word}",
+  "pos": ["noun", "verb"],
+  "pronunciation": "/əˈʃʊrəns/",
+  "meanings": [
+    {
+      "id": "${word.toLowerCase()}_1",
+      "definition": "[명사] 한국어 정의",
+      "examples": [
+        "English example sentence. (한국어 번역)"
+      ],
+      "keywords": ["keyword1", "keyword2"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.65
+    }
+  ],
+  "updatedAt": "${now}"
+}
+
+주의사항:
+1. JSON 형식만 반환하세요. 다른 설명이나 마크다운 코드 블록 없이 순수 JSON만 반환하세요.
+2. word는 정확히 "${word}"로 반환하세요.
+3. 만약 "${word}"가 영어 사전에 존재하지 않는 단어이거나 유효하지 않은 단어라면, meanings 배열을 빈 배열 []로 반환하고, definition에는 "[${word} 단어는 존재하지 않는 단어입니다.]" 형식으로 반환하세요.
+4. pos는 영어 품사 배열입니다 (예: ["noun"], ["verb", "noun"]).
+5. pronunciation은 IPA(International Phonetic Alphabet) 형식의 발음기호입니다. 슬래시(/)로 감싼 형식으로 반환하세요 (예: /əˈʃʊrəns/). 미국식 발음을 제공해주세요. 단어가 존재하지 않는 경우 빈 문자열 ""을 반환하세요.
+6. meanings 배열에는 단어의 주요 의미를 2개에서 5개 사이로 포함하세요. 가장 자주 사용되고 중요한 의미를 우선적으로 포함해주세요. 의미가 많더라도 5개를 초과하지 마세요. 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
+7. 각 meaning의 id는 "${word.toLowerCase()}_1", "${word.toLowerCase()}_2" 형식입니다.
+8. definition은 "[품사] 한국어 정의" 형식입니다 (예: "[명사] 확신, 자신감"). 단어가 존재하지 않는 경우 "[${word} 단어는 존재하지 않는 단어입니다.]" 형식으로 반환하세요.
+9. examples는 영문 예문과 한국어 번역을 포함한 문자열 배열입니다 (예: "She spoke with assurance. (그녀는 자신 있게 말했다.)"). 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
+10. keywords는 관련 단어 배열입니다 (영어로). 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
+11. embedding은 항상 빈 객체 {}입니다.
+12. difficulty는 1-5 사이의 정수입니다.
+13. frequency는 0-1 사이의 실수입니다.
+14. updatedAt은 "${now}" 형식의 ISO 8601 문자열입니다.`;
+
+    try {
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model: 'gpt-4o-mini',
+          messages: [
+            {
+              role: 'system',
+              content: 'You are a helpful assistant that provides word definitions in JSON format. Always respond with valid JSON only, no additional text.',
+            },
+            {
+              role: 'user',
+              content: prompt,
+            },
+          ],
+          temperature: 0.7,
+          response_format: { type: 'json_object' },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`ChatGPT API 호출 실패: ${response.status} - ${await response.text()}`);
+      }
+
+      const responseData = await response.json();
+      const content = responseData.choices[0].message.content as string;
+      
+      // JSON 파싱
+      const wordData = JSON.parse(content) as any;
+      
+      // 응답 정규화
+      const normalizedWord = wordData.word || word;
+      const normalizedPos = (wordData.pos || []).map((p: any) => p.toString());
+      const normalizedMeanings = (wordData.meanings || []).map((meaning: any, index: number) => {
+        if (typeof meaning !== 'object') return meaning;
+        
+        return {
+          id: meaning.id || `${normalizedWord.toLowerCase()}_${index + 1}`,
+          definition: meaning.definition || '',
+          examples: (meaning.examples || []).map((e: any) => e.toString()),
+          keywords: (meaning.keywords || []).map((k: any) => k.toString()),
+          embedding: meaning.embedding || {},
+          difficulty: meaning.difficulty || 3,
+          frequency: meaning.frequency || 0.5,
+        };
+      });
+
+      return {
+        word: normalizedWord,
+        pos: normalizedPos,
+        pronunciation: wordData.pronunciation || '',
+        meanings: normalizedMeanings,
+        updatedAt: wordData.updatedAt || now,
+      };
+    } catch (error) {
+      console.error('ChatGPT API 오류:', error);
+      throw error;
+    }
+  };
+
+  // words 컬렉션에 단어 저장
+  const saveWordToWordsCollection = async (wordKey: string, wordData: any) => {
+    try {
+      await setDoc(
+        doc(db, 'words', wordKey.toLowerCase()),
+        wordData,
+        { merge: true }
+      );
+      console.log(`"${wordKey}" 단어가 words 컬렉션에 저장되었습니다.`);
+    } catch (error) {
+      console.error('words 컬렉션 저장 실패:', error);
+      throw error;
+    }
+  };
+
   // Firebase에서 단어 정보 가져오기 (words 컬렉션 전용)
   const fetchWordFromFirebase = async (word: string, sentence?: string, fullText?: string) => {
     setIsLoadingClickedWord(true);
@@ -476,7 +668,7 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
         const wordDocSnap = await getDoc(wordDocRef);
         
         if (wordDocSnap.exists()) {
-          const data = wordDocSnap.data();
+          const data = wordDocSnap.data() as any;
           meanings = data.meanings || [];
           pos = data.pos || [];
           
@@ -487,6 +679,66 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
             updatedAt: data.updatedAt || ''
           };
           break;
+        }
+      }
+      
+      // Firebase에서 단어를 찾지 못한 경우 ChatGPT API 호출
+      if (!wordData) {
+        try {
+          // 원형(lemma) 찾기
+          const nlpDoc = nlp(word);
+          const baseForm = nlpDoc.nouns().toSingular().out('text') || 
+                          nlpDoc.verbs().toInfinitive().out('text') || 
+                          word.toLowerCase();
+          
+          // ChatGPT API 호출
+          const chatGPTData = await fetchWordFromChatGPT(word, baseForm);
+          
+          if (chatGPTData) {
+            // meanings가 비어있거나 "존재하지 않는" 메시지가 있는지 확인
+            const chatGPTMeanings = chatGPTData.meanings || [];
+            let isInvalidWord = false;
+            
+            if (chatGPTMeanings.length === 0) {
+              isInvalidWord = true;
+            } else {
+              const firstMeaning = chatGPTMeanings[0];
+              const definition = firstMeaning?.definition || '';
+              if (definition.includes('존재하지 않는') || 
+                  definition.includes('존재하지 않습니다') || 
+                  definition.includes('없는 단어')) {
+                isInvalidWord = true;
+              }
+            }
+            
+            if (isInvalidWord) {
+              setClickedWordData(null);
+              setClickedWordNotFound(true);
+              return;
+            }
+            
+            // ChatGPT에서 받아온 단어 정보를 저장하지 않고 사용자에게 표시
+            setNewWordFromChatGPT(chatGPTData);
+            // setShowNewWordSaveDialog(true); // 다이얼로그 대신 우측 카드에 버튼 표시
+            
+            // 임시로 wordData에 설정하여 표시 (저장은 안 됨)
+            meanings = chatGPTData.meanings || [];
+            pos = chatGPTData.pos || [];
+            
+            wordData = {
+              word: chatGPTData.word || word,
+              pos: pos,
+              meanings: meanings,
+              updatedAt: chatGPTData.updatedAt || '',
+              isFromChatGPT: true // ChatGPT에서 온 데이터임을 표시
+            };
+          }
+        } catch (chatGPTError) {
+          console.error('ChatGPT API 호출 오류:', chatGPTError);
+          // ChatGPT API 실패 시에도 계속 진행 (기존 로직대로)
+          setClickedWordData(null);
+          setClickedWordNotFound(true);
+          return;
         }
       }
       
@@ -732,6 +984,212 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
     } catch (err) {
       console.error('뜻 삭제 오류:', err);
       alert('뜻 삭제 중 오류가 발생했습니다.');
+    } finally {
+      setIsSavingMeaning(false);
+    }
+  };
+
+  // ChatGPT로부터 받은 새 단어를 words 컬렉션에 저장
+  const handleSaveNewWordToWords = async () => {
+    if (!newWordFromChatGPT) return;
+    
+    try {
+      setIsSavingMeaning(true);
+      const wordKey = (newWordFromChatGPT.word || '').toLowerCase();
+      await saveWordToWordsCollection(wordKey, newWordFromChatGPT);
+      
+      // 저장 후 단어 정보 다시 가져오기
+      const savedDocRef = doc(db, 'words', wordKey);
+      const savedDocSnap = await getDoc(savedDocRef);
+      
+      if (savedDocSnap.exists()) {
+        const savedData = savedDocSnap.data() as any;
+        const meanings = savedData.meanings || [];
+        const pos = savedData.pos || [];
+        
+        // clickedWordData 업데이트 (isFromChatGPT 플래그 제거)
+        setClickedWordData({
+          word: savedData.word || wordKey,
+          pos: pos,
+          meanings: meanings,
+          updatedAt: savedData.updatedAt || ''
+        });
+      }
+      
+      alert('words 컬렉션에 저장되었습니다.');
+      setShowNewWordSaveDialog(false);
+      setNewWordFromChatGPT(null);
+    } catch (error) {
+      console.error('words 컬렉션 저장 오류:', error);
+      alert('저장 중 오류가 발생했습니다.');
+    } finally {
+      setIsSavingMeaning(false);
+    }
+  };
+
+  // ChatGPT로부터 받은 새 단어를 단어장(flashcards)에 바로 저장
+  const handleSaveNewWordToFlashcard = async () => {
+    if (!newWordFromChatGPT || !user) return;
+    
+    try {
+      setIsSavingMeaning(true);
+      const uid = user.uid;
+      const userDocRef = doc(db, 'users', uid);
+      
+      // 첫 번째 meaning 가져오기 (Flutter 앱처럼)
+      const meanings = newWordFromChatGPT.meanings || [];
+      if (meanings.length === 0) {
+        alert('저장할 의미가 없습니다.');
+        return;
+      }
+      
+      const firstMeaning = meanings[0];
+      const word = newWordFromChatGPT.word || '';
+      const pronunciation = newWordFromChatGPT.pronunciation || '';
+      
+      // flashcard 데이터 생성
+      const flashcardData = {
+        word: word,
+        pronunciation: pronunciation,
+        definition: firstMeaning.definition || '',
+        examples: firstMeaning.examples || [],
+        createdAt: new Date().toISOString(),
+        reviewCount: 0,
+        correctCount: 0,
+        wrongCount: 0,
+        lastReviewedAt: null,
+        nextReviewDate: null,
+        level: 0,
+      };
+      
+      // users 문서의 flashcards 배열에 추가
+      const userDocSnap = await getDoc(userDocRef);
+      const userData = userDocSnap.exists() ? userDocSnap.data() : {};
+      const flashcards = userData.flashcards || [];
+      
+      flashcards.push(flashcardData);
+      
+      await setDoc(userDocRef, { flashcards }, { merge: true });
+      
+      alert('단어장에 저장되었습니다.');
+      setShowNewWordSaveDialog(false);
+      setNewWordFromChatGPT(null);
+    } catch (error) {
+      console.error('단어장 저장 오류:', error);
+      alert('저장 중 오류가 발생했습니다.');
+    } finally {
+      setIsSavingMeaning(false);
+    }
+  };
+
+  // 특정 뜻을 words 컬렉션과 flashcards에 모두 저장
+  const handleAddMeaningToWordsAndFlashcard = async (word: string, meaning: any, pronunciation?: string) => {
+    if (!user) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+    
+    try {
+      setIsSavingMeaning(true);
+      const wordKey = word.toLowerCase();
+      const uid = user.uid;
+      
+      // 1. words 컬렉션에 저장/업데이트
+      const wordDocRef = doc(db, 'words', wordKey);
+      const wordDocSnap = await getDoc(wordDocRef);
+      
+      const nowIso = new Date().toISOString();
+      let wordMeanings: any[] = [];
+      let wordPos: string[] = [];
+      
+      if (wordDocSnap.exists()) {
+        const wordData = wordDocSnap.data() as any;
+        wordMeanings = Array.isArray(wordData.meanings) ? [...wordData.meanings] : [];
+        wordPos = Array.isArray(wordData.pos) ? [...wordData.pos] : [];
+        
+        // 중복 체크 (같은 definition이 이미 있는지)
+        const isDuplicate = wordMeanings.some((m: any) => m.definition === meaning.definition);
+        if (!isDuplicate) {
+          // embedding 제거한 meaning 복사
+          const meaningWithoutEmbedding = { ...meaning };
+          delete meaningWithoutEmbedding.embedding;
+          
+          wordMeanings.push({
+            ...meaningWithoutEmbedding,
+            updatedAt: nowIso
+          });
+        }
+      } else {
+        // words 컬렉션에 단어가 없으면 새로 생성
+        const meaningWithoutEmbedding = { ...meaning };
+        delete meaningWithoutEmbedding.embedding;
+        
+        wordMeanings = [{
+          ...meaningWithoutEmbedding,
+          updatedAt: nowIso
+        }];
+        
+        // POS 추출
+        const extractedPosMatch = meaning.definition?.match(/^\s*\[([^\]]+)\]/);
+        if (extractedPosMatch) {
+          const extractedPosValue = extractedPosMatch[1];
+          const extractedPosLabel = `[${extractedPosValue}]`;
+          const posEntry = Object.entries(POS_MAP).find(([, label]) => label === extractedPosLabel);
+          const canonicalPos = posEntry ? posEntry[0] : extractedPosValue.toLowerCase();
+          wordPos = [canonicalPos];
+        }
+      }
+      
+      await setDoc(
+        wordDocRef,
+        {
+          word: word,
+          meanings: wordMeanings,
+          pos: wordPos,
+          pronunciation: pronunciation || '',
+          updatedAt: nowIso
+        },
+        { merge: true }
+      );
+      
+      // 2. users 문서의 flashcards 배열에 추가
+      const userDocRef = doc(db, 'users', uid);
+      const userDocSnap = await getDoc(userDocRef);
+      const userData = userDocSnap.exists() ? userDocSnap.data() : {};
+      const flashcards = (userData.flashcards || []) as any[];
+      
+      // 중복 체크 (같은 단어와 정의가 이미 있는지)
+      const isDuplicateFlashcard = flashcards.some((card: any) => 
+        card.word === word && card.definition === meaning.definition
+      );
+      
+      if (!isDuplicateFlashcard) {
+        // embedding 제거한 meaning 복사
+        const meaningWithoutEmbedding = { ...meaning };
+        delete meaningWithoutEmbedding.embedding;
+        
+        const flashcardData = {
+          word: word,
+          pronunciation: pronunciation || '',
+          meaning: meaningWithoutEmbedding, // Flutter 앱처럼 meaning 객체로 저장
+          createdAt: new Date().toISOString(),
+          reviewCount: 0,
+          correctCount: 0,
+          wrongCount: 0,
+          lastReviewedAt: null,
+          nextReviewDate: null,
+          level: 0,
+        };
+        
+        flashcards.push(flashcardData);
+        
+        await setDoc(userDocRef, { flashcards }, { merge: true });
+      }
+      
+      alert('words 컬렉션과 단어장에 저장되었습니다.');
+    } catch (error) {
+      console.error('저장 오류:', error);
+      alert('저장 중 오류가 발생했습니다.');
     } finally {
       setIsSavingMeaning(false);
     }
@@ -1011,13 +1469,38 @@ const decodeHtmlEntities = (text: string): string => {
 
       if (queuedMeaning) {
         try {
+          // 사용자별 통계 집계를 위한 userId 저장
+          let userId: string | null = null;
+          let userUid: string | null = null;
+          let userEmail: string | null = null;
+
+          if (user?.uid && user.email) {
+            const username = user.email.split('@')[0];
+            userId = `${username}${user.uid}`;
+            userUid = user.uid;
+            userEmail = user.email;
+          }
+
+          console.log('[PasteImageModal] newWords 저장 준비:', {
+            word: trimmedWord,
+            eventType: isNewWordInWordsCollection ? 'new-word' : 'new-meaning',
+            createdAt: nowIso,
+            userId,
+            userUid,
+            userEmail
+          });
+
           await addDoc(collection(db, 'newWords'), {
             word: trimmedWord,
             eventType: isNewWordInWordsCollection ? 'new-word' : 'new-meaning',
             meaning: queuedMeaning,
             createdAt: nowIso,
-            source: 'manual'
+            source: 'manual',
+            userId,
+            userUid,
+            userEmail
           });
+          console.log('[PasteImageModal] newWords 저장 완료');
         } catch (queueError) {
           console.error('새로운 단어 큐 저장 실패:', queueError);
         }
@@ -1047,7 +1530,7 @@ const decodeHtmlEntities = (text: string): string => {
 
     try {
       // 단어들을 원형으로 변환하고 중복 제거
-      const lemmatizedWords = Array.from(new Set(selectedWords.map(getLemma)));
+      const lemmatizedWords = Array.from(new Set(selectedWords.map(item => getLemma(item.word))));
 
       // 단어를 배치로 나누기 (한 번에 1개씩 처리)
       const BATCH_SIZE = 1;
@@ -1553,50 +2036,39 @@ Please respond with only JSON, without any additional explanation.`;
     onClose();
   };
 
-  if (!isOpen) return null;
+  if (!isOpen && !embedded) return null;
 
-  return (
+  const contentComponent = (
     <div 
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100] p-4"
-      onTouchStart={(e) => e.stopPropagation()}
-      onTouchMove={(e) => e.stopPropagation()}
-      onWheel={(e) => e.stopPropagation()}
-      style={{ touchAction: 'none' }}
-      onClick={(e) => {
-        // 모달 배경 클릭 시 이벤트 전파 방지
-        if (e.target === e.currentTarget) {
-          e.stopPropagation();
-        }
-      }}
+      ref={containerRef}
+      className={`bg-white ${embedded ? 'h-full' : 'rounded-2xl shadow-2xl w-full max-w-[95vw] max-h-[90vh]'} flex flex-col overflow-hidden transition-all ${
+        isDragOver ? 'ring-4 ring-blue-500 ring-offset-2 scale-[0.98]' : ''
+      }`}
+      tabIndex={-1}
+      style={{ outline: 'none' }}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
     >
-      <div 
-        ref={containerRef}
-        className={`bg-white rounded-2xl shadow-2xl w-full max-w-[95vw] max-h-[90vh] flex flex-col overflow-hidden transition-all ${
-          isDragOver ? 'ring-4 ring-blue-500 ring-offset-2 scale-[0.98]' : ''
-        }`}
-        tabIndex={-1}
-        style={{ outline: 'none' }}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-      >
         {/* 헤더 */}
-        <div className="p-6 border-b border-gray-100 flex-shrink-0 bg-white">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
-              이미지 붙이기
-            </h2>
-            <button
-              onClick={handleCancel}
-              className="text-gray-400 hover:text-gray-600 text-3xl font-bold"
-            >
-              ×
-            </button>
+        {!embedded && (
+          <div className="p-6 border-b border-gray-100 flex-shrink-0 bg-white">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                이미지 붙이기
+              </h2>
+              <button
+                onClick={handleCancel}
+                className="text-gray-400 hover:text-gray-600 text-3xl font-bold"
+              >
+                ×
+              </button>
+            </div>
+            <p className="text-sm text-gray-600 mt-2">
+              스크린샷/텍스트를 복사한 후 (Cmd+V 또는 Ctrl+V)로 붙여넣거나, 이미지 파일을 드래그 앤 드롭하세요
+            </p>
           </div>
-          <p className="text-sm text-gray-600 mt-2">
-            스크린샷/텍스트를 복사한 후 (Cmd+V 또는 Ctrl+V)로 붙여넣거나, 이미지 파일을 드래그 앤 드롭하세요
-          </p>
-        </div>
+        )}
 
         {/* 메인 콘텐츠 */}
         <div 
@@ -1691,10 +2163,8 @@ Please respond with only JSON, without any additional explanation.`;
                             // ** 표시 제거
                             sentence = sentence.replace(/\*\*/g, '').trim();
                             
-                            if (word && !selectedWords.includes(word)) {
-                              setSelectedWords([...selectedWords, word]);
-                              
-                              // 더블클릭 시 즉시 Firebase에서 단어 정보 가져오기 (문장 + 전체 텍스트 포함)
+                            // 더블클릭 시 Firebase에서 단어 정보 가져오기만 (선택 목록에는 아직 추가하지 않음)
+                            if (word) {
                               fetchWordFromFirebase(word, sentence, ocrText);
                               
                               // 시각적 피드백: 더블클릭 시 일시적으로 선택 표시
@@ -1717,9 +2187,6 @@ Please respond with only JSON, without any additional explanation.`;
                                   // Range 생성 실패 시 무시
                                 }
                               }
-                            } else if (word && selectedWords.includes(word)) {
-                              // 이미 선택된 단어를 다시 더블클릭하면 정보만 다시 가져오기 (문장 + 전체 텍스트 포함)
-                              fetchWordFromFirebase(word, sentence, ocrText);
                             }
                           }
                         } catch (error) {
@@ -1730,63 +2197,6 @@ Please respond with only JSON, without any additional explanation.`;
                   >
                     {ocrText || '텍스트를 찾을 수 없습니다.'}
                   </div>
-                  {selectedWords.length > 0 && (
-                    <div className="mt-6 pt-6 border-t border-gray-200">
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-sm font-semibold text-gray-700">선택된 단어들</h3>
-                        <button
-                          onClick={() => setSelectedWords([])}
-                          className="text-xs text-gray-500 hover:text-gray-700 px-2 py-1 rounded hover:bg-gray-100"
-                        >
-                          모두 삭제
-                        </button>
-                      </div>
-                      <div className="flex flex-wrap gap-2 items-center">
-                        {selectedWords.map((word, index) => (
-                          <button
-                            key={`${word}-${index}`}
-                            className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all"
-                            onClick={async () => {
-                              // 버튼 클릭 시 해당 단어 정보 가져오기
-                              // 문장 추출을 위해 텍스트에서 해당 단어가 포함된 문장 찾기
-                              const wordIndex = ocrText.toLowerCase().indexOf(word.toLowerCase());
-                              if (wordIndex >= 0) {
-                                // 단어 주변의 문장 추출
-                                let sentenceStart = wordIndex;
-                                let sentenceEnd = wordIndex + word.length;
-                                
-                                // 문장 시작 찾기
-                                while (sentenceStart > 0 && !/[.!?\n]/.test(ocrText[sentenceStart - 1])) {
-                                  sentenceStart--;
-                                }
-                                
-                                // 문장 끝 찾기
-                                while (sentenceEnd < ocrText.length && !/[.!?\n]/.test(ocrText[sentenceEnd])) {
-                                  sentenceEnd++;
-                                }
-                                
-                                let sentence = ocrText.substring(sentenceStart, sentenceEnd).trim();
-                                sentence = sentence.replace(/\*\*/g, '').trim();
-                                
-                                await fetchWordFromFirebase(word, sentence, ocrText);
-                              } else {
-                                await fetchWordFromFirebase(word, undefined, ocrText);
-                              }
-                            }}
-                          >
-                            {word}
-                          </button>
-                        ))}
-                        <button
-                          onClick={handleOrganizeWords}
-                          disabled={isLoadingWordData}
-                          className="px-4 py-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {isLoadingWordData ? '처리 중...' : '📚 단어 뜻/예문 정리'}
-                        </button>
-                      </div>
-                    </div>
-                  )}
                 </>
               )}
               </div>
@@ -1862,7 +2272,7 @@ Please respond with only JSON, without any additional explanation.`;
                       <button
                         onClick={() => {
                           // 마지막으로 더블 클릭한 단어 사용
-                          const wordToInput = lastDoubleClickedWord || clickedWordData?.word || selectedWords[selectedWords.length - 1] || '';
+                          const wordToInput = lastDoubleClickedWord || clickedWordData?.word || selectedWords[selectedWords.length - 1]?.word || '';
                           if (wordToInput) {
                             setClickedWordForInput(wordToInput);
                             setIsDirectInputOpen(true);
@@ -1923,12 +2333,15 @@ Please respond with only JSON, without any additional explanation.`;
                               >
                                 {/* 편집 아이콘 */}
                                 <button
-                                  onClick={() => setEditingMeaning({ 
-                                    word: clickedWordData.word, 
-                                    meaningIndex: originalIdx, 
-                                    source: 'clicked' 
-                                  })}
-                                  className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-gray-200 transition-colors"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setEditingMeaning({ 
+                                      word: clickedWordData.word, 
+                                      meaningIndex: originalIdx, 
+                                      source: 'clicked' 
+                                    });
+                                  }}
+                                  className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-gray-200 transition-colors z-10"
                                   title="뜻 편집"
                                 >
                                   <svg 
@@ -1950,7 +2363,7 @@ Please respond with only JSON, without any additional explanation.`;
                                   {meaning.definition}
                                 </div>
                                 {meaning.examples && meaning.examples.length > 0 && (
-                                  <div className="text-sm text-gray-600 space-y-1">
+                                  <div className="text-sm text-gray-600 space-y-1 mb-3">
                                     {meaning.examples.map((example: string, exIdx: number) => (
                                       <div key={exIdx} className="italic">
                                         {example}
@@ -1958,6 +2371,25 @@ Please respond with only JSON, without any additional explanation.`;
                                     ))}
                                   </div>
                                 )}
+                                
+                                {/* 단어장에 추가 버튼 */}
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleAddMeaningToWordsAndFlashcard(
+                                      clickedWordData.word,
+                                      meaning,
+                                      clickedWordData.pronunciation
+                                    );
+                                  }}
+                                  disabled={isSavingMeaning}
+                                  className="w-full mt-3 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold text-xs shadow-sm hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                  </svg>
+                                  {isSavingMeaning ? '저장 중...' : '단어장에 추가'}
+                                </button>
                               </div>
                             );
                           });
@@ -1966,6 +2398,23 @@ Please respond with only JSON, without any additional explanation.`;
                     ) : (
                       <div className="text-center py-8 text-gray-500">
                         단어 정보 없음
+                      </div>
+                    )}
+                    
+                    {/* ChatGPT에서 받아온 단어인 경우 저장 버튼 표시 */}
+                    {clickedWordData.isFromChatGPT && (
+                      <div className="mt-6 pt-6 border-t border-gray-200">
+                        {/* words 컬렉션에만 저장 */}
+                        <button
+                          onClick={handleSaveNewWordToWords}
+                          disabled={isSavingMeaning}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                          </svg>
+                          {isSavingMeaning ? '저장 중...' : 'words 컬렉션에만 저장'}
+                        </button>
                       </div>
                     )}
                   </>
@@ -2086,57 +2535,80 @@ Please respond with only JSON, without any additional explanation.`;
         </div>
 
         {/* 푸터 */}
-        <div className="p-6 border-t border-gray-100 flex-shrink-0 bg-white">
-          <div className="flex justify-between gap-3">
-            {showText && pastedImage ? (
-              // 텍스트 모드일 때: 이미지로 돌아가기 버튼
-              <button
-                onClick={() => {
-                  setShowText(false);
-                  setOcrText('');
-                }}
-                className="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors font-semibold"
-              >
-                ← 이미지로 돌아가기
-              </button>
-            ) : showText ? (
-              // 텍스트만 있을 때: 빈 공간
-              <div></div>
-            ) : pastedImage ? (
-              // 이미지 모드일 때: 텍스트로 바꾸기 버튼
-              <button
-                onClick={handleConvertToText}
-                className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold transition-all shadow-lg hover:shadow-xl"
-              >
-                📝 텍스트로 바꾸기
-              </button>
-            ) : (
-              <div></div>
-            )}
-            {showText && selectedWords.length > 0 && (
-              <div className="text-xs text-gray-500">
-                {selectedWords.length}개 단어 선택됨
-              </div>
-            )}
-            <div className="flex gap-3">
-              <button
-                onClick={handleCancel}
-                className="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors font-semibold"
-              >
-                취소
-              </button>
-              {showText && !isProcessingOCR && ocrText && (
+        {!embedded && (
+          <div className="p-6 border-t border-gray-100 flex-shrink-0 bg-white">
+            <div className="flex justify-between gap-3">
+              {showText && pastedImage ? (
+                // 텍스트 모드일 때: 이미지로 돌아가기 버튼
                 <button
-                  onClick={handleConfirm}
-                  className="px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold transition-all shadow-lg hover:shadow-xl"
+                  onClick={() => {
+                    setShowText(false);
+                    setOcrText('');
+                  }}
+                  className="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors font-semibold"
                 >
-                  확인
+                  ← 이미지로 돌아가기
                 </button>
+              ) : showText ? (
+                // 텍스트만 있을 때: 빈 공간
+                <div></div>
+              ) : pastedImage ? (
+                // 이미지 모드일 때: 텍스트로 바꾸기 버튼
+                <button
+                  onClick={handleConvertToText}
+                  className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold transition-all shadow-lg hover:shadow-xl"
+                >
+                  📝 텍스트로 바꾸기
+                </button>
+              ) : (
+                <div></div>
               )}
+              {showText && selectedWords.length > 0 && (
+                <div className="text-xs text-gray-500">
+                  {selectedWords.length}개 단어 선택됨
+                </div>
+              )}
+              <div className="flex gap-3">
+                <button
+                  onClick={handleCancel}
+                  className="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors font-semibold"
+                >
+                  취소
+                </button>
+                {showText && !isProcessingOCR && ocrText && (
+                  <button
+                    onClick={handleConfirm}
+                    className="px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold transition-all shadow-lg hover:shadow-xl"
+                  >
+                    확인
+                  </button>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
+  );
+
+  if (embedded) {
+    return contentComponent;
+  }
+
+  return (
+    <div 
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100] p-4"
+      onTouchStart={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+      onWheel={(e) => e.stopPropagation()}
+      style={{ touchAction: 'none' }}
+      onClick={(e) => {
+        // 모달 배경 클릭 시 이벤트 전파 방지
+        if (e.target === e.currentTarget) {
+          e.stopPropagation();
+        }
+      }}
+    >
+      {contentComponent}
 
       {/* 뜻 편집 모달 */}
       {editingMeaning && (
@@ -2182,6 +2654,20 @@ Please respond with only JSON, without any additional explanation.`;
               setClickedWordForInput(null);
               setClickedWordNotFound(false);
             }
+          }}
+          isSaving={isSavingMeaning}
+        />
+      )}
+
+      {/* ChatGPT 새 단어 저장 다이얼로그 */}
+      {showNewWordSaveDialog && newWordFromChatGPT && (
+        <NewWordSaveDialog
+          wordData={newWordFromChatGPT}
+          onSaveToWords={handleSaveNewWordToWords}
+          onSaveToFlashcard={handleSaveNewWordToFlashcard}
+          onClose={() => {
+            setShowNewWordSaveDialog(false);
+            setNewWordFromChatGPT(null);
           }}
           isSaving={isSavingMeaning}
         />
@@ -2332,3 +2818,131 @@ function DirectWordInputModal({
   );
 }
 
+// ChatGPT 새 단어 저장 다이얼로그 컴포넌트
+interface NewWordSaveDialogProps {
+  wordData: any;
+  onSaveToWords: () => void;
+  onSaveToFlashcard: () => void;
+  onClose: () => void;
+  isSaving: boolean;
+}
+
+function NewWordSaveDialog({
+  wordData,
+  onSaveToWords,
+  onSaveToFlashcard,
+  onClose,
+  isSaving
+}: NewWordSaveDialogProps) {
+  const selectedWord = wordData.word || '';
+  const pronunciation = wordData.pronunciation || '';
+  const meanings = (wordData.meanings || []).slice(0, 3); // 최대 3개만 표시
+
+  const definitionPreview = (definition: any): string => {
+    if (!definition) return '';
+    if (Array.isArray(definition)) {
+      return definition.map((e: any) => e.toString()).join(' · ');
+    }
+    return definition.toString();
+  };
+
+  return (
+    <div 
+      className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-[200] p-4"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          e.stopPropagation();
+        }
+      }}
+    >
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
+        <div className="p-6">
+          {/* 제목 */}
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">
+            새 단어 저장
+          </h2>
+
+          {/* 단어 정보 미리보기 */}
+          <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-5 border border-slate-200 mb-5">
+            {/* 단어 */}
+            <h3 className="text-3xl font-extrabold text-gray-900 mb-2">
+              {selectedWord}
+            </h3>
+
+            {/* 발음 */}
+            {pronunciation && (
+              <p className="text-base text-gray-600 mb-4">
+                {pronunciation}
+              </p>
+            )}
+
+            {/* 의미 미리보기 */}
+            <div className="space-y-3">
+              {meanings.map((meaning: any, index: number) => {
+                const definition = definitionPreview(meaning.definition);
+                return (
+                  <div key={index} className="flex items-start gap-3">
+                    <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center bg-indigo-500/10 rounded-lg">
+                      <span className="text-sm font-bold text-indigo-600">
+                        {index + 1}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-800 leading-relaxed flex-1 pt-0.5">
+                      {definition}
+                    </p>
+                  </div>
+                );
+              })}
+              {wordData.meanings && wordData.meanings.length > 3 && (
+                <p className="text-xs text-gray-500 pl-10">
+                  + {wordData.meanings.length - 3}개의 의미 더 있음
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* 안내 텍스트 */}
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">
+            어디에 저장할까요?
+          </h3>
+
+          {/* 버튼 그룹 */}
+          <div className="space-y-3">
+            {/* words 컬렉션에 저장 */}
+            <button
+              onClick={onSaveToWords}
+              disabled={isSaving}
+              className="w-full flex items-center justify-center gap-2 px-5 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold text-base shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              words 컬렉션에 저장
+            </button>
+
+            {/* 단어장에 바로 저장 */}
+            <button
+              onClick={onSaveToFlashcard}
+              disabled={isSaving}
+              className="w-full flex items-center justify-center gap-2 px-5 py-4 rounded-xl border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-bold text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+              단어장에 바로 저장
+            </button>
+
+            {/* 취소 버튼 */}
+            <button
+              onClick={onClose}
+              disabled={isSaving}
+              className="w-full py-3 text-gray-600 hover:text-gray-800 font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              다음에 할게요
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
