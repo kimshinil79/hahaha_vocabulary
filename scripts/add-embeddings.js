@@ -1,17 +1,23 @@
+require('dotenv').config();
 const { initializeApp } = require('firebase/app');
 const { getFirestore, doc, getDoc, updateDoc } = require('firebase/firestore');
 const { pipeline } = require('@xenova/transformers');
 
 // Firebase 설정
 const firebaseConfig = {
-  apiKey: 'AIzaSyAQY-tXbLL-u1MLGDo_keO2HmSnmaAOlF0',
-  authDomain: 'memorizewholetext.firebaseapp.com',
-  projectId: 'memorizewholetext',
-  storageBucket: 'memorizewholetext.appspot.com',
-  messagingSenderId: '1017620600279',
-  appId: '1:1017620600279:web:1ef89648b5c2d17f56e792',
-  measurementId: 'G-HYV1GDPW35',
+  apiKey: process.env.FIREBASE_API_KEY || process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN || process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID || process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET || process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID || process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID || process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
+
+if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
+  console.error('❌ Firebase 설정이 누락되었습니다. .env 파일에 Firebase 설정을 추가하세요.');
+  process.exit(1);
+}
 
 // Firebase 초기화
 const app = initializeApp(firebaseConfig);
