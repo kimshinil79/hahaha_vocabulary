@@ -8,6 +8,7 @@ import PasteImageModal from '@/components/PasteImageModal';
 import OCRResultModal from '@/components/OCRResultModal';
 import StatisticsView from '@/components/StatisticsView';
 import WordSearchModal from '@/components/WordSearchModal';
+import FlashcardListModal from '@/components/FlashcardListModal';
 import { isMobileDevice } from '@/utils/deviceDetection';
 
 type ViewMode = 'main' | 'statistics';
@@ -21,6 +22,7 @@ export default function Home() {
   const [isPasteImageOpen, setIsPasteImageOpen] = useState(false);
   const [tempImage, setTempImage] = useState<string | null>(null); // 임시 저장된 이미지
   const [isWordSearchOpen, setIsWordSearchOpen] = useState(false);
+  const [isFlashcardListOpen, setIsFlashcardListOpen] = useState(false);
   const [currentView, setCurrentView] = useState<ViewMode>('main');
 
   // 모바일 디바이스 감지 (클라이언트 사이드에서만 실행)
@@ -117,6 +119,13 @@ export default function Home() {
             </button>
             
             <button
+              onClick={() => setIsFlashcardListOpen(true)}
+              className="w-full px-4 py-3 rounded-lg text-white bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 transition-all duration-200 shadow-md hover:shadow-lg font-semibold text-sm"
+            >
+              📚 단어장
+            </button>
+            
+            <button
               onClick={() => setCurrentView('statistics')}
               className={`w-full px-4 py-3 rounded-lg font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg ${
                 currentView === 'statistics'
@@ -154,6 +163,11 @@ export default function Home() {
         isOpen={isWordSearchOpen}
         onClose={() => setIsWordSearchOpen(false)}
         user={user}
+      />
+
+      <FlashcardListModal
+        isOpen={isFlashcardListOpen}
+        onClose={() => setIsFlashcardListOpen(false)}
       />
 
       <OCRResultModal
