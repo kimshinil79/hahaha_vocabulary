@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/hooks/useAuth';
+import { StudyPattern } from './StudyPatternSelectionModal';
+import StudyCompleteModal, { StudyContinuationOption } from './StudyCompleteModal';
+import FlashcardGroupSelectionModal from './FlashcardGroupSelectionModal';
 
 interface WordMeaning {
   definition: string;
@@ -33,24 +36,39 @@ interface StudyWord {
 interface WordPracticeModalProps {
   isOpen: boolean;
   onClose: () => void;
+  studyPattern?: StudyPattern | null;
+  continuationOption?: StudyContinuationOption | 'groupSelection' | null;
+  selectedGroupId?: string | null;
+  onContinue?: (option: StudyContinuationOption | 'groupSelection', groupId?: string | null) => void;
 }
 
-export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModalProps) {
+export default function WordPracticeModal({ 
+  isOpen, 
+  onClose, 
+  studyPattern,
+  continuationOption,
+  selectedGroupId,
+  onContinue
+}: WordPracticeModalProps) {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [studyWords, setStudyWords] = useState<StudyWord[]>([]);
-  const [originalWords, setOriginalWords] = useState<string[]>([]); // 원래 선택된 30개 단어 저장
+  const [originalWords, setOriginalWords] = useState<string[]>([]); // 원래 선택된 단어 저장
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false); // 버튼 중복 클릭 방지
+  const [isStudyCompleteModalOpen, setIsStudyCompleteModalOpen] = useState(false);
+  const [studiedWordsCount, setStudiedWordsCount] = useState(0);
+  const [isGroupSelectionOpen, setIsGroupSelectionOpen] = useState(false);
+  const [flashcardDifficulties, setFlashcardDifficulties] = useState<{ [word: string]: string }>({});
 
   useEffect(() => {
-    if (isOpen && user) {
+    if (isOpen && user && studyPattern) {
       loadAndPrepareWords();
     }
-  }, [isOpen, user]);
+  }, [isOpen, user, studyPattern, continuationOption, selectedGroupId]);
 
   // 단어가 변경될 때 뜻 표시 초기화
   useEffect(() => {
@@ -82,17 +100,7 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
     setError(null);
 
     try {
-      const email = user.email;
-      const uid = user.uid;
-      
-      if (!email) {
-        throw new Error('이메일 정보를 찾을 수 없습니다.');
-      }
-
-      const username = email.split('@')[0];
-      const userDocId = `${username}${uid}`;
-
-      const userDocRef = doc(db, 'users', userDocId);
+      const userDocRef = doc(db, 'users', user.uid);
       const userDocSnap = await getDoc(userDocRef);
 
       if (!userDocSnap.exists()) {
@@ -102,62 +110,135 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
       }
 
       const userData = userDocSnap.data();
-      const meanings: MeaningsData = userData.meanings || {};
+      const flashcards = (userData.flashcards || []) as any[];
 
-      // 각 단어의 총 frequency 계산 및 예문 추출
-      const wordsWithFrequency: Array<{ word: string; frequency: number; wordData: WordData }> = [];
-      
-      Object.entries(meanings).forEach(([word, wordData]) => {
-        const totalFrequency = wordData.meanings?.reduce((sum, meaning) => sum + (meaning.frequency || 0), 0) || 0;
-        wordsWithFrequency.push({ word, frequency: totalFrequency, wordData });
-      });
-
-      // frequency 낮은 순으로 정렬, 같으면 알파벳 순
-      wordsWithFrequency.sort((a, b) => {
-        if (a.frequency !== b.frequency) {
-          return a.frequency - b.frequency;
-        }
-        return a.word.localeCompare(b.word, 'en', { sensitivity: 'base' });
-      });
-
-      // frequency별로 그룹화
-      const frequencyGroups: { [freq: number]: Array<{ word: string; frequency: number; wordData: WordData }> } = {};
-      wordsWithFrequency.forEach(item => {
-        if (!frequencyGroups[item.frequency]) {
-          frequencyGroups[item.frequency] = [];
-        }
-        frequencyGroups[item.frequency].push(item);
-      });
-
-      // 각 frequency 그룹 내에서 랜덤 셔플, 상위 2개 선택
-      const selectedWords: StudyWord[] = [];
-      const frequencies = Object.keys(frequencyGroups).map(Number).sort((a, b) => a - b);
-
-      for (const freq of frequencies) {
-        if (selectedWords.length >= 2) break;
-        
-        const group = frequencyGroups[freq];
-        // 그룹 내에서 랜덤 셔플
-        const shuffled = [...group].sort(() => Math.random() - 0.5);
-        
-        for (const item of shuffled) {
-          if (selectedWords.length >= 2) break;
-          
-          // 첫 번째 의미의 첫 번째 예문 사용, 없으면 빈 문자열
-          const firstExample = item.wordData.meanings?.[0]?.examples?.[0] || '';
-          selectedWords.push({
-            word: item.word,
-            example: firstExample,
-            frequency: item.frequency,
-            starCount: 0,
-            showDefinition: false,
-            wordData: item.wordData
-          });
-        }
+      if (flashcards.length === 0) {
+        setStudyWords([]);
+        setLoading(false);
+        return;
       }
 
+      // 옵션에 따라 단어 선택
+      let selectedFlashcards: any[] = [];
+
+      if (continuationOption === 'groupSelection' && selectedGroupId) {
+        // 그룹별 단어
+        selectedFlashcards = flashcards
+          .filter((card) => {
+            const groups = card.groups || [];
+            return groups.includes(selectedGroupId);
+          })
+          .sort((a, b) => {
+            const viewCountA = a.viewCount || 0;
+            const viewCountB = b.viewCount || 0;
+            return viewCountA - viewCountB;
+          })
+          .slice(0, 10);
+      } else if (continuationOption === StudyContinuationOption.lowFrequency) {
+        // 공부 빈도 낮은 단어 (viewCount 낮은 순)
+        selectedFlashcards = [...flashcards]
+          .sort((a, b) => {
+            const viewCountA = a.viewCount || 0;
+            const viewCountB = b.viewCount || 0;
+            return viewCountA - viewCountB;
+          })
+          .slice(0, 10);
+      } else if (continuationOption === StudyContinuationOption.hardWords) {
+        // 어려운 단어
+        const hardFlashcards = flashcards
+          .filter((card) => (card.difficulty || card.meaning?.difficulty) === 'hard')
+          .sort((a, b) => {
+            const viewCountA = a.viewCount || 0;
+            const viewCountB = b.viewCount || 0;
+            return viewCountA - viewCountB;
+          });
+        selectedFlashcards = hardFlashcards.slice(0, 10);
+      } else if (continuationOption === StudyContinuationOption.mix) {
+        // 1번과 2번 믹스
+        const lowList = [...flashcards].sort((a, b) => {
+          const viewCountA = a.viewCount || 0;
+          const viewCountB = b.viewCount || 0;
+          return viewCountA - viewCountB;
+        });
+        const hardList = flashcards
+          .filter((card) => (card.difficulty || card.meaning?.difficulty) === 'hard')
+          .sort((a, b) => {
+            const viewCountA = a.viewCount || 0;
+            const viewCountB = b.viewCount || 0;
+            return viewCountA - viewCountB;
+          });
+
+        const combined: any[] = [];
+        const seen = new Set<string>();
+
+        const addCards = (source: any[]) => {
+          for (const card of source) {
+            const word = card.word || '';
+            if (!word || seen.has(word)) continue;
+            seen.add(word);
+            combined.push(card);
+            if (combined.length >= 10) break;
+          }
+        };
+
+        addCards(lowList.slice(0, 5));
+        if (combined.length < 10) {
+          addCards(hardList.slice(0, 5));
+        }
+        if (combined.length < 10) {
+          addCards(lowList.slice(5));
+        }
+
+        selectedFlashcards = combined;
+      } else {
+        // 기본: viewCount 낮은 순으로 10개
+        selectedFlashcards = [...flashcards]
+          .sort((a, b) => {
+            const viewCountA = a.viewCount || 0;
+            const viewCountB = b.viewCount || 0;
+            return viewCountA - viewCountB;
+          })
+          .slice(0, 10);
+      }
+
+      // flashcards를 StudyWord 형식으로 변환
+      const selectedWords: StudyWord[] = selectedFlashcards.map((flashcard) => {
+        const meaning = flashcard.meaning || {};
+        const examples = meaning.examples || [];
+        const firstExample = Array.isArray(examples) ? (examples[0] || '') : (examples || '');
+        
+        // WordData 형식으로 변환
+        const wordData: WordData = {
+          meanings: [{
+            definition: meaning.definition || '',
+            examples: Array.isArray(examples) ? examples : [examples].filter(Boolean),
+            frequency: 0,
+            updatedAt: new Date().toISOString()
+          }],
+          updatedAt: new Date().toISOString()
+        };
+
+        const word = flashcard.word || '';
+        const difficulty = flashcard.difficulty || flashcard.meaning?.difficulty || 'normal';
+        
+        // 난이도 상태 초기화
+        setFlashcardDifficulties((prev) => ({
+          ...prev,
+          [word]: difficulty
+        }));
+
+        return {
+          word,
+          example: firstExample,
+          frequency: 0,
+          starCount: 0,
+          showDefinition: false,
+          wordData
+        };
+      });
+
       setStudyWords(selectedWords);
-      setOriginalWords(selectedWords.map(w => w.word)); // 원래 단어 목록 저장
+      setOriginalWords([]); // 공부 완료한 단어(별 2개)만 추가
       setCurrentIndex(0);
       setIsCompleted(false);
     } catch (err) {
@@ -176,6 +257,7 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
     setIsCompleted(false);
     setIsUpdating(false);
     setIsProcessing(false);
+    setFlashcardDifficulties({});
     onClose();
   };
 
@@ -229,29 +311,47 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
     }
   };
 
-  const handleSpeakExample = (e: React.MouseEvent) => {
-    e.stopPropagation(); // 카드 클릭 이벤트 전파 방지
-    if (!currentWord?.example || typeof window === 'undefined') return;
+  const handleUpdateDifficulty = async (difficulty: string) => {
+    if (!user || !currentWord) return;
+
+    const word = currentWord.word;
     
-    // 예문에서 영어 부분만 추출 (한국어 해석 제거)
-    let englishExample = currentWord.example;
-    const match = englishExample.match(/^(.+?)\(([^)]+)\)$/);
-    if (match) {
-      englishExample = match[1].trim();
-    }
-    
-    // Web Speech API 사용
-    if ('speechSynthesis' in window) {
-      // 이전 음성이 있다면 취소
-      window.speechSynthesis.cancel();
-      
-      const utterance = new SpeechSynthesisUtterance(englishExample);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.85; // 예문은 조금 느리게
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      
-      window.speechSynthesis.speak(utterance);
+    try {
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (!userDocSnap.exists()) {
+        throw new Error('사용자 데이터를 찾을 수 없습니다.');
+      }
+
+      const userData = userDocSnap.data();
+      const flashcards = (userData.flashcards || []) as any[];
+      const updatedFlashcards = [...flashcards];
+
+      // 해당 단어의 flashcard 찾아서 난이도 업데이트
+      const flashcardIndex = updatedFlashcards.findIndex((card) => card.word === word);
+      if (flashcardIndex >= 0) {
+        updatedFlashcards[flashcardIndex] = {
+          ...updatedFlashcards[flashcardIndex],
+          difficulty: difficulty,
+          updatedAt: new Date().toISOString()
+        };
+
+        // Firebase에 업데이트
+        await setDoc(userDocRef, {
+          flashcards: updatedFlashcards,
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+
+        // 로컬 상태 업데이트
+        setFlashcardDifficulties((prev) => ({
+          ...prev,
+          [word]: difficulty
+        }));
+      }
+    } catch (err) {
+      console.error('난이도 업데이트 오류:', err);
+      alert('난이도 업데이트 중 오류가 발생했습니다.');
     }
   };
 
@@ -291,6 +391,14 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
         setStudyWords(updatedWords);
         setCurrentIndex(newIndex);
 
+        // 별이 2개면 originalWords에 추가 (공부 완료한 단어)
+        setOriginalWords((prev) => {
+          if (!prev.includes(newStudyWords[wordIndex].word)) {
+            return [...prev, newStudyWords[wordIndex].word];
+          }
+          return prev;
+        });
+
         // 모든 카드가 삭제되면 완료 처리
         if (updatedWords.length === 0) {
           handleComplete();
@@ -315,20 +423,10 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
 
     setIsCompleted(true);
     setIsUpdating(true);
+    setStudiedWordsCount(originalWords.length);
 
     try {
-      const email = user.email;
-      const uid = user.uid;
-      
-      if (!email) {
-        throw new Error('이메일 정보를 찾을 수 없습니다.');
-      }
-
-      const username = email.split('@')[0];
-      const userDocId = `${username}${uid}`;
-
-      // Firebase에서 현재 meanings 데이터 가져오기
-      const userDocRef = doc(db, 'users', userDocId);
+      const userDocRef = doc(db, 'users', user.uid);
       const userDocSnap = await getDoc(userDocRef);
 
       if (!userDocSnap.exists()) {
@@ -336,41 +434,96 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
       }
 
       const userData = userDocSnap.data();
-      const meanings: MeaningsData = userData.meanings || {};
-      const updatedMeanings = { ...meanings };
+      const flashcards = (userData.flashcards || []) as any[];
+      const updatedFlashcards = [...flashcards];
 
-      // 원래 30개 단어의 frequency를 1씩 증가
+      // 공부한 단어들의 viewCount 업데이트
       for (const word of originalWords) {
-        if (updatedMeanings[word]) {
-          const wordData = updatedMeanings[word];
-          const updatedMeaningsArray = wordData.meanings?.map(meaning => ({
-            ...meaning,
-            frequency: (meaning.frequency || 0) + 1
-          })) || [];
-
-          updatedMeanings[word] = {
-            ...wordData,
-            meanings: updatedMeaningsArray,
+        const flashcardIndex = updatedFlashcards.findIndex((card) => card.word === word);
+        if (flashcardIndex >= 0) {
+          const currentViewCount = updatedFlashcards[flashcardIndex].viewCount || 0;
+          updatedFlashcards[flashcardIndex] = {
+            ...updatedFlashcards[flashcardIndex],
+            viewCount: currentViewCount + 1,
             updatedAt: new Date().toISOString()
           };
         }
       }
 
+      // studyHistory에 세션 저장
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+      const studyHistory = (userData.studyHistory || {}) as { [key: string]: any };
+      const dateData = studyHistory[dateStr] || {};
+      const sessions = Array.isArray(dateData.sessions) ? [...dateData.sessions] : [];
+
+      // 새 세션 추가
+      sessions.push({
+        time: timeStr,
+        words: originalWords
+      });
+
+      // 날짜별 데이터 업데이트
+      studyHistory[dateStr] = {
+        sessions: sessions,
+        count: sessions.length
+      };
+
       // Firebase에 업데이트
       await setDoc(userDocRef, {
-        meanings: updatedMeanings,
+        flashcards: updatedFlashcards,
+        studyHistory: studyHistory,
         updatedAt: new Date().toISOString()
       }, { merge: true });
 
       setIsUpdating(false);
+      
+      // 공부 완료 모달 표시
+      setTimeout(() => {
+        setIsStudyCompleteModalOpen(true);
+      }, 600);
     } catch (err) {
-      console.error('Frequency 업데이트 오류:', err);
-      setError(err instanceof Error ? err.message : 'Frequency 업데이트 중 오류가 발생했습니다.');
+      console.error('ViewCount 업데이트 오류:', err);
+      setError(err instanceof Error ? err.message : 'ViewCount 업데이트 중 오류가 발생했습니다.');
       setIsUpdating(false);
     }
   };
 
-  if (!isOpen) return null;
+  const handleStudyCompleteOption = (option: StudyContinuationOption | 'groupSelection') => {
+    if (option === StudyContinuationOption.goHome) {
+      setIsStudyCompleteModalOpen(false);
+      handleClose();
+      return;
+    }
+    
+    if (option === 'groupSelection') {
+      setIsGroupSelectionOpen(true);
+      return;
+    }
+    
+    // 다른 옵션들은 부모 컴포넌트에 알려서 새로운 옵션으로 다시 열기
+    setIsStudyCompleteModalOpen(false);
+    if (onContinue) {
+      onContinue(option);
+    } else {
+      handleClose();
+    }
+  };
+
+  const handleGroupSelect = (groupId: string | null, groupName: string | null) => {
+    setIsGroupSelectionOpen(false);
+    if (groupId && onContinue) {
+      // 그룹 선택 시 부모 컴포넌트에 알려서 다시 열기
+      setIsStudyCompleteModalOpen(false);
+      onContinue('groupSelection', groupId);
+    } else {
+      handleClose();
+    }
+  };
+
+  if (!isOpen || !studyPattern) return null;
 
   const currentWord = studyWords[currentIndex];
 
@@ -457,68 +610,103 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
                   </svg>
                 </button>
 
-                {/* 단어 */}
+                {/* 단어 - 패턴에 따라 표시 */}
                 <div className="text-center mb-6">
                   <h3 className="text-4xl font-extrabold text-gray-900 mb-2">
-                    {currentWord.word}
-                    {currentWord.showDefinition && currentWord.wordData.meanings?.[0]?.definition && (
-                      <span className="text-2xl text-gray-600 font-normal ml-2">
-                        ({currentWord.wordData.meanings[0].definition})
-                      </span>
-                    )}
+                    {(() => {
+                      const meaning = currentWord.wordData.meanings?.[0];
+                      const definition = meaning?.definition || '';
+                      
+                      // definition에서 한글 부분만 추출 (예: "[명사] 확신" -> "확신")
+                      const extractKorean = (def: string) => {
+                        const match = def.match(/\]\s*(.+)$/);
+                        return match ? match[1].trim() : def;
+                      };
+                      
+                      if (studyPattern === StudyPattern.englishToKorean) {
+                        // 영어 -> 한글: 영어 단어 표시
+                        return (
+                          <>
+                            {currentWord.word}
+                            {currentWord.showDefinition && definition && (
+                              <span className="text-2xl text-gray-600 font-normal ml-2">
+                                ({extractKorean(definition)})
+                              </span>
+                            )}
+                          </>
+                        );
+                      } else if (studyPattern === StudyPattern.koreanToEnglish) {
+                        // 한글 -> 영어: 한글 뜻 표시
+                        return (
+                          <>
+                            {currentWord.showDefinition ? (
+                              <>
+                                {extractKorean(definition)}
+                                <span className="text-2xl text-gray-600 font-normal ml-2">
+                                  ({currentWord.word})
+                                </span>
+                              </>
+                            ) : (
+                              extractKorean(definition) || definition
+                            )}
+                          </>
+                        );
+                      } else {
+                        // 한글 문장 -> 영어 문장: 예문의 한글 부분 표시
+                        const example = currentWord.example || '';
+                        const match = example.match(/\(([^)]+)\)/);
+                        const koreanPart = match ? match[1].trim() : '';
+                        
+                        return (
+                          <>
+                            {currentWord.showDefinition ? (
+                              <>
+                                {koreanPart}
+                                <span className="text-2xl text-gray-600 font-normal ml-2">
+                                  ({example.replace(/\([^)]+\)/, '').trim()})
+                                </span>
+                              </>
+                            ) : (
+                              koreanPart || example
+                            )}
+                          </>
+                        );
+                      }
+                    })()}
                   </h3>
                 </div>
 
-                {/* 예문 */}
-                {currentWord.example && (
-                  <div className="bg-white rounded-xl p-6 border border-cyan-200 relative">
-                    <div className="text-sm text-gray-500 mb-2 font-semibold">예문:</div>
-                    <div className="text-lg text-gray-700 italic pr-10">
-                      {(() => {
-                        // 예문에서 영어 부분과 한국어 해석 부분 분리
-                        const exampleText = currentWord.example;
-                        const match = exampleText.match(/^(.+?)\(([^)]+)\)$/);
-                        
-                        if (match) {
-                          const englishPart = match[1].trim();
-                          const koreanPart = match[2].trim();
-                          
-                          // showDefinition이 true면 해석도 보여주기, false면 영어만
-                          if (currentWord.showDefinition) {
-                            return `"${englishPart} (${koreanPart})"`;
-                          } else {
-                            return `"${englishPart}"`;
-                          }
-                        } else {
-                          // 해석이 없는 경우 그대로 표시
-                          return `"${exampleText}"`;
-                        }
-                      })()}
-                    </div>
-                    {/* 예문 스피커 아이콘 */}
-                    <button
-                      onClick={handleSpeakExample}
-                      className="absolute bottom-4 right-4 p-2 rounded-full bg-cyan-50/80 hover:bg-cyan-100 shadow-md hover:shadow-lg transition-all active:scale-95"
-                      aria-label="예문 발음 듣기"
-                      title="예문 발음 듣기"
-                    >
-                      <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        className="h-5 w-5 text-cyan-600" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor"
-                      >
-                        <path 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          strokeWidth={2} 
-                          d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" 
-                        />
-                      </svg>
-                    </button>
+                {/* 난이도 선택 버튼 */}
+                <div className="bg-white rounded-xl p-4 border border-cyan-200">
+                  <div className="text-sm text-gray-500 mb-3 font-semibold text-center">난이도</div>
+                  <div className="flex justify-center gap-2">
+                    {[
+                      { value: 'easy', label: '쉬움', color: 'bg-green-500 hover:bg-green-600', borderColor: 'border-green-600' },
+                      { value: 'normal', label: '보통', color: 'bg-orange-500 hover:bg-orange-600', borderColor: 'border-orange-600' },
+                      { value: 'hard', label: '어려움', color: 'bg-red-500 hover:bg-red-600', borderColor: 'border-red-600' }
+                    ].map((difficulty) => {
+                      const currentDifficulty = flashcardDifficulties[currentWord.word] || 'normal';
+                      const isSelected = currentDifficulty === difficulty.value;
+                      
+                      return (
+                        <button
+                          key={difficulty.value}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleUpdateDifficulty(difficulty.value);
+                          }}
+                          className={`px-4 py-2 rounded-lg border-2 font-semibold text-sm transition-all ${
+                            isSelected
+                              ? `${difficulty.color} text-white ${difficulty.borderColor}`
+                              : 'bg-transparent text-gray-600 border-gray-300 hover:bg-gray-50'
+                          }`}
+                        >
+                          {difficulty.label}
+                        </button>
+                      );
+                    })}
                   </div>
-                )}
+                </div>
               </div>
 
               {/* 네비게이션 버튼 */}
@@ -553,7 +741,7 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
           )}
 
           {/* 공부 완료 화면 */}
-          {isCompleted && (
+          {isCompleted && !isStudyCompleteModalOpen && (
             <div className="w-full max-w-lg text-center px-4">
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg border-2 border-green-200">
                 <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">🎉</div>
@@ -565,28 +753,7 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
                     <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-green-500 mx-auto mb-2"></div>
                     <p className="text-sm sm:text-base text-gray-600">Frequency 업데이트 중...</p>
                   </div>
-                ) : (
-                  <div>
-                    <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-4">
-                      모든 단어를 완료했습니다!<br />
-                      2개 단어의 frequency가 1씩 증가했습니다.
-                    </p>
-                    <div className="flex justify-center gap-3 sm:gap-4">
-                      <button
-                        onClick={handleClose}
-                        className="px-4 py-2 sm:px-5 sm:py-2 md:px-6 md:py-3 rounded-full bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 text-white text-sm sm:text-base md:text-lg font-semibold shadow-md hover:shadow-lg transition-all"
-                      >
-                        닫기
-                      </button>
-                      <button
-                        onClick={handleStudyMore}
-                        className="px-4 py-2 sm:px-5 sm:py-2 md:px-6 md:py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white text-sm sm:text-base md:text-lg font-semibold shadow-md hover:shadow-lg transition-all"
-                      >
-                        다른 단어 공부하기
-                      </button>
-                    </div>
-                  </div>
-                )}
+                ) : null}
               </div>
             </div>
           )}
@@ -604,6 +771,27 @@ export default function WordPracticeModal({ isOpen, onClose }: WordPracticeModal
           </div>
         </div>
       </div>
+
+      {/* 공부 완료 모달 */}
+      <StudyCompleteModal
+        isOpen={isStudyCompleteModalOpen}
+        onClose={() => {
+          setIsStudyCompleteModalOpen(false);
+          handleClose();
+        }}
+        onSelect={handleStudyCompleteOption}
+        studiedWordsCount={studiedWordsCount}
+      />
+
+      {/* 그룹 선택 모달 */}
+      {isGroupSelectionOpen && (
+        <FlashcardGroupSelectionModal
+          isOpen={isGroupSelectionOpen}
+          onClose={() => setIsGroupSelectionOpen(false)}
+          onSelect={handleGroupSelect}
+          user={user}
+        />
+      )}
     </div>
   );
 }

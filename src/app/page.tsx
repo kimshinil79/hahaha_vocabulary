@@ -9,6 +9,9 @@ import OCRResultModal from '@/components/OCRResultModal';
 import StatisticsView from '@/components/StatisticsView';
 import WordSearchModal from '@/components/WordSearchModal';
 import FlashcardListModal from '@/components/FlashcardListModal';
+import StudyPatternSelectionModal, { StudyPattern } from '@/components/StudyPatternSelectionModal';
+import WordPracticeModal from '@/components/WordPracticeModal';
+import { StudyContinuationOption } from '@/components/StudyCompleteModal';
 import { isMobileDevice } from '@/utils/deviceDetection';
 
 type ViewMode = 'main' | 'statistics';
@@ -23,6 +26,11 @@ export default function Home() {
   const [tempImage, setTempImage] = useState<string | null>(null); // 임시 저장된 이미지
   const [isWordSearchOpen, setIsWordSearchOpen] = useState(false);
   const [isFlashcardListOpen, setIsFlashcardListOpen] = useState(false);
+  const [isStudyPatternSelectionOpen, setIsStudyPatternSelectionOpen] = useState(false);
+  const [isWordPracticeOpen, setIsWordPracticeOpen] = useState(false);
+  const [selectedStudyPattern, setSelectedStudyPattern] = useState<StudyPattern | null>(null);
+  const [continuationOption, setContinuationOption] = useState<StudyContinuationOption | 'groupSelection' | null>(null);
+  const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
   const [currentView, setCurrentView] = useState<ViewMode>('main');
 
   // 모바일 디바이스 감지 (클라이언트 사이드에서만 실행)
@@ -126,6 +134,13 @@ export default function Home() {
             </button>
             
             <button
+              onClick={() => setIsStudyPatternSelectionOpen(true)}
+              className="w-full px-4 py-3 rounded-lg text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg font-semibold text-sm"
+            >
+              📖 공부 시작
+            </button>
+            
+            <button
               onClick={() => setCurrentView('statistics')}
               className={`w-full px-4 py-3 rounded-lg font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg ${
                 currentView === 'statistics'
@@ -168,6 +183,39 @@ export default function Home() {
       <FlashcardListModal
         isOpen={isFlashcardListOpen}
         onClose={() => setIsFlashcardListOpen(false)}
+      />
+
+      <StudyPatternSelectionModal
+        isOpen={isStudyPatternSelectionOpen}
+        onClose={() => setIsStudyPatternSelectionOpen(false)}
+        onSelect={(pattern) => {
+          setSelectedStudyPattern(pattern);
+          setIsStudyPatternSelectionOpen(false);
+          setIsWordPracticeOpen(true);
+        }}
+      />
+
+      <WordPracticeModal
+        isOpen={isWordPracticeOpen}
+        onClose={() => {
+          setIsWordPracticeOpen(false);
+          setSelectedStudyPattern(null);
+          setContinuationOption(null);
+          setSelectedGroupId(null);
+        }}
+        studyPattern={selectedStudyPattern}
+        continuationOption={continuationOption}
+        selectedGroupId={selectedGroupId}
+        onContinue={(option, groupId) => {
+          // 새로운 옵션으로 다시 열기
+          setContinuationOption(option);
+          setSelectedGroupId(groupId || null);
+          // 모달을 닫았다가 다시 열기 (새로운 옵션으로 로드하기 위해)
+          setIsWordPracticeOpen(false);
+          setTimeout(() => {
+            setIsWordPracticeOpen(true);
+          }, 100);
+        }}
       />
 
       <OCRResultModal

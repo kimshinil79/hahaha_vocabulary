@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/hooks/useAuth';
+import StudySessionsModal from './StudySessionsModal';
+import StudySessionWordsModal from './StudySessionWordsModal';
 
 interface WordAdditionData {
   date: string;
@@ -25,6 +27,12 @@ export default function StatisticsView() {
   const [displayedMonth, setDisplayedMonth] = useState(new Date());
   const [selectedChartPoint, setSelectedChartPoint] = useState<WordAdditionData | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState<{ x: number; y: number } | null>(null);
+  const [isSessionsModalOpen, setIsSessionsModalOpen] = useState(false);
+  const [isWordsModalOpen, setIsWordsModalOpen] = useState(false);
+  const [selectedDateStr, setSelectedDateStr] = useState<string>('');
+  const [selectedSessions, setSelectedSessions] = useState<any[]>([]);
+  const [selectedSessionWords, setSelectedSessionWords] = useState<any[]>([]);
+  const [selectedSessionTitle, setSelectedSessionTitle] = useState<string>('');
 
   useEffect(() => {
     if (user) {
@@ -235,7 +243,11 @@ export default function StatisticsView() {
       days.push(
         <button
           key={day}
-          onClick={() => setSelectedDate(date)}
+          onClick={async () => {
+            setSelectedDate(date);
+            // 날짜 클릭 시 세션 목록 표시
+            await handleDateClick(dateStr);
+          }}
           className={`h-7 rounded-md flex items-center justify-center text-xs font-medium transition-all ${
             selected ? 'ring-2 ring-teal-600' : ''
           } ${today && !selected ? 'ring-2 ring-red-500' : ''}`}
@@ -255,6 +267,63 @@ export default function StatisticsView() {
     const newMonth = new Date(displayedMonth);
     newMonth.setMonth(newMonth.getMonth() + delta);
     setDisplayedMonth(newMonth);
+  };
+
+  const handleDateClick = async (dateStr: string) => {
+    if (!user) return;
+
+    try {
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (!userDocSnap.exists()) return;
+
+      const userData = userDocSnap.data();
+      const studyHistory = userData?.studyHistory || {};
+      const dateData = studyHistory[dateStr];
+      const sessions = dateData?.sessions || [];
+
+      const formattedDate = new Date(dateStr).toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      setSelectedDateStr(formattedDate);
+      setSelectedSessions(sessions);
+      setIsSessionsModalOpen(true);
+    } catch (error) {
+      console.error('세션 로드 실패:', error);
+    }
+  };
+
+  const handleSessionSelected = async (session: any) => {
+    if (!user) return;
+
+    try {
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (!userDocSnap.exists()) return;
+
+      const userData = userDocSnap.data();
+      const flashcards = (userData.flashcards || []) as any[];
+      const words = session.words || [];
+
+      // 단어 목록 가져오기
+      const wordList = words
+        .map((wordStr: string) => {
+          return flashcards.find((card) => card.word === wordStr);
+        })
+        .filter(Boolean);
+
+      const time = session.time || '';
+      setSelectedSessionTitle(`${selectedDateStr} ${time}`);
+      setSelectedSessionWords(wordList);
+      setIsWordsModalOpen(true);
+    } catch (error) {
+      console.error('단어 로드 실패:', error);
+    }
   };
 
   if (isLoading) {
@@ -505,6 +574,22 @@ export default function StatisticsView() {
         </div>
       </div>
 
+      {/* 세션 목록 모달 */}
+      <StudySessionsModal
+        isOpen={isSessionsModalOpen}
+        onClose={() => setIsSessionsModalOpen(false)}
+        formattedDate={selectedDateStr}
+        sessions={selectedSessions}
+        onSessionSelected={handleSessionSelected}
+      />
+
+      {/* 단어 목록 모달 */}
+      <StudySessionWordsModal
+        isOpen={isWordsModalOpen}
+        onClose={() => setIsWordsModalOpen(false)}
+        title={selectedSessionTitle}
+        wordList={selectedSessionWords}
+      />
     </div>
   );
 }
