@@ -11,8 +11,10 @@ import WordSearchModal from '@/components/WordSearchModal';
 import FlashcardListModal from '@/components/FlashcardListModal';
 import StudyPatternSelectionModal, { StudyPattern } from '@/components/StudyPatternSelectionModal';
 import WordPracticeModal from '@/components/WordPracticeModal';
-import { StudyContinuationOption } from '@/components/StudyCompleteModal';
+import StudyCompleteModal, { StudyContinuationOption } from '@/components/StudyCompleteModal';
+import FlashcardGroupSelectionModal from '@/components/FlashcardGroupSelectionModal';
 import { isMobileDevice } from '@/utils/deviceDetection';
+import { useStudySession } from '@/contexts/StudySessionContext';
 
 type ViewMode = 'main' | 'statistics';
 
@@ -28,10 +30,14 @@ export default function Home() {
   const [isFlashcardListOpen, setIsFlashcardListOpen] = useState(false);
   const [isStudyPatternSelectionOpen, setIsStudyPatternSelectionOpen] = useState(false);
   const [isWordPracticeOpen, setIsWordPracticeOpen] = useState(false);
+  const [isStudyCompleteModalOpen, setIsStudyCompleteModalOpen] = useState(false);
+  const [isGroupSelectionModalOpen, setIsGroupSelectionModalOpen] = useState(false);
   const [selectedStudyPattern, setSelectedStudyPattern] = useState<StudyPattern | null>(null);
   const [continuationOption, setContinuationOption] = useState<StudyContinuationOption | 'groupSelection' | null>(null);
   const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
+  const [studiedWordsCount, setStudiedWordsCount] = useState(0);
   const [currentView, setCurrentView] = useState<ViewMode>('main');
+  const { setStudyPattern: setContextStudyPattern, setContinuationOption: setContextContinuationOption, setSelectedGroupId: setContextSelectedGroupId } = useStudySession();
 
   // 모바일 디바이스 감지 (클라이언트 사이드에서만 실행)
   useEffect(() => {
@@ -206,16 +212,66 @@ export default function Home() {
         studyPattern={selectedStudyPattern}
         continuationOption={continuationOption}
         selectedGroupId={selectedGroupId}
-        onContinue={(option, groupId) => {
-          // 새로운 옵션으로 다시 열기
-          setContinuationOption(option);
-          setSelectedGroupId(groupId || null);
-          // 모달을 닫았다가 다시 열기 (새로운 옵션으로 로드하기 위해)
+        onStudyComplete={(count) => {
+          // 공부 완료 시 WordPracticeModal 닫고 StudyCompleteModal 열기
           setIsWordPracticeOpen(false);
+          setStudiedWordsCount(count);
+          setTimeout(() => {
+            setIsStudyCompleteModalOpen(true);
+          }, 100);
+        }}
+      />
+
+      <StudyCompleteModal
+        isOpen={isStudyCompleteModalOpen}
+        onClose={() => {
+          setIsStudyCompleteModalOpen(false);
+        }}
+        studiedWordsCount={studiedWordsCount}
+        onSelect={async (option) => {
+          setIsStudyCompleteModalOpen(false);
+          
+          if (option === StudyContinuationOption.goHome) {
+            // 홈으로 가기
+            setSelectedStudyPattern(null);
+            setContinuationOption(null);
+            setSelectedGroupId(null);
+            return;
+          }
+          
+          if (option === 'groupSelection') {
+            // 그룹 선택 모달 열기
+            setContinuationOption(option);
+            setIsGroupSelectionModalOpen(true);
+            return; // 그룹 선택 모달이 닫힐 때까지 WordPracticeModal을 열지 않음
+          } else {
+            setContinuationOption(option);
+            setSelectedGroupId(null);
+            
+            // 새로운 단어 세트 로드 후 WordPracticeModal 열기
+            // 단어 로드는 WordPracticeModal 내부에서 처리하도록 함
+            setTimeout(() => {
+              setIsWordPracticeOpen(true);
+            }, 100);
+          }
+        }}
+      />
+
+      <FlashcardGroupSelectionModal
+        isOpen={isGroupSelectionModalOpen}
+        onClose={() => {
+          setIsGroupSelectionModalOpen(false);
+        }}
+        onSelect={(groupId, groupName) => {
+          setIsGroupSelectionModalOpen(false);
+          setSelectedGroupId(groupId);
+          
+          // 그룹 선택 후 WordPracticeModal 열기
           setTimeout(() => {
             setIsWordPracticeOpen(true);
           }, 100);
         }}
+        user={user}
       />
 
       <OCRResultModal

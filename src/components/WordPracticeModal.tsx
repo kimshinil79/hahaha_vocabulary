@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/hooks/useAuth';
 import { StudyPattern } from './StudyPatternSelectionModal';
-import StudyCompleteModal, { StudyContinuationOption } from './StudyCompleteModal';
+import { StudyContinuationOption } from './StudyCompleteModal';
 import FlashcardGroupSelectionModal from './FlashcardGroupSelectionModal';
 
 interface WordMeaning {
@@ -39,7 +39,7 @@ interface WordPracticeModalProps {
   studyPattern?: StudyPattern | null;
   continuationOption?: StudyContinuationOption | 'groupSelection' | null;
   selectedGroupId?: string | null;
-  onContinue?: (option: StudyContinuationOption | 'groupSelection', groupId?: string | null) => void;
+  onStudyComplete?: (studiedWordsCount: number) => void; // 공부 완료 시 호출
 }
 
 export default function WordPracticeModal({ 
@@ -48,7 +48,7 @@ export default function WordPracticeModal({
   studyPattern,
   continuationOption,
   selectedGroupId,
-  onContinue
+  onStudyComplete
 }: WordPracticeModalProps) {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -59,16 +59,55 @@ export default function WordPracticeModal({
   const [isCompleted, setIsCompleted] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false); // 버튼 중복 클릭 방지
-  const [isStudyCompleteModalOpen, setIsStudyCompleteModalOpen] = useState(false);
-  const [studiedWordsCount, setStudiedWordsCount] = useState(0);
   const [isGroupSelectionOpen, setIsGroupSelectionOpen] = useState(false);
   const [flashcardDifficulties, setFlashcardDifficulties] = useState<{ [word: string]: string }>({});
+  // 내부에서 관리하는 공부 옵션 (부모에서 받은 옵션 또는 내부에서 선택한 옵션)
+  const [internalContinuationOption, setInternalContinuationOption] = useState<StudyContinuationOption | 'groupSelection' | null>(null);
+  const [internalSelectedGroupId, setInternalSelectedGroupId] = useState<string | null>(null);
+  // 수동으로 로드 중인지 추적하는 플래그 (useEffect가 다시 실행되지 않도록)
+  const isManualLoadingRef = useRef(false);
 
   useEffect(() => {
-    if (isOpen && user && studyPattern) {
-      loadAndPrepareWords();
+    // 모달이 처음 열릴 때만 단어 로드 (props가 변경될 때만)
+    // 수동 로드 중이면 useEffect에서 로드하지 않음
+    if (isOpen && user && studyPattern && !isManualLoadingRef.current) {
+      console.log('[WordPracticeModal] useEffect - 모달 열림, 단어 로드 시작:', {
+        isOpen,
+        hasUser: !!user,
+        studyPattern,
+        continuationOption,
+        selectedGroupId,
+        isManualLoading: isManualLoadingRef.current
+      });
+      // props가 변경되면 내부 상태도 동기화
+      setInternalContinuationOption(continuationOption || null);
+      setInternalSelectedGroupId(selectedGroupId || null);
+      // 모달이 처음 열릴 때만 로드 (내부에서 옵션 변경 시에는 직접 loadAndPrepareWords 호출)
+      if (continuationOption === undefined && selectedGroupId === undefined) {
+        // props가 없으면 기본 옵션으로 로드
+        loadAndPrepareWords(null, null);
+      } else {
+        // props가 있으면 해당 옵션으로 로드
+        loadAndPrepareWords(continuationOption || null, selectedGroupId || null);
+      }
+    } else if (isManualLoadingRef.current) {
+      console.log('[WordPracticeModal] useEffect - 수동 로드 중이므로 스킵');
     }
-  }, [isOpen, user, studyPattern, continuationOption, selectedGroupId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, user, studyPattern]); // continuationOption과 selectedGroupId는 제거 (내부에서 관리)
+  
+  // studyWords 상태 변경 추적
+  useEffect(() => {
+    console.log('[WordPracticeModal] studyWords 상태 변경:', {
+      count: studyWords.length,
+      words: studyWords.map(w => w.word),
+      currentIndex,
+      isCompleted,
+      loading,
+      isManualLoading: isManualLoadingRef.current
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [studyWords.length, currentIndex, isCompleted, loading]);
 
   // 단어가 변경될 때 뜻 표시 초기화
   useEffect(() => {
@@ -90,11 +129,28 @@ export default function WordPracticeModal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]); // currentIndex가 변경될 때만 실행
 
-  const loadAndPrepareWords = async () => {
+  const loadAndPrepareWords = async (
+    optionOverride?: StudyContinuationOption | 'groupSelection' | null,
+    groupIdOverride?: string | null
+  ): Promise<StudyWord[]> => {
+    console.log('[WordPracticeModal] loadAndPrepareWords 호출:', {
+      optionOverride,
+      groupIdOverride,
+      internalContinuationOption,
+      internalSelectedGroupId,
+      studyPattern
+    });
+    
     if (!user) {
       setError('로그인이 필요합니다');
-      return;
+      return [];
     }
+
+    // 파라미터로 전달된 값 우선, 없으면 내부 상태 사용
+    const currentOption = optionOverride !== undefined ? optionOverride : internalContinuationOption;
+    const currentGroupId = groupIdOverride !== undefined ? groupIdOverride : internalSelectedGroupId;
+
+    console.log('[WordPracticeModal] 사용할 옵션:', { currentOption, currentGroupId });
 
     setLoading(true);
     setError(null);
@@ -106,7 +162,7 @@ export default function WordPracticeModal({
       if (!userDocSnap.exists()) {
         setStudyWords([]);
         setLoading(false);
-        return;
+        return [];
       }
 
       const userData = userDocSnap.data();
@@ -115,18 +171,27 @@ export default function WordPracticeModal({
       if (flashcards.length === 0) {
         setStudyWords([]);
         setLoading(false);
-        return;
+        return [];
       }
 
       // 옵션에 따라 단어 선택
       let selectedFlashcards: any[] = [];
 
-      if (continuationOption === 'groupSelection' && selectedGroupId) {
+      // currentOption이 null이면 기본 옵션으로 처리 (viewCount 낮은 순)
+      if (currentOption === null || currentOption === undefined) {
+        selectedFlashcards = [...flashcards]
+          .sort((a, b) => {
+            const viewCountA = a.viewCount || 0;
+            const viewCountB = b.viewCount || 0;
+            return viewCountA - viewCountB;
+          })
+          .slice(0, 10);
+      } else if (currentOption === 'groupSelection' && currentGroupId) {
         // 그룹별 단어
         selectedFlashcards = flashcards
           .filter((card) => {
             const groups = card.groups || [];
-            return groups.includes(selectedGroupId);
+            return groups.includes(currentGroupId);
           })
           .sort((a, b) => {
             const viewCountA = a.viewCount || 0;
@@ -134,7 +199,16 @@ export default function WordPracticeModal({
             return viewCountA - viewCountB;
           })
           .slice(0, 10);
-      } else if (continuationOption === StudyContinuationOption.lowFrequency) {
+      } else if (currentOption === 'groupSelection' && !currentGroupId) {
+        // 모든 그룹 (전체 단어에서 viewCount 낮은 순)
+        selectedFlashcards = [...flashcards]
+          .sort((a, b) => {
+            const viewCountA = a.viewCount || 0;
+            const viewCountB = b.viewCount || 0;
+            return viewCountA - viewCountB;
+          })
+          .slice(0, 10);
+      } else if (currentOption === StudyContinuationOption.lowFrequency) {
         // 공부 빈도 낮은 단어 (viewCount 낮은 순)
         selectedFlashcards = [...flashcards]
           .sort((a, b) => {
@@ -143,7 +217,7 @@ export default function WordPracticeModal({
             return viewCountA - viewCountB;
           })
           .slice(0, 10);
-      } else if (continuationOption === StudyContinuationOption.hardWords) {
+      } else if (currentOption === StudyContinuationOption.hardWords) {
         // 어려운 단어
         const hardFlashcards = flashcards
           .filter((card) => (card.difficulty || card.meaning?.difficulty) === 'hard')
@@ -153,7 +227,7 @@ export default function WordPracticeModal({
             return viewCountA - viewCountB;
           });
         selectedFlashcards = hardFlashcards.slice(0, 10);
-      } else if (continuationOption === StudyContinuationOption.mix) {
+      } else if (currentOption === StudyContinuationOption.mix) {
         // 1번과 2번 믹스
         const lowList = [...flashcards].sort((a, b) => {
           const viewCountA = a.viewCount || 0;
@@ -237,13 +311,50 @@ export default function WordPracticeModal({
         };
       });
 
-      setStudyWords(selectedWords);
+      console.log('[WordPracticeModal] 로드된 공부 세트:', {
+        option: currentOption,
+        groupId: currentGroupId,
+        selectedWordsCount: selectedWords.length,
+        words: selectedWords.map(w => w.word),
+        studyPattern: studyPattern,
+        selectedFlashcardsCount: selectedFlashcards.length
+      });
+      
+      // 상태 업데이트 - 순서가 중요함
       setOriginalWords([]); // 공부 완료한 단어(별 2개)만 추가
-      setCurrentIndex(0);
-      setIsCompleted(false);
+      setIsCompleted(false); // 먼저 완료 상태 해제
+      setIsUpdating(false);
+      setIsProcessing(false);
+      
+      console.log('[WordPracticeModal] setStudyWords 호출 전:', {
+        selectedWordsCount: selectedWords.length,
+        isManualLoading: isManualLoadingRef.current
+      });
+      
+      // 함수형 업데이트를 사용하여 항상 최신 상태를 설정
+      setStudyWords(() => {
+        console.log('[WordPracticeModal] setStudyWords 함수형 업데이트 실행:', {
+          selectedWordsCount: selectedWords.length,
+          words: selectedWords.map(w => w.word)
+        });
+        return selectedWords;
+      });
+      
+      // currentIndex는 단어가 설정된 후에 설정 (단어가 있을 때만 0으로 설정)
+      if (selectedWords.length > 0) {
+        setCurrentIndex(0);
+      } else {
+        setCurrentIndex(0);
+      }
+      
+      console.log('[WordPracticeModal] setStudyWords 호출 완료 - selectedWords.length:', selectedWords.length, 'currentIndex: 0', 'isCompleted:', false);
+      
+      // 로드된 단어 목록 반환
+      return selectedWords;
     } catch (err) {
       console.error('단어 데이터 로드 오류:', err);
       setError(err instanceof Error ? err.message : '단어 데이터를 불러오는 중 오류가 발생했습니다.');
+      return [];
     } finally {
       setLoading(false);
     }
@@ -258,6 +369,10 @@ export default function WordPracticeModal({
     setIsUpdating(false);
     setIsProcessing(false);
     setFlashcardDifficulties({});
+    setInternalContinuationOption(null);
+    setInternalSelectedGroupId(null);
+    setIsGroupSelectionOpen(false);
+    isManualLoadingRef.current = false; // 수동 로드 플래그 리셋
     onClose();
   };
 
@@ -392,16 +507,22 @@ export default function WordPracticeModal({
         setCurrentIndex(newIndex);
 
         // 별이 2개면 originalWords에 추가 (공부 완료한 단어)
+        const completedWord = newStudyWords[wordIndex].word;
         setOriginalWords((prev) => {
-          if (!prev.includes(newStudyWords[wordIndex].word)) {
-            return [...prev, newStudyWords[wordIndex].word];
+          if (!prev.includes(completedWord)) {
+            return [...prev, completedWord];
           }
           return prev;
         });
 
         // 모든 카드가 삭제되면 완료 처리
         if (updatedWords.length === 0) {
-          handleComplete();
+          // originalWords 상태 업데이트를 기다리지 않고, 직접 계산한 단어 목록을 전달
+          const finalCompletedWords = [...originalWords];
+          if (!finalCompletedWords.includes(completedWord)) {
+            finalCompletedWords.push(completedWord);
+          }
+          handleComplete(finalCompletedWords);
           setIsProcessing(false);
         } else {
           setIsProcessing(false); // 처리 완료
@@ -418,12 +539,19 @@ export default function WordPracticeModal({
     }, 500); // 0.5초 후 이동
   };
 
-  const handleComplete = async () => {
-    if (!user || originalWords.length === 0) return;
+  const handleComplete = async (completedWords?: string[]) => {
+    // completedWords가 전달되면 사용하고, 없으면 originalWords 상태 사용
+    const wordsToSave = completedWords || originalWords;
+    
+    if (!user || wordsToSave.length === 0) return;
 
     setIsCompleted(true);
     setIsUpdating(true);
-    setStudiedWordsCount(originalWords.length);
+    
+    // originalWords 상태도 업데이트 (UI 동기화용)
+    if (completedWords) {
+      setOriginalWords(completedWords);
+    }
 
     try {
       const userDocRef = doc(db, 'users', user.uid);
@@ -438,7 +566,7 @@ export default function WordPracticeModal({
       const updatedFlashcards = [...flashcards];
 
       // 공부한 단어들의 viewCount 업데이트
-      for (const word of originalWords) {
+      for (const word of wordsToSave) {
         const flashcardIndex = updatedFlashcards.findIndex((card) => card.word === word);
         if (flashcardIndex >= 0) {
           const currentViewCount = updatedFlashcards[flashcardIndex].viewCount || 0;
@@ -462,7 +590,7 @@ export default function WordPracticeModal({
       // 새 세션 추가
       sessions.push({
         time: timeStr,
-        words: originalWords
+        words: wordsToSave
       });
 
       // 날짜별 데이터 업데이트
@@ -480,10 +608,17 @@ export default function WordPracticeModal({
 
       setIsUpdating(false);
       
-      // 공부 완료 모달 표시
-      setTimeout(() => {
-        setIsStudyCompleteModalOpen(true);
-      }, 600);
+      // 공부 완료 - 부모 컴포넌트에 알림
+      if (onStudyComplete) {
+        setTimeout(() => {
+          onStudyComplete(wordsToSave.length);
+        }, 600);
+      } else {
+        // onStudyComplete가 없으면 그냥 닫기
+        setTimeout(() => {
+          onClose();
+        }, 600);
+      }
     } catch (err) {
       console.error('ViewCount 업데이트 오류:', err);
       setError(err instanceof Error ? err.message : 'ViewCount 업데이트 중 오류가 발생했습니다.');
@@ -491,44 +626,133 @@ export default function WordPracticeModal({
     }
   };
 
-  const handleStudyCompleteOption = (option: StudyContinuationOption | 'groupSelection') => {
-    if (option === StudyContinuationOption.goHome) {
-      setIsStudyCompleteModalOpen(false);
-      handleClose();
-      return;
-    }
-    
-    if (option === 'groupSelection') {
-      setIsGroupSelectionOpen(true);
-      return;
-    }
-    
-    // 다른 옵션들은 부모 컴포넌트에 알려서 새로운 옵션으로 다시 열기
-    setIsStudyCompleteModalOpen(false);
-    if (onContinue) {
-      onContinue(option);
-    } else {
-      handleClose();
-    }
-  };
+  // handleStudyCompleteOption은 이제 page.tsx에서 처리하므로 제거됨
 
-  const handleGroupSelect = (groupId: string | null, groupName: string | null) => {
+  const handleGroupSelect = async (groupId: string | null, groupName: string | null) => {
+    console.log('[WordPracticeModal] handleGroupSelect 호출:', { groupId, groupName });
     setIsGroupSelectionOpen(false);
-    if (groupId && onContinue) {
-      // 그룹 선택 시 부모 컴포넌트에 알려서 다시 열기
-      setIsStudyCompleteModalOpen(false);
-      onContinue('groupSelection', groupId);
+    
+    // 그룹 선택 시 내부에서 바로 새로운 공부 세트 로드 (같은 studyPattern 유지)
+    console.log('[WordPracticeModal] 그룹 선택 후 새로운 공부 세트 로드 시작 - groupId:', groupId, 'studyPattern:', studyPattern);
+    
+    // 수동 로드 플래그 설정 (useEffect가 실행되지 않도록)
+    isManualLoadingRef.current = true;
+    
+    // 먼저 완료 상태를 닫고 초기화
+    setIsCompleted(false);
+    setIsUpdating(false);
+    setIsProcessing(false);
+    setError(null);
+    
+    // 내부 상태 업데이트
+    setInternalContinuationOption('groupSelection');
+    setInternalSelectedGroupId(groupId);
+    
+    // 단어 목록 초기화 (새로운 단어 로드 전에)
+    setStudyWords([]);
+    setOriginalWords([]);
+    setCurrentIndex(0);
+    setFlashcardDifficulties({});
+    
+    // 상태 업데이트가 완료되도록 약간의 딜레이
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    // 새로운 단어 로드 (반환값으로 로드된 단어 확인)
+    const loadedWords = await loadAndPrepareWords('groupSelection', groupId);
+    
+    console.log('[WordPracticeModal] loadAndPrepareWords 완료 직후 (그룹 선택):', {
+      loadedWordsCount: loadedWords.length,
+      isManualLoading: isManualLoadingRef.current
+    });
+    
+    // 로드 완료 후 확실히 완료 상태 해제
+    setIsCompleted(false);
+    setIsUpdating(false);
+    
+    // 상태 업데이트 확인을 위한 추가 딜레이 (React 상태 업데이트가 완료될 때까지)
+    // 플래그는 상태 업데이트가 완료된 후에 해제하여 useEffect가 실행되지 않도록 함
+    await new Promise(resolve => setTimeout(resolve, 200));
+    
+    // 수동 로드 완료 후 플래그 해제 (상태 업데이트가 완료된 후)
+    isManualLoadingRef.current = false;
+    
+    // 상태 업데이트 확인을 위한 추가 딜레이
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    console.log('[WordPracticeModal] 그룹 선택 후 새로운 공부 세트 로드 완료 - 최종 상태 확인:', {
+      loadedWordsCount: loadedWords.length,
+      studyWordsLength: studyWords.length, // React 상태는 비동기이므로 이 값은 아직 업데이트되지 않았을 수 있음
+      isCompleted: false,
+      loading: false
+    });
+    
+    // 로드된 단어가 없으면 에러 표시
+    if (loadedWords.length === 0) {
+      setError('선택된 그룹에 해당하는 단어가 없습니다.');
     } else {
-      handleClose();
+      // 단어가 로드되었으면 에러 초기화 및 강제 리렌더링
+      setError(null);
+      // 상태 업데이트를 강제하기 위해 약간의 딜레이 후 다시 한 번 설정
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      // 상태가 제대로 업데이트되었는지 확인하고 필요하면 강제 업데이트
+      setStudyWords((prevWords) => {
+        // 이미 올바른 값이 설정되어 있으면 그대로 반환
+        if (prevWords.length === loadedWords.length && prevWords.length > 0) {
+          console.log('[WordPracticeModal] 상태가 이미 올바르게 설정됨 (그룹 선택):', prevWords.length);
+          return prevWords;
+        }
+        // 아니면 다시 설정
+        console.log('[WordPracticeModal] 상태 강제 업데이트 (그룹 선택):', {
+          prevLength: prevWords.length,
+          loadedLength: loadedWords.length
+        });
+        return loadedWords;
+      });
+      
+      // 추가로 currentIndex도 확실히 설정
+      if (loadedWords.length > 0) {
+        setCurrentIndex(0);
+      }
+      
+      // 강제 리렌더링을 위한 추가 상태 업데이트
+      await new Promise(resolve => setTimeout(resolve, 50));
+      setIsCompleted(false); // 한 번 더 확실히
     }
   };
 
   if (!isOpen || !studyPattern) return null;
 
   const currentWord = studyWords[currentIndex];
+  
+  // 디버깅: 현재 상태 로그
+  const shouldShowCard = !loading && !error && !isCompleted && !!currentWord;
+  console.log('[WordPracticeModal] 렌더링 상태:', {
+    isOpen,
+    studyPattern,
+    loading,
+    isCompleted,
+    studyWordsLength: studyWords.length,
+    currentIndex,
+    hasCurrentWord: !!currentWord,
+    currentWordText: currentWord?.word,
+    isGroupSelectionOpen,
+    error,
+    // 카드 표시 조건 체크
+    shouldShowCard,
+    shouldShowEmpty: !loading && !error && !isCompleted && studyWords.length === 0,
+    shouldShowCompleted: isCompleted && studyWords.length === 0,
+    // 렌더링 조건 상세
+    '!loading': !loading,
+    '!error': !error,
+    '!isCompleted': !isCompleted,
+    '!!currentWord': !!currentWord,
+    'studyWords.length > 0': studyWords.length > 0,
+    'currentIndex valid': currentIndex >= 0 && currentIndex < studyWords.length
+  });
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[200] p-4">
       <div className="bg-white rounded-2xl shadow-xl ring-1 ring-black/5 w-full max-w-2xl flex flex-col overflow-hidden">
         {/* 헤더 */}
         <div className="p-6 border-b border-gray-100 flex-shrink-0 bg-white">
@@ -740,8 +964,8 @@ export default function WordPracticeModal({
             </div>
           )}
 
-          {/* 공부 완료 화면 */}
-          {isCompleted && !isStudyCompleteModalOpen && (
+          {/* 공부 완료 화면 - 완료 모달이 열려있지 않고, 단어가 없을 때만 표시 */}
+          {isCompleted && studyWords.length === 0 && (
             <div className="w-full max-w-lg text-center px-4">
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg border-2 border-green-200">
                 <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">🎉</div>
@@ -771,17 +995,6 @@ export default function WordPracticeModal({
           </div>
         </div>
       </div>
-
-      {/* 공부 완료 모달 */}
-      <StudyCompleteModal
-        isOpen={isStudyCompleteModalOpen}
-        onClose={() => {
-          setIsStudyCompleteModalOpen(false);
-          handleClose();
-        }}
-        onSelect={handleStudyCompleteOption}
-        studiedWordsCount={studiedWordsCount}
-      />
 
       {/* 그룹 선택 모달 */}
       {isGroupSelectionOpen && (
