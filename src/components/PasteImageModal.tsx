@@ -9,7 +9,6 @@ import { API_CONFIG } from '@/lib/api-config';
 import MeaningEditModal from '@/components/MeaningEditModal';
 import WordEditModal from '@/components/WordEditModal';
 import AddToFlashcardModal from '@/components/AddToFlashcardModal';
-import PasteImageDirectWordInputModal from '@/components/PasteImageDirectWordInputModal';
 import NewWordSaveDialog from '@/components/NewWordSaveDialog';
 import MeaningSelectionModal from '@/components/MeaningSelectionModal';
 import WordCard from '@/components/WordCard';
@@ -72,7 +71,6 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
   const [editingWord, setEditingWord] = useState<{ wordData: any; source: 'clicked' | 'list' } | null>(null); // 편집 중인 단어 정보
   const [addingToFlashcard, setAddingToFlashcard] = useState<{ word: string; meaning: any; pronunciation?: string } | null>(null); // 단어장에 추가 중인 단어 정보
   const [isSavingMeaning, setIsSavingMeaning] = useState(false); // 뜻 저장 중 여부
-  const [isDirectInputOpen, setIsDirectInputOpen] = useState(false); // 직접 입력 모달 열림 여부
   const [isMeaningSelectionOpen, setIsMeaningSelectionOpen] = useState(false); // 의미 선택 모달 열림 여부
   const [clickedWordForInput, setClickedWordForInput] = useState<string | null>(null); // 직접 입력할 단어
   const [lastDoubleClickedWord, setLastDoubleClickedWord] = useState<string | null>(null); // 마지막으로 더블 클릭한 단어
@@ -439,7 +437,7 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
     // 클립보드에서 이미지 또는 텍스트 붙여넣기 처리
     const handlePaste = async (e: ClipboardEvent) => {
       // 직접 입력 모달이나 편집 모달이 열려있으면 처리하지 않음
-      if (isDirectInputOpen || editingMeaning || editingWord) {
+      if (editingMeaning || editingWord) {
         return;
       }
 
@@ -538,7 +536,7 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
       document.body.style.overflow = '';
       document.body.style.touchAction = '';
     };
-  }, [isOpen, initialImage, isDirectInputOpen, editingMeaning, editingWord, addingToFlashcard]);
+  }, [isOpen, initialImage, editingMeaning, editingWord, addingToFlashcard]);
 
   // 텍스트 모드에서 확인 버튼 클릭 시 - 모달 닫기
   const handleConfirm = () => {
@@ -777,10 +775,6 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
               setClickedWordNotFound(false);
               setClickedWordForInput(null);
             }}
-            onDirectInput={(word) => {
-              setClickedWordForInput(word);
-              setIsDirectInputOpen(true);
-            }}
             onEditWord={(wordData, source) => {
               setEditingWord({ wordData, source });
             }}
@@ -948,28 +942,6 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
     >
       {contentComponent}
       {modals}
-
-      {/* 직접 입력 모달 */}
-      {isDirectInputOpen && clickedWordForInput && (
-        <PasteImageDirectWordInputModal
-          word={clickedWordForInput}
-          onClose={() => {
-            setIsDirectInputOpen(false);
-            setClickedWordForInput(null);
-          }}
-          onSave={async (pos: string, definition: string, example: string) => {
-            const success = await saveDirectWordToFirebase(clickedWordForInput, pos, definition, example);
-            if (success) {
-              // 저장 후 단어 정보 다시 가져오기
-              await fetchWordFromFirebase(clickedWordForInput);
-              setIsDirectInputOpen(false);
-              setClickedWordForInput(null);
-              setClickedWordNotFound(false);
-            }
-          }}
-          isSaving={isSavingMeaning}
-        />
-      )}
 
       {/* ChatGPT 새 단어 저장 다이얼로그 */}
       {showNewWordSaveDialog && newWordFromChatGPT && (

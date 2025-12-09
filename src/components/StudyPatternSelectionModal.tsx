@@ -10,12 +10,14 @@ interface StudyPatternSelectionModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelect: (pattern: StudyPattern) => void;
+  embedded?: boolean; // 페이지에 embedded 모드로 표시할지 여부
 }
 
 export default function StudyPatternSelectionModal({
   isOpen,
   onClose,
-  onSelect
+  onSelect,
+  embedded = false
 }: StudyPatternSelectionModalProps) {
   if (!isOpen) return null;
 
@@ -46,19 +48,11 @@ export default function StudyPatternSelectionModal({
     }
   ];
 
-  return (
+  const contentComponent = (
     <div
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[120] p-4"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          onClose();
-        }
-      }}
+      className={`bg-white ${embedded ? 'h-full rounded-none' : 'rounded-3xl shadow-2xl ring-1 ring-black/5'} w-full ${embedded ? '' : 'max-w-md h-[60vh]'} flex flex-col overflow-hidden`}
+      onClick={(e) => e.stopPropagation()}
     >
-      <div
-        className="bg-white rounded-3xl shadow-2xl ring-1 ring-black/5 w-full max-w-md h-[60vh] flex flex-col overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
         {/* 헤더 */}
         <div className="p-7 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 flex-shrink-0">
           <div className="flex items-center gap-3 mb-2">
@@ -105,6 +99,22 @@ export default function StudyPatternSelectionModal({
           </div>
         </div>
       </div>
+  );
+
+  if (embedded) {
+    return contentComponent;
+  }
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[120] p-4"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      {contentComponent}
     </div>
   );
 }

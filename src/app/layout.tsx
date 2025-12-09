@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className} suppressHydrationWarning>
         <StudySessionProvider>
           <RelationshipsProvider>
-            {children}
+        {children}
           </RelationshipsProvider>
         </StudySessionProvider>
       </body>

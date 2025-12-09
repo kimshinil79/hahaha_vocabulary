@@ -14,11 +14,12 @@ import WordPracticeModal from '@/components/WordPracticeModal';
 import StudyCompleteModal, { StudyContinuationOption } from '@/components/StudyCompleteModal';
 import FlashcardGroupSelectionModal from '@/components/FlashcardGroupSelectionModal';
 import SettingsModal from '@/components/SettingsModal';
+import DirectWordInputModal from '@/components/DirectWordInputModal';
 import { isMobileDevice } from '@/utils/deviceDetection';
 import { useStudySession } from '@/contexts/StudySessionContext';
 import { initializeFCM, setupForegroundMessageHandler, subscribeToPendingRequests } from '@/utils/fcmService';
 
-type ViewMode = 'main' | 'statistics';
+type ViewMode = 'main' | 'statistics' | 'directInput' | 'wordSearch' | 'flashcardList' | 'studyPattern' | 'wordPractice';
 
 export default function Home() {
   const { user, loading } = useAuth();
@@ -28,10 +29,6 @@ export default function Home() {
   const [isProcessingOCR, setIsProcessingOCR] = useState(false);
   const [isPasteImageOpen, setIsPasteImageOpen] = useState(false);
   const [tempImage, setTempImage] = useState<string | null>(null); // 임시 저장된 이미지
-  const [isWordSearchOpen, setIsWordSearchOpen] = useState(false);
-  const [isFlashcardListOpen, setIsFlashcardListOpen] = useState(false);
-  const [isStudyPatternSelectionOpen, setIsStudyPatternSelectionOpen] = useState(false);
-  const [isWordPracticeOpen, setIsWordPracticeOpen] = useState(false);
   const [isStudyCompleteModalOpen, setIsStudyCompleteModalOpen] = useState(false);
   const [isGroupSelectionModalOpen, setIsGroupSelectionModalOpen] = useState(false);
   const [selectedStudyPattern, setSelectedStudyPattern] = useState<StudyPattern | null>(null);
@@ -230,33 +227,53 @@ export default function Home() {
               onClick={() => setCurrentView('main')}
               className={`w-full px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
                 currentView === 'main'
-                  ? 'bg-gradient-to-r from-sky-200 to-blue-200 text-slate-700 shadow-sm border border-sky-300/50'
-                  : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
+                  ? 'bg-gradient-to-r from-purple-200 to-violet-200 text-slate-700 shadow-sm border border-purple-300/50'
+                  : 'bg-sky-100 text-slate-600 hover:bg-sky-200 border border-sky-200'
               }`}
             >
               단어 입력
             </button>
             
             <button
-              onClick={() => {
-                setCurrentView('main');
-                setIsWordSearchOpen(true);
-              }}
-              className="w-full px-4 py-3 rounded-lg font-medium text-sm bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all duration-200"
+              onClick={() => setCurrentView('directInput')}
+              className={`w-full px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
+                currentView === 'directInput'
+                  ? 'bg-gradient-to-r from-purple-200 to-violet-200 text-slate-700 shadow-sm border border-purple-300/50'
+                  : 'bg-sky-100 text-slate-600 hover:bg-sky-200 border border-sky-200'
+              }`}
+            >
+              직접 입력
+            </button>
+            
+            <button
+              onClick={() => setCurrentView('wordSearch')}
+              className={`w-full px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
+                currentView === 'wordSearch'
+                  ? 'bg-gradient-to-r from-purple-200 to-violet-200 text-slate-700 shadow-sm border border-purple-300/50'
+                  : 'bg-sky-100 text-slate-600 hover:bg-sky-200 border border-sky-200'
+              }`}
             >
               단어 검색
             </button>
             
             <button
-              onClick={() => setIsFlashcardListOpen(true)}
-              className="w-full px-4 py-3 rounded-lg font-medium text-sm bg-gradient-to-r from-pink-100 to-rose-100 text-rose-700 hover:from-pink-200 hover:to-rose-200 border border-pink-200 transition-all duration-200"
+              onClick={() => setCurrentView('flashcardList')}
+              className={`w-full px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
+                currentView === 'flashcardList'
+                  ? 'bg-gradient-to-r from-purple-200 to-violet-200 text-slate-700 shadow-sm border border-purple-300/50'
+                  : 'bg-sky-100 text-slate-600 hover:bg-sky-200 border border-sky-200'
+              }`}
             >
               단어장
             </button>
             
             <button
-              onClick={() => setIsStudyPatternSelectionOpen(true)}
-              className="w-full px-4 py-3 rounded-lg font-medium text-sm bg-gradient-to-r from-violet-100 to-purple-100 text-purple-700 hover:from-violet-200 hover:to-purple-200 border border-violet-200 transition-all duration-200"
+              onClick={() => setCurrentView('studyPattern')}
+              className={`w-full px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
+                currentView === 'studyPattern'
+                  ? 'bg-gradient-to-r from-purple-200 to-violet-200 text-slate-700 shadow-sm border border-purple-300/50'
+                  : 'bg-sky-100 text-slate-600 hover:bg-sky-200 border border-sky-200'
+              }`}
             >
               공부 시작
             </button>
@@ -265,8 +282,8 @@ export default function Home() {
               onClick={() => setCurrentView('statistics')}
               className={`w-full px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
                 currentView === 'statistics'
-                  ? 'bg-gradient-to-r from-emerald-200 to-teal-200 text-slate-700 shadow-sm border border-emerald-300/50'
-                  : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
+                  ? 'bg-gradient-to-r from-purple-200 to-violet-200 text-slate-700 shadow-sm border border-purple-300/50'
+                  : 'bg-sky-100 text-slate-600 hover:bg-sky-200 border border-sky-200'
               }`}
             >
               통계
@@ -289,53 +306,60 @@ export default function Home() {
                 setTempImage(null);
               }}
             />
+          ) : currentView === 'directInput' ? (
+            <DirectWordInputModal
+              isOpen={true}
+              onClose={() => setCurrentView('main')}
+              embedded={true}
+            />
+          ) : currentView === 'wordSearch' ? (
+            <WordSearchModal
+              isOpen={true}
+              onClose={() => setCurrentView('main')}
+              user={user}
+              embedded={true}
+            />
+          ) : currentView === 'flashcardList' ? (
+            <FlashcardListModal
+              isOpen={true}
+              onClose={() => setCurrentView('main')}
+              embedded={true}
+            />
+          ) : currentView === 'studyPattern' ? (
+            <StudyPatternSelectionModal
+              isOpen={true}
+              onClose={() => setCurrentView('main')}
+              onSelect={(pattern) => {
+                setSelectedStudyPattern(pattern);
+                // state 업데이트 후 뷰 전환
+                setTimeout(() => {
+                  setCurrentView('wordPractice');
+                }, 0);
+              }}
+              embedded={true}
+            />
+          ) : currentView === 'wordPractice' ? (
+            <WordPracticeModal
+              isOpen={true}
+              onClose={() => setCurrentView('main')}
+              studyPattern={selectedStudyPattern}
+              continuationOption={continuationOption}
+              selectedGroupId={selectedGroupId}
+              onStudyComplete={(count) => {
+                setStudiedWordsCount(count);
+                setCurrentView('main');
+                setIsStudyCompleteModalOpen(true);
+              }}
+              embedded={true}
+            />
           ) : (
             <StatisticsView />
           )}
         </div>
       </div>
       
-      <WordSearchModal
-        isOpen={isWordSearchOpen}
-        onClose={() => setIsWordSearchOpen(false)}
-        user={user}
-      />
 
-      <FlashcardListModal
-        isOpen={isFlashcardListOpen}
-        onClose={() => setIsFlashcardListOpen(false)}
-      />
 
-      <StudyPatternSelectionModal
-        isOpen={isStudyPatternSelectionOpen}
-        onClose={() => setIsStudyPatternSelectionOpen(false)}
-        onSelect={(pattern) => {
-          setSelectedStudyPattern(pattern);
-          setIsStudyPatternSelectionOpen(false);
-          setIsWordPracticeOpen(true);
-        }}
-      />
-
-      <WordPracticeModal
-        isOpen={isWordPracticeOpen}
-        onClose={() => {
-          setIsWordPracticeOpen(false);
-          setSelectedStudyPattern(null);
-          setContinuationOption(null);
-          setSelectedGroupId(null);
-        }}
-        studyPattern={selectedStudyPattern}
-        continuationOption={continuationOption}
-        selectedGroupId={selectedGroupId}
-        onStudyComplete={(count) => {
-          // 공부 완료 시 WordPracticeModal 닫고 StudyCompleteModal 열기
-          setIsWordPracticeOpen(false);
-          setStudiedWordsCount(count);
-          setTimeout(() => {
-            setIsStudyCompleteModalOpen(true);
-          }, 100);
-        }}
-      />
 
       <StudyCompleteModal
         isOpen={isStudyCompleteModalOpen}
@@ -364,10 +388,7 @@ export default function Home() {
             setSelectedGroupId(null);
             
             // 새로운 단어 세트 로드 후 WordPracticeModal 열기
-            // 단어 로드는 WordPracticeModal 내부에서 처리하도록 함
-            setTimeout(() => {
-              setIsWordPracticeOpen(true);
-            }, 100);
+            setCurrentView('wordPractice');
           }
         }}
       />
@@ -382,9 +403,7 @@ export default function Home() {
           setSelectedGroupId(groupId);
           
           // 그룹 선택 후 WordPracticeModal 열기
-          setTimeout(() => {
-            setIsWordPracticeOpen(true);
-          }, 100);
+          setCurrentView('wordPractice');
         }}
         user={user}
       />

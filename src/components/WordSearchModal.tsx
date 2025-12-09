@@ -12,9 +12,10 @@ interface WordSearchModalProps {
   isOpen: boolean;
   onClose: () => void;
   user: any;
+  embedded?: boolean; // 페이지에 embedded 모드로 표시할지 여부
 }
 
-export default function WordSearchModal({ isOpen, onClose, user }: WordSearchModalProps) {
+export default function WordSearchModal({ isOpen, onClose, user, embedded = false }: WordSearchModalProps) {
   const { user: authUser } = useAuth();
   const [wordSearchTerm, setWordSearchTerm] = useState('');
   const [wordSearchResult, setWordSearchResult] = useState<any | null>(null);
@@ -235,20 +236,11 @@ export default function WordSearchModal({ isOpen, onClose, user }: WordSearchMod
 
   if (!isOpen) return null;
 
-  return (
-    <>
-      <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[80] p-4"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            onClose();
-          }
-        }}
-      >
-        <div
-          className="bg-white rounded-2xl shadow-xl ring-1 ring-black/5 w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
-          onClick={(e) => e.stopPropagation()}
-        >
+  const contentComponent = (
+    <div
+      className={`bg-white ${embedded ? 'h-full rounded-none' : 'rounded-2xl shadow-xl ring-1 ring-black/5'} w-full ${embedded ? '' : 'max-w-2xl max-h-[90vh]'} flex flex-col overflow-hidden`}
+      onClick={(e) => e.stopPropagation()}
+    >
           <div className="p-6 border-b border-gray-100 flex justify-between items-center">
             <h3 className="text-xl font-extrabold bg-gradient-to-r from-slate-600 to-gray-800 bg-clip-text text-transparent">
               단어 검색
@@ -387,7 +379,7 @@ export default function WordSearchModal({ isOpen, onClose, user }: WordSearchMod
                       const levelExamples = getExamplesByLevel(meaning.examples, userProfile.englishLevel);
                       // 관심분야별 예문 가져오기
                       const studyFieldExamples = getExamplesByStudyFields(meaning.examples, userProfile.studyFields);
-                      
+
                       return (
                         <div key={idx} className="border border-gray-200 rounded-xl p-4 bg-slate-50 shadow-sm relative">
                           <div className="text-gray-800 font-semibold text-base sm:text-lg">
@@ -423,8 +415,8 @@ export default function WordSearchModal({ isOpen, onClose, user }: WordSearchMod
                                       {fieldName}
                                     </p>
                                     {fieldData.examples.map((example: string, exIdx: number) => (
-                                      <div key={exIdx}>
-                                        {renderExample(example)}
+                                  <div key={exIdx}>
+                                    {renderExample(example)}
                                       </div>
                                     ))}
                                   </div>
@@ -466,6 +458,38 @@ export default function WordSearchModal({ isOpen, onClose, user }: WordSearchMod
             )}
           </div>
         </div>
+  );
+
+  if (embedded) {
+    return (
+      <>
+        {contentComponent}
+        {/* 단어장에 추가 모달 (검색 결과에서) */}
+        {addingToFlashcardFromSearch && (
+          <AddToFlashcardModal
+            word={addingToFlashcardFromSearch.word}
+            meaning={addingToFlashcardFromSearch.meaning}
+            pronunciation={addingToFlashcardFromSearch.pronunciation}
+            onClose={() => setAddingToFlashcardFromSearch(null)}
+            onSave={handleSaveToFlashcardFromSearch}
+            isSaving={isSavingToFlashcard}
+          />
+        )}
+      </>
+    );
+  }
+
+  return (
+    <>
+      <div
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[80] p-4"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            onClose();
+          }
+        }}
+      >
+        {contentComponent}
       </div>
 
       {/* 단어장에 추가 모달 (검색 결과에서) */}

@@ -514,40 +514,40 @@ function WordDetailModal({ word, wordData, onClose }: WordDetailModalProps) {
                           <>
                             {/* 레벨별 예문 표시 */}
                             {levelExamples && levelExamples.length > 0 && (
-                              <div className="mt-3 space-y-2">
-                                <span className="text-sm text-gray-500 font-semibold">예문:</span>
+                        <div className="mt-3 space-y-2">
+                          <span className="text-sm text-gray-500 font-semibold">예문:</span>
                                 {levelExamples.map((example, exIndex) => (
-                                  <div
-                                    key={exIndex}
-                                    className="text-sm text-gray-700 italic bg-white p-3 rounded-lg border border-gray-200 relative pr-10"
-                                  >
-                                    "{example}"
-                                    {/* 예문 읽기 아이콘 */}
-                                    <button
-                                      onClick={() => handleSpeakExample(example)}
-                                      className="absolute bottom-2 right-2 p-1.5 rounded-full bg-cyan-50 hover:bg-cyan-100 shadow-sm hover:shadow-md transition-all active:scale-95"
-                                      aria-label="예문 발음 듣기"
-                                      title="예문 발음 듣기"
-                                    >
-                                      <svg 
-                                        xmlns="http://www.w3.org/2000/svg" 
-                                        className="h-4 w-4 text-cyan-600" 
-                                        fill="none" 
-                                        viewBox="0 0 24 24" 
-                                        stroke="currentColor"
-                                      >
-                                        <path 
-                                          strokeLinecap="round" 
-                                          strokeLinejoin="round" 
-                                          strokeWidth={2} 
-                                          d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" 
-                                        />
-                                      </svg>
-                                    </button>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
+                            <div
+                              key={exIndex}
+                              className="text-sm text-gray-700 italic bg-white p-3 rounded-lg border border-gray-200 relative pr-10"
+                            >
+                              "{example}"
+                              {/* 예문 읽기 아이콘 */}
+                              <button
+                                onClick={() => handleSpeakExample(example)}
+                                className="absolute bottom-2 right-2 p-1.5 rounded-full bg-cyan-50 hover:bg-cyan-100 shadow-sm hover:shadow-md transition-all active:scale-95"
+                                aria-label="예문 발음 듣기"
+                                title="예문 발음 듣기"
+                              >
+                                <svg 
+                                  xmlns="http://www.w3.org/2000/svg" 
+                                  className="h-4 w-4 text-cyan-600" 
+                                  fill="none" 
+                                  viewBox="0 0 24 24" 
+                                  stroke="currentColor"
+                                >
+                                  <path 
+                                    strokeLinecap="round" 
+                                    strokeLinejoin="round" 
+                                    strokeWidth={2} 
+                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" 
+                                  />
+                                </svg>
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                             
                             {/* 관심분야별 예문 표시 */}
                             {studyFieldExamples.length > 0 && (

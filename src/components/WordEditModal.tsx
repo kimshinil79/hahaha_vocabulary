@@ -204,10 +204,10 @@ export default function WordEditModal({
                         <>
                           {/* 레벨별 예문 표시 */}
                           {levelExamples && levelExamples.length > 0 && (
-                            <div className="space-y-2">
-                              <div className="text-xs font-semibold text-gray-600 mb-2">
-                                예문:
-                              </div>
+                  <div className="space-y-2">
+                    <div className="text-xs font-semibold text-gray-600 mb-2">
+                      예문:
+                    </div>
                               {levelExamples.map((example: string, exampleIndex: number) => (
                                 <div key={exampleIndex} className="text-sm text-gray-700 italic bg-white p-3 rounded-lg border border-gray-200">
                                   {example}
@@ -240,13 +240,13 @@ export default function WordEditModal({
                                   </div>
                                 );
                               })}
-                            </div>
+                        </div>
                           )}
                           
                           {/* 예문이 없는 경우 */}
                           {(!levelExamples || levelExamples.length === 0) && studyFieldExamples.length === 0 && (
-                            <div className="text-sm text-gray-400 italic">예문이 없습니다</div>
-                          )}
+                      <div className="text-sm text-gray-400 italic">예문이 없습니다</div>
+                    )}
                         </>
                       );
                     })()}
@@ -272,21 +272,21 @@ export default function WordEditModal({
             )}
             
             {/* 저장/취소 버튼 */}
-            <div className="flex justify-end gap-3">
-              <button
-                onClick={onClose}
-                disabled={isSaving}
-                className="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                취소
-              </button>
-              <button
-                onClick={handleSave}
-                disabled={isSaving || !word.trim()}
-                className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSaving ? '저장 중...' : '저장'}
-              </button>
+          <div className="flex justify-end gap-3">
+            <button
+              onClick={onClose}
+              disabled={isSaving}
+              className="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              취소
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={isSaving || !word.trim()}
+              className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSaving ? '저장 중...' : '저장'}
+            </button>
             </div>
           </div>
         </div>

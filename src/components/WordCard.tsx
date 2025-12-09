@@ -21,7 +21,7 @@ interface WordCardProps {
   userFlashcards: any[];
   onClose: () => void;
   onCloseNotFound: () => void;
-  onDirectInput: (word: string) => void;
+  onDirectInput?: (word: string) => void;
   onEditWord: (wordData: any, source: 'clicked' | 'list') => void;
   onAddToFlashcard: (word: string, meaning: any, pronunciation?: string) => void;
   onSaveNewWordToWords: () => void;
@@ -129,7 +129,7 @@ export default function WordCard({
               <button
                 onClick={() => {
                   const wordToInput = lastDoubleClickedWord || clickedWordData?.word || selectedWords[selectedWords.length - 1]?.word || '';
-                  if (wordToInput) {
+                  if (wordToInput && onDirectInput) {
                     onDirectInput(wordToInput);
                   }
                 }}
@@ -221,14 +221,14 @@ export default function WordCard({
                             <>
                               {/* 레벨별 예문 표시 */}
                               {levelExamples && levelExamples.length > 0 && (
-                                <div className="text-sm text-gray-600 space-y-1 mb-3">
+                          <div className="text-sm text-gray-600 space-y-1 mb-3">
                                   {levelExamples.map((example: string, exIdx: number) => (
-                                    <div key={exIdx} className="italic">
-                                      {example}
-                                    </div>
-                                  ))}
-                                </div>
-                              )}
+                              <div key={exIdx} className="italic">
+                                {example}
+                              </div>
+                            ))}
+                          </div>
+                        )}
                               
                               {/* 관심분야별 예문 표시 */}
                               {studyFieldExamples.length > 0 && (
@@ -404,21 +404,21 @@ export default function WordCard({
                   const studyFieldExamples = getExamplesByStudyFields(meaning.examples, userProfile.studyFields);
                   
                   return (
-                    <div key={idx} className="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0 relative">
-                      <div className="font-semibold text-gray-700 mb-2">
-                        {meaning.definition}
-                      </div>
+                  <div key={idx} className="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0 relative">
+                    <div className="font-semibold text-gray-700 mb-2">
+                      {meaning.definition}
+                    </div>
                       
                       {/* 레벨별 예문 표시 */}
                       {levelExamples && levelExamples.length > 0 && (
                         <div className="text-sm text-gray-600 space-y-1 mt-2">
                           {levelExamples.map((example: string, exIdx: number) => (
-                            <div key={exIdx} className="italic">
-                              {example}
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                          <div key={exIdx} className="italic">
+                            {example}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                       
                       {/* 관심분야별 예문 표시 */}
                       {studyFieldExamples.length > 0 && (
@@ -439,8 +439,8 @@ export default function WordCard({
                                 {fieldData.examples.map((example: string, exIdx: number) => (
                                   <div key={exIdx} className="text-sm text-gray-600 italic ml-2">
                                     {example}
-                                  </div>
-                                ))}
+                  </div>
+                ))}
                               </div>
                             );
                           })}

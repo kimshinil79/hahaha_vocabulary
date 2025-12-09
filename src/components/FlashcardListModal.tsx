@@ -13,9 +13,10 @@ type SortType = 'frequency' | 'difficulty';
 interface FlashcardListModalProps {
   isOpen: boolean;
   onClose: () => void;
+  embedded?: boolean; // 페이지에 embedded 모드로 표시할지 여부
 }
 
-export default function FlashcardListModal({ isOpen, onClose }: FlashcardListModalProps) {
+export default function FlashcardListModal({ isOpen, onClose, embedded = false }: FlashcardListModalProps) {
   const { user } = useAuth();
   const [flashcards, setFlashcards] = useState<any[]>([]);
   const [filteredFlashcards, setFilteredFlashcards] = useState<any[]>([]);
@@ -299,20 +300,11 @@ export default function FlashcardListModal({ isOpen, onClose }: FlashcardListMod
 
   if (!isOpen) return null;
 
-  return (
-    <>
-      <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            onClose();
-          }
-        }}
-      >
-        <div
-          className="bg-white rounded-2xl shadow-xl ring-1 ring-black/5 w-full max-w-6xl h-[90vh] flex flex-col overflow-hidden"
-          onClick={(e) => e.stopPropagation()}
-        >
+  const contentComponent = (
+    <div
+      className={`bg-white ${embedded ? 'h-full rounded-none' : 'rounded-2xl shadow-xl ring-1 ring-black/5'} w-full ${embedded ? '' : 'max-w-6xl h-[90vh]'} flex flex-col overflow-hidden`}
+      onClick={(e) => e.stopPropagation()}
+    >
           {/* 헤더 */}
           <div className="p-6 border-b border-gray-200 flex-shrink-0">
             <div className="flex justify-between items-center mb-4">
@@ -450,10 +442,52 @@ export default function FlashcardListModal({ isOpen, onClose }: FlashcardListMod
             )}
           </div>
         </div>
+  );
+
+  if (embedded) {
+    return (
+      <>
+        {contentComponent}
+        {/* 그룹 선택 모달 */}
+        {isGroupSelectionOpen && user && (
+          <FlashcardGroupSelectionModal
+            isOpen={isGroupSelectionOpen}
+            onClose={() => setIsGroupSelectionOpen(false)}
+            onSelect={handleGroupSelect}
+            user={user}
+          />
+        )}
+
+        {/* 단어 상세 정보 모달 */}
+        {selectedWord && (
+          <WordEditModal
+            wordData={selectedWord}
+            source="list"
+            onClose={() => setSelectedWord(null)}
+            onSave={handleSaveWord}
+            isSaving={isSaving}
+            onDelete={handleDeleteWord}
+          />
+        )}
+      </>
+    );
+  }
+
+  return (
+    <>
+      <div
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            onClose();
+          }
+        }}
+      >
+        {contentComponent}
       </div>
 
       {/* 그룹 선택 모달 */}
-      {isGroupSelectionOpen && (
+      {isGroupSelectionOpen && user && (
         <FlashcardGroupSelectionModal
           isOpen={isGroupSelectionOpen}
           onClose={() => setIsGroupSelectionOpen(false)}

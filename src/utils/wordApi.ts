@@ -644,7 +644,7 @@ ${commonNotes.split('\n').slice(9).join('\n')}`;
       const embedding = meaning.embedding || {};
       const difficulty = meaning.difficulty || 3;
       const frequency = meaning.frequency || 0.5;
-
+      
       return {
         id,
         definition,

@@ -41,6 +41,7 @@ interface WordPracticeModalProps {
   continuationOption?: StudyContinuationOption | 'groupSelection' | null;
   selectedGroupId?: string | null;
   onStudyComplete?: (studiedWordsCount: number) => void; // 공부 완료 시 호출
+  embedded?: boolean; // 페이지에 embedded 모드로 표시할지 여부
 }
 
 export default function WordPracticeModal({ 
@@ -49,7 +50,8 @@ export default function WordPracticeModal({
   studyPattern,
   continuationOption,
   selectedGroupId,
-  onStudyComplete
+  onStudyComplete,
+  embedded = false
 }: WordPracticeModalProps) {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -317,7 +319,7 @@ export default function WordPracticeModal({
         const levelExamples = getExamplesByLevel(examples, userProfile.englishLevel);
         // 관심분야별 예문 가져오기 (우선순위: 관심분야 > 레벨)
         const studyFieldExamples = getExamplesByStudyFields(examples, userProfile.studyFields);
-        
+          
         // 예문 선택: 관심분야 예문이 있으면 첫 번째 관심분야의 첫 번째 예문, 없으면 레벨 예문의 첫 번째
         let selectedExample = '';
         if (studyFieldExamples.length > 0 && studyFieldExamples[0].examples.length > 0) {
@@ -799,9 +801,8 @@ export default function WordPracticeModal({
     'currentIndex valid': currentIndex >= 0 && currentIndex < studyWords.length
   });
 
-  return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[200] p-4">
-      <div className="bg-white rounded-2xl shadow-xl ring-1 ring-black/5 w-full max-w-2xl flex flex-col overflow-hidden">
+  const contentComponent = (
+    <div className={`bg-white ${embedded ? 'h-full rounded-none' : 'rounded-2xl shadow-xl ring-1 ring-black/5'} w-full ${embedded ? '' : 'max-w-2xl'} flex flex-col overflow-hidden`}>
         {/* 헤더 */}
         <div className="p-6 border-b border-gray-100 flex-shrink-0 bg-white">
           <div className="flex justify-between items-center">
@@ -1043,9 +1044,30 @@ export default function WordPracticeModal({
           </div>
         </div>
       </div>
+  );
 
+  if (embedded) {
+    return (
+      <>
+        {contentComponent}
+        {/* 그룹 선택 모달 */}
+        {isGroupSelectionOpen && user && (
+          <FlashcardGroupSelectionModal
+            isOpen={isGroupSelectionOpen}
+            onClose={() => setIsGroupSelectionOpen(false)}
+            onSelect={handleGroupSelect}
+            user={user}
+          />
+        )}
+      </>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[200] p-4">
+      {contentComponent}
       {/* 그룹 선택 모달 */}
-      {isGroupSelectionOpen && (
+      {isGroupSelectionOpen && user && (
         <FlashcardGroupSelectionModal
           isOpen={isGroupSelectionOpen}
           onClose={() => setIsGroupSelectionOpen(false)}
