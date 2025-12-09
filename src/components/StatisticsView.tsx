@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/hooks/useAuth';
+import { useRelationships } from '@/contexts/RelationshipsContext';
 import StudySessionsModal from './StudySessionsModal';
 import StudySessionWordsModal from './StudySessionWordsModal';
 
@@ -17,8 +18,11 @@ interface StudyCountData {
   [date: string]: number;
 }
 
+type UserType = '학생' | '선생님' | '부모님';
+
 export default function StatisticsView() {
   const { user } = useAuth();
+  const { relationships } = useRelationships();
   const [selectedDays, setSelectedDays] = useState(7);
   const [wordAdditionData, setWordAdditionData] = useState<WordAdditionData[]>([]);
   const [studyCounts, setStudyCounts] = useState<StudyCountData>({});
@@ -33,12 +37,104 @@ export default function StatisticsView() {
   const [selectedSessions, setSelectedSessions] = useState<any[]>([]);
   const [selectedSessionWords, setSelectedSessionWords] = useState<any[]>([]);
   const [selectedSessionTitle, setSelectedSessionTitle] = useState<string>('');
+  
+  // 사용자 선택 관련 상태
+  const [selectedUserEmail, setSelectedUserEmail] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<{ userType?: UserType; nickname?: string }>({});
+  const [emailToNickname, setEmailToNickname] = useState<{ [email: string]: string }>({});
+
+  // 사용자 프로필 로드
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      if (!user) return;
+      
+      try {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          setUserProfile({
+            userType: userData.userType as UserType | undefined,
+            nickname: userData.nickname || user.email?.split('@')[0] || '나',
+          });
+        }
+      } catch (error) {
+        console.error('사용자 프로필 로드 실패:', error);
+      }
+    };
+    
+    if (user) {
+      loadUserProfile();
+    }
+  }, [user]);
+
+  // 이메일로 닉네임 매핑 로드
+  useEffect(() => {
+    const loadNicknames = async () => {
+      if (!user || !userProfile.userType) return;
+      
+      const emails: string[] = [];
+      if (userProfile.userType === '부모님') {
+        emails.push(...relationships.children);
+      } else if (userProfile.userType === '학생') {
+        emails.push(...relationships.friends);
+      } else if (userProfile.userType === '선생님') {
+        emails.push(...relationships.students);
+      }
+      
+      if (emails.length === 0) {
+        setEmailToNickname({});
+        return;
+      }
+      
+      const nicknameMap: { [email: string]: string } = {};
+      
+      for (const email of emails) {
+        try {
+          // 이메일을 소문자로 변환하여 쿼리 (Firestore는 대소문자 구분)
+          const emailLower = email.toLowerCase();
+          const usersQuery = query(
+            collection(db, 'users'),
+            where('email', '==', emailLower)
+          );
+          
+          let usersSnapshot = await getDocs(usersQuery);
+          
+          // 소문자로 찾지 못하면 원본 이메일로도 시도
+          if (usersSnapshot.empty && email !== emailLower) {
+            const usersQueryOriginal = query(
+              collection(db, 'users'),
+              where('email', '==', email)
+            );
+            usersSnapshot = await getDocs(usersQueryOriginal);
+          }
+          
+          if (!usersSnapshot.empty) {
+            const userData = usersSnapshot.docs[0].data();
+            nicknameMap[email] = userData.nickname || email.split('@')[0];
+          } else {
+            nicknameMap[email] = email.split('@')[0];
+          }
+        } catch (error) {
+          console.error(`닉네임 로드 실패 (${email}):`, error);
+          nicknameMap[email] = email.split('@')[0];
+        }
+      }
+      
+      setEmailToNickname(nicknameMap);
+    };
+    
+    if (user && userProfile.userType) {
+      loadNicknames();
+    }
+  }, [user, userProfile.userType, relationships]);
 
   useEffect(() => {
     if (user) {
       loadStatisticsData();
     }
-  }, [user, selectedDays]);
+  }, [user, selectedDays, selectedUserEmail]);
 
   // 페이지 어디든 클릭하면 툴팁 닫기
   useEffect(() => {
@@ -64,20 +160,51 @@ export default function StatisticsView() {
     setIsLoading(true);
     try {
       console.log('[StatisticsView] 통계 로딩 시작');
-      const uid = user.uid;
       
-      if (!uid) {
+      let targetUid = user.uid;
+      
+      // 선택된 사용자가 있으면 해당 사용자의 uid 찾기
+      if (selectedUserEmail) {
+        try {
+          const usersQuery = query(
+            collection(db, 'users'),
+            where('email', '==', selectedUserEmail)
+          );
+          const usersSnapshot = await getDocs(usersQuery);
+          
+          if (!usersSnapshot.empty) {
+            targetUid = usersSnapshot.docs[0].id;
+          } else {
+            // 대소문자 구분 없이 다시 시도
+            const usersQueryLower = query(
+              collection(db, 'users'),
+              where('email', '==', selectedUserEmail.toLowerCase())
+            );
+            const usersSnapshotLower = await getDocs(usersQueryLower);
+            if (!usersSnapshotLower.empty) {
+              targetUid = usersSnapshotLower.docs[0].id;
+            }
+          }
+        } catch (error) {
+          console.error('선택된 사용자 찾기 실패:', error);
+          setIsLoading(false);
+          return;
+        }
+      }
+      
+      if (!targetUid) {
         setIsLoading(false);
         return;
       }
 
       console.log('[StatisticsView] 로그인된 유저 정보:', {
-        uid,
-        userDocId: uid
+        uid: targetUid,
+        selectedUserEmail,
+        userDocId: targetUid
       });
 
-      // users 컬렉션에서 현재 사용자 문서 가져오기 (uid만 사용)
-      const userDocRef = doc(db, 'users', uid);
+      // users 컬렉션에서 대상 사용자 문서 가져오기
+      const userDocRef = doc(db, 'users', targetUid);
       const userDocSnap = await getDoc(userDocRef);
 
       if (!userDocSnap.exists()) {
@@ -273,7 +400,36 @@ export default function StatisticsView() {
     if (!user) return;
 
     try {
-      const userDocRef = doc(db, 'users', user.uid);
+      let targetUid = user.uid;
+      
+      // 선택된 사용자가 있으면 해당 사용자의 uid 찾기
+      if (selectedUserEmail) {
+        try {
+          const usersQuery = query(
+            collection(db, 'users'),
+            where('email', '==', selectedUserEmail)
+          );
+          const usersSnapshot = await getDocs(usersQuery);
+          
+          if (!usersSnapshot.empty) {
+            targetUid = usersSnapshot.docs[0].id;
+          } else {
+            const usersQueryLower = query(
+              collection(db, 'users'),
+              where('email', '==', selectedUserEmail.toLowerCase())
+            );
+            const usersSnapshotLower = await getDocs(usersQueryLower);
+            if (!usersSnapshotLower.empty) {
+              targetUid = usersSnapshotLower.docs[0].id;
+            }
+          }
+        } catch (error) {
+          console.error('선택된 사용자 찾기 실패:', error);
+          return;
+        }
+      }
+      
+      const userDocRef = doc(db, 'users', targetUid);
       const userDocSnap = await getDoc(userDocRef);
 
       if (!userDocSnap.exists()) return;
@@ -301,7 +457,36 @@ export default function StatisticsView() {
     if (!user) return;
 
     try {
-      const userDocRef = doc(db, 'users', user.uid);
+      let targetUid = user.uid;
+      
+      // 선택된 사용자가 있으면 해당 사용자의 uid 찾기
+      if (selectedUserEmail) {
+        try {
+          const usersQuery = query(
+            collection(db, 'users'),
+            where('email', '==', selectedUserEmail)
+          );
+          const usersSnapshot = await getDocs(usersQuery);
+          
+          if (!usersSnapshot.empty) {
+            targetUid = usersSnapshot.docs[0].id;
+          } else {
+            const usersQueryLower = query(
+              collection(db, 'users'),
+              where('email', '==', selectedUserEmail.toLowerCase())
+            );
+            const usersSnapshotLower = await getDocs(usersQueryLower);
+            if (!usersSnapshotLower.empty) {
+              targetUid = usersSnapshotLower.docs[0].id;
+            }
+          }
+        } catch (error) {
+          console.error('선택된 사용자 찾기 실패:', error);
+          return;
+        }
+      }
+      
+      const userDocRef = doc(db, 'users', targetUid);
       const userDocSnap = await getDoc(userDocRef);
 
       if (!userDocSnap.exists()) return;
@@ -337,8 +522,116 @@ export default function StatisticsView() {
     );
   }
 
+  // 사용자 선택 버튼 렌더링
+  const renderUserSelectionButtons = () => {
+    const isParent = userProfile.userType === '부모님';
+    const isStudent = userProfile.userType === '학생';
+    const isTeacher = userProfile.userType === '선생님';
+    const hasChildren = relationships.children.length > 0;
+    const hasFriends = relationships.friends.length > 0;
+    const hasStudents = relationships.students.length > 0;
+
+    // 부모이고 자녀가 있거나, 학생이고 친구가 있거나, 선생님이고 학생이 있을 때만 표시
+    if (!((isParent && hasChildren) || (isStudent && hasFriends) || (isTeacher && hasStudents))) {
+      return null;
+    }
+
+    const currentNickname = userProfile.nickname || '나';
+    const userButtons: Array<{ label: string; email: string | null }> = [
+      { label: currentNickname, email: null }, // 현재 사용자
+    ];
+
+    // 부모일 때: 자녀 목록 추가
+    if (isParent && hasChildren) {
+      relationships.children.forEach((email) => {
+        const nickname = emailToNickname[email] || email.split('@')[0];
+        userButtons.push({ label: nickname, email });
+      });
+    }
+
+    // 학생일 때: 친구 목록 추가
+    if (isStudent && hasFriends) {
+      relationships.friends.forEach((email) => {
+        const nickname = emailToNickname[email] || email.split('@')[0];
+        userButtons.push({ label: nickname, email });
+      });
+    }
+
+    // 선생님일 때: 학생 목록 추가
+    if (isTeacher && hasStudents) {
+      relationships.students.forEach((email) => {
+        const nickname = emailToNickname[email] || email.split('@')[0];
+        userButtons.push({ label: nickname, email });
+      });
+    }
+
+    return (
+      <div className="mb-4">
+        <div className="flex gap-2.5 overflow-x-auto pb-2">
+          {userButtons.map((button, index) => {
+            const isSelected = selectedUserEmail === button.email;
+            return (
+              <button
+                key={button.email || 'me'}
+                onClick={() => setSelectedUserEmail(button.email)}
+                className={`px-3.5 py-2 rounded-[22px] text-sm font-medium transition-all duration-200 whitespace-nowrap ${
+                  isSelected
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/30'
+                    : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 shadow-sm'
+                }`}
+                style={{
+                  fontWeight: isSelected ? 600 : 500,
+                }}
+              >
+                {button.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="h-full overflow-y-auto p-6 bg-gray-50 space-y-6">
+      {/* 사용자 선택 버튼 */}
+      {renderUserSelectionButtons()}
+      
+      {/* 달력 */}
+      <div className="bg-white rounded-2xl p-6 shadow-lg">
+        <div className="flex justify-between items-center mb-4">
+          <button
+            onClick={() => changeMonth(-1)}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            ←
+          </button>
+          <h3 className="text-lg font-bold text-gray-800">
+            {displayedMonth.getFullYear()}년 {displayedMonth.getMonth() + 1}월
+          </h3>
+          <button
+            onClick={() => changeMonth(1)}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            →
+          </button>
+        </div>
+
+        {/* 요일 헤더 */}
+        <div className="grid grid-cols-7 gap-1 mb-2">
+          {['일', '월', '화', '수', '목', '금', '토'].map(day => (
+            <div key={day} className="text-center text-xs font-semibold text-gray-600 py-1">
+              {day}
+            </div>
+          ))}
+        </div>
+
+        {/* 날짜 그리드 */}
+        <div className="grid grid-cols-7 gap-1">
+          {renderCalendar()}
+        </div>
+      </div>
+
       {/* 단어 추가 차트 */}
       <div className="bg-white rounded-2xl p-6 border-2 border-orange-300 shadow-lg">
         <div className="flex justify-between items-center mb-4">
@@ -537,41 +830,6 @@ export default function StatisticsView() {
           )}
         </div>
         
-      </div>
-
-      {/* 달력 */}
-      <div className="bg-white rounded-2xl p-6 shadow-lg">
-        <div className="flex justify-between items-center mb-4">
-          <button
-            onClick={() => changeMonth(-1)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-          >
-            ←
-          </button>
-          <h3 className="text-lg font-bold text-gray-800">
-            {displayedMonth.getFullYear()}년 {displayedMonth.getMonth() + 1}월
-          </h3>
-          <button
-            onClick={() => changeMonth(1)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-          >
-            →
-          </button>
-        </div>
-
-        {/* 요일 헤더 */}
-        <div className="grid grid-cols-7 gap-1 mb-2">
-          {['일', '월', '화', '수', '목', '금', '토'].map(day => (
-            <div key={day} className="text-center text-xs font-semibold text-gray-600 py-1">
-              {day}
-            </div>
-          ))}
-        </div>
-
-        {/* 날짜 그리드 */}
-        <div className="grid grid-cols-7 gap-1">
-          {renderCalendar()}
-        </div>
       </div>
 
       {/* 세션 목록 모달 */}
