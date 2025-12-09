@@ -1,6 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import { useAuth } from '@/hooks/useAuth';
+import { getExamplesByLevel, getExamplesByStudyFields, getStudyFieldName } from '@/utils/wordUtils';
 
 export interface WordEditModalProps {
   wordData: any;
@@ -8,6 +12,7 @@ export interface WordEditModalProps {
   onClose: () => void;
   onSave: (updatedWordData: any) => Promise<void>;
   isSaving: boolean;
+  onDelete?: () => Promise<void>; // 단어장에서 삭제 함수 (optional)
 }
 
 export default function WordEditModal({
@@ -15,11 +20,45 @@ export default function WordEditModal({
   source,
   onClose,
   onSave,
-  isSaving
+  isSaving,
+  onDelete
 }: WordEditModalProps) {
+  const { user } = useAuth();
   const [word, setWord] = useState(wordData?.word || '');
   const [pronunciation, setPronunciation] = useState(wordData?.pronunciation || '');
   const [meanings, setMeanings] = useState<any[]>(wordData?.meanings ? [...wordData.meanings] : []);
+  const [userProfile, setUserProfile] = useState<{ englishLevel?: string; studyFields?: string[] }>({});
+
+  // 사용자 프로필 정보 로드
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      if (!user) return;
+      
+      try {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          const fields = userData.studyFields || userData.studyField || [];
+          const studyFields = Array.isArray(fields) 
+            ? fields.filter((f: string) => ['KSAT', 'Toeic', 'Toefl'].includes(f))
+            : [];
+          
+          setUserProfile({
+            englishLevel: userData.englishLevel as string | undefined,
+            studyFields,
+          });
+        }
+      } catch (error) {
+        console.error('사용자 프로필 로드 실패:', error);
+      }
+    };
+    
+    if (user) {
+      loadUserProfile();
+    }
+  }, [user]);
 
   useEffect(() => {
     if (wordData) {
@@ -72,6 +111,21 @@ export default function WordEditModal({
     };
 
     await onSave(updatedWordData);
+  };
+
+  const handleDelete = async () => {
+    if (!onDelete) return;
+    
+    const confirmDelete = window.confirm(`"${word}" 단어를 단어장에서 삭제하시겠습니까?`);
+    if (!confirmDelete) return;
+
+    try {
+      await onDelete();
+      onClose();
+    } catch (error) {
+      console.error('단어 삭제 오류:', error);
+      alert('단어 삭제 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -139,51 +193,63 @@ export default function WordEditModal({
                     </div>
                   </div>
                   
-                  <div className="space-y-2">
-                    <div className="text-xs font-semibold text-gray-600 mb-2">
-                      예문:
-                    </div>
-                    {meaning.examples && meaning.examples.length > 0 ? (
-                      meaning.examples.map((example: string, exampleIndex: number) => (
-                        <div key={exampleIndex} className="flex items-center gap-2">
-                          <input
-                            type="text"
-                            value={example}
-                            onChange={(e) => handleExampleChange(meaningIndex, exampleIndex, e.target.value)}
-                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
-                            placeholder="예문을 입력하세요"
-                          />
-                          <button
-                            onClick={() => handleRemoveExample(meaningIndex, exampleIndex)}
-                            className="p-2 text-red-500 hover:bg-red-50 rounded-full transition-colors"
-                            title="예문 삭제"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-4 w-4"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M6 18L18 6M6 6l12 12"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="text-sm text-gray-400 italic">예문이 없습니다</div>
-                    )}
-                    <button
-                      onClick={() => handleAddExample(meaningIndex)}
-                      className="w-full px-3 py-2 text-sm border border-dashed border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
-                    >
-                      + 예문 추가
-                    </button>
+                  <div className="space-y-3">
+                    {(() => {
+                      // 레벨별 예문 가져오기
+                      const levelExamples = getExamplesByLevel(meaning.examples, userProfile.englishLevel);
+                      // 관심분야별 예문 가져오기
+                      const studyFieldExamples = getExamplesByStudyFields(meaning.examples, userProfile.studyFields);
+                      
+                      return (
+                        <>
+                          {/* 레벨별 예문 표시 */}
+                          {levelExamples && levelExamples.length > 0 && (
+                            <div className="space-y-2">
+                              <div className="text-xs font-semibold text-gray-600 mb-2">
+                                예문:
+                              </div>
+                              {levelExamples.map((example: string, exampleIndex: number) => (
+                                <div key={exampleIndex} className="text-sm text-gray-700 italic bg-white p-3 rounded-lg border border-gray-200">
+                                  {example}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          
+                          {/* 관심분야별 예문 표시 */}
+                          {studyFieldExamples.length > 0 && (
+                            <div className="space-y-3">
+                              {studyFieldExamples.map((fieldData, fieldIdx) => {
+                                const fieldName = getStudyFieldName(fieldData.field);
+                                const fieldColor = fieldData.field === 'KSAT' 
+                                  ? 'text-purple-600' 
+                                  : fieldData.field === 'Toeic'
+                                    ? 'text-cyan-600'
+                                    : 'text-emerald-600';
+                                
+                                return (
+                                  <div key={fieldIdx} className="space-y-2">
+                                    <div className={`text-xs font-semibold ${fieldColor} mb-2`}>
+                                      {fieldName} 예문:
+                                    </div>
+                                    {fieldData.examples.map((example: string, exIndex: number) => (
+                                      <div key={exIndex} className="text-sm text-gray-700 italic bg-white p-3 rounded-lg border border-gray-200">
+                                        {example}
+                                      </div>
+                                    ))}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
+                          
+                          {/* 예문이 없는 경우 */}
+                          {(!levelExamples || levelExamples.length === 0) && studyFieldExamples.length === 0 && (
+                            <div className="text-sm text-gray-400 italic">예문이 없습니다</div>
+                          )}
+                        </>
+                      );
+                    })()}
                   </div>
                 </div>
               ))}
@@ -193,21 +259,35 @@ export default function WordEditModal({
 
         {/* 푸터 */}
         <div className="p-6 border-t border-gray-100 flex-shrink-0 bg-white">
-          <div className="flex justify-end gap-3">
-            <button
-              onClick={onClose}
-              disabled={isSaving}
-              className="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              취소
-            </button>
-            <button
-              onClick={handleSave}
-              disabled={isSaving || !word.trim()}
-              className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSaving ? '저장 중...' : '저장'}
-            </button>
+          <div className="flex flex-col gap-3">
+            {/* 삭제 버튼 (가장 아래) */}
+            {onDelete && (
+              <button
+                onClick={handleDelete}
+                disabled={isSaving}
+                className="w-full px-6 py-2 rounded-full bg-red-50 text-red-600 hover:bg-red-100 border-2 border-red-200 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                단어장에서 삭제
+              </button>
+            )}
+            
+            {/* 저장/취소 버튼 */}
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={onClose}
+                disabled={isSaving}
+                className="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                취소
+              </button>
+              <button
+                onClick={handleSave}
+                disabled={isSaving || !word.trim()}
+                className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSaving ? '저장 중...' : '저장'}
+              </button>
+            </div>
           </div>
         </div>
       </div>

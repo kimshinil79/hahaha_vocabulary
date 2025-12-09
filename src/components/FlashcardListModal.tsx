@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc, setDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/hooks/useAuth';
 import FlashcardGroupSelectionModal from './FlashcardGroupSelectionModal';
@@ -256,6 +256,42 @@ export default function FlashcardListModal({ isOpen, onClose }: FlashcardListMod
     }
   };
 
+  const handleDeleteWord = async () => {
+    if (!user || !selectedWord) return;
+
+    try {
+      setIsSaving(true);
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (!userDocSnap.exists()) {
+        alert('사용자 정보를 찾을 수 없습니다.');
+        return;
+      }
+
+      const userData = userDocSnap.data();
+      const flashcards = (userData?.flashcards || []) as any[];
+
+      // 해당 단어를 찾아서 제거
+      const wordToDelete = selectedWord.word.toLowerCase();
+      const updatedFlashcards = flashcards.filter((card) => {
+        const cardWord = (card.word || '').toLowerCase();
+        return cardWord !== wordToDelete;
+      });
+
+      // Firestore 업데이트
+      await setDoc(userDocRef, { flashcards: updatedFlashcards }, { merge: true });
+
+      setSelectedWord(null);
+      alert(`"${selectedWord.word}" 단어가 단어장에서 삭제되었습니다.`);
+    } catch (error) {
+      console.error('단어 삭제 오류:', error);
+      alert('단어 삭제 중 오류가 발생했습니다.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   const maxViewCount = filteredFlashcards.reduce(
     (max, card) => Math.max(max, card.viewCount || 0),
     0
@@ -434,6 +470,7 @@ export default function FlashcardListModal({ isOpen, onClose }: FlashcardListMod
           onClose={() => setSelectedWord(null)}
           onSave={handleSaveWord}
           isSaving={isSaving}
+          onDelete={handleDeleteWord}
         />
       )}
     </>

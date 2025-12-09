@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/hooks/useAuth';
+import { getExamplesByLevel, getExamplesByStudyFields } from '@/utils/wordUtils';
 import { StudyPattern } from './StudyPatternSelectionModal';
 import { StudyContinuationOption } from './StudyCompleteModal';
 import FlashcardGroupSelectionModal from './FlashcardGroupSelectionModal';
@@ -58,6 +59,38 @@ export default function WordPracticeModal({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [userProfile, setUserProfile] = useState<{ englishLevel?: string; studyFields?: string[] }>({});
+
+  // 사용자 프로필 정보 로드
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      if (!user) return;
+      
+      try {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          const fields = userData.studyFields || userData.studyField || [];
+          const studyFields = Array.isArray(fields) 
+            ? fields.filter((f: string) => ['KSAT', 'Toeic', 'Toefl'].includes(f))
+            : [];
+          
+          setUserProfile({
+            englishLevel: userData.englishLevel as string | undefined,
+            studyFields,
+          });
+        }
+      } catch (error) {
+        console.error('사용자 프로필 로드 실패:', error);
+      }
+    };
+    
+    if (user) {
+      loadUserProfile();
+    }
+  }, [user]);
   const [isProcessing, setIsProcessing] = useState(false); // 버튼 중복 클릭 방지
   const [isGroupSelectionOpen, setIsGroupSelectionOpen] = useState(false);
   const [flashcardDifficulties, setFlashcardDifficulties] = useState<{ [word: string]: string }>({});
@@ -279,7 +312,22 @@ export default function WordPracticeModal({
       const selectedWords: StudyWord[] = selectedFlashcards.map((flashcard) => {
         const meaning = flashcard.meaning || {};
         const examples = meaning.examples || [];
-        const firstExample = Array.isArray(examples) ? (examples[0] || '') : (examples || '');
+        
+        // 사용자 레벨에 맞는 예문 가져오기
+        const levelExamples = getExamplesByLevel(examples, userProfile.englishLevel);
+        // 관심분야별 예문 가져오기 (우선순위: 관심분야 > 레벨)
+        const studyFieldExamples = getExamplesByStudyFields(examples, userProfile.studyFields);
+        
+        // 예문 선택: 관심분야 예문이 있으면 첫 번째 관심분야의 첫 번째 예문, 없으면 레벨 예문의 첫 번째
+        let selectedExample = '';
+        if (studyFieldExamples.length > 0 && studyFieldExamples[0].examples.length > 0) {
+          selectedExample = studyFieldExamples[0].examples[0];
+        } else if (levelExamples && levelExamples.length > 0) {
+          selectedExample = levelExamples[0];
+        } else {
+          // 기존 방식 (호환성)
+          selectedExample = Array.isArray(examples) ? (examples[0] || '') : (examples || '');
+        }
         
         // WordData 형식으로 변환
         const wordData: WordData = {
@@ -303,7 +351,7 @@ export default function WordPracticeModal({
 
         return {
           word,
-            example: firstExample,
+            example: selectedExample,
           frequency: 0,
             starCount: 0,
             showDefinition: false,

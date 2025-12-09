@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { useAuth } from '@/hooks/useAuth';
+import { getExamplesByLevel, getExamplesByStudyFields, getStudyFieldName } from '@/utils/wordUtils';
 
 interface WordMeaning {
   definition: string;
@@ -268,6 +269,38 @@ function WordDetailModal({ word, wordData, onClose }: WordDetailModalProps) {
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [userProfile, setUserProfile] = useState<{ englishLevel?: string; studyFields?: string[] }>({});
+
+  // 사용자 프로필 정보 로드
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      if (!user) return;
+      
+      try {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          const fields = userData.studyFields || userData.studyField || [];
+          const studyFields = Array.isArray(fields) 
+            ? fields.filter((f: string) => ['KSAT', 'Toeic', 'Toefl'].includes(f))
+            : [];
+          
+          setUserProfile({
+            englishLevel: userData.englishLevel as string | undefined,
+            studyFields,
+          });
+        }
+      } catch (error) {
+        console.error('사용자 프로필 로드 실패:', error);
+      }
+    };
+    
+    if (user) {
+      loadUserProfile();
+    }
+  }, [user]);
 
   const handleSpeakWord = () => {
     if (typeof window === 'undefined' || !word) return;
@@ -471,41 +504,105 @@ function WordDetailModal({ word, wordData, onClose }: WordDetailModalProps) {
                       <div className="text-gray-700 text-lg font-medium mb-2">
                         {meaning.definition}
                       </div>
-                      {meaning.examples && meaning.examples.length > 0 && (
-                        <div className="mt-3 space-y-2">
-                          <span className="text-sm text-gray-500 font-semibold">예문:</span>
-                          {meaning.examples.map((example, exIndex) => (
-                            <div
-                              key={exIndex}
-                              className="text-sm text-gray-700 italic bg-white p-3 rounded-lg border border-gray-200 relative pr-10"
-                            >
-                              "{example}"
-                              {/* 예문 읽기 아이콘 */}
-                              <button
-                                onClick={() => handleSpeakExample(example)}
-                                className="absolute bottom-2 right-2 p-1.5 rounded-full bg-cyan-50 hover:bg-cyan-100 shadow-sm hover:shadow-md transition-all active:scale-95"
-                                aria-label="예문 발음 듣기"
-                                title="예문 발음 듣기"
-                              >
-                                <svg 
-                                  xmlns="http://www.w3.org/2000/svg" 
-                                  className="h-4 w-4 text-cyan-600" 
-                                  fill="none" 
-                                  viewBox="0 0 24 24" 
-                                  stroke="currentColor"
-                                >
-                                  <path 
-                                    strokeLinecap="round" 
-                                    strokeLinejoin="round" 
-                                    strokeWidth={2} 
-                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" 
-                                  />
-                                </svg>
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                      {(() => {
+                        // 레벨별 예문 가져오기
+                        const levelExamples = getExamplesByLevel(meaning.examples, userProfile.englishLevel);
+                        // 관심분야별 예문 가져오기
+                        const studyFieldExamples = getExamplesByStudyFields(meaning.examples, userProfile.studyFields);
+                        
+                        return (
+                          <>
+                            {/* 레벨별 예문 표시 */}
+                            {levelExamples && levelExamples.length > 0 && (
+                              <div className="mt-3 space-y-2">
+                                <span className="text-sm text-gray-500 font-semibold">예문:</span>
+                                {levelExamples.map((example, exIndex) => (
+                                  <div
+                                    key={exIndex}
+                                    className="text-sm text-gray-700 italic bg-white p-3 rounded-lg border border-gray-200 relative pr-10"
+                                  >
+                                    "{example}"
+                                    {/* 예문 읽기 아이콘 */}
+                                    <button
+                                      onClick={() => handleSpeakExample(example)}
+                                      className="absolute bottom-2 right-2 p-1.5 rounded-full bg-cyan-50 hover:bg-cyan-100 shadow-sm hover:shadow-md transition-all active:scale-95"
+                                      aria-label="예문 발음 듣기"
+                                      title="예문 발음 듣기"
+                                    >
+                                      <svg 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        className="h-4 w-4 text-cyan-600" 
+                                        fill="none" 
+                                        viewBox="0 0 24 24" 
+                                        stroke="currentColor"
+                                      >
+                                        <path 
+                                          strokeLinecap="round" 
+                                          strokeLinejoin="round" 
+                                          strokeWidth={2} 
+                                          d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" 
+                                        />
+                                      </svg>
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                            
+                            {/* 관심분야별 예문 표시 */}
+                            {studyFieldExamples.length > 0 && (
+                              <div className="mt-3 space-y-3">
+                                {studyFieldExamples.map((fieldData, fieldIdx) => {
+                                  const fieldName = getStudyFieldName(fieldData.field);
+                                  const fieldColor = fieldData.field === 'KSAT' 
+                                    ? 'text-purple-600' 
+                                    : fieldData.field === 'Toeic'
+                                      ? 'text-cyan-600'
+                                      : 'text-emerald-600';
+                                  
+                                  return (
+                                    <div key={fieldIdx} className="space-y-2">
+                                      <span className={`text-sm font-semibold ${fieldColor}`}>
+                                        {fieldName}:
+                                      </span>
+                                      {fieldData.examples.map((example, exIndex) => (
+                                        <div
+                                          key={exIndex}
+                                          className="text-sm text-gray-700 italic bg-white p-3 rounded-lg border border-gray-200 relative pr-10 ml-2"
+                                        >
+                                          "{example}"
+                                          {/* 예문 읽기 아이콘 */}
+                                          <button
+                                            onClick={() => handleSpeakExample(example)}
+                                            className="absolute bottom-2 right-2 p-1.5 rounded-full bg-cyan-50 hover:bg-cyan-100 shadow-sm hover:shadow-md transition-all active:scale-95"
+                                            aria-label="예문 발음 듣기"
+                                            title="예문 발음 듣기"
+                                          >
+                                            <svg 
+                                              xmlns="http://www.w3.org/2000/svg" 
+                                              className="h-4 w-4 text-cyan-600" 
+                                              fill="none" 
+                                              viewBox="0 0 24 24" 
+                                              stroke="currentColor"
+                                            >
+                                              <path 
+                                                strokeLinecap="round" 
+                                                strokeLinejoin="round" 
+                                                strokeWidth={2} 
+                                                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" 
+                                              />
+                                            </svg>
+                                          </button>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            )}
+                          </>
+                        );
+                      })()}
                       {meaning.frequency && (
                         <div className="mt-3 text-xs text-gray-400">
                           사용 빈도: {meaning.frequency}회

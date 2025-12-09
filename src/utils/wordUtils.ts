@@ -194,3 +194,113 @@ export const formatExampleText = async (input: string): Promise<string> => {
   return `${englishSentence} (${translation})`;
 };
 
+/**
+ * 사용자 레벨에 맞는 예문을 반환합니다 (Flutter 앱과 동일한 로직)
+ * @param examples - 예문 데이터 (Map 형태 또는 배열/문자열)
+ * @param englishLevel - 사용자 영어 레벨 (elementary, middle, high)
+ * @returns 레벨에 맞는 예문 배열 또는 null
+ */
+export const getExamplesByLevel = (
+  examples: any,
+  englishLevel?: string
+): string[] | null => {
+  if (!examples) return null;
+  
+  // Map 형태인지 확인 (레벨별 예문)
+  if (typeof examples === 'object' && !Array.isArray(examples) && examples !== null) {
+    const userLevel = englishLevel || 'elementary'; // 기본값: elementary
+    
+    let examplesForLevel: any;
+    
+    // 사용자 레벨에 맞는 예문 가져오기
+    if (examples[userLevel]) {
+      examplesForLevel = examples[userLevel];
+    } else if (examples['elementary']) {
+      // 레벨에 맞는 예문이 없으면 elementary 사용
+      examplesForLevel = examples['elementary'];
+    } else if (Object.keys(examples).length > 0) {
+      // elementary도 없으면 첫 번째 값 사용
+      examplesForLevel = Object.values(examples)[0];
+    } else {
+      return null;
+    }
+    
+    // String이면 배열로 변환
+    if (typeof examplesForLevel === 'string') {
+      return [examplesForLevel];
+    }
+    // List면 그대로 반환
+    if (Array.isArray(examplesForLevel)) {
+      return examplesForLevel.map((e: any) => String(e));
+    }
+    // 다른 형태면 빈 배열 반환
+    return [];
+  }
+  
+  // 기존 형태 (List 또는 String) 처리
+  if (typeof examples === 'string') {
+    return [examples];
+  }
+  if (Array.isArray(examples)) {
+    return examples.map((e: any) => String(e));
+  }
+  return null;
+};
+
+/**
+ * 관심분야별 예문을 가져오는 함수 (Flutter 앱과 동일한 로직)
+ * @param examples - 예문 데이터 (Map 형태)
+ * @param studyFields - 사용자 관심분야 배열 (KSAT, Toeic, Toefl)
+ * @returns {field: string, examples: string[]} 형태의 배열
+ */
+export const getExamplesByStudyFields = (
+  examples: any,
+  studyFields?: string[]
+): Array<{ field: string; examples: string[] }> => {
+  if (!studyFields || studyFields.length === 0) return [];
+  
+  // Map 형태인지 확인 (관심분야별 예문)
+  if (typeof examples === 'object' && !Array.isArray(examples) && examples !== null) {
+    const result: Array<{ field: string; examples: string[] }> = [];
+    
+    for (const field of studyFields) {
+      if (examples[field]) {
+        let fieldExamples = examples[field];
+        
+        // String이면 배열로 변환
+        if (typeof fieldExamples === 'string') {
+          fieldExamples = [fieldExamples];
+        }
+        
+        // List인 경우에만 추가
+        if (Array.isArray(fieldExamples) && fieldExamples.length > 0) {
+          result.push({
+            field,
+            examples: fieldExamples.map((e: any) => String(e)),
+          });
+        }
+      }
+    }
+    
+    return result;
+  }
+  
+  return [];
+};
+
+/**
+ * 관심분야 이름을 한글로 변환
+ */
+export const getStudyFieldName = (field: string): string => {
+  switch (field) {
+    case 'KSAT':
+      return '수능';
+    case 'Toeic':
+      return '토익';
+    case 'Toefl':
+      return '토플';
+    default:
+      return field;
+  }
+};
+

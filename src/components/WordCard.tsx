@@ -1,5 +1,11 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import { useAuth } from '@/hooks/useAuth';
+import { getExamplesByLevel, getExamplesByStudyFields, getStudyFieldName } from '@/utils/wordUtils';
+
 interface WordCardProps {
   isLoadingClickedWord: boolean;
   clickedWordData: any | null;
@@ -45,6 +51,39 @@ export default function WordCard({
   onPreviousWord,
   onNextWord
 }: WordCardProps) {
+  const { user } = useAuth();
+  const [userProfile, setUserProfile] = useState<{ englishLevel?: string; studyFields?: string[] }>({});
+
+  // 사용자 프로필 정보 로드
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      if (!user) return;
+      
+      try {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          const fields = userData.studyFields || userData.studyField || [];
+          const studyFields = Array.isArray(fields) 
+            ? fields.filter((f: string) => ['KSAT', 'Toeic', 'Toefl'].includes(f))
+            : [];
+          
+          setUserProfile({
+            englishLevel: userData.englishLevel as string | undefined,
+            studyFields,
+          });
+        }
+      } catch (error) {
+        console.error('사용자 프로필 로드 실패:', error);
+      }
+    };
+    
+    if (user) {
+      loadUserProfile();
+    }
+  }, [user]);
   
   // 특정 단어와 뜻이 이미 flashcards에 있는지 확인
   const isMeaningInFlashcard = (word: string, meaning: any): boolean => {
@@ -172,15 +211,54 @@ export default function WordCard({
                         <div className="font-semibold text-gray-700 mb-2">
                           {meaning.definition}
                         </div>
-                        {meaning.examples && meaning.examples.length > 0 && (
-                          <div className="text-sm text-gray-600 space-y-1 mb-3">
-                            {meaning.examples.map((example: string, exIdx: number) => (
-                              <div key={exIdx} className="italic">
-                                {example}
-                              </div>
-                            ))}
-                          </div>
-                        )}
+                        {(() => {
+                          // 레벨별 예문 가져오기
+                          const levelExamples = getExamplesByLevel(meaning.examples, userProfile.englishLevel);
+                          // 관심분야별 예문 가져오기
+                          const studyFieldExamples = getExamplesByStudyFields(meaning.examples, userProfile.studyFields);
+                          
+                          return (
+                            <>
+                              {/* 레벨별 예문 표시 */}
+                              {levelExamples && levelExamples.length > 0 && (
+                                <div className="text-sm text-gray-600 space-y-1 mb-3">
+                                  {levelExamples.map((example: string, exIdx: number) => (
+                                    <div key={exIdx} className="italic">
+                                      {example}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                              
+                              {/* 관심분야별 예문 표시 */}
+                              {studyFieldExamples.length > 0 && (
+                                <div className="mt-3 space-y-2 mb-3">
+                                  {studyFieldExamples.map((fieldData, fieldIdx) => {
+                                    const fieldName = getStudyFieldName(fieldData.field);
+                                    const fieldColor = fieldData.field === 'KSAT' 
+                                      ? 'text-purple-600' 
+                                      : fieldData.field === 'Toeic'
+                                        ? 'text-cyan-600'
+                                        : 'text-emerald-600';
+                                    
+                                    return (
+                                      <div key={fieldIdx} className="space-y-1">
+                                        <div className={`text-xs font-semibold ${fieldColor}`}>
+                                          {fieldName}
+                                        </div>
+                                        {fieldData.examples.map((example: string, exIdx: number) => (
+                                          <div key={exIdx} className="text-sm text-gray-600 italic ml-2">
+                                            {example}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              )}
+                            </>
+                          );
+                        })()}
                         
                         {/* 단어장에 추가 버튼 */}
                         {(() => {
@@ -319,22 +397,58 @@ export default function WordCard({
 
             {wordDataList[currentWordIndex]?.meanings && (
               <div className="space-y-4">
-                {wordDataList[currentWordIndex].meanings.map((meaning: any, idx: number) => (
-                  <div key={idx} className="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0 relative">
-                    <div className="font-semibold text-gray-700 mb-2">
-                      {meaning.definition}
-                    </div>
-                    {meaning.examples && meaning.examples.length > 0 && (
-                      <div className="text-sm text-gray-600 space-y-1">
-                        {meaning.examples.map((example: string, exIdx: number) => (
-                          <div key={exIdx} className="italic">
-                            {example}
-                          </div>
-                        ))}
+                {wordDataList[currentWordIndex].meanings.map((meaning: any, idx: number) => {
+                  // 레벨별 예문 가져오기
+                  const levelExamples = getExamplesByLevel(meaning.examples, userProfile.englishLevel);
+                  // 관심분야별 예문 가져오기
+                  const studyFieldExamples = getExamplesByStudyFields(meaning.examples, userProfile.studyFields);
+                  
+                  return (
+                    <div key={idx} className="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0 relative">
+                      <div className="font-semibold text-gray-700 mb-2">
+                        {meaning.definition}
                       </div>
-                    )}
-                  </div>
-                ))}
+                      
+                      {/* 레벨별 예문 표시 */}
+                      {levelExamples && levelExamples.length > 0 && (
+                        <div className="text-sm text-gray-600 space-y-1 mt-2">
+                          {levelExamples.map((example: string, exIdx: number) => (
+                            <div key={exIdx} className="italic">
+                              {example}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* 관심분야별 예문 표시 */}
+                      {studyFieldExamples.length > 0 && (
+                        <div className="mt-3 space-y-2">
+                          {studyFieldExamples.map((fieldData, fieldIdx) => {
+                            const fieldName = getStudyFieldName(fieldData.field);
+                            const fieldColor = fieldData.field === 'KSAT' 
+                              ? 'text-purple-600' 
+                              : fieldData.field === 'Toeic'
+                                ? 'text-cyan-600'
+                                : 'text-emerald-600';
+                            
+                            return (
+                              <div key={fieldIdx} className="space-y-1">
+                                <div className={`text-xs font-semibold ${fieldColor}`}>
+                                  {fieldName}
+                                </div>
+                                {fieldData.examples.map((example: string, exIdx: number) => (
+                                  <div key={exIdx} className="text-sm text-gray-600 italic ml-2">
+                                    {example}
+                                  </div>
+                                ))}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
 

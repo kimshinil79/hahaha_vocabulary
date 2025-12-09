@@ -1,4 +1,4 @@
-import { db } from '@/lib/firebase';
+import { db, auth } from '@/lib/firebase';
 import { doc, getDoc, setDoc, collection, addDoc, deleteDoc } from 'firebase/firestore';
 import { POS_MAP, getPosTag, formatExampleText } from './wordUtils';
 import { fetchWordFromChatGPT, findMostSimilarMeaning } from './wordApi';
@@ -260,8 +260,35 @@ export const fetchWordFromFirebase = async (
                         nlpDoc.verbs().toInfinitive().out('text') || 
                         word.toLowerCase();
         
-        // ChatGPT API 호출
-        const chatGPTData = await fetchWordFromChatGPT(word, baseForm);
+        // 사용자 프로필 정보 가져오기 (englishLevel, studyFields)
+        let englishLevel: string | undefined;
+        let studyFields: string[] | undefined;
+        
+        try {
+          const user = auth.currentUser;
+          if (user) {
+            const userDocRef = doc(db, 'users', user.uid);
+            const userDocSnap = await getDoc(userDocRef);
+            if (userDocSnap.exists()) {
+              const userData = userDocSnap.data();
+              englishLevel = userData.englishLevel as string | undefined;
+              const fields = userData.studyFields || userData.studyField || [];
+              studyFields = Array.isArray(fields) 
+                ? fields.filter((f: string) => ['KSAT', 'Toeic', 'Toefl'].includes(f))
+                : [];
+            }
+          }
+        } catch (profileError) {
+          console.error('사용자 프로필 로드 실패:', profileError);
+          // 프로필 로드 실패해도 계속 진행
+        }
+        
+        // ChatGPT API 호출 (Flutter 앱과 동일: fromBrowser: true)
+        const chatGPTData = await fetchWordFromChatGPT(word, baseForm, {
+          fromBrowser: true,
+          englishLevel,
+          studyFields,
+        });
         
         if (chatGPTData) {
           // meanings가 비어있거나 "존재하지 않는" 메시지가 있는지 확인
@@ -853,17 +880,18 @@ export const saveNewWordToWords = async (
   }
 };
 
-// ChatGPT로부터 받은 새 단어를 단어장(flashcards)에 바로 저장
+// ChatGPT로부터 받은 새 단어를 단어장(flashcards)에 저장 (선택한 의미만)
 export const saveNewWordToFlashcard = async (
   user: any,
   newWordFromChatGPT: any,
+  selectedMeaning: any,
   setStateCallbacks: {
     setShowNewWordSaveDialog: (show: boolean) => void;
     setNewWordFromChatGPT: (data: any | null) => void;
     setIsSavingMeaning: (saving: boolean) => void;
   }
 ): Promise<void> => {
-  if (!newWordFromChatGPT || !user) {
+  if (!newWordFromChatGPT || !user || !selectedMeaning) {
     throw new Error('저장할 단어 정보가 없습니다.');
   }
 
@@ -874,22 +902,15 @@ export const saveNewWordToFlashcard = async (
     const uid = user.uid;
     const userDocRef = doc(db, 'users', uid);
     
-    // 첫 번째 meaning 가져오기 (Flutter 앱처럼)
-    const meanings = newWordFromChatGPT.meanings || [];
-    if (meanings.length === 0) {
-      throw new Error('저장할 의미가 없습니다.');
-    }
-    
-    const firstMeaning = meanings[0];
     const word = newWordFromChatGPT.word || '';
     const pronunciation = newWordFromChatGPT.pronunciation || '';
     
-    // flashcard 데이터 생성
+    // flashcard 데이터 생성 (선택한 meaning만)
     const flashcardData = {
       word: word,
       pronunciation: pronunciation,
-      definition: firstMeaning.definition || '',
-      examples: firstMeaning.examples || [],
+      definition: selectedMeaning.definition || '',
+      examples: selectedMeaning.examples || [],
       createdAt: new Date().toISOString(),
       reviewCount: 0,
       correctCount: 0,

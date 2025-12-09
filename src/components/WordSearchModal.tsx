@@ -3,7 +3,9 @@
 import { useState, useEffect, useRef, FormEvent } from 'react';
 import { doc, getDoc, collection, query, getDocs, limit } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { useAuth } from '@/hooks/useAuth';
 import { addMeaningToWordsAndFlashcard } from '@/utils/wordFirebase';
+import { getExamplesByLevel, getExamplesByStudyFields, getStudyFieldName } from '@/utils/wordUtils';
 import AddToFlashcardModal from '@/components/AddToFlashcardModal';
 
 interface WordSearchModalProps {
@@ -13,6 +15,7 @@ interface WordSearchModalProps {
 }
 
 export default function WordSearchModal({ isOpen, onClose, user }: WordSearchModalProps) {
+  const { user: authUser } = useAuth();
   const [wordSearchTerm, setWordSearchTerm] = useState('');
   const [wordSearchResult, setWordSearchResult] = useState<any | null>(null);
   const [wordSearchCandidates, setWordSearchCandidates] = useState<any[]>([]); // 부분 일치 검색 결과 목록
@@ -21,6 +24,38 @@ export default function WordSearchModal({ isOpen, onClose, user }: WordSearchMod
   const wordSearchInputRef = useRef<HTMLInputElement>(null);
   const [addingToFlashcardFromSearch, setAddingToFlashcardFromSearch] = useState<{ word: string; meaning: any; pronunciation?: string } | null>(null);
   const [isSavingToFlashcard, setIsSavingToFlashcard] = useState(false);
+  const [userProfile, setUserProfile] = useState<{ englishLevel?: string; studyFields?: string[] }>({});
+
+  // 사용자 프로필 정보 로드
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      if (!authUser) return;
+      
+      try {
+        const userDocRef = doc(db, 'users', authUser.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          const fields = userData.studyFields || userData.studyField || [];
+          const studyFields = Array.isArray(fields) 
+            ? fields.filter((f: string) => ['KSAT', 'Toeic', 'Toefl'].includes(f))
+            : [];
+          
+          setUserProfile({
+            englishLevel: userData.englishLevel as string | undefined,
+            studyFields,
+          });
+        }
+      } catch (error) {
+        console.error('사용자 프로필 로드 실패:', error);
+      }
+    };
+    
+    if (authUser) {
+      loadUserProfile();
+    }
+  }, [authUser]);
 
   // 모달이 열릴 때 자동 포커싱
   useEffect(() => {
@@ -348,23 +383,53 @@ export default function WordSearchModal({ isOpen, onClose, user }: WordSearchMod
                         );
                       };
 
+                      // 레벨별 예문 가져오기
+                      const levelExamples = getExamplesByLevel(meaning.examples, userProfile.englishLevel);
+                      // 관심분야별 예문 가져오기
+                      const studyFieldExamples = getExamplesByStudyFields(meaning.examples, userProfile.studyFields);
+                      
                       return (
                         <div key={idx} className="border border-gray-200 rounded-xl p-4 bg-slate-50 shadow-sm relative">
                           <div className="text-gray-800 font-semibold text-base sm:text-lg">
                             {renderDefinition()}
                           </div>
-                          {meaning.examples && (
+                          
+                          {/* 레벨별 예문 표시 */}
+                          {levelExamples && levelExamples.length > 0 && (
                             <div className="mt-3 space-y-2">
                               <p className="text-xs font-semibold text-gray-500">예문</p>
-                              {Array.isArray(meaning.examples) ? (
-                                meaning.examples.map((example: any, exIdx: number) => (
-                                  <div key={exIdx}>
-                                    {renderExample(example)}
+                              {levelExamples.map((example: string, exIdx: number) => (
+                                <div key={exIdx}>
+                                  {renderExample(example)}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          
+                          {/* 관심분야별 예문 표시 */}
+                          {studyFieldExamples.length > 0 && (
+                            <div className="mt-3 space-y-3">
+                              {studyFieldExamples.map((fieldData, fieldIdx) => {
+                                const fieldName = getStudyFieldName(fieldData.field);
+                                const fieldColor = fieldData.field === 'KSAT' 
+                                  ? 'text-purple-600' 
+                                  : fieldData.field === 'Toeic'
+                                    ? 'text-cyan-600'
+                                    : 'text-emerald-600';
+                                
+                                return (
+                                  <div key={fieldIdx} className="space-y-1">
+                                    <p className={`text-xs font-semibold ${fieldColor}`}>
+                                      {fieldName}
+                                    </p>
+                                    {fieldData.examples.map((example: string, exIdx: number) => (
+                                      <div key={exIdx}>
+                                        {renderExample(example)}
+                                      </div>
+                                    ))}
                                   </div>
-                                ))
-                              ) : (
-                                renderExample(meaning.examples)
-                              )}
+                                );
+                              })}
                             </div>
                           )}
                           {meaning.frequency !== undefined && (

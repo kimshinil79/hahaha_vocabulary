@@ -11,6 +11,7 @@ import WordEditModal from '@/components/WordEditModal';
 import AddToFlashcardModal from '@/components/AddToFlashcardModal';
 import PasteImageDirectWordInputModal from '@/components/PasteImageDirectWordInputModal';
 import NewWordSaveDialog from '@/components/NewWordSaveDialog';
+import MeaningSelectionModal from '@/components/MeaningSelectionModal';
 import WordCard from '@/components/WordCard';
 import { 
   POS_MAP, 
@@ -72,6 +73,7 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
   const [addingToFlashcard, setAddingToFlashcard] = useState<{ word: string; meaning: any; pronunciation?: string } | null>(null); // 단어장에 추가 중인 단어 정보
   const [isSavingMeaning, setIsSavingMeaning] = useState(false); // 뜻 저장 중 여부
   const [isDirectInputOpen, setIsDirectInputOpen] = useState(false); // 직접 입력 모달 열림 여부
+  const [isMeaningSelectionOpen, setIsMeaningSelectionOpen] = useState(false); // 의미 선택 모달 열림 여부
   const [clickedWordForInput, setClickedWordForInput] = useState<string | null>(null); // 직접 입력할 단어
   const [lastDoubleClickedWord, setLastDoubleClickedWord] = useState<string | null>(null); // 마지막으로 더블 클릭한 단어
   const containerRef = useRef<HTMLDivElement>(null);
@@ -180,8 +182,25 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
   const handleSaveNewWordToFlashcard = async () => {
     if (!newWordFromChatGPT || !user) return;
     
+    // 먼저 words 컬렉션에 저장
     try {
-      await saveNewWordToFlashcardUtil(user, newWordFromChatGPT, {
+      const wordKey = (newWordFromChatGPT.word || '').toLowerCase();
+      await saveWordToWordsCollection(wordKey, newWordFromChatGPT);
+    } catch (error) {
+      console.error('words 컬렉션 저장 오류:', error);
+      alert('words 컬렉션 저장 중 오류가 발생했습니다.');
+      return;
+    }
+    
+    // 의미 선택 모달 열기
+    setIsMeaningSelectionOpen(true);
+  };
+
+  const handleMeaningSelected = async (selectedMeaning: any) => {
+    if (!newWordFromChatGPT || !user) return;
+    
+    try {
+      await saveNewWordToFlashcardUtil(user, newWordFromChatGPT, selectedMeaning, {
         setShowNewWordSaveDialog,
         setNewWordFromChatGPT,
         setIsSavingMeaning
@@ -963,6 +982,20 @@ export default function PasteImageModal({ isOpen, onClose, onImagePasted, initia
             setNewWordFromChatGPT(null);
           }}
           isSaving={isSavingMeaning}
+        />
+      )}
+
+      {/* 의미 선택 모달 */}
+      {isMeaningSelectionOpen && newWordFromChatGPT && (
+        <MeaningSelectionModal
+          isOpen={isMeaningSelectionOpen}
+          onClose={() => {
+            setIsMeaningSelectionOpen(false);
+            setShowNewWordSaveDialog(false);
+            setNewWordFromChatGPT(null);
+          }}
+          meanings={newWordFromChatGPT.meanings || []}
+          onSelect={handleMeaningSelected}
         />
       )}
 

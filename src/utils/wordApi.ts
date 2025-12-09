@@ -340,30 +340,169 @@ export const findMostSimilarMeaning = async (
   }
 };
 
+// 공통 주의사항 생성 함수
+const buildCommonNotes = (word: string, targetWord: string, idFormat: string, now: string, includeNotFoundHandling: boolean = true): string => {
+  const notes = [
+    '1. JSON 형식만 반환하세요. 다른 설명이나 마크다운 코드 블록 없이 순수 JSON만 반환하세요.',
+    `2. word는 ${targetWord === word ? `정확히 "${word}"` : `원형 "${targetWord}"`}로 반환하세요.`,
+  ];
+
+  if (includeNotFoundHandling) {
+    notes.push(
+      `3. 만약 "${word}"가 영어 사전에 존재하지 않는 단어이거나 유효하지 않은 단어라면, meanings 배열을 빈 배열 []로 반환하고, definition에는 "[${word} 단어는 존재하지 않는 단어입니다.]" 형식으로 반환하세요.`
+    );
+  }
+
+  notes.push(
+    '4. pos는 영어 품사 배열입니다 (예: ["noun"], ["verb", "noun"]).',
+    '5. pronunciation은 IPA(International Phonetic Alphabet) 형식의 발음기호입니다. 슬래시(/)로 감싼 형식으로 반환하세요 (예: /əˈʃʊrəns/). 미국식 발음을 제공해주세요. 단어가 존재하지 않는 경우 빈 문자열 ""을 반환하세요.',
+    '6. meanings 배열에는 단어의 주요 의미를 2개에서 5개 사이로 포함하세요. 가장 자주 사용되고 중요한 의미를 우선적으로 포함해주세요. 의미가 많더라도 5개를 초과하지 마세요. 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.',
+    '7. 중요: 서로 다른 의미는 하나의 definition에 묶지 말고 각각 별도의 meaning 객체로 분리하세요. 예를 들어, "단열하다, 격리하다"처럼 서로 다른 의미가 하나의 정의에 포함되어 있다면, "[동사] 단열하다"와 "[동사] 격리하다"로 분리하여 각각 별도의 meaning 객체로 제공하세요. 각 의미마다 해당하는 예문도 별도로 제공하세요.',
+    `8. 각 meaning의 id는 "${idFormat}" 형식입니다.`,
+    '9. definition은 "[품사] 한국어 정의" 형식입니다 (예: "[명사] 확신, 자신감"). 단어가 존재하지 않는 경우 "[${word} 단어는 존재하지 않는 단어입니다.]" 형식으로 반환하세요.',
+    '10. keywords는 관련 단어 배열입니다 (영어로). 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.',
+    '11. embedding은 항상 빈 객체 {}입니다.',
+    '12. difficulty는 1-5 사이의 정수입니다.',
+    '13. frequency는 0-1 사이의 실수입니다.',
+    `14. updatedAt은 "${now}" 형식의 ISO 8601 문자열입니다.`
+  );
+
+  return notes.join('\n');
+};
+
+// 예문 설명 생성 함수
+const buildExamplesNote = (isFromBrowser: boolean): string => {
+  if (isFromBrowser) {
+    return `11. examples는 반드시 객체 형태로 제공해야 하며, 다음 키들을 포함해야 합니다:
+    - "elementary": 초등학교 수준의 간단한 예문 배열 (최소 1개, 여러 개 가능)
+    - "middle": 중학교 수준의 예문 배열 (최소 1개, 여러 개 가능)
+    - "high": 고등학교 이상 수준의 예문 배열 (최소 1개, 여러 개 가능)
+    - "KSAT": 수능 스타일의 예문 배열 (최소 1개, 여러 개 가능)
+    - "Toeic": 토익 스타일의 예문 배열 (최소 1개, 여러 개 가능)
+    - "Toefl": 토플 스타일의 예문 배열 (최소 1개, 여러 개 가능)
+    각 배열에는 "영문 예문. (한국어 번역)" 형식의 문자열을 배열 형태로 포함하세요. 각 배열에는 여러 개의 예문을 포함할 수 있습니다.`;
+  } else {
+    return '9. examples는 영문 예문과 한국어 번역을 포함한 문자열 배열입니다 (예: "She spoke with assurance. (그녀는 자신 있게 말했다.)"). 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.';
+  }
+};
+
 // ChatGPT API를 호출하여 단어 정보 가져오기
-export const fetchWordFromChatGPT = async (word: string, baseForm?: string): Promise<any | null> => {
+export const fetchWordFromChatGPT = async (
+  word: string,
+  baseForm?: string,
+  options?: {
+    fromBrowser?: boolean;
+    englishLevel?: string;
+    studyFields?: string[];
+  }
+): Promise<any | null> => {
   const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
   
   if (!apiKey || apiKey === 'YOUR_OPENAI_API_KEY_HERE') {
     throw new Error('OpenAI API 키가 설정되지 않았습니다.');
   }
 
+  const { fromBrowser = false } = options || {};
   const now = new Date().toISOString();
   
-  const prompt = baseForm && baseForm.trim() !== '' && baseForm !== word.toLowerCase()
-    ? `다음 영어 단어에 대한 정보를 아래 형식의 JSON으로 제공해주세요.
+  let prompt: string;
+  let targetWord: string;
+  let idFormat: string;
+  let jsonExample: string;
 
-단어: "${word}"
-원형(lemma): "${baseForm.trim()}"
+  if (fromBrowser) {
+    // 브라우저에서 선택된 단어인 경우
+    targetWord = '원형(lemma)';
+    idFormat = '원형_1';
+    jsonExample = `{
+  "surfaceForm": {
+    "word": "${word}",
+    "pronunciation": "/선택된 단어의 발음기호/"
+  },
+  "word": "원형(lemma)",
+  "pos": ["noun", "verb"],
+  "pronunciation": "/원형의 발음기호/",
+  "meanings": [
+    {
+      "id": "원형_1",
+      "definition": "[품사] 한국어 정의",
+      "examples": {
+        "elementary": [
+          "Simple English example sentence. (간단한 한국어 번역)"
+        ],
+        "middle": [
+          "Moderate English example sentence. (중급 한국어 번역)"
+        ],
+        "high": [
+          "Advanced English example sentence. (고급 한국어 번역)"
+        ],
+        "KSAT": [
+          "KSAT-style English example sentence. (수능 스타일 한국어 번역)"
+        ],
+        "Toeic": [
+          "TOEIC-style English example sentence. (토익 스타일 한국어 번역)"
+        ],
+        "Toefl": [
+          "TOEFL-style English example sentence. (토플 스타일 한국어 번역)"
+        ]
+      },
+      "keywords": ["keyword1", "keyword2"],
+      "embedding": {},
+      "difficulty": 3,
+      "frequency": 0.65
+    }
+  ],
+  "updatedAt": "${now}"
+}`;
+
+    const inflectionNote = `중요: 이 단어가 굴절형(inflection)인 경우에만 원형(lemma)을 찾아주세요.
+- 굴절형의 예: 동사 활용형 (revoking -> revoke, went -> go), 명사 복수형 (cats -> cat, children -> child), 형용사 비교급/최상급 (bigger -> big, best -> good)
+- 굴절형이 아닌 경우 (파생어, 독립 단어): wreckage, happiness, beautiful, teacher 등은 원형으로 변환하지 말고 그대로 사용하세요.
+- "${word}"가 독립적인 단어(파생어 포함)라면, word 필드에 "${word}"를 그대로 반환하세요.`;
+
+    const surfaceFormNotes = `2. surfaceForm.word는 사용자가 선택한 원래 단어 "${word}"입니다.
+3. surfaceForm.pronunciation은 선택된 단어 "${word}"의 IPA 발음기호입니다.
+4. word는 원형(lemma)입니다. 단, "${word}"가 굴절형이 아니라 독립적인 단어(파생어 포함)라면 "${word}"를 그대로 반환하세요.
+   - 굴절형 예시: "revoking" -> "revoke", "cats" -> "cat", "went" -> "go"
+   - 독립 단어 예시: "wreckage" -> "wreckage" (변환하지 않음), "happiness" -> "happiness" (변환하지 않음)
+5. pronunciation은 word 필드에 반환된 단어의 IPA 발음기호입니다.
+6. 만약 "${word}"가 영어 사전에 존재하지 않는 단어라면, surfaceForm.word는 "${word}", word도 "${word}"로 반환하고, meanings 배열을 빈 배열 []로 반환하세요.
+7. pos는 원형의 영어 품사 배열입니다.
+8. meanings 배열에는 원형의 주요 의미를 2개에서 5개 사이로 포함하세요.
+9. 중요: 서로 다른 의미는 하나의 definition에 묶지 말고 각각 별도의 meaning 객체로 분리하세요. 예를 들어, "단열하다, 격리하다"처럼 서로 다른 의미가 하나의 정의에 포함되어 있다면, "[동사] 단열하다"와 "[동사] 격리하다"로 분리하여 각각 별도의 meaning 객체로 제공하세요. 각 의미마다 해당하는 예문도 별도로 제공하세요.
+10. 각 meaning의 id는 "원형_1", "원형_2" 형식입니다.
+11. definition은 "[품사] 한국어 정의" 형식입니다.`;
+
+    const examplesNote = buildExamplesNote(true);
+    const commonNotes = buildCommonNotes(word, targetWord, idFormat, now, false);
+
+    prompt = `다음 영어 단어에 대한 정보를 아래 형식의 JSON으로 제공해주세요.
+
+사용자가 선택한 단어: "${word}"
+
+${inflectionNote}
 
 응답 형식 (정확히 이 형식을 따르세요):
-{
-  "word": "${baseForm.trim()}",
+${jsonExample}
+
+주의사항:
+1. JSON 형식만 반환하세요. 다른 설명이나 마크다운 코드 블록 없이 순수 JSON만 반환하세요.
+${surfaceFormNotes}
+${examplesNote}
+${commonNotes.split('\n').slice(2).join('\n')}
+17. 발음기호는 미국식 발음을 제공해주세요.`;
+
+  } else if (baseForm && baseForm.trim() !== '' && baseForm !== word.toLowerCase()) {
+    // baseForm이 있는 경우
+    targetWord = baseForm.trim();
+    idFormat = `${targetWord.toLowerCase()}_1`;
+    jsonExample = `{
+  "word": "${targetWord}",
   "pos": ["noun", "verb"],
   "pronunciation": "/əˈʃʊrəns/",
   "meanings": [
     {
-      "id": "${baseForm.trim().toLowerCase()}_1",
+      "id": "${idFormat}",
       "definition": "[명사] 한국어 정의",
       "examples": [
         "English example sentence. (한국어 번역)"
@@ -375,35 +514,35 @@ export const fetchWordFromChatGPT = async (word: string, baseForm?: string): Pro
     }
   ],
   "updatedAt": "${now}"
-}
+}`;
 
-주의사항:
-1. JSON 형식만 반환하세요. 다른 설명이나 마크다운 코드 블록 없이 순수 JSON만 반환하세요.
-2. word는 원형 "${baseForm.trim()}"로 반환하세요.
-3. 만약 "${word}"가 영어 사전에 존재하지 않는 단어이거나 유효하지 않은 단어라면, meanings 배열을 빈 배열 []로 반환하고, definition에는 "[${word} 단어는 존재하지 않는 단어입니다.]" 형식으로 반환하세요.
-4. pos는 영어 품사 배열입니다 (예: ["noun"], ["verb", "noun"]).
-5. pronunciation은 IPA(International Phonetic Alphabet) 형식의 발음기호입니다. 슬래시(/)로 감싼 형식으로 반환하세요 (예: /əˈʃʊrəns/). 미국식 발음을 제공해주세요. 단어가 존재하지 않는 경우 빈 문자열 ""을 반환하세요.
-6. meanings 배열에는 단어의 주요 의미를 2개에서 5개 사이로 포함하세요. 가장 자주 사용되고 중요한 의미를 우선적으로 포함해주세요. 의미가 많더라도 5개를 초과하지 마세요. 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
-7. 각 meaning의 id는 "${baseForm.trim().toLowerCase()}_1", "${baseForm.trim().toLowerCase()}_2" 형식입니다.
-8. definition은 "[품사] 한국어 정의" 형식입니다 (예: "[명사] 확신, 자신감"). 단어가 존재하지 않는 경우 "[${word} 단어는 존재하지 않는 단어입니다.]" 형식으로 반환하세요.
-9. examples는 영문 예문과 한국어 번역을 포함한 문자열 배열입니다 (예: "She spoke with assurance. (그녀는 자신 있게 말했다.)"). 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
-10. keywords는 관련 단어 배열입니다 (영어로). 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
-11. embedding은 항상 빈 객체 {}입니다.
-12. difficulty는 1-5 사이의 정수입니다.
-13. frequency는 0-1 사이의 실수입니다.
-14. updatedAt은 "${now}" 형식의 ISO 8601 문자열입니다.`
-    : `다음 영어 단어에 대한 정보를 아래 형식의 JSON으로 제공해주세요.
+    const commonNotes = buildCommonNotes(word, targetWord, idFormat, now);
+    const examplesNote = buildExamplesNote(false);
+
+    prompt = `다음 영어 단어에 대한 정보를 아래 형식의 JSON으로 제공해주세요.
 
 단어: "${word}"
+원형(lemma): "${targetWord}"
 
 응답 형식 (정확히 이 형식을 따르세요):
-{
-  "word": "${word}",
+${jsonExample}
+
+주의사항:
+${commonNotes.split('\n').slice(0, 8).join('\n')}
+${examplesNote}
+${commonNotes.split('\n').slice(9).join('\n')}`;
+
+  } else {
+    // 기본 경우
+    targetWord = word;
+    idFormat = `${word.toLowerCase()}_1`;
+    jsonExample = `{
+  "word": "${targetWord}",
   "pos": ["noun", "verb"],
   "pronunciation": "/əˈʃʊrəns/",
   "meanings": [
     {
-      "id": "${word.toLowerCase()}_1",
+      "id": "${idFormat}",
       "definition": "[명사] 한국어 정의",
       "examples": [
         "English example sentence. (한국어 번역)"
@@ -415,23 +554,23 @@ export const fetchWordFromChatGPT = async (word: string, baseForm?: string): Pro
     }
   ],
   "updatedAt": "${now}"
-}
+}`;
+
+    const commonNotes = buildCommonNotes(word, targetWord, idFormat, now);
+    const examplesNote = buildExamplesNote(false);
+
+    prompt = `다음 영어 단어에 대한 정보를 아래 형식의 JSON으로 제공해주세요.
+
+단어: "${word}"
+
+응답 형식 (정확히 이 형식을 따르세요):
+${jsonExample}
 
 주의사항:
-1. JSON 형식만 반환하세요. 다른 설명이나 마크다운 코드 블록 없이 순수 JSON만 반환하세요.
-2. word는 정확히 "${word}"로 반환하세요.
-3. 만약 "${word}"가 영어 사전에 존재하지 않는 단어이거나 유효하지 않은 단어라면, meanings 배열을 빈 배열 []로 반환하고, definition에는 "[${word} 단어는 존재하지 않는 단어입니다.]" 형식으로 반환하세요.
-4. pos는 영어 품사 배열입니다 (예: ["noun"], ["verb", "noun"]).
-5. pronunciation은 IPA(International Phonetic Alphabet) 형식의 발음기호입니다. 슬래시(/)로 감싼 형식으로 반환하세요 (예: /əˈʃʊrəns/). 미국식 발음을 제공해주세요. 단어가 존재하지 않는 경우 빈 문자열 ""을 반환하세요.
-6. meanings 배열에는 단어의 주요 의미를 2개에서 5개 사이로 포함하세요. 가장 자주 사용되고 중요한 의미를 우선적으로 포함해주세요. 의미가 많더라도 5개를 초과하지 마세요. 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
-7. 각 meaning의 id는 "${word.toLowerCase()}_1", "${word.toLowerCase()}_2" 형식입니다.
-8. definition은 "[품사] 한국어 정의" 형식입니다 (예: "[명사] 확신, 자신감"). 단어가 존재하지 않는 경우 "[${word} 단어는 존재하지 않는 단어입니다.]" 형식으로 반환하세요.
-9. examples는 영문 예문과 한국어 번역을 포함한 문자열 배열입니다 (예: "She spoke with assurance. (그녀는 자신 있게 말했다.)"). 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
-10. keywords는 관련 단어 배열입니다 (영어로). 단어가 존재하지 않는 경우 빈 배열 []을 반환하세요.
-11. embedding은 항상 빈 객체 {}입니다.
-12. difficulty는 1-5 사이의 정수입니다.
-13. frequency는 0-1 사이의 실수입니다.
-14. updatedAt은 "${now}" 형식의 ISO 8601 문자열입니다.`;
+${commonNotes.split('\n').slice(0, 8).join('\n')}
+${examplesNote}
+${commonNotes.split('\n').slice(9).join('\n')}`;
+  }
 
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -467,30 +606,74 @@ export const fetchWordFromChatGPT = async (word: string, baseForm?: string): Pro
     // JSON 파싱
     const wordData = JSON.parse(content) as any;
     
-    // 응답 정규화
+    // 응답 정규화 (Flutter 앱의 _normalizeWordData와 동일)
     const normalizedWord = wordData.word || word;
     const normalizedPos = (wordData.pos || []).map((p: any) => p.toString());
     const normalizedMeanings = (wordData.meanings || []).map((meaning: any, index: number) => {
       if (typeof meaning !== 'object') return meaning;
       
+      const id = meaning.id || `${normalizedWord.toLowerCase()}_${index + 1}`;
+      const definition = meaning.definition || '';
+      
+      // examples 처리: 객체 형태 (레벨별/관심분야별) 또는 배열 형태 (기존 호환성)
+      let examples: any;
+      const examplesData = meaning.examples;
+      if (examplesData && typeof examplesData === 'object' && !Array.isArray(examplesData)) {
+        // 객체 형태인 경우: 각 키의 배열을 문자열 배열로 변환
+        const examplesMap: { [key: string]: string[] } = {};
+        Object.keys(examplesData).forEach((key) => {
+          const value = examplesData[key];
+          if (Array.isArray(value)) {
+            examplesMap[key] = value.map((e: any) => e.toString());
+          } else if (typeof value === 'string') {
+            examplesMap[key] = [value];
+          } else {
+            examplesMap[key] = [];
+          }
+        });
+        examples = examplesMap;
+      } else if (Array.isArray(examplesData)) {
+        // 배열 형태인 경우 (기존 호환성): 그대로 유지
+        examples = examplesData.map((e: any) => e.toString());
+      } else {
+        // 없거나 다른 형태인 경우: 빈 객체
+        examples = {};
+      }
+      
+      const keywords = (meaning.keywords || []).map((k: any) => k.toString());
+      const embedding = meaning.embedding || {};
+      const difficulty = meaning.difficulty || 3;
+      const frequency = meaning.frequency || 0.5;
+
       return {
-        id: meaning.id || `${normalizedWord.toLowerCase()}_${index + 1}`,
-        definition: meaning.definition || '',
-        examples: (meaning.examples || []).map((e: any) => e.toString()),
-        keywords: (meaning.keywords || []).map((k: any) => k.toString()),
-        embedding: meaning.embedding || {},
-        difficulty: meaning.difficulty || 3,
-        frequency: meaning.frequency || 0.5,
+        id,
+        definition,
+        examples,
+        keywords,
+        embedding,
+        difficulty,
+        frequency,
       };
     });
 
-    return {
+    const result: any = {
       word: normalizedWord,
       pos: normalizedPos,
-      pronunciation: wordData.pronunciation || '',
       meanings: normalizedMeanings,
       updatedAt: wordData.updatedAt || now,
     };
+    
+    // pronunciation이 있으면 추가
+    if (wordData.pronunciation && wordData.pronunciation.trim() !== '') {
+      result.pronunciation = wordData.pronunciation.trim();
+    }
+    
+    // surfaceForm이 있으면 추가 (fromBrowser일 때)
+    if (wordData.surfaceForm) {
+      result.surfaceForm = wordData.surfaceForm;
+    }
+
+    return result;
   } catch (error) {
     console.error('ChatGPT API 오류:', error);
     throw error;
