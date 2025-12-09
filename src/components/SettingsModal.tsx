@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { doc, getDoc, setDoc, Timestamp, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc, setDoc, Timestamp, onSnapshot, collection, query as firestoreQuery, where, limit, getDocs } from 'firebase/firestore';
 import { updatePassword } from 'firebase/auth';
 import { db, auth } from '@/lib/firebase';
 import { useAuth } from '@/hooks/useAuth';
@@ -908,7 +908,12 @@ function ContactModal({
   onAdd: (email: string) => void;
   type: 'friends' | 'students' | 'children';
 }) {
+  const { user } = useAuth();
   const [email, setEmail] = useState('');
+  const [emailSuggestions, setEmailSuggestions] = useState<Array<{email: string; nickname?: string}>>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const typeLabels = {
     friends: '친구',
@@ -916,10 +921,106 @@ function ContactModal({
     children: '자녀',
   };
 
+  // 이메일 검색 함수
+  const searchEmails = async (query: string) => {
+    if (!query.trim() || query.length < 2) {
+      setEmailSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+
+    setIsSearching(true);
+    try {
+      const searchQuery = query.toLowerCase();
+      const usersRef = collection(db, 'users');
+      
+      // prefix 검색을 위한 쿼리 (email 필드가 인덱싱되어 있어야 함)
+      const emailQuery = firestoreQuery(
+        usersRef,
+        where('email', '>=', searchQuery),
+        where('email', '<=', searchQuery + '\uf8ff'),
+        limit(10)
+      );
+
+      const snapshot = await getDocs(emailQuery);
+      const suggestions: Array<{email: string; nickname?: string}> = [];
+      const currentEmail = user?.email?.toLowerCase() || '';
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const userEmail = data.email?.toLowerCase() || '';
+        
+        // 현재 사용자 이메일 제외
+        if (userEmail && userEmail !== currentEmail && userEmail.includes(searchQuery)) {
+          suggestions.push({
+            email: data.email,
+            nickname: data.nickname || userEmail.split('@')[0],
+          });
+        }
+      });
+
+      // 이메일 순으로 정렬
+      suggestions.sort((a, b) => a.email.localeCompare(b.email));
+      setEmailSuggestions(suggestions);
+      setShowSuggestions(suggestions.length > 0);
+    } catch (error) {
+      console.error('이메일 검색 오류:', error);
+      setEmailSuggestions([]);
+      setShowSuggestions(false);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  // 이메일 입력 변경 핸들러
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    // 이전 타이머 취소
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    // 300ms 후 검색 (디바운싱)
+    searchTimeoutRef.current = setTimeout(() => {
+      searchEmails(value);
+    }, 300);
+  };
+
+  // 제안 항목 선택
+  const handleSelectSuggestion = (selectedEmail: string) => {
+    setEmail(selectedEmail);
+    setShowSuggestions(false);
+    setEmailSuggestions([]);
+  };
+
+  // 모달 닫기 시 초기화
+  const handleClose = () => {
+    setEmail('');
+    setEmailSuggestions([]);
+    setShowSuggestions(false);
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+    onClose();
+  };
+
+  // 컴포넌트 언마운트 시 타이머 정리
+  useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleAdd = () => {
     if (email.trim()) {
-      onAdd(email);
+      onAdd(email.trim().toLowerCase());
       setEmail('');
+      setEmailSuggestions([]);
+      setShowSuggestions(false);
     }
   };
 
@@ -932,7 +1033,7 @@ function ContactModal({
           <div className="flex justify-between items-center">
             <h3 className="text-xl font-bold text-white">{typeLabels[type]} 등록</h3>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="text-white hover:text-gray-200 text-3xl font-bold"
             >
               ×
@@ -940,27 +1041,51 @@ function ContactModal({
           </div>
         </div>
         <div className="p-6 space-y-4">
-          <div>
+          <div className="relative">
             <label className="block text-sm font-semibold text-gray-700 mb-2">이메일</label>
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
+              onFocus={() => emailSuggestions.length > 0 && setShowSuggestions(true)}
               onKeyPress={(e) => e.key === 'Enter' && handleAdd()}
               className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:outline-none"
               placeholder={`${typeLabels[type]} 이메일을 입력하세요`}
             />
+            
+            {/* 검색 결과 드롭다운 */}
+            {showSuggestions && emailSuggestions.length > 0 && (
+              <div className="absolute z-10 w-full mt-1 bg-white border-2 border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto">
+                {isSearching && (
+                  <div className="px-4 py-2 text-sm text-gray-500">검색 중...</div>
+                )}
+                {emailSuggestions.map((suggestion, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => handleSelectSuggestion(suggestion.email)}
+                    className="w-full text-left px-4 py-3 hover:bg-indigo-50 transition-colors border-b border-gray-100 last:border-b-0"
+                  >
+                    <div className="font-medium text-gray-900">{suggestion.email}</div>
+                    {suggestion.nickname && suggestion.nickname !== suggestion.email.split('@')[0] && (
+                      <div className="text-sm text-gray-500">{suggestion.nickname}</div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
           <div className="flex gap-3">
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="flex-1 px-4 py-3 rounded-xl border-2 border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
             >
               취소
             </button>
             <button
               onClick={handleAdd}
-              className="flex-1 px-4 py-3 rounded-xl bg-indigo-500 text-white hover:bg-indigo-600 transition-colors font-semibold"
+              disabled={!email.trim()}
+              className="flex-1 px-4 py-3 rounded-xl bg-indigo-500 text-white hover:bg-indigo-600 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
             >
               추가
             </button>
