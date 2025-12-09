@@ -14,7 +14,8 @@ interface DirectWordInputModalProps {
 
 export default function DirectWordInputModal({ isOpen, onClose, embedded = false }: DirectWordInputModalProps) {
   const { user } = useAuth();
-  const [wordInput, setWordInput] = useState(''); // 영어 또는 한글
+  const [englishWord, setEnglishWord] = useState(''); // 영어 단어
+  const [koreanMeaning, setKoreanMeaning] = useState(''); // 한글 뜻
   const [difficulty, setDifficulty] = useState<'easy' | 'normal' | 'hard'>('normal');
   const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
   const [selectedGroupName, setSelectedGroupName] = useState<string | null>(null);
@@ -29,8 +30,8 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
       return;
     }
 
-    if (!wordInput.trim()) {
-      setError('단어를 입력해주세요.');
+    if (!englishWord.trim() || !koreanMeaning.trim()) {
+      setError('영어 단어와 한글 뜻을 모두 입력해주세요.');
       return;
     }
 
@@ -49,17 +50,17 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
       
       // 중복 체크 (같은 단어가 있는지)
       const existingIndex = flashcards.findIndex((card: any) => 
-        card.word.toLowerCase() === wordInput.trim().toLowerCase()
+        card.word.toLowerCase() === englishWord.trim().toLowerCase()
       );
       
       const now = new Date().toISOString();
       
       // flashcard 데이터 생성
       const flashcardData: any = {
-        word: wordInput.trim(),
+        word: englishWord.trim(),
         pronunciation: '', // 직접 입력에서는 발음 기호 없음
         meaning: {
-          definition: wordInput.trim(), // 직접 입력한 단어/뜻을 definition으로 사용
+          definition: koreanMeaning.trim(), // 한글 뜻을 definition으로 사용
           pos: [],
           examples: []
         },
@@ -67,9 +68,6 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
         viewCount: 0,
         createdAt: now,
         updatedAt: now,
-        reviewCount: 0,
-        correctCount: 0,
-        wrongCount: 0,
         lastReviewedAt: null,
         nextReviewDate: null,
         level: 0,
@@ -87,9 +85,6 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
           flashcardData.groups = groups;
           flashcardData.createdAt = existingCard.createdAt; // 기존 생성 시간 유지
           flashcardData.viewCount = existingCard.viewCount || 0;
-          flashcardData.reviewCount = existingCard.reviewCount || 0;
-          flashcardData.correctCount = existingCard.correctCount || 0;
-          flashcardData.wrongCount = existingCard.wrongCount || 0;
           flashcardData.lastReviewedAt = existingCard.lastReviewedAt || null;
           flashcardData.nextReviewDate = existingCard.nextReviewDate || null;
           flashcardData.level = existingCard.level || 0;
@@ -113,7 +108,8 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
       await setDoc(userDocRef, { flashcards }, { merge: true });
       
       setSuccess('단어장에 추가되었습니다!');
-      setWordInput('');
+      setEnglishWord('');
+      setKoreanMeaning('');
       
       // 1.5초 후 성공 메시지 지우기
       setTimeout(() => {
@@ -128,7 +124,8 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
   };
 
   const handleClose = () => {
-    setWordInput('');
+    setEnglishWord('');
+    setKoreanMeaning('');
     setDifficulty('normal');
     setError(null);
     setSuccess(null);
@@ -159,7 +156,7 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
               </button>
             </div>
             <p className="text-sm text-gray-500 mt-2">
-              영어 또는 한글을 입력하세요.
+              영어 단어와 한글 뜻을 입력하세요.
             </p>
           </div>
 
@@ -178,80 +175,99 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
               </div>
             )}
 
-            {/* 단어 입력 */}
+            {/* 영어 단어 입력 */}
             <div>
-              <label htmlFor="wordInput" className="block text-sm font-semibold text-gray-700 mb-2">
-                단어 <span className="text-red-500">*</span>
+              <label htmlFor="englishWord" className="block text-sm font-semibold text-gray-700 mb-2">
+                영어 단어 <span className="text-red-500">*</span>
               </label>
               <input
-                id="wordInput"
+                id="englishWord"
                 type="text"
-                value={wordInput}
-                onChange={(e) => setWordInput(e.target.value)}
-                placeholder="예: apple 또는 사과"
+                value={englishWord}
+                onChange={(e) => setEnglishWord(e.target.value)}
+                placeholder="예: apple"
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
                 disabled={isSaving}
               />
             </div>
 
-            {/* 난이도 선택 */}
+            {/* 한글 뜻 입력 */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
-                난이도
+              <label htmlFor="koreanMeaning" className="block text-sm font-semibold text-gray-700 mb-2">
+                한글 뜻 <span className="text-red-500">*</span>
               </label>
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setDifficulty('easy')}
-                  disabled={isSaving}
-                  className={`flex-1 px-4 py-3 rounded-xl font-medium text-sm transition-all ${
-                    difficulty === 'easy'
-                      ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-md'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  } disabled:opacity-50 disabled:cursor-not-allowed`}
-                >
-                  쉬움
-                </button>
-                <button
-                  onClick={() => setDifficulty('normal')}
-                  disabled={isSaving}
-                  className={`flex-1 px-4 py-3 rounded-xl font-medium text-sm transition-all ${
-                    difficulty === 'normal'
-                      ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-md'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  } disabled:opacity-50 disabled:cursor-not-allowed`}
-                >
-                  보통
-                </button>
-                <button
-                  onClick={() => setDifficulty('hard')}
-                  disabled={isSaving}
-                  className={`flex-1 px-4 py-3 rounded-xl font-medium text-sm transition-all ${
-                    difficulty === 'hard'
-                      ? 'bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-md'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  } disabled:opacity-50 disabled:cursor-not-allowed`}
-                >
-                  어려움
-                </button>
-              </div>
+              <input
+                id="koreanMeaning"
+                type="text"
+                value={koreanMeaning}
+                onChange={(e) => setKoreanMeaning(e.target.value)}
+                placeholder="예: 사과"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                disabled={isSaving}
+              />
             </div>
 
-            {/* 그룹 선택 */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                그룹 (선택사항)
-              </label>
-              <button
-                onClick={() => setIsGroupSelectionOpen(true)}
-                disabled={isSaving}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl hover:border-purple-300 hover:bg-purple-50 transition-all text-left disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {selectedGroupName ? (
-                  <span className="text-gray-800 font-medium">{selectedGroupName}</span>
-                ) : (
-                  <span className="text-gray-400">그룹 선택</span>
-                )}
-              </button>
+            {/* 난이도 선택과 그룹 선택 */}
+            <div className="flex gap-4">
+              {/* 난이도 선택 */}
+              <div className="flex-1">
+                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                  난이도
+                </label>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setDifficulty('easy')}
+                    disabled={isSaving}
+                    className={`flex-1 px-3 py-2.5 rounded-xl font-medium text-xs transition-all ${
+                      difficulty === 'easy'
+                        ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-md'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    } disabled:opacity-50 disabled:cursor-not-allowed`}
+                  >
+                    쉬움
+                  </button>
+                  <button
+                    onClick={() => setDifficulty('normal')}
+                    disabled={isSaving}
+                    className={`flex-1 px-3 py-2.5 rounded-xl font-medium text-xs transition-all ${
+                      difficulty === 'normal'
+                        ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-md'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    } disabled:opacity-50 disabled:cursor-not-allowed`}
+                  >
+                    보통
+                  </button>
+                  <button
+                    onClick={() => setDifficulty('hard')}
+                    disabled={isSaving}
+                    className={`flex-1 px-3 py-2.5 rounded-xl font-medium text-xs transition-all ${
+                      difficulty === 'hard'
+                        ? 'bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-md'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    } disabled:opacity-50 disabled:cursor-not-allowed`}
+                  >
+                    어려움
+                  </button>
+                </div>
+              </div>
+
+              {/* 그룹 선택 */}
+              <div className="flex-1">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  그룹 (선택사항)
+                </label>
+                <button
+                  onClick={() => setIsGroupSelectionOpen(true)}
+                  disabled={isSaving}
+                  className="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl hover:border-purple-300 hover:bg-purple-50 transition-all text-left disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {selectedGroupName ? (
+                    <span className="text-gray-800 font-medium text-sm">{selectedGroupName}</span>
+                  ) : (
+                    <span className="text-gray-400 text-sm">그룹 선택</span>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
 
@@ -266,7 +282,7 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
             </button>
             <button
               onClick={handleSave}
-              disabled={isSaving || !wordInput.trim()}
+              disabled={isSaving || !englishWord.trim() || !koreanMeaning.trim()}
               className="flex-1 px-6 py-3 rounded-xl text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSaving ? '저장 중...' : '저장'}
