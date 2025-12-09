@@ -233,7 +233,7 @@ export default function WordPracticeModal({
           const viewCountA = a.viewCount || 0;
           const viewCountB = b.viewCount || 0;
           return viewCountA - viewCountB;
-        });
+      });
         const hardList = flashcards
           .filter((card) => (card.difficulty || card.meaning?.difficulty) === 'hard')
           .sort((a, b) => {
@@ -303,10 +303,10 @@ export default function WordPracticeModal({
 
         return {
           word,
-          example: firstExample,
+            example: firstExample,
           frequency: 0,
-          starCount: 0,
-          showDefinition: false,
+            starCount: 0,
+            showDefinition: false,
           wordData
         };
       });
@@ -547,11 +547,11 @@ export default function WordPracticeModal({
 
     setIsCompleted(true);
     setIsUpdating(true);
-    
+
     // originalWords 상태도 업데이트 (UI 동기화용)
     if (completedWords) {
       setOriginalWords(completedWords);
-    }
+      }
 
     try {
       const userDocRef = doc(db, 'users', user.uid);
@@ -851,12 +851,12 @@ export default function WordPracticeModal({
                         // 영어 -> 한글: 영어 단어 표시
                         return (
                           <>
-                            {currentWord.word}
+                    {currentWord.word}
                             {currentWord.showDefinition && definition && (
-                              <span className="text-2xl text-gray-600 font-normal ml-2">
+                      <span className="text-2xl text-gray-600 font-normal ml-2">
                                 ({extractKorean(definition)})
-                              </span>
-                            )}
+                      </span>
+                    )}
                           </>
                         );
                       } else if (studyPattern === StudyPattern.koreanToEnglish) {
@@ -913,7 +913,7 @@ export default function WordPracticeModal({
                       const isSelected = currentDifficulty === difficulty.value;
                       
                       return (
-                        <button
+                    <button
                           key={difficulty.value}
                           onClick={(e) => {
                             e.stopPropagation();
@@ -926,7 +926,7 @@ export default function WordPracticeModal({
                           }`}
                         >
                           {difficulty.label}
-                        </button>
+                    </button>
                       );
                     })}
                   </div>

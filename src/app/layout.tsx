@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { StudySessionProvider } from '@/contexts/StudySessionContext';
+import { RelationshipsProvider } from '@/contexts/RelationshipsContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className={inter.className} suppressHydrationWarning>
         <StudySessionProvider>
-          {children}
+          <RelationshipsProvider>
+            {children}
+          </RelationshipsProvider>
         </StudySessionProvider>
       </body>
     </html>

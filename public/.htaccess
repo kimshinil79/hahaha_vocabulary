@@ -2,6 +2,12 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /hahahaEnglish/
 
+# CRITICAL: Service Worker 파일을 위한 특별한 규칙
+# Firebase는 /firebase-messaging-sw.js를 루트에서 찾으려고 함
+# 실제 파일은 /hahahaEnglish/firebase-messaging-sw.js에 있음
+RewriteCond %{REQUEST_URI} ^/firebase-messaging-sw\.js$
+RewriteRule ^(.*)$ /hahahaEnglish/firebase-messaging-sw.js [L]
+
 # CRITICAL: Stop rewriting for llm-proxy.php immediately for all methods
 RewriteRule ^llm-proxy\.php$ - [L]
 

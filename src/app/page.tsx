@@ -13,8 +13,10 @@ import StudyPatternSelectionModal, { StudyPattern } from '@/components/StudyPatt
 import WordPracticeModal from '@/components/WordPracticeModal';
 import StudyCompleteModal, { StudyContinuationOption } from '@/components/StudyCompleteModal';
 import FlashcardGroupSelectionModal from '@/components/FlashcardGroupSelectionModal';
+import SettingsModal from '@/components/SettingsModal';
 import { isMobileDevice } from '@/utils/deviceDetection';
 import { useStudySession } from '@/contexts/StudySessionContext';
+import { initializeFCM, setupForegroundMessageHandler, subscribeToPendingRequests } from '@/utils/fcmService';
 
 type ViewMode = 'main' | 'statistics';
 
@@ -37,11 +39,124 @@ export default function Home() {
   const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
   const [studiedWordsCount, setStudiedWordsCount] = useState(0);
   const [currentView, setCurrentView] = useState<ViewMode>('main');
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const { setStudyPattern: setContextStudyPattern, setContinuationOption: setContextContinuationOption, setSelectedGroupId: setContextSelectedGroupId } = useStudySession();
 
   // 모바일 디바이스 감지 (클라이언트 사이드에서만 실행)
   useEffect(() => {
     setIsMobile(isMobileDevice());
+  }, []);
+
+  // FCM 초기화 및 전역 리스너 설정
+  useEffect(() => {
+    if (!user) return;
+
+    const setupFCM = async () => {
+      try {
+        // FCM 초기화
+        await initializeFCM();
+
+        // 포그라운드 메시지 처리
+        setupForegroundMessageHandler((payload) => {
+          console.log('[전역] 포그라운드 메시지 수신:', payload);
+          
+          // 요청 수락 알림 (실시간 리스너가 자동으로 업데이트하므로 알림만 표시)
+          if (payload.data?.type === 'request_accepted') {
+            const nickname = payload.data.toUserNickname || '사용자';
+            const requestType = payload.data.requestType || '요청';
+            const typeLabel = requestType === 'friend' ? '친구' : requestType === 'student' ? '학생' : '자녀';
+            alert(`${nickname}님이 ${typeLabel} 요청을 수락했습니다.`);
+            // 프로필은 실시간 리스너가 자동으로 업데이트합니다
+          }
+
+          // 관계 요청 알림
+          if (payload.data?.requestId) {
+            // 설정 모달이 열려있으면 요청 표시
+            window.dispatchEvent(new CustomEvent('relationshipRequest', {
+              detail: {
+                id: payload.data.requestId,
+                fromUserNickname: payload.data.fromUserNickname,
+                fromUserEmail: payload.data.fromUserEmail || '',
+                requestType: payload.data.requestType,
+              }
+            }));
+          }
+        });
+
+        // Service Worker 메시지 리스너 (백그라운드 알림 클릭)
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.addEventListener('message', (event) => {
+            console.log('[전역] Service Worker 메시지 수신:', event.data);
+            
+            if (event.data?.type === 'NOTIFICATION_CLICK') {
+              const data = event.data.data;
+              
+              // 요청 수락 알림 (실시간 리스너가 자동으로 업데이트)
+              if (data?.type === 'request_accepted') {
+                const nickname = data.toUserNickname || '사용자';
+                const requestType = data.requestType || '요청';
+                const typeLabel = requestType === 'friend' ? '친구' : requestType === 'student' ? '학생' : '자녀';
+                alert(`${nickname}님이 ${typeLabel} 요청을 수락했습니다.`);
+                // 프로필은 실시간 리스너가 자동으로 업데이트합니다
+              }
+
+              // 관계 요청 알림
+              if (data?.requestId) {
+                window.dispatchEvent(new CustomEvent('relationshipRequest', {
+                  detail: {
+                    id: data.requestId,
+                    fromUserNickname: data.fromUserNickname,
+                    fromUserEmail: data.fromUserEmail || '',
+                    requestType: data.requestType,
+                  }
+                }));
+              }
+            }
+          });
+        }
+
+        // 대기 중인 요청 구독 (실시간 업데이트)
+        const unsubscribe = subscribeToPendingRequests((requests) => {
+          if (requests.length > 0) {
+            const latestRequest = requests[0];
+            window.dispatchEvent(new CustomEvent('relationshipRequest', {
+              detail: {
+                id: latestRequest.id,
+                fromUserNickname: latestRequest.fromUserNickname,
+                fromUserEmail: latestRequest.fromUserEmail || '',
+                requestType: latestRequest.requestType,
+              }
+            }));
+          }
+        });
+
+        return unsubscribe;
+      } catch (error) {
+        console.error('[전역] FCM 초기화 실패:', error);
+        return () => {};
+      }
+    };
+
+    let unsubscribeFn: (() => void) | null = null;
+    setupFCM().then((unsubscribe) => {
+      unsubscribeFn = unsubscribe;
+    });
+
+    return () => {
+      if (unsubscribeFn) unsubscribeFn();
+    };
+  }, [user]);
+
+  // 설정 모달 열기 이벤트 리스너
+  useEffect(() => {
+    const handleOpenSettings = () => {
+      setIsSettingsModalOpen(true);
+    };
+
+    window.addEventListener('openSettings', handleOpenSettings);
+    return () => {
+      window.removeEventListener('openSettings', handleOpenSettings);
+    };
   }, []);
 
   // OCR 처리 함수
@@ -279,6 +394,11 @@ export default function Home() {
         onClose={() => setIsOCROpen(false)}
         extractedText={ocrText}
         isProcessing={isProcessingOCR}
+      />
+
+      <SettingsModal
+        isOpen={isSettingsModalOpen}
+        onClose={() => setIsSettingsModalOpen(false)}
       />
     </div>
   );

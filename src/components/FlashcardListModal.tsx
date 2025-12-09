@@ -221,12 +221,33 @@ export default function FlashcardListModal({ isOpen, onClose }: FlashcardListMod
   };
 
   const handleSaveWord = async (updatedWordData: any) => {
-    if (!user) return;
+    if (!user || !selectedWord) return;
 
     try {
       setIsSaving(true);
-      await updateWordInfo(user, updatedWordData.word.toLowerCase(), updatedWordData);
+      // 현재 선택된 단어의 인덱스 찾기
+      const currentWordIndex = flashcards.findIndex(
+        (card) => card.word.toLowerCase() === selectedWord.word.toLowerCase()
+      );
+      
+      await updateWordInfo(
+        user,
+        selectedWord, // originalWordData
+        updatedWordData, // updatedWordData
+        'list', // source
+        {
+          clickedWordData: null,
+          wordDataList: flashcards,
+          currentWordIndex: currentWordIndex >= 0 ? currentWordIndex : 0
+        },
+        {
+          setClickedWordData: () => {}, // 사용하지 않음
+          setWordDataList: () => {}, // 사용하지 않음 (실시간 리스너가 자동 업데이트)
+          setIsSavingMeaning: setIsSaving // 저장 상태 관리
+        }
+      );
       setSelectedWord(null);
+      alert('단어 정보가 수정되었습니다.');
     } catch (error) {
       console.error('단어 저장 오류:', error);
       alert('단어 저장 중 오류가 발생했습니다.');

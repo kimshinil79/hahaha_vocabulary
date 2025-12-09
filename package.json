@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build",
+    "build": "next build && node scripts/post-build.js",
     "start": "next start",
     "lint": "eslint",
-    "upload-words": "node scripts/upload-words.js"
+    "upload-words": "node scripts/upload-words.js",
+    "enrich-examples": "npx tsx scripts/enrich-examples.ts",
+    "check-examples": "npx tsx scripts/check-examples.ts",
+    "migrate-examples": "npx tsx scripts/migrate-examples-to-array.ts"
   },
   "dependencies": {
     "@tensorflow/tfjs": "^4.22.0",
@@ -15,7 +18,7 @@
     "compromise": "^14.14.4",
     "firebase": "^12.4.0",
     "natural": "^8.1.0",
-    "next": "16.0.0",
+    "next": "16.0.7",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "tesseract.js": "^6.0.1"
@@ -27,7 +30,7 @@
     "@types/react-dom": "^19",
     "dotenv": "^17.2.3",
     "eslint": "^9",
-    "eslint-config-next": "16.0.0",
+    "eslint-config-next": "^16.0.7",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
