@@ -29,6 +29,7 @@ export default function AddToFlashcardModal({
   const [isCreatingNewGroup, setIsCreatingNewGroup] = useState(false);
   const [newGroupName, setNewGroupName] = useState('');
   const [newGroupDate, setNewGroupDate] = useState(new Date().toISOString().split('T')[0]);
+  const [isPublic, setIsPublic] = useState(false);
   const [isLoadingGroups, setIsLoadingGroups] = useState(true);
 
   useEffect(() => {
@@ -100,6 +101,7 @@ export default function AddToFlashcardModal({
         id: newGroupId,
         name: newGroupName.trim(),
         date: newGroupDate,
+        isPublic: isPublic,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
@@ -113,6 +115,7 @@ export default function AddToFlashcardModal({
       setIsCreatingNewGroup(false);
       setNewGroupName('');
       setNewGroupDate(new Date().toISOString().split('T')[0]);
+      setIsPublic(false);
     } catch (error) {
       console.error('그룹 생성 실패:', error);
       alert('그룹 생성 중 오류가 발생했습니다.');
@@ -218,6 +221,22 @@ export default function AddToFlashcardModal({
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
                       />
                     </div>
+                    <div>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={isPublic}
+                          onChange={(e) => setIsPublic(e.target.checked)}
+                          className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500 focus:ring-2"
+                        />
+                        <span className="text-xs font-semibold text-gray-600">
+                          공개 그룹
+                        </span>
+                      </label>
+                      <p className="text-xs text-gray-500 mt-1 ml-6">
+                        공개 그룹은 다른 사용자들이 볼 수 있습니다
+                      </p>
+                    </div>
                     <div className="flex gap-2">
                       <button
                         onClick={handleCreateGroup}
@@ -227,11 +246,12 @@ export default function AddToFlashcardModal({
                         생성
                       </button>
                       <button
-                        onClick={() => {
-                          setIsCreatingNewGroup(false);
-                          setNewGroupName('');
-                          setNewGroupDate(new Date().toISOString().split('T')[0]);
-                        }}
+                      onClick={() => {
+                        setIsCreatingNewGroup(false);
+                        setNewGroupName('');
+                        setNewGroupDate(new Date().toISOString().split('T')[0]);
+                        setIsPublic(false);
+                      }}
                         className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-semibold text-sm"
                       >
                         취소

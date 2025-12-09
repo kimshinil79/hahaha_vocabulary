@@ -455,6 +455,8 @@ export default function FlashcardListModal({ isOpen, onClose, embedded = false }
             onClose={() => setIsGroupSelectionOpen(false)}
             onSelect={handleGroupSelect}
             user={user}
+            currentSelectedGroupId={selectedGroupId}
+            showImportButton={true}
           />
         )}
 
@@ -493,6 +495,8 @@ export default function FlashcardListModal({ isOpen, onClose, embedded = false }
           onClose={() => setIsGroupSelectionOpen(false)}
           onSelect={handleGroupSelect}
           user={user}
+          currentSelectedGroupId={selectedGroupId}
+          showImportButton={true}
         />
       )}
 

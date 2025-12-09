@@ -178,7 +178,7 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
             {/* 영어 단어 입력 */}
             <div>
               <label htmlFor="englishWord" className="block text-sm font-semibold text-gray-700 mb-2">
-                영어 단어 <span className="text-red-500">*</span>
+                영어 <span className="text-red-500">*</span>
               </label>
               <input
                 id="englishWord"
@@ -194,7 +194,7 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
             {/* 한글 뜻 입력 */}
             <div>
               <label htmlFor="koreanMeaning" className="block text-sm font-semibold text-gray-700 mb-2">
-                한글 뜻 <span className="text-red-500">*</span>
+                한글<span className="text-red-500">*</span>
               </label>
               <input
                 id="koreanMeaning"
@@ -254,7 +254,7 @@ export default function DirectWordInputModal({ isOpen, onClose, embedded = false
               {/* 그룹 선택 */}
               <div className="flex-1">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  그룹 (선택사항)
+                  그룹
                 </label>
                 <button
                   onClick={() => setIsGroupSelectionOpen(true)}
