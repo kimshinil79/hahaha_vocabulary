@@ -228,13 +228,13 @@ export default function Home() {
           <div className="flex-1 overflow-y-auto p-4 space-y-2">
             <button
               onClick={() => setCurrentView('main')}
-              className={`w-full px-4 py-3 rounded-lg font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg ${
+              className={`w-full px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
                 currentView === 'main'
-                  ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-gradient-to-r from-sky-200 to-blue-200 text-slate-700 shadow-sm border border-sky-300/50'
+                  : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
               }`}
             >
-              📝 단어 입력
+              단어 입력
             </button>
             
             <button
@@ -242,34 +242,34 @@ export default function Home() {
                 setCurrentView('main');
                 setIsWordSearchOpen(true);
               }}
-              className="w-full px-4 py-3 rounded-lg text-white bg-gradient-to-r from-slate-500 to-gray-700 hover:from-slate-600 hover:to-gray-800 transition-all duration-200 shadow-md hover:shadow-lg font-semibold text-sm"
+              className="w-full px-4 py-3 rounded-lg font-medium text-sm bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all duration-200"
             >
-              🔍 단어 검색
+              단어 검색
             </button>
             
             <button
               onClick={() => setIsFlashcardListOpen(true)}
-              className="w-full px-4 py-3 rounded-lg text-white bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 transition-all duration-200 shadow-md hover:shadow-lg font-semibold text-sm"
+              className="w-full px-4 py-3 rounded-lg font-medium text-sm bg-gradient-to-r from-pink-100 to-rose-100 text-rose-700 hover:from-pink-200 hover:to-rose-200 border border-pink-200 transition-all duration-200"
             >
-              📚 단어장
+              단어장
             </button>
             
             <button
               onClick={() => setIsStudyPatternSelectionOpen(true)}
-              className="w-full px-4 py-3 rounded-lg text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg font-semibold text-sm"
+              className="w-full px-4 py-3 rounded-lg font-medium text-sm bg-gradient-to-r from-violet-100 to-purple-100 text-purple-700 hover:from-violet-200 hover:to-purple-200 border border-violet-200 transition-all duration-200"
             >
-              📖 공부 시작
+              공부 시작
             </button>
             
             <button
               onClick={() => setCurrentView('statistics')}
-              className={`w-full px-4 py-3 rounded-lg font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg ${
+              className={`w-full px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
                 currentView === 'statistics'
-                  ? 'bg-gradient-to-r from-green-500 to-teal-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-gradient-to-r from-emerald-200 to-teal-200 text-slate-700 shadow-sm border border-emerald-300/50'
+                  : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
               }`}
             >
-              📊 통계
+              통계
             </button>
           </div>
         </div>
