@@ -1,12 +1,22 @@
 'use client';
 
-import Image from 'next/image';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserProfile } from '@/hooks/useUserProfile';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
   const { user } = useAuth();
   const { nickname, loading } = useUserProfile();
+  const [imagePath, setImagePath] = useState('/flashcard.png');
+
+  useEffect(() => {
+    // basePath를 동적으로 감지 (window.location.pathname 기반)
+    if (typeof window !== 'undefined') {
+      const pathname = window.location.pathname;
+      const basePath = pathname.startsWith('/hahahaEnglish') ? '/hahahaEnglish' : '';
+      setImagePath(`${basePath}/flashcard.png`);
+    }
+  }, []);
 
   if (loading) {
     return (
@@ -39,13 +49,11 @@ export default function Header() {
       <div className="flex h-16">
         {/* 좌측 패널 너비만큼 공간 확보 (w-64 = 256px) */}
         <div className="w-64 flex items-center pl-4">
-          <Image
-            src="/flashcard.png"
+          <img
+            src={imagePath}
             alt="HaHaHa FlashCards"
-            width={200}
-            height={40}
             className="h-10 w-auto object-contain"
-            priority
+            style={{ maxWidth: '200px' }}
           />
         </div>
         {/* 우측 영역 */}
